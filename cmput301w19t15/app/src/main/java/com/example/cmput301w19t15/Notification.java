@@ -11,6 +11,9 @@ public class Notification  {
     private Book book;
     private String type;
 
+    public Notification(String type){
+        this.type = type;
+    }
 
     public void notifyBorrower(Context context){
         this.context = context;
