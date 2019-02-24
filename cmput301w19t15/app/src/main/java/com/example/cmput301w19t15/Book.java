@@ -12,28 +12,33 @@ public class Book {
     public Book(Integer ISBN) {
     }
     public void setTitle(String title) {
+        this.title = title;
     }
     public String getTitle() {
-        return "title";
+        return this.title;
     }
     public void setAuthor(String author) {
+        this.author = author;
     }
     public String getAuthor() {
-        return "author";
+        return this.author;
     }
     public void setISBN(Integer ISBN) {
+        this.ISBN = ISBN;
     }
     public Integer getISBN() {
         return 1;
     }
     public void setStatus(String status) {
+        this.status = status;
     }
     public String getStatus() {
-        return "status";
+        return this.status;
     }
     public void setPhoto(Image photo) {
+        this.photo = photo;
     }
-    public Photo getPhoto() {
-        return "author";
+    public Image getPhoto() {
+        return this.photo;
     }
 }

@@ -1,4 +1,6 @@
 package com.example.cmput301w19t15;
+import android.media.Image;
+
 import junit.framework.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -45,9 +47,11 @@ public class BookTest {
     }
     @Test
     // Don't understand how photos work yet
+    // initialize image as null for now
     public void testSetPhoto() {
         Book x = new Book(123);
-        x.setPhoto();
+        Image image = null;
+        x.setPhoto(image);
         assertEquals(x.getISBN(),(Integer) 345);
         x.setISBN(567);
         assertEquals(x.getISBN(),(Integer) 567);
