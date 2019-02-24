@@ -26,6 +26,11 @@ public class Book {
     public Integer getISBN() {
         return 1;
     }
+    public void setStatus(String status) {
+    }
+    public String getStatus() {
+        return "status";
+    }
     public void setPhoto(Image photo) {
     }
     public Photo getPhoto() {
