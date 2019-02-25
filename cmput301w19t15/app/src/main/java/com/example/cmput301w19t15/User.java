@@ -10,27 +10,28 @@ public class User {
     private Float rating;
 
     public User(String username, String name, String email, String phone) {
+
     }
     public void setUsername(String username) {
     }
     public String getUsername() {
-        return "username";
+        return username;
     }
     public void setName(String name) {
     }
 
     public String getName() {
-        return "name";
+        return name;
     }
     public void setEmail(String email) {
     }
     public String getEmail() {
-        return "email";
+        return email;
     }
     public void setPhone(String phone) {
     }
     public String getPhone() {
-        return "780-111-1111";
+        return phone;
     }
     public void setRating(Float rating) {
     }
