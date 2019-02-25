@@ -8,8 +8,10 @@ public class Book {
     private Integer ISBN;
     private String status;
     private Image photo;
+    private String BookID;
 
     public Book(Integer ISBN) {
+        this.BookID = UUID.randomUUID().toString();
     }
     public void setTitle(String title) {
         this.title = title;
@@ -27,7 +29,7 @@ public class Book {
         this.ISBN = ISBN;
     }
     public Integer getISBN() {
-        return 1;
+        return this.ISBN;
     }
     public void setStatus(String status) {
         this.status = status;
@@ -40,5 +42,8 @@ public class Book {
     }
     public Image getPhoto() {
         return this.photo;
+    }
+    public String getBookID() {
+        return this.BookID;
     }
 }
