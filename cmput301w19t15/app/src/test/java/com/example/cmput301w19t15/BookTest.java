@@ -11,7 +11,7 @@ public class BookTest {
 
         Book x = new Book("testTitle","testAuthor",123);
         assertEquals(x.getISBN(),(Integer) 123);
-        Book y = new Book(345);
+        Book y = new Book("testTitle","testAuthor",345);
         assertEquals(y.getISBN(),(Integer) 345);
     }
     @Test

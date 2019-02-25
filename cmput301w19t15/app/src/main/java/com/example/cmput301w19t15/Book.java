@@ -2,17 +2,19 @@ package com.example.cmput301w19t15;
 
 import android.media.Image;
 
+import java.util.UUID;
+
 public class Book {
     private String title;
     private String author;
     private Integer ISBN;
     private String status;
-    private Image photo;
+    private String photo;
     private String BookID;
 
     public Book(String title, String author, Integer ISBN) {
         this.title = title;
-        this.author =
+        this.author = author;
         this.BookID = UUID.randomUUID().toString();
     }
     public void setTitle(String title) {
