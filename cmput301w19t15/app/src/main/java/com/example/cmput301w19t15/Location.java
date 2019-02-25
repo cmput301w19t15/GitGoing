@@ -21,6 +21,5 @@ public class Location {
     }
     public double getLatitude() {
         return this.latitude;
-
     }
 }
