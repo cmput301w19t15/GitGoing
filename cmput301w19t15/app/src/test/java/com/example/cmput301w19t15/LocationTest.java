@@ -12,8 +12,8 @@ public class LocationTest {
         double array[] =x.getLocation();
         assertEquals(array[0], 123);
         assertEquals(array[1],-120);
-        Location x = new Location(-178.12345,0);
-        double array2[] = x.getLocation();
+        Location y = new Location(-178.12345,0);
+        double array2[] = y.getLocation();
         assertEquals(array2[0], -178.12345);
         assertEquals(array2[1],0);
     }

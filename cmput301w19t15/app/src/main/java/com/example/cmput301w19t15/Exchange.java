@@ -20,5 +20,6 @@ public class Exchange {
     public Owner getOwnwer(){return owner;}
     public Borrower getBorrower(){return borrower;}
     public Book getBook(){return book;}
+    public Date getDate(){return date;}
 
 }
