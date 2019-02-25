@@ -10,8 +10,9 @@ public class Notification  {
     private String username;
     private Book book;
     private String type;
-    public Notification(String type){
 
+    public Notification(String type){
+        this.type = type;
     }
 
     public void notifyBorrower(Context context){
@@ -21,7 +22,6 @@ public class Notification  {
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setContentTitle(type)
                 .setContentText("accept");
-
 
     }
     public void notifyOwner(Context context){
