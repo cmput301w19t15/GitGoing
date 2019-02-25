@@ -10,7 +10,9 @@ public class Book {
     private Image photo;
     private String BookID;
 
-    public Book(Integer ISBN) {
+    public Book(String title, String author, Integer ISBN) {
+        this.title = title;
+        this.author =
         this.BookID = UUID.randomUUID().toString();
     }
     public void setTitle(String title) {
