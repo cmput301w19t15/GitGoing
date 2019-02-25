@@ -47,15 +47,11 @@ public class BookTest {
         assertEquals(x.getStatus(),"Available");
     }
     @Test
-    // Don't understand how photos work yet
-    // initialize image as null for now
     public void testSetPhoto() {
         Book x = new Book("testTitle","testAuthor",123);
-        Image image = null;
+        String image = "https://s3.amazonaws.com/spoonflower/public/design_thumbnails/0464/6961/rr12x12_Dirt_Block_2015_shop_thumb.png";
         x.setPhoto(image);
-        assertEquals(x.getISBN(),(Integer) 345);
-        x.setISBN(567);
-        assertEquals(x.getISBN(),(Integer) 567);
+        assertEquals(x.getPhoto(),image);
     }
 
 

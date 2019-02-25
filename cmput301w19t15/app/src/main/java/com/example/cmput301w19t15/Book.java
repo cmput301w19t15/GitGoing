@@ -39,10 +39,10 @@ public class Book {
     public String getStatus() {
         return this.status;
     }
-    public void setPhoto(Image photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
-    public Image getPhoto() {
+    public String getPhoto() {
         return this.photo;
     }
     public String getBookID() {
