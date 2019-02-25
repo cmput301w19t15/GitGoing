@@ -20,9 +20,7 @@ public class Borrower extends User {
     public void addAcceptedRequest(Book book){
         borrowedBooks.add(book);
     }
-    public Boolean borrowed(Book book){
-        return borrowedBooks.contains(book);
-    }
+    public Boolean borrowed(Book book){ return borrowedBooks.contains(book); }
     public void deleteRequest(Book book){
         requestedBooks.remove(book);
     }
