@@ -9,26 +9,24 @@ public class LocationTest {
     @Test
     public void testLocation() {
         Location x = new Location(123,-120);
-        assertEquals(x.getLongitude(), 123);
-        assertEquals(x.getLatitide(),-120);
+        double array[] =x.getLocation();
+        assertEquals(array[0], 123);
+        assertEquals(array[1],-120);
         Location x = new Location(-178.12345,0);
-        assertEquals(x.getLongitude(), -178.12345);
-        assertEquals(x.getLatitide()),0);
+        double array2[] = x.getLocation();
+        assertEquals(array2[0], -178.12345);
+        assertEquals(array2[1],0);
     }
     @Test
-    public void testSetLongitude() {
+    public void testSetLocation() {
         Location x = new Location(123,-120);
-        x.setLongitude(12.9076)
-        assertEquals(x.getLogitude(),12.9076);
-        x.setLongitude(-180)
-        assertEquals(x.getLogitude(),-180);
-    }
-    @Test
-    public void testSetLatitude() {
-        Location x = new Location(123,-120);
-        x.setLatitude(180)
-        assertEquals(x.getLatitude(),180);
-        x.setLongitude(-156.4734)
-        assertEquals(x.getLogitude(),-156.4734);
+        x.setLocation(12.9076,-180);
+        double array[] =x.getLocation();
+        assertEquals(array[0],12.9076);
+        assertEquals(array[1],-180);
+        x.setLocation(180,0);
+        double array2[] =x.getLocation();
+        assertEquals(array2[0],180);
+        assertEquals(array2[1],0);
     }
 }

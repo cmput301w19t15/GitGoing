@@ -1,25 +1,22 @@
 package com.example.cmput301w19t15;
 
 import android.media.Image;
-
+import java.util.ArrayList;
 public class Location {
 
     private double longitude;
     private double latitude;
-
-    public Book(double longitude, double latitude) {
+    private double geoCode[] = new double[2];
+    public Location(double longitude, double latitude) {
+        geoCode[0] = longitude;
+        geoCode[1] = latitude;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setLocation(double longitude, double latitude) {
+        geoCode[0] = longitude;
+        geoCode[1] = latitude;
     }
-    public double getLongitude() {
-        return this.longitude;
-    }
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-    public double getLatitude() {
-        return this.latitude;
+    public double[] getLocation() {
+        return geoCode;
     }
 }
