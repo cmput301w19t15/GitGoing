@@ -142,4 +142,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onResume();
         progressBar.setVisibility(View.GONE);
     }
+    @Override
+    public void onBackPressed() {
+        //do nothing
+    }
 }

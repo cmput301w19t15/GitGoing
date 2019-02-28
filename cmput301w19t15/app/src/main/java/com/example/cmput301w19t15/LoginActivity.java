@@ -36,7 +36,6 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Set up the login form.
-
         setContentView(R.layout.activity_login);
 
         //Get Firebase auth instance
@@ -66,8 +65,7 @@ public class LoginActivity extends AppCompatActivity{
                     //editTextEmail.setError("Email is required");
                     //editTextEmail.requestFocus();
                     return;
-                }
-                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     Toast.makeText(getApplicationContext(), "Enter valid email!", Toast.LENGTH_SHORT).show();
                     //editTextEmail.setError("Please enter a valid email");
                     //editTextEmail.requestFocus();
@@ -79,17 +77,14 @@ public class LoginActivity extends AppCompatActivity{
                     //editTextPassword.setError("Password is required");
                     //editTextPassword.requestFocus();
                     return;
-                }
-                if (password.length() < 6) {
+                } else if (password.length() < 6) {
                     Toast.makeText(getApplicationContext(), "Password to short!", Toast.LENGTH_SHORT).show();
                     inputPassword.setError(getString(R.string.minimum_password));
                     // editTextPassword.setError("Minimum lenght of password should be 6");
                     // editTextPassword.requestFocus();
                     return;
                 }
-
                 progressBar.setVisibility(View.VISIBLE);
-
                 //authenticate user
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -99,8 +94,7 @@ public class LoginActivity extends AppCompatActivity{
                         // signed in user can be handled in the listener.
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
                         } else {
                             // there was an error
@@ -115,13 +109,15 @@ public class LoginActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                finish();
             }
         });
 
         btnResetPassword.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                finish();
             }
         });
     }
