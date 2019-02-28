@@ -25,16 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BookInformationActivity" />
-        <activity android:name=".NotificationActivity" />
-        <activity android:name=".MyBooksListActivity" />
-        <activity android:name=".ShowBorrowedBooksActivity" />
         <activity android:name=".ShowAvaliableBookActivity" />
         <activity android:name=".SearchBooksorUsersActivity" />
-        <activity android:name=".ViewRequestActivity" />
-        <activity android:name=".UserProfileActivity" />
-        <activity android:name=".UserAccountActivity" />
-        <activity android:name=".CreateAccountActivity" />
     </application>
 
 </manifest>
