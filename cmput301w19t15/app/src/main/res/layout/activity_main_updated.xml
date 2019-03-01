@@ -19,14 +19,14 @@
 
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="116dp"
-        android:layout_height="54dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@android:drawable/btn_star_big_on" />
+        tools:srcCompat="@drawable/inbox_turq" />
 
     <Button
         android:id="@+id/button3"
@@ -74,14 +74,14 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="116dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="204dp"
+        android:layout_marginLeft="204dp"
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/icon_turq" />
 
     <Button
         android:id="@+id/button5"
