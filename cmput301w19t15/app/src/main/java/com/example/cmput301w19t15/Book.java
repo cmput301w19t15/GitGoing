@@ -1,10 +1,10 @@
 package com.example.cmput301w19t15;
 
 import android.media.Image;
-
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Book {
+public class Book implements Serializable {
     private String title;
     private String author;
     private Integer ISBN;

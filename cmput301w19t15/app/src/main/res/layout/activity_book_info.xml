@@ -7,6 +7,7 @@
     tools:context=".BookInfo">
 
     <ListView
+        android:id="@+id/mybookISBN"
         android:layout_width="395dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
@@ -29,6 +30,7 @@
         tools:layout_editor_absoluteY="227dp" />
 
     <ListView
+        android:id="@+id/mybookauthor"
         android:layout_width="395dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
@@ -87,11 +89,12 @@
         android:layout_marginRight="8dp"
         android:text="@string/scan"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="393dp" />
+        tools:layout_editor_absoluteY="385dp" />
 
     <ListView
+        android:id="@+id/mybooktitle"
         android:layout_width="395dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
