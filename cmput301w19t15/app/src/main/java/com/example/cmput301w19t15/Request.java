@@ -17,11 +17,9 @@ public class Request {
 
     public void acceptRequest(){
         this.accept = true;
-        book.setStatus("accepted");
     }
     public void denyRequest(){
         this.accept = false;
-        book.setStatus("available");
     }
     public boolean requestStatus(){
         return this.accept;

@@ -94,37 +94,23 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Toast.makeText(RegisterActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
-                            //create the user
-                            User user = new User("test",name,email,phone);
-
-                            //get userid
+                            //
+                            DatabaseReference dataBase, newUser;
                             FirebaseUser currentUser = task.getResult().getUser();
-                            //pick users table to same the user
-                            DatabaseReference newUser = FirebaseDatabase.getInstance().getReference().child("users").child(currentUser.getUid());
-
+                            //pick users table to same the user in
+                            dataBase = FirebaseDatabase.getInstance().getReference().child("users");
+                            newUser = dataBase.child(currentUser.getUid());
+                            //create the user
+                            User usertest = new User("test",name,email,phone);
                             //save the user in the database
-                            newUser.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    progressBar.setVisibility(View.GONE);
-                                    if(task.isSuccessful()){
-                                        Toast.makeText(RegisterActivity.this,"Successfully Registerd",Toast.LENGTH_SHORT).show();
-                                        try {
-                                            //set time in mili
-                                            Thread.sleep(3000);
-                                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-
-                                        }catch (Exception e){
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                }
-                            });
+                            newUser.setValue(usertest);
                             //close register
+                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                             finish();
                         } else {
                             Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(), Toast.LENGTH_SHORT).show();
