@@ -1,15 +1,21 @@
 package com.example.cmput301w19t15;
 
 import android.media.Image;
+import java.io.Serializable;
+import java.util.UUID;
 
-public class Book {
+public class Book implements Serializable {
     private String title;
     private String author;
     private Integer ISBN;
     private String status;
-    private Image photo;
+    private String photo;
+    private String BookID;
 
-    public Book(Integer ISBN) {
+    public Book(String title, String author, Integer ISBN) {
+        this.title = title;
+        this.author = author;
+        this.BookID = UUID.randomUUID().toString();
     }
     public void setTitle(String title) {
         this.title = title;
@@ -27,7 +33,7 @@ public class Book {
         this.ISBN = ISBN;
     }
     public Integer getISBN() {
-        return 1;
+        return this.ISBN;
     }
     public void setStatus(String status) {
         this.status = status;
@@ -35,10 +41,13 @@ public class Book {
     public String getStatus() {
         return this.status;
     }
-    public void setPhoto(Image photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
-    public Image getPhoto() {
+    public String getPhoto() {
         return this.photo;
+    }
+    public String getBookID() {
+        return this.BookID;
     }
 }

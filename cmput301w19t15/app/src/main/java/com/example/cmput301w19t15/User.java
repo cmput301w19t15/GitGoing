@@ -10,7 +10,10 @@ public class User {
     private Float rating;
 
     public User(String username, String name, String email, String phone) {
-
+        this.username = username;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
     }
     public void setUsername(String username) {
     }

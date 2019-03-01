@@ -13,7 +13,7 @@ public class RequestTest {
     public void RequestStatus(){
         Owner owner = new Owner("user123", "first last", "example@email.com", "111-111-1111");
         Borrower borrower = new Borrower("userb", "first last", "example@email.com", "111-111-1111");
-        Book book = new Book(1);
+        Book book = new Book("test title","test author",123);
         Request request = new Request(owner,borrower,book);
         assertEquals(request.requestStatus(),false);
     }
@@ -22,7 +22,7 @@ public class RequestTest {
     public void AcceptRequest(){
         Owner owner = new Owner("user123", "first last", "example@email.com", "111-111-1111");
         Borrower borrower = new Borrower("userb", "first last", "example@email.com", "111-111-1111");
-        Book book = new Book(1);
+        Book book = new Book("test title","test author",123);
         Request request = new Request(owner,borrower,book);
         request.acceptRequest();
         assertEquals(request.requestStatus(),true);
@@ -32,7 +32,7 @@ public class RequestTest {
     public void DenyRequest(){
         Owner owner = new Owner("user123", "first last", "example@email.com", "111-111-1111");
         Borrower borrower = new Borrower("userb", "first last", "example@email.com", "111-111-1111");
-        Book book = new Book(1);
+        Book book = new Book("test title","test author",123);
         Request request = new Request(owner,borrower,book);
         request.denyRequest();
         assertEquals(request.requestStatus(),false);
