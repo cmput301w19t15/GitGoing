@@ -1,29 +1,8 @@
 package com.example.cmput301w19t15;
 
-import java.util.Date;
 
-public class Request {
-    private Owner owner;
-    private Borrower borrower;
-    private Book book;
-    private boolean accept = false;
-    private Date date;
+import android.support.v7.app.AppCompatActivity;
 
-    public Request(Owner owner, Borrower borrower, Book book){
-        this.owner = owner;
-        this.borrower = borrower;
-        this.book = book;
-    }
+public class FindBooks extends AppCompatActivity {
 
-    public void acceptRequest(){
-        this.accept = true;
-        book.setStatus("accepted");
-    }
-    public void denyRequest(){
-        this.accept = false;
-        book.setStatus("available");
-    }
-    public boolean requestStatus(){
-        return this.accept;
-    }
 }

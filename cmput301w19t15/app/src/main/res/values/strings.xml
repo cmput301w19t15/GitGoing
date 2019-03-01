@@ -52,4 +52,6 @@
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
     <string name="location">Location</string>
+    <string name="go_to_my_books">Go To My Books</string>
+    <string name="filter_by">Filter By:</string>
 </resources>

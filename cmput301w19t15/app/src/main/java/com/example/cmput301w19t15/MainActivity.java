@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authListener;
     private ProgressBar progressBar;
     private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
-            changeEmail, changePassword, sendEmail, remove, logOut;
+            changeEmail, changePassword, sendEmail, remove, logOut, myBooks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,17 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        myBooks = (Button) findViewById(R.id.my_books);
+
+        myBooks.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
     }
     protected void onResume() {
         super.onResume();
