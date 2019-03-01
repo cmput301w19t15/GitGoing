@@ -1,0 +1,323 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:2:1-32:12
+MERGED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:17:1-42:12
+MERGED from [com.google.firebase:firebase-database:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.1.aar/7a5afd6e52df586ea1bfc2fb7dc53ee2/AndroidManifest.xml:2:1-8:12
+MERGED from [com.google.firebase:firebase-storage:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.1.0.aar/443f87fc57ba12fd5d0af28624918aec/AndroidManifest.xml:15:1-37:12
+MERGED from [com.google.android.gms:play-services-flags:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-flags-16.0.1.aar/61d09a9ab8de3dfe172c9e0a260005ad/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.firebase:firebase-auth-interop:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/a622721287fcc96595fe0f12731a3bd1/AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/caf21df165b1e410a5dcb8f431190930/AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.firebase:firebase-database-connection:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-database-connection-16.0.1.aar/bf00e338f262b27205b12ba7676cee4d/AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.firebase:firebase-common:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-common-16.1.0.aar/6c9c0991e7471d4359ec5dcf58cfe7c9/AndroidManifest.xml:2:1-19:12
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/f53245580e5afc99de3c72b06e89b663/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-database-collection:15.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-database-collection-15.0.1.aar/a95279ca4ba4ce8f5f72622c43931499/AndroidManifest.xml:2:1-8:12
+MERGED from [com.google.android.gms:play-services-basement:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/c3a7c0504bf96c12bf49c2372ecc5c66/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-v4:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/876c2b6dbc2155d517e41c0dfe5c3feb/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:design:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/a624b6a75bf8686b464af431fe64e20c/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support.constraint:constraint-layout:2.0.0-alpha3] /home/eisha/.gradle/caches/transforms-1/files-1.1/constraint-layout-2.0.0-alpha3.aar/faa0b0edd19c390cee096003e6bcb9ee/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/48da267ed5bac7de089e1c76f1bcb057/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/8f851b61d6e1665d8b247039ff16d2b4/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/4d6ede7fb37143c80974ebcb64369d63/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/4ae24d98e02d87cd4441642724f3cd41/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/eff9867fb12c98213f31783a4fb9dc58/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/5f97e7e0ff8cda118c801b8d80704c34/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/f1d3bf0be262bedd78ed35828a1b1eb2/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/23193002b7360de5624d046a4dbca5fc/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/13790188e6af91b926995d2a26802346/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/3f31af41ec64a1d6e573efb380503592/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/62ff63df2e04a7310b4913d16be114c7/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/9d39bfaf4ad50c5bcbf753d96142b9e5/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/4210a725c86d662145f8faefdc8d918a/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/a3ab5d4590994c77154e787777648828/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/0f8762d5a5691e6495649f2c1f153b56/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/528a00960c5186f1d2ace2f2763cadde/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/1d01642f819bcd7a5f91af5dc26a5e4f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/8041fe93068c5eda7ac94a8981136dbd/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/68afb7ad53e6d356fde3b9680a907f2f/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/92887833cf9a53dbfcb7b0a1ccf757c1/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/6f36b7d4cfeee68c7f7275921245c571/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cardview-v7:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/b592d00d94419466884374d68253bbfc/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/1cee20e9ce9e08e03d70319e408957d6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/7eed570e7d476ab0f4bede54d024f953/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/4637f3a53227c0fb5965ead3bafe48e9/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/4a17905d47f5e793f6fdbd257844e2dd/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/a6bc4dc8eb2cee4ae73ccef2a76ce528/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/b7f2e3f0c76aca8a570f75f95c98f818/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/4f19a3f036d0b29d4b4c37512ddd7870/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/db0a7d89fbbe1b0266172c663e41101a/AndroidManifest.xml:17:1-22:12
+INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:2:1-32:12
+	package
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:3:5-41
+		INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+		INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:2:1-32:12
+		INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:2:1-32:12
+		INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.GET_ACCOUNTS
+ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:5:5-71
+	android:name
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:5:22-68
+uses-permission#android.permission.READ_PROFILE
+ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:6:5-71
+	android:name
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:6:22-68
+uses-permission#android.permission.READ_CONTACTS
+ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:7:5-72
+	android:name
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:7:22-69
+uses-permission#android.permission.INTERNET
+ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:8:5-67
+MERGED from [com.google.firebase:firebase-storage:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.1.0.aar/443f87fc57ba12fd5d0af28624918aec/AndroidManifest.xml:27:5-67
+MERGED from [com.google.firebase:firebase-storage:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.1.0.aar/443f87fc57ba12fd5d0af28624918aec/AndroidManifest.xml:27:5-67
+MERGED from [com.google.firebase:firebase-database-connection:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-database-connection-16.0.1.aar/bf00e338f262b27205b12ba7676cee4d/AndroidManifest.xml:8:5-67
+MERGED from [com.google.firebase:firebase-database-connection:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-database-connection-16.0.1.aar/bf00e338f262b27205b12ba7676cee4d/AndroidManifest.xml:8:5-67
+	android:name
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:8:22-64
+application
+ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:10:5-30:19
+MERGED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:23:5-40:19
+MERGED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:23:5-40:19
+MERGED from [com.google.firebase:firebase-storage:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.1.0.aar/443f87fc57ba12fd5d0af28624918aec/AndroidManifest.xml:29:5-35:19
+MERGED from [com.google.firebase:firebase-storage:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.1.0.aar/443f87fc57ba12fd5d0af28624918aec/AndroidManifest.xml:29:5-35:19
+MERGED from [com.google.firebase:firebase-auth-interop:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/a622721287fcc96595fe0f12731a3bd1/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-auth-interop:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/a622721287fcc96595fe0f12731a3bd1/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/caf21df165b1e410a5dcb8f431190930/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/caf21df165b1e410a5dcb8f431190930/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.firebase:firebase-common:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-common-16.1.0.aar/6c9c0991e7471d4359ec5dcf58cfe7c9/AndroidManifest.xml:11:5-17:19
+MERGED from [com.google.firebase:firebase-common:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-common-16.1.0.aar/6c9c0991e7471d4359ec5dcf58cfe7c9/AndroidManifest.xml:11:5-17:19
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/f53245580e5afc99de3c72b06e89b663/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/f53245580e5afc99de3c72b06e89b663/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/c3a7c0504bf96c12bf49c2372ecc5c66/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/c3a7c0504bf96c12bf49c2372ecc5c66/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:design:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/a624b6a75bf8686b464af431fe64e20c/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/a624b6a75bf8686b464af431fe64e20c/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support.constraint:constraint-layout:2.0.0-alpha3] /home/eisha/.gradle/caches/transforms-1/files-1.1/constraint-layout-2.0.0-alpha3.aar/faa0b0edd19c390cee096003e6bcb9ee/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:2.0.0-alpha3] /home/eisha/.gradle/caches/transforms-1/files-1.1/constraint-layout-2.0.0-alpha3.aar/faa0b0edd19c390cee096003e6bcb9ee/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-compat:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/8041fe93068c5eda7ac94a8981136dbd/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/8041fe93068c5eda7ac94a8981136dbd/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/68afb7ad53e6d356fde3b9680a907f2f/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/68afb7ad53e6d356fde3b9680a907f2f/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/8041fe93068c5eda7ac94a8981136dbd/AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:15:9-35
+	android:label
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:13:9-41
+	android:roundIcon
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:14:9-54
+	android:icon
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:12:9-43
+	android:allowBackup
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:11:9-35
+	android:theme
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:16:9-40
+activity#com.example.cmput301w19t15.RegisterActivity
+ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:17:9-63
+	android:name
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:17:19-51
+activity#com.example.cmput301w19t15.MainActivity
+ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:18:9-50
+	android:name
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:18:19-47
+activity#com.example.cmput301w19t15.LoginActivity
+ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:19:9-27:20
+	android:label
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:21:13-57
+	android:name
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:20:13-42
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:22:13-26:29
+action#android.intent.action.MAIN
+ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:23:17-69
+	android:name
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:23:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:25:17-77
+	android:name
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:25:27-74
+activity#com.example.cmput301w19t15.ShowAvaliableBookActivity
+ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:28:9-63
+	android:name
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:28:19-60
+activity#com.example.cmput301w19t15.SearchBooksorUsersActivity
+ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:29:9-64
+	android:name
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml:29:19-61
+uses-sdk
+INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+MERGED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:21:5-44
+MERGED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:21:5-44
+MERGED from [com.google.firebase:firebase-database:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.1.aar/7a5afd6e52df586ea1bfc2fb7dc53ee2/AndroidManifest.xml:6:5-44
+MERGED from [com.google.firebase:firebase-database:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.1.aar/7a5afd6e52df586ea1bfc2fb7dc53ee2/AndroidManifest.xml:6:5-44
+MERGED from [com.google.firebase:firebase-storage:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.1.0.aar/443f87fc57ba12fd5d0af28624918aec/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.firebase:firebase-storage:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.1.0.aar/443f87fc57ba12fd5d0af28624918aec/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.gms:play-services-flags:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-flags-16.0.1.aar/61d09a9ab8de3dfe172c9e0a260005ad/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-flags:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-flags-16.0.1.aar/61d09a9ab8de3dfe172c9e0a260005ad/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-auth-interop:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/a622721287fcc96595fe0f12731a3bd1/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-auth-interop:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/a622721287fcc96595fe0f12731a3bd1/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/caf21df165b1e410a5dcb8f431190930/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/caf21df165b1e410a5dcb8f431190930/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-database-connection:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-database-connection-16.0.1.aar/bf00e338f262b27205b12ba7676cee4d/AndroidManifest.xml:6:5-44
+MERGED from [com.google.firebase:firebase-database-connection:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-database-connection-16.0.1.aar/bf00e338f262b27205b12ba7676cee4d/AndroidManifest.xml:6:5-44
+MERGED from [com.google.firebase:firebase-common:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-common-16.1.0.aar/6c9c0991e7471d4359ec5dcf58cfe7c9/AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.firebase:firebase-common:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-common-16.1.0.aar/6c9c0991e7471d4359ec5dcf58cfe7c9/AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/f53245580e5afc99de3c72b06e89b663/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/f53245580e5afc99de3c72b06e89b663/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-database-collection:15.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-database-collection-15.0.1.aar/a95279ca4ba4ce8f5f72622c43931499/AndroidManifest.xml:6:5-44
+MERGED from [com.google.firebase:firebase-database-collection:15.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-database-collection-15.0.1.aar/a95279ca4ba4ce8f5f72622c43931499/AndroidManifest.xml:6:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/c3a7c0504bf96c12bf49c2372ecc5c66/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/c3a7c0504bf96c12bf49c2372ecc5c66/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/876c2b6dbc2155d517e41c0dfe5c3feb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/876c2b6dbc2155d517e41c0dfe5c3feb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/a624b6a75bf8686b464af431fe64e20c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/a624b6a75bf8686b464af431fe64e20c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:2.0.0-alpha3] /home/eisha/.gradle/caches/transforms-1/files-1.1/constraint-layout-2.0.0-alpha3.aar/faa0b0edd19c390cee096003e6bcb9ee/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:2.0.0-alpha3] /home/eisha/.gradle/caches/transforms-1/files-1.1/constraint-layout-2.0.0-alpha3.aar/faa0b0edd19c390cee096003e6bcb9ee/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:appcompat-v7:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/48da267ed5bac7de089e1c76f1bcb057/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/48da267ed5bac7de089e1c76f1bcb057/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/8f851b61d6e1665d8b247039ff16d2b4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/8f851b61d6e1665d8b247039ff16d2b4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/4d6ede7fb37143c80974ebcb64369d63/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/4d6ede7fb37143c80974ebcb64369d63/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/4ae24d98e02d87cd4441642724f3cd41/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/4ae24d98e02d87cd4441642724f3cd41/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/eff9867fb12c98213f31783a4fb9dc58/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/eff9867fb12c98213f31783a4fb9dc58/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/5f97e7e0ff8cda118c801b8d80704c34/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/5f97e7e0ff8cda118c801b8d80704c34/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/f1d3bf0be262bedd78ed35828a1b1eb2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/f1d3bf0be262bedd78ed35828a1b1eb2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/23193002b7360de5624d046a4dbca5fc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/23193002b7360de5624d046a4dbca5fc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/13790188e6af91b926995d2a26802346/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/13790188e6af91b926995d2a26802346/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/3f31af41ec64a1d6e573efb380503592/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/3f31af41ec64a1d6e573efb380503592/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/62ff63df2e04a7310b4913d16be114c7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/62ff63df2e04a7310b4913d16be114c7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/9d39bfaf4ad50c5bcbf753d96142b9e5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/9d39bfaf4ad50c5bcbf753d96142b9e5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/4210a725c86d662145f8faefdc8d918a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/4210a725c86d662145f8faefdc8d918a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/a3ab5d4590994c77154e787777648828/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/a3ab5d4590994c77154e787777648828/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/0f8762d5a5691e6495649f2c1f153b56/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/0f8762d5a5691e6495649f2c1f153b56/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/528a00960c5186f1d2ace2f2763cadde/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/528a00960c5186f1d2ace2f2763cadde/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/1d01642f819bcd7a5f91af5dc26a5e4f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/1d01642f819bcd7a5f91af5dc26a5e4f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/8041fe93068c5eda7ac94a8981136dbd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/8041fe93068c5eda7ac94a8981136dbd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/68afb7ad53e6d356fde3b9680a907f2f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/68afb7ad53e6d356fde3b9680a907f2f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/92887833cf9a53dbfcb7b0a1ccf757c1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/92887833cf9a53dbfcb7b0a1ccf757c1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/6f36b7d4cfeee68c7f7275921245c571/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/6f36b7d4cfeee68c7f7275921245c571/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/b592d00d94419466884374d68253bbfc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/b592d00d94419466884374d68253bbfc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/1cee20e9ce9e08e03d70319e408957d6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/1cee20e9ce9e08e03d70319e408957d6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/7eed570e7d476ab0f4bede54d024f953/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/7eed570e7d476ab0f4bede54d024f953/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/4637f3a53227c0fb5965ead3bafe48e9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/4637f3a53227c0fb5965ead3bafe48e9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/4a17905d47f5e793f6fdbd257844e2dd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/4a17905d47f5e793f6fdbd257844e2dd/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/a6bc4dc8eb2cee4ae73ccef2a76ce528/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/a6bc4dc8eb2cee4ae73ccef2a76ce528/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/b7f2e3f0c76aca8a570f75f95c98f818/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/b7f2e3f0c76aca8a570f75f95c98f818/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/4f19a3f036d0b29d4b4c37512ddd7870/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/4f19a3f036d0b29d4b4c37512ddd7870/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/db0a7d89fbbe1b0266172c663e41101a/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/db0a7d89fbbe1b0266172c663e41101a/AndroidManifest.xml:20:5-44
+INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+		INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+		ADDED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+		INJECTED from /home/eisha/AndroidStudioProjects/BookProject/GitGoing/cmput301w19t15/app/src/main/AndroidManifest.xml
+activity#com.google.firebase.auth.internal.FederatedSignInActivity
+ADDED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:24:9-31:50
+	android:excludeFromRecents
+		ADDED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:26:13-46
+	android:launchMode
+		ADDED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:28:13-44
+	android:exported
+		ADDED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:27:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:29:13-102
+	android:theme
+		ADDED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:30:13-72
+	tools:replace
+		ADDED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:31:13-47
+	android:name
+		ADDED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:25:13-85
+service#com.google.firebase.components.ComponentDiscoveryService
+ADDED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:33:9-39:19
+MERGED from [com.google.firebase:firebase-storage:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.1.0.aar/443f87fc57ba12fd5d0af28624918aec/AndroidManifest.xml:30:9-34:19
+MERGED from [com.google.firebase:firebase-storage:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.1.0.aar/443f87fc57ba12fd5d0af28624918aec/AndroidManifest.xml:30:9-34:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:35:13-37
+	android:name
+		ADDED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:34:13-84
+meta-data#com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar
+ADDED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:36:13-38:85
+	android:value
+		ADDED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:38:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-auth:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.1.0.aar/e86b9faa0a0f0902bbed81ce39496f67/AndroidManifest.xml:37:17-109
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.firebase:firebase-storage:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.1.0.aar/443f87fc57ba12fd5d0af28624918aec/AndroidManifest.xml:26:5-79
+	android:name
+		ADDED from [com.google.firebase:firebase-storage:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.1.0.aar/443f87fc57ba12fd5d0af28624918aec/AndroidManifest.xml:26:22-76
+meta-data#com.google.firebase.components:com.google.firebase.storage.StorageRegistrar
+ADDED from [com.google.firebase:firebase-storage:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.1.0.aar/443f87fc57ba12fd5d0af28624918aec/AndroidManifest.xml:31:13-33:85
+	android:value
+		ADDED from [com.google.firebase:firebase-storage:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.1.0.aar/443f87fc57ba12fd5d0af28624918aec/AndroidManifest.xml:33:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-storage:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.1.0.aar/443f87fc57ba12fd5d0af28624918aec/AndroidManifest.xml:32:17-107
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/caf21df165b1e410a5dcb8f431190930/AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/caf21df165b1e410a5dcb8f431190930/AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/caf21df165b1e410a5dcb8f431190930/AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/caf21df165b1e410a5dcb8f431190930/AndroidManifest.xml:24:13-79
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-common-16.1.0.aar/6c9c0991e7471d4359ec5dcf58cfe7c9/AndroidManifest.xml:12:9-16:39
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-common-16.1.0.aar/6c9c0991e7471d4359ec5dcf58cfe7c9/AndroidManifest.xml:14:13-72
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-common-16.1.0.aar/6c9c0991e7471d4359ec5dcf58cfe7c9/AndroidManifest.xml:15:13-37
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-common-16.1.0.aar/6c9c0991e7471d4359ec5dcf58cfe7c9/AndroidManifest.xml:16:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-common:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/firebase-common-16.1.0.aar/6c9c0991e7471d4359ec5dcf58cfe7c9/AndroidManifest.xml:13:13-77
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/c3a7c0504bf96c12bf49c2372ecc5c66/AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/c3a7c0504bf96c12bf49c2372ecc5c66/AndroidManifest.xml:25:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:16.1.0] /home/eisha/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/c3a7c0504bf96c12bf49c2372ecc5c66/AndroidManifest.xml:24:13-58
