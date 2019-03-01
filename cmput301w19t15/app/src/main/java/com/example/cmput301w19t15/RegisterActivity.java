@@ -68,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()){
-
+                                emailError = setFocus(inputEmail,"Email already Exists");
                             }else{
                                 emailError = false;
                             }
