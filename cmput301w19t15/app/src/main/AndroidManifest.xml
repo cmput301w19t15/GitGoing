@@ -25,6 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MyBooks"/>
         <activity android:name=".ShowAvaliableBookActivity" />
         <activity android:name=".SearchBooksorUsersActivity" />
     </application>

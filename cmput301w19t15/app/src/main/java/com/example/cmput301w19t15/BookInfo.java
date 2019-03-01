@@ -30,6 +30,7 @@ public class BookInfo extends AppCompatActivity {
 
         /*
         // only show if user is not the owner of this book
+        /*
         Button requestButton = findViewById(R.id.request);
         requestButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +42,5 @@ public class BookInfo extends AppCompatActivity {
             }
         });
         */
-
     }
 }
