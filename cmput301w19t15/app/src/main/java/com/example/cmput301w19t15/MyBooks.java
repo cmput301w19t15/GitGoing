@@ -21,12 +21,10 @@ public class MyBooks extends AppCompatActivity {
         Button addBook = (Button) findViewById(R.id.addBook);
 
         addBook.setOnClickListener(new View.OnClickListener() {
-                                       public void onClick(View v) {
-                                           Intent addIntent = new Intent(MyBooks.this, BookInfo.class);
-                                           startActivityForResult(addIntent, NEW_BOOK);
-                                       }
-                                   }
-
-        );
+            public void onClick(View v) {
+                Intent addIntent = new Intent(MyBooks.this, BookInfo.class);
+                startActivityForResult(addIntent, NEW_BOOK);
+            }
+        });
     }
 }
