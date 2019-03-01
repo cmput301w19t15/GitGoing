@@ -6,43 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".BookInfo">
 
-    <ListView
-        android:id="@+id/mybookISBN"
-        android:layout_width="395dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
     <TextView
         android:id="@+id/textView6"
         android:layout_width="48dp"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/ISBN"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="227dp" />
-
-    <ListView
-        android:id="@+id/mybookauthor"
-        android:layout_width="395dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/editMyBookAuthor" />
 
     <TextView
         android:id="@+id/textView5"
@@ -50,9 +23,10 @@
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/author"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="138dp" />
+        app:layout_constraintTop_toBottomOf="@+id/editMyBookTitle" />
 
     <TextView
         android:id="@+id/textView3"
@@ -87,25 +61,44 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="48dp"
         android:text="@string/scan"
+        app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="385dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <ListView
-        android:id="@+id/mybooktitle"
-        android:layout_width="395dp"
-        android:layout_height="50dp"
+    <EditText
+        android:id="@+id/editMyBookTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:ems="10"
+        android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <EditText
+        android:id="@+id/editMyBookAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="165dp" />
+
+    <EditText
+        android:id="@+id/editMyBookISBN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
 </android.support.constraint.ConstraintLayout>
