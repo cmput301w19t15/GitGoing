@@ -1,13 +1,29 @@
 package com.example.cmput301w19t15;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import java.util.Date;
 
-public class FindBooks extends AppCompatActivity {
+public class Request {
+    private Owner owner;
+    private Borrower borrower;
+    private Book book;
+    private boolean accept = false;
+    private Date date;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_find_books);
+    public Request(Owner owner, Borrower borrower, Book book){
+        this.owner = owner;
+        this.borrower = borrower;
+        this.book = book;
+    }
+
+    public void acceptRequest(){
+        this.accept = true;
+        book.setStatus("accepted");
+    }
+    public void denyRequest(){
+        this.accept = false;
+        book.setStatus("available");
+    }
+    public boolean requestStatus(){
+        return this.accept;
     }
 }
