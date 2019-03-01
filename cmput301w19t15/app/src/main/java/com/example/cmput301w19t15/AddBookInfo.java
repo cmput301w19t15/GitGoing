@@ -42,8 +42,6 @@ public class AddBookInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Book book = new Book(booktitleText, authorText, isbnText);
-
-
                 //pick book table to same the book
                 DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(book.getBookID());
 
