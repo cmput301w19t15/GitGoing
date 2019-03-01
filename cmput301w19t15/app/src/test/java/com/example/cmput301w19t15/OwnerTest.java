@@ -9,7 +9,7 @@ import static org.junit.Assert.assertFalse;
 public class OwnerTest {
     @Test
     public void testOwner() {
-        Owner owner = new Owner("user123", "first last", "example@email.com", "111-111-1111");
+        User owner = new User("user123", "first last", "example@email.com", "111-111-1111");
         assertEquals(owner.getUsername(),"user123");
         assertEquals(owner.getName(),"first last");
         assertEquals(owner.getEmail(),"example@email.com");
@@ -18,7 +18,7 @@ public class OwnerTest {
 
     @Test
     public void testAddMyBook(){
-        Owner owner = new Owner("user123", "first last", "example@email.com", "111-111-1111");
+        User owner = new User("user123", "first last", "example@email.com", "111-111-1111");
         Book b = new Book("a","a",123);
         owner.addMyBook(b);
         assertTrue(owner.hasBook(b));
@@ -26,7 +26,7 @@ public class OwnerTest {
     }
     @Test
     public void testDeleteMyBook(){
-        Owner owner = new Owner("user123", "first last", "example@email.com", "111-111-1111");
+        User owner = new User("user123", "first last", "example@email.com", "111-111-1111");
         Book b = new Book("a","a",123);
         owner.addMyBook(b);
         owner.deleteMyBook(b);
@@ -34,7 +34,7 @@ public class OwnerTest {
     }
     @Test
     public void testAddAvailableBook(){
-        Owner owner = new Owner("user123", "first last", "example@email.com", "111-111-1111");
+        User owner = new User("user123", "first last", "example@email.com", "111-111-1111");
         Book b = new Book("a","a",123);
         owner.addAvailableBook(b);
         assertTrue(owner.bookAvailable(b));
@@ -42,7 +42,7 @@ public class OwnerTest {
     }
     @Test
     public void testDeleteAvailableBook(){
-        Owner owner = new Owner("user123", "first last", "example@email.com", "111-111-1111");
+        User owner = new User("user123", "first last", "example@email.com", "111-111-1111");
         Book b = new Book("a","a",123);
         owner.addAvailableBook(b);
         owner.deleteAvailableBook(b);
@@ -50,8 +50,8 @@ public class OwnerTest {
     }
     @Test
     public void testAddPendingRequest(){
-        Owner owner = new Owner("user123", "first last", "example@email.com", "111-111-1111");
-        Borrower borrower = new Borrower("user123", "first last", "example@email.com", "111-111-1111");
+        User owner = new User("user123", "first last", "example@email.com", "111-111-1111");
+        User borrower = new User("user123", "first last", "example@email.com", "111-111-1111");
         Book b = new Book("a","a",123);
         Request request = new Request(owner,borrower,b);
         owner.addPendingRequest(request);
@@ -59,8 +59,8 @@ public class OwnerTest {
     }
     @Test
     public void testDeletePendingRequest(){
-        Owner owner = new Owner("user123", "first last", "example@email.com", "111-111-1111");
-        Borrower borrower = new Borrower("user123", "first last", "example@email.com", "111-111-1111");
+        User owner = new User("user123", "first last", "example@email.com", "111-111-1111");
+        User borrower = new User("user123", "first last", "example@email.com", "111-111-1111");
         Book b = new Book("a","a",123);
         Request request = new Request(owner,borrower,b);
         owner.addPendingRequest(request);
@@ -70,8 +70,8 @@ public class OwnerTest {
     }
     @Test
     public void testAddAcceptedRequest(){
-        Owner owner = new Owner("user123", "first last", "example@email.com", "111-111-1111");
-        Borrower borrower = new Borrower("user123", "first last", "example@email.com", "111-111-1111");
+        User owner = new User("user123", "first last", "example@email.com", "111-111-1111");
+        User borrower = new User("user123", "first last", "example@email.com", "111-111-1111");
         Book b = new Book("a","a",123);
         Request request = new Request(owner,borrower,b);
         owner.addAcceptedRequest(request);
@@ -80,8 +80,8 @@ public class OwnerTest {
     }
     @Test
     public void testDeleteAcceptedRequest(){
-        Owner owner = new Owner("user123", "first last", "example@email.com", "111-111-1111");
-        Borrower borrower = new Borrower("user123", "first last", "example@email.com", "111-111-1111");
+        User owner = new User("user123", "first last", "example@email.com", "111-111-1111");
+        User borrower = new User("user123", "first last", "example@email.com", "111-111-1111");
         Book b = new Book("a","a",123);
         Request request = new Request(owner,borrower,b);
         owner.addAcceptedRequest(request);

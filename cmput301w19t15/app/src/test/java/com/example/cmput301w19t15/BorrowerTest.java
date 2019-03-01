@@ -9,7 +9,7 @@ import static org.junit.Assert.assertFalse;
 public class BorrowerTest {
     @Test
     public void testBorrower(){
-        Borrower x = new Borrower("user123", "first last", "example@email.com", "111-111-1111");
+        User x = new User("user123", "first last", "example@email.com", "111-111-1111");
         assertEquals(x.getUsername(),"user123");
         assertEquals(x.getName(),"first last");
         assertEquals(x.getEmail(),"example@email.com");
@@ -17,21 +17,21 @@ public class BorrowerTest {
     }
     @Test
     public void testRequestBook(){
-        Borrower x = new Borrower("user123", "first last", "example@email.com", "111-111-1111");
+        User x = new User("user123", "first last", "example@email.com", "111-111-1111");
         Book b = new Book("a","a",123);
         x.requestBook(b);
         assertTrue(x.requested(b));
     }
     @Test
     public void testAddAcceptedRequest(){
-        Borrower x = new Borrower("user123", "first last", "example@email.com", "111-111-1111");
+        User x = new User("user123", "first last", "example@email.com", "111-111-1111");
         Book b = new Book("a","a",123);
         x.addAcceptedRequest(b);
         assertTrue(x.borrowed(b));
     }
     @Test
     public void testDeleteRequest(){
-        Borrower x = new Borrower("user123", "first last", "example@email.com", "111-111-1111");
+        User x = new User("user123", "first last", "example@email.com", "111-111-1111");
         Book b = new Book("a","a",123);
         x.requestBook(b);
         x.deleteRequest(b);
@@ -39,7 +39,7 @@ public class BorrowerTest {
     }
     @Test
     public void testReturnBook(){
-        Borrower x = new Borrower("user123", "first last", "example@email.com", "111-111-1111");
+        User x = new User("user123", "first last", "example@email.com", "111-111-1111");
         Book b = new Book("a","a",123);
         x.addAcceptedRequest(b);
         x.returnBook(b);

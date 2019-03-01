@@ -10,7 +10,10 @@
     <string name="action_reset">Forgot Password</string>
 
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password </string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_name">Full Name</string>
+    <string name="prompt_phone">Phone</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
@@ -25,9 +28,6 @@
     <string name="hint_email">abc@domain.com</string>
     <string name="hint_password">123456</string>
     <string name="action_login_short">Login</string>
-    <string name="hint_first_name">Joe</string>
-    <string name="hint_last_name">Doe</string>
-    <string name="hint_phone">780-123-4567</string>
 
 
     <!-- check these over -->

@@ -28,18 +28,19 @@ public class BookInfo extends AppCompatActivity {
         ISBN.setText(book.getISBN());
 
 
+        /*
         // only show if user is not the owner of this book
         Button requestButton = findViewById(R.id.request);
         requestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 // make the request object
                 // notify owner about request
                 book.setStatus("requested");
 
             }
         });
+        */
 
     }
 }

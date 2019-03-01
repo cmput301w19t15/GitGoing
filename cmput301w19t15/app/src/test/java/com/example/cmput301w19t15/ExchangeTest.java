@@ -10,8 +10,8 @@ import static org.junit.Assert.assertFalse;
 public class ExchangeTest {
     @Test
     public void SetLocation(){
-        Owner owner = new Owner("user123", "first last", "example@email.com", "111-111-1111");
-        Borrower borrower = new Borrower("userb", "first last", "example@email.com", "111-111-1111");
+        User owner = new User("user123", "first last", "example@email.com", "111-111-1111");
+        User borrower = new User("userb", "first last", "example@email.com", "111-111-1111");
         Book book = new Book("test title","test author",123);
         Exchange exchange = new Exchange(owner, borrower, book);
         double longitude = 25;
@@ -22,8 +22,8 @@ public class ExchangeTest {
     }
     @Test
     public void SetDate(){
-        Owner owner = new Owner("user123", "first last", "example@email.com", "111-111-1111");
-        Borrower borrower = new Borrower("userb", "first last", "example@email.com", "111-111-1111");
+        User owner = new User("user123", "first last", "example@email.com", "111-111-1111");
+        User borrower = new User("userb", "first last", "example@email.com", "111-111-1111");
         Book book = new Book("test title","test author",123);
         Exchange exchange = new Exchange(owner, borrower, book);
         Date date = new Date();
