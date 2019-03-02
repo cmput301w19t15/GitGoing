@@ -116,8 +116,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/AddBookInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="133" column="13" selection-start-line="133" selection-start-column="5" selection-end-line="133" selection-end-column="13" />
+            <state relative-caret-position="90">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
               <folding>
                 <element signature="method#onCreate#0;class#AddBookInfo#0" />
                 <element signature="e#1609#1780#0" expanded="true" />
@@ -2454,6 +2454,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="993" y="27" width="927" height="1053" extended-state="4" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24971624" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -2572,8 +2573,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/AddBookInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="133" column="13" selection-start-line="133" selection-start-column="5" selection-end-line="133" selection-end-column="13" />
+        <state relative-caret-position="90">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
           <folding>
             <element signature="method#onCreate#0;class#AddBookInfo#0" />
             <element signature="e#1609#1780#0" expanded="true" />
