@@ -14,7 +14,7 @@ public class BookInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_info);
 
-        //get intents/book from on click in my books list
+        //get intents/book from onclick in books list
         Intent intent = getIntent();
         final Book book = (Book) intent.getSerializableExtra("Book");
 
@@ -27,7 +27,12 @@ public class BookInfo extends AppCompatActivity {
         author.setText(book.getAuthor());
         ISBN.setText(book.getISBN());
 
+        //update any edits to firebase, so far no booklist in firebase to update
+        //also update mybooks list
 
+
+
+        //>>>>>>>This class is called so far only if clicked in mybooks list, will need to add intent to other lists(find books,borrower books) to change that
         /*
         // only show if user is not the owner of this book
         /*
