@@ -3,6 +3,7 @@ package com.example.cmput301w19t15;
 import android.media.Image;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class User {
     private String username;
@@ -18,6 +19,7 @@ public class User {
         this.phone = phone;
     }
     public void setUsername(String username) {
+        this.username = username;
     }
     public String getUsername() {
         return username;
@@ -48,30 +50,46 @@ public class User {
         return rating;
     }
 
-    private ArrayList<Book> requestedBooks = new ArrayList<>();
-    private ArrayList<Book> borrowedBooks = new ArrayList<>();
+    /***
+     
+    private HashMap<String,Book> requestedBooks = new HashMap<String,Book>();
+    private HashMap<String,Book> borrowedBooks = new HashMap<String,Book>();
+
+
+
 
     public void requestBook(Book book){
-        requestedBooks.add(book);
+        String bookId = book.getBookID();
+        requestedBooks.put(bookId,book);
     }
     public Boolean requested(Book book){
-        return requestedBooks.contains(book);
+
+        return requestedBooks.containsValue(book);
     }
     public void addAcceptedRequest(Book book){
-        borrowedBooks.add(book);
+        String bookId = book.getBookID();
+        borrowedBooks.put(bookId,book);
     }
     public Boolean borrowed(Book book){
-        return borrowedBooks.contains(book);
+
+        return borrowedBooks.containsValue(book);
     }
     public void deleteRequest(Book book){
+
         requestedBooks.remove(book);
     }
     public void returnBook(Book book){
+
         borrowedBooks.remove(book);
     }
 
-    private ArrayList<Book> myBooks = new ArrayList<>();
-    private ArrayList<Book> availableBooks = new ArrayList<>();
+
+
+    private HashMap<String,Book> myBooks = new HashMap<String,Book>();
+    private HashMap<String,Book> availableBooks = new HashMap<String,Book>();
+
+
+
 
     public void addMyBook(Book book){
         myBooks.add(book);
@@ -91,5 +109,6 @@ public class User {
     public void deleteAvailableBook(Book book){
         availableBooks.remove(book);
     }
+    **/
 
 }

@@ -11,6 +11,8 @@ public class Book {
     private String status;
     private String photo;
     private String BookID;
+    private boolean borrowed;
+    private String ownerId;
 
     public Book(String title, String author, int ISBN) {
         this.title = title;
@@ -52,4 +54,8 @@ public class Book {
     public String getBookID() {
         return this.BookID;
     }
+    public void setBorrowed(Boolean borrowed){this.borrowed = borrowed;}
+    public boolean getBorroed(){return this.borrowed;}
+    public void setOwnerId(String ownerId){this.ownerId = ownerId;}
+    public String getOwnerId(){return this.ownerId;}
 }
