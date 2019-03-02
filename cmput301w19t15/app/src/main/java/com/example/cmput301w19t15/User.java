@@ -31,10 +31,11 @@ public class User {
 
     //need this constructor DO NOT REMOVE OR EDIT
     public User(){}
-    public User(String userID){
+    public User(String emailID, String userID){
+        this.email = emailID;
         this.userID = userID;
+        /*
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userID);
-        //DatabaseReference userRef = databaseReference.child(userID).child("username");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -50,6 +51,7 @@ public class User {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
+        */
     }
     public User(String username, String name, String email, String phone, String userID) {
         this.username = username;
@@ -100,9 +102,13 @@ public class User {
     //my books i own
     public void addToMyBooks(Book book){
         myBooks.add(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myBooks").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myBooks").setValue(myBooks);
     }
     public void removeMyBooks(Book book){
         myBooks.remove(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myBooks").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myBooks").setValue(myBooks);
     }
     public ArrayList<Book> getMyBooks(){
         return myBooks;
@@ -110,9 +116,13 @@ public class User {
     //books i have requested from others - with status
     public void addToMyRequestedBooks(Book book){
         myRequestedBooks.add(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooks").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooks").setValue(myRequestedBooks);
     }
     public void removeMyRequestedBooks(Book book){
         myRequestedBooks.remove(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooks").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooks").setValue(myRequestedBooks);
     }
     public ArrayList<Book> getMyRequestedBooks(){
         return myRequestedBooks;
@@ -120,9 +130,13 @@ public class User {
     //books others have requested from me
     public void addToRequestedBooks(Book book){
         requestedBooks.add(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("requestedBooks").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("requestedBooks").setValue(requestedBooks);
     }
     public void removeRequestedBooks(Book book){
         requestedBooks.remove(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("requestedBooks").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("requestedBooks").setValue(requestedBooks);
     }
     public ArrayList<Book> getRequestedBooks(){
         return requestedBooks;
@@ -130,9 +144,13 @@ public class User {
     //book that i have borrowed from others
     public void addToMyBorrowedBooks(Book book){
         borrowedBooks.add(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("borrowedBooks").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("borrowedBooks").setValue(borrowedBooks);
     }
     public void removeMyBorrowedBooks(Book book){
         borrowedBooks.remove(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("borrowedBooks").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("borrowedBooks").setValue(borrowedBooks);
     }
     public ArrayList<Book> getBorrowedBooks(){
         return borrowedBooks;
@@ -145,9 +163,13 @@ public class User {
     //requested books that are avaliable - with status
     public void addToMyRequestedBooksAvailable(Book book){
         myRequestedBooksAvailable.add(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAvailable").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAvailable").setValue(myRequestedBooksAvailable);
     }
     public void removeMyRequestedBooksAvailable(Book book){
         myRequestedBooksAvailable.remove(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAvailable").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAvailable").setValue(myRequestedBooksAvailable);
     }
     public ArrayList<Book> getMyRequestedBooksAvailable(){
         return myRequestedBooksAvailable;
@@ -155,9 +177,13 @@ public class User {
     //requested books that have been accepeted - with status
     public void addToMyRequestedBooksAccepted(Book book){
         myRequestedBooksAccepted.add(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAccepted").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAccepted").setValue(myRequestedBooksAccepted);
     }
     public void removeMyRequestedBooksAccepted(Book book){
         myRequestedBooksAccepted.remove(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAccepted").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAccepted").setValue(myRequestedBooksAccepted);
     }
     public ArrayList<Book> getMyRequestedBooksAccepted(){
         return myRequestedBooksAccepted;
