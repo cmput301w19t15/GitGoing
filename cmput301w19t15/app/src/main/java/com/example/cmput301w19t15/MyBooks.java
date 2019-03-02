@@ -22,7 +22,7 @@ public class MyBooks extends AppCompatActivity {
 
         addBook.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent addIntent = new Intent(MyBooks.this, BookInfo.class);
+                Intent addIntent = new Intent(MyBooks.this, AddBookInfo.class);
                 startActivityForResult(addIntent, NEW_BOOK);
             }
         });
