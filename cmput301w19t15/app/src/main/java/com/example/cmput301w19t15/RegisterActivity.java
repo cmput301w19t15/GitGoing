@@ -96,11 +96,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 //get database
                                 DatabaseReference dataBase, newUser;
                                 FirebaseUser currentUser = task.getResult().getUser();
+                                String userID = currentUser.getUid();
                                 //pick users table to same the user in
                                 dataBase = FirebaseDatabase.getInstance().getReference().child("users");
                                 newUser = dataBase.child(currentUser.getUid());
                                 //create the user
-                                User addUser = new User(username,name,email,phone);
+                                User addUser = new User(username,name,email,phone,userID);
                                 //save the user in the database
                                 newUser.setValue(addUser);
                                 //close register

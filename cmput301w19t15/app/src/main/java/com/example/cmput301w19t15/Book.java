@@ -14,6 +14,7 @@ public class Book {
     private String BookID;
     private Date returnDate;
     private Status status;
+    private String borrowerID;
 
     public Book(String title, String author, int ISBN, String photo, String ownerID) {
         this.title = title;
@@ -77,6 +78,12 @@ public class Book {
             case "accepted"    : this.status = Status.Accepted; break;
             case "borrowed"    : this.status = Status.Borrowed; break;
         }
+    }
+    public void setBorrowerID(String borrowerID){
+        this.borrowerID = borrowerID;
+    }
+    public String getBorrowerID(){
+        return borrowerID;
     }
     public String getStatus(){
         return status.toString();
