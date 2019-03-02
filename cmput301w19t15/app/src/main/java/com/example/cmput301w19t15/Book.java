@@ -2,24 +2,34 @@ package com.example.cmput301w19t15;
 
 import android.media.Image;
 
+import java.util.Date;
 import java.util.UUID;
 
 public class Book {
     private String title;
     private String author;
     private int ISBN;
-    private String status;
     private String photo;
+    private String ownerID;
     private String BookID;
-    private boolean borrowed;
-    private String ownerId;
+    private Date returnDate;
+    private Status status;
 
-    public Book(String title, String author, int ISBN) {
+    public Book(String title, String author, int ISBN, String photo, String ownerID) {
         this.title = title;
         this.author = author;
         this.ISBN = ISBN;
+        this.photo = photo;
+        this.ownerID = ownerID;
+        this.status = Status.Available;
         if(this.BookID == null || this.BookID.isEmpty())
             this.BookID = UUID.randomUUID().toString();
+    }
+    public enum Status{
+        Available,
+        Requested,
+        Accepted,
+        Borrowed
     }
     public void setTitle(String title) {
         this.title = title;
@@ -39,23 +49,30 @@ public class Book {
     public int getISBN() {
         return this.ISBN;
     }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public String getStatus() {
-        return this.status;
-    }
     public void setPhoto(String photo) {
         this.photo = photo;
     }
     public String getPhoto() {
         return this.photo;
     }
+    public void setOwnerID(String ownerID){this.ownerID = ownerID;}
+    public String getOwnerID(){return this.ownerID;}
     public String getBookID() {
         return this.BookID;
     }
-    public void setBorrowed(Boolean borrowed){this.borrowed = borrowed;}
-    public boolean getBorroed(){return this.borrowed;}
-    public void setOwnerId(String ownerId){this.ownerId = ownerId;}
-    public String getOwnerId(){return this.ownerId;}
+    public void setReturnDate(Date date){
+        this.returnDate = date;
+    }
+    public Date getDate(){return returnDate;}
+    public void setStatus(String status){
+        switch (status) {
+            case "available" : this.status = Status.Available; break;
+            case "requested" : this.status = Status.Requested; break;
+            case "accepted"    : this.status = Status.Accepted; break;
+            case "borrowed"    : this.status = Status.Borrowed; break;
+        }
+    }
+    public String getStatus(){
+        return status.toString();
+    }
 }

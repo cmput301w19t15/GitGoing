@@ -45,7 +45,7 @@ public class AddBookInfo extends AppCompatActivity {
                 booktitleText = booktitle.getText().toString();
                 authorText = author.getText().toString();
                 isbnText = Integer.parseInt(isbn.getText().toString()); // look up better way
-                Book book = new Book(booktitleText, authorText, isbnText);
+                Book book = new Book(booktitleText, authorText, isbnText,"null.png","owneremail@gmail.com");
                 Bundle result = new Bundle();
                 Intent returnIntent = new Intent(AddBookInfo.this, MyBooks.class);
 

@@ -3,6 +3,7 @@ package com.example.cmput301w19t15;
 import android.media.Image;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class User {
@@ -11,6 +12,22 @@ public class User {
     private String email;
     private String phone;
     private Float rating;
+
+
+    //my books i own
+    private ArrayList<Book> myBooks = new ArrayList<>();
+    //books i have requested from others - with status
+    private ArrayList<Book> myRequestedBooks = new ArrayList<>();
+    //requested books that are avaliable - with status
+    private ArrayList<Book> myRequestedBooksAvailable = new ArrayList<>();
+    //requested books that have been accepeted - with status
+    private ArrayList<Book> myRequestedBooksAccepted = new ArrayList<>();
+    //book that i have borrowed from others
+    private ArrayList<Book> borrowedBooks = new ArrayList<>();
+    //books others have requested from me
+    private ArrayList<Book> requestedBooks = new ArrayList<>();
+
+
 
     public User(String username, String name, String email, String phone) {
         this.username = username;
@@ -50,65 +67,73 @@ public class User {
         return rating;
     }
 
-    /***
-     
-    private HashMap<String,Book> requestedBooks = new HashMap<String,Book>();
-    private HashMap<String,Book> borrowedBooks = new HashMap<String,Book>();
 
 
-
-
-    public void requestBook(Book book){
-        String bookId = book.getBookID();
-        requestedBooks.put(bookId,book);
-    }
-    public Boolean requested(Book book){
-
-        return requestedBooks.containsValue(book);
-    }
-    public void addAcceptedRequest(Book book){
-        String bookId = book.getBookID();
-        borrowedBooks.put(bookId,book);
-    }
-    public Boolean borrowed(Book book){
-
-        return borrowedBooks.containsValue(book);
-    }
-    public void deleteRequest(Book book){
-
-        requestedBooks.remove(book);
-    }
-    public void returnBook(Book book){
-
-        borrowedBooks.remove(book);
-    }
-
-
-
-    private HashMap<String,Book> myBooks = new HashMap<String,Book>();
-    private HashMap<String,Book> availableBooks = new HashMap<String,Book>();
-
-
-
-
-    public void addMyBook(Book book){
+    //my books i own
+    public void addToMyBooks(Book book){
         myBooks.add(book);
     }
-    public Boolean hasBook(Book book){
-        return myBooks.contains(book);
-    }
-    public void deleteMyBook(Book book){
+    public void removeMyBooks(Book book){
         myBooks.remove(book);
     }
-    public void addAvailableBook(Book book){
-        availableBooks.add(book);
+    public ArrayList<Book> getMyBooks(){
+        return myBooks;
     }
-    public Boolean bookAvailable(Book book){
-        return availableBooks.contains(book);
+    //books i have requested from others - with status
+    public void addToMyRequestedBooks(Book book){
+        myRequestedBooks.add(book);
     }
-    public void deleteAvailableBook(Book book){
-        availableBooks.remove(book);
+    public void removeMyRequestedBooks(Book book){
+        myRequestedBooks.remove(book);
     }
-    **/
+    public ArrayList<Book> getMyRequestedBooks(){
+        return myRequestedBooks;
+    }
+    //books others have requested from me
+    public void addToRequestedBooks(Book book){
+        requestedBooks.add(book);
+    }
+    public void removeRequestedBooks(Book book){
+        requestedBooks.remove(book);
+    }
+    public ArrayList<Book> getRequestedBooks(){
+        return requestedBooks;
+    }
+    //book that i have borrowed from others
+    public void addToMyBorrowedBooks(Book book){
+        borrowedBooks.add(book);
+    }
+    public void removeMyBorrowedBooks(Book book){
+        borrowedBooks.remove(book);
+    }
+    public ArrayList<Book> getBorrowedBooks(){
+        return borrowedBooks;
+    }
+
+
+    /*** Planned to Remove***/
+
+
+    //requested books that are avaliable - with status
+    public void addToMyRequestedBooksAvailable(Book book){
+        myRequestedBooksAvailable.add(book);
+    }
+    public void removeMyRequestedBooksAvailable(Book book){
+        myRequestedBooksAvailable.remove(book);
+    }
+    public ArrayList<Book> getMyRequestedBooksAvailable(){
+        return myRequestedBooksAvailable;
+    }
+    //requested books that have been accepeted - with status
+    public void addToMyRequestedBooksAccepted(Book book){
+        myRequestedBooksAccepted.add(book);
+    }
+    public void removeMyRequestedBooksAccepted(Book book){
+        myRequestedBooksAccepted.remove(book);
+    }
+    public ArrayList<Book> getMyRequestedBooksAccepted(){
+        return myRequestedBooksAccepted;
+    }
+
 
 }

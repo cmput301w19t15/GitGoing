@@ -26,8 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
             changeEmail, changePassword, sendEmail, remove, logOut, myBooks;
 
-    @Override
+    private User loggedinUser;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -90,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         //do nothing
     }
-    User loggedinUser;
     private void getLoggedinUser(){
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null){
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     if (dataSnapshot.exists()){
                         for(DataSnapshot user: dataSnapshot.getChildren()){
                             if(user.child("email").getValue().toString().equalsIgnoreCase(userEmail)){
-                                //loggedinUser = user.getValue(User.class);
+                                loggedinUser = user.getValue(User.class);
                                 Log.d("testing",user.child("email").getValue().toString());
                                 Log.d("testing",user.child("name").getValue().toString());
                                 //Log.d("testing",loggedinUser.getEmail());
