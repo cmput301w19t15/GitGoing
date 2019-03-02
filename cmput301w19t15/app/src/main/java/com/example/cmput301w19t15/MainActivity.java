@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
@@ -26,29 +29,19 @@ public class MainActivity extends AppCompatActivity {
     private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
             changeEmail, changePassword, sendEmail, remove, logOut, myBooks;
 
-    private User loggedinUser;
-
+    //private User loggedinUser;
+    ArrayList<User> testUser = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        auth = FirebaseAuth.getInstance();
-        //check if the user is logged in/user exists
+
+        checkLoggedIn();
         getLoggedinUser();
-        authListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
-                    // user auth state is changed - user is null user logsout
-                    // launch login activity
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    finish();
-                }
-            }
-        };
+
         logOut = (Button) findViewById(R.id.logout_button);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
 
         //logout user
         logOut.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         myBooks = (Button) findViewById(R.id.my_books);
-
         myBooks.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MyBooks.class);
@@ -91,33 +83,26 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         //do nothing
     }
+    public void checkLoggedIn(){
+        auth = FirebaseAuth.getInstance();
+        //check if the user is logged in/user exists
+        authListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    // user auth state is changed - user is null user logout // launch login activity
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    finish();
+                }
+            }
+        };
+    }
     private void getLoggedinUser(){
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null){
-            final String userEmail = user.getEmail();
-            FirebaseDatabase.getInstance().getReference().child("users").orderByChild("email").equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()){
-                        for(DataSnapshot user: dataSnapshot.getChildren()){
-                            if(user.child("email").getValue().toString().equalsIgnoreCase(userEmail)){
-                                loggedinUser = user.getValue(User.class);
-                                Log.d("testing",user.child("email").getValue().toString());
-                                Log.d("testing",user.child("name").getValue().toString());
-                                //Log.d("testing",loggedinUser.getEmail());
-                                //Log.d("testing",loggedinUser.getName());
-                                break;
-                            }
-                        }
-                    }else {}
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {}
-            });
+        if(user != null) {
+            String userID = user.getUid();
+            User loggedInUser = new User(userID);
         }
-        //Log.d("testing",loggedinUser.getEmail());
-    }
-    private void saveLoggedinUser(DataSnapshot data){
-        //loggedinUser = data.getValue(User.class);
     }
 }
