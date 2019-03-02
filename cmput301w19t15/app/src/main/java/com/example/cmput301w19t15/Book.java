@@ -25,6 +25,12 @@ public class Book {
         if(this.BookID == null || this.BookID.isEmpty())
             this.BookID = UUID.randomUUID().toString();
     }
+
+    /***
+     * this enum class will give 4 options to status,
+     * each field is a constant value, cannot be changed,
+     * Status can be only one of them
+     */
     public enum Status{
         Available,
         Requested,
