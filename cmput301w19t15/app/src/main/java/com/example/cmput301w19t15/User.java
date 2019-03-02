@@ -23,29 +23,33 @@ public class User {
         return username;
     }
     public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {
         return name;
     }
     public void setEmail(String email) {
+        this.email = email;
     }
     public String getEmail() {
         return email;
     }
     public void setPhone(String phone) {
+        this.phone = phone;
     }
     public String getPhone() {
         return phone;
     }
     public void setRating(Float rating) {
+        this.rating = rating;
     }
     public Float getRating() {
-        return 0f ;
+        return rating;
     }
 
-    private ArrayList<Book> requestedBooks = new ArrayList<Book>();
-    private ArrayList<Book> borrowedBooks = new ArrayList<Book>();
+    private ArrayList<Book> requestedBooks = new ArrayList<>();
+    private ArrayList<Book> borrowedBooks = new ArrayList<>();
 
     public void requestBook(Book book){
         requestedBooks.add(book);
@@ -66,12 +70,8 @@ public class User {
         borrowedBooks.remove(book);
     }
 
-
-
-    private ArrayList<Book> myBooks = new ArrayList<Book>();
-    private ArrayList<Book> availableBooks = new ArrayList<Book>();
-    private ArrayList<Request> pendingRequests = new ArrayList<Request>();
-    private ArrayList<Request> acceptedRequests = new ArrayList<Request>();
+    private ArrayList<Book> myBooks = new ArrayList<>();
+    private ArrayList<Book> availableBooks = new ArrayList<>();
 
     public void addMyBook(Book book){
         myBooks.add(book);
@@ -90,24 +90,6 @@ public class User {
     }
     public void deleteAvailableBook(Book book){
         availableBooks.remove(book);
-    }
-    public void addPendingRequest(Request request){
-        pendingRequests.add(request);
-    }
-    public boolean requestPending(Request request){
-        return pendingRequests.contains(request);
-    }
-    public void deletePendingRequest(Request request){
-        pendingRequests.remove(request);
-    }
-    public void addAcceptedRequest(Request request){
-        acceptedRequests.add(request);
-    }
-    public boolean requestAccepted(Request request){
-        return acceptedRequests.contains(request);
-    }
-    public void deleteAcceptedRequest(Request request){
-        acceptedRequests.remove(request);
     }
 
 }

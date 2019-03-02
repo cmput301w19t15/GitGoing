@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        Log.d("testing","im here");
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
@@ -58,68 +59,29 @@ public class RegisterActivity extends AppCompatActivity {
                 final String name = inputName.getText().toString().trim();
                 final String phone = inputPhoneNumber.getText().toString().trim();
 
-                if (email.isEmpty()) {
-                    emailError = setFocus(inputEmail,"Email is required");
-                }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    emailError = setFocus(inputEmail,"Please enter a valid email");
-                }else{
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
-                    databaseReference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()){
-                                emailError = setFocus(inputEmail,"Email already Exists");
-                            }else{
-                                emailError = false;
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {}
-                    });
-                }
+                /*
+                Log.d("testing","Email " + emailError);
+                checkEmail(email);
+                Log.d("testing","Email " + emailError);
+                Log.d("testing","Username " + usernameError);
+                checkUsername(username);
+                Log.d("testing","Username " + usernameError);
+                Log.d("testing","Password " + passwordError);
+                checkPassword(password);
+                Log.d("testing","Password " + passwordError);
+                //Log.d("testing","Name " + nameError);
+                checkName(name);
+                //Log.d("testing","Name " + nameError);
+                //Log.d("testing","Phone " + phoneError);
+                checkPhoneNumber(phone);
+                //Log.d("testing","Phone " + phoneError);
 
-                if(username.isEmpty()) {
-                    usernameError = setFocus(inputUsername,"Enter a username");
-                }else{
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
-                    databaseReference.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()){
-                                usernameError = setFocus(inputUsername,"Username already Exists");
-                            //check your password in the same way and grant access if it exists too
-                            }else {
-                                // wrong details entered/ user does not exist
-                                usernameError = false;
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("testing",".");
+                Log.d("testing",".");
 
-                        }
-                    });
-
-                }
-                //if (TextUtils.isEmpty(password)) {
-                if (password.isEmpty()) {
-                    passwordError = setFocus(inputPassword,"Password is required");
-                }else if (password.length() < 6) {
-                    passwordError = setFocus(inputPassword,getString(R.string.minimum_password));
-                }else{
-                    passwordError = false;
-                }
-                if (name.isEmpty()) {
-                    nameError = setFocus(inputName,"Please Enter your Name!");
-                }else{
-                    nameError = false;
-                }
-                if (phone.isEmpty()){
-                    phoneError = setFocus(inputPhoneNumber,"Please Enter your Name!");
-                }else{
-                    phoneError = false;
-                }
-                currentFocus.requestFocus();
-                if(!emailError && !usernameError && !passwordError && !nameError && !phoneError) {
+                */
+                //if(!emailError && !usernameError && !passwordError && !nameError && !phoneError) {
+                if(!checkEmail(email) && !checkUsername(username) && !checkPassword(password) && !checkName(name) && !checkPhoneNumber(phone)) {
                     progressBar.setVisibility(View.VISIBLE);
                     //create user
                     auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
@@ -131,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                             // the auth state listener will be notified and logic to handle the
                             // signed in user can be handled in the listener.
                             if (task.isSuccessful()) {
-                                //
+                                //get database
                                 DatabaseReference dataBase, newUser;
                                 FirebaseUser currentUser = task.getResult().getUser();
                                 //pick users table to same the user in
@@ -149,6 +111,9 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         }
                     });
+                }
+                if(currentFocus != null){
+                    currentFocus.requestFocus();
                 }
             }
         });
@@ -168,7 +133,79 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+    private boolean checkEmail(String email){
+        if (email.isEmpty()) {
+            emailError = setFocus(inputEmail,"Email is required");
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            emailError = setFocus(inputEmail,"Please enter a valid email");
+        }else{
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+            databaseReference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()){
+                        emailError = setFocus(inputEmail,"Email already Exists");
+                    }else{
+                        emailError = false;
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {}
+            });
+        }
+        return emailError;
+    }
+    private boolean checkUsername(String username){
+        if(username.isEmpty()) {
+            usernameError = setFocus(inputUsername,"Enter a username");
+        }else{
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+            databaseReference.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()){
+                        usernameError = setFocus(inputUsername,"Username already Exists");
+                        //check your password in the same way and grant access if it exists too
+                    }else {
+                        // wrong details entered/ user does not exist
+                        usernameError = false;
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                }
+            });
+
+        }
+        return usernameError;
+    }
+    private boolean checkPassword(String password){
+        if (password.isEmpty()) {
+            passwordError = setFocus(inputPassword,"Password is required");
+        }else if (password.length() < 6) {
+            passwordError = setFocus(inputPassword,getString(R.string.minimum_password));
+        }else{
+            passwordError = false;
+        }
+        return passwordError;
+    }
+    private boolean checkName(String name){
+        if (name.isEmpty()) {
+            nameError = setFocus(inputName,"Please Enter your Name!");
+        }else{
+            nameError = false;
+        }
+        return nameError;
+    }
+    private boolean checkPhoneNumber(String phone){
+        if (phone.isEmpty()){
+            phoneError = setFocus(inputPhoneNumber,"Please Enter your Name!");
+        }else{
+            phoneError = false;
+        }
+        return phoneError;
+    }
     @Override
     protected void onResume() {
         super.onResume();

@@ -38,10 +38,6 @@ public class AddBookInfo extends AppCompatActivity {
 
         Button saveButton = findViewById(R.id.addBook);
 
-
-
-
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +50,6 @@ public class AddBookInfo extends AppCompatActivity {
                 Intent returnIntent = new Intent(AddBookInfo.this, MyBooks.class);
 
                 //result.putSerializable("putresut", book);
-                //========SAVE TO FIREBASE IDK HOW=================//
 
                 //pick book table to same the book
                 DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(book.getBookID());
@@ -75,13 +70,9 @@ public class AddBookInfo extends AppCompatActivity {
                         }
                     }
                 });
-
-
                 returnIntent.putExtra("result", result);
                 setResult(RESULT_OK, returnIntent);
                 finish();
-                // Meow ^_^
-
             }
         });
 

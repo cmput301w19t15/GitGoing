@@ -4,13 +4,20 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
@@ -20,13 +27,13 @@ public class MainActivity extends AppCompatActivity {
             changeEmail, changePassword, sendEmail, remove, logOut, myBooks;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         auth = FirebaseAuth.getInstance();
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         //check if the user is logged in/user exists
+        getLoggedinUser();
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -82,5 +89,35 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //do nothing
+    }
+    User loggedinUser;
+    private void getLoggedinUser(){
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            final String userEmail = user.getEmail();
+            FirebaseDatabase.getInstance().getReference().child("users").orderByChild("email").equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()){
+                        for(DataSnapshot user: dataSnapshot.getChildren()){
+                            if(user.child("email").getValue().toString().equalsIgnoreCase(userEmail)){
+                                //loggedinUser = user.getValue(User.class);
+                                Log.d("testing",user.child("email").getValue().toString());
+                                Log.d("testing",user.child("name").getValue().toString());
+                                //Log.d("testing",loggedinUser.getEmail());
+                                //Log.d("testing",loggedinUser.getName());
+                                break;
+                            }
+                        }
+                    }else {}
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {}
+            });
+        }
+        //Log.d("testing",loggedinUser.getEmail());
+    }
+    private void saveLoggedinUser(DataSnapshot data){
+        //loggedinUser = data.getValue(User.class);
     }
 }

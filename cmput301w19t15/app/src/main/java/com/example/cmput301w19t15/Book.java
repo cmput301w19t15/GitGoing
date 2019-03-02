@@ -7,14 +7,15 @@ import java.util.UUID;
 public class Book {
     private String title;
     private String author;
-    private Integer ISBN;
+    private int ISBN;
     private String status;
     private String photo;
     private String BookID;
 
-    public Book(String title, String author, Integer ISBN) {
+    public Book(String title, String author, int ISBN) {
         this.title = title;
         this.author = author;
+        this.ISBN = ISBN;
         if(this.BookID == null || this.BookID.isEmpty())
             this.BookID = UUID.randomUUID().toString();
     }
@@ -30,10 +31,10 @@ public class Book {
     public String getAuthor() {
         return this.author;
     }
-    public void setISBN(Integer ISBN) {
+    public void setISBN(int ISBN) {
         this.ISBN = ISBN;
     }
-    public Integer getISBN() {
+    public int getISBN() {
         return this.ISBN;
     }
     public void setStatus(String status) {
