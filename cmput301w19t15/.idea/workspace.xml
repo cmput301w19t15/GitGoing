@@ -7,24 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1424fb2d-9ef5-4d0f-8f97-4e30b055ddfb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/example/cmput301w19t15/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/example/cmput301w19t15/BuildConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/AddBookInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/AddBookInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/RegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/RegisterActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmput301w19t15.iml" beforeDir="false" afterPath="$PROJECT_DIR$/cmput301w19t15.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,82 +84,58 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-1133491361">
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="546" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="546" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="3" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="607">
-              <caret line="118" column="5" selection-start-line="118" selection-start-column="5" selection-end-line="118" selection-end-column="5" />
-              <folding>
-                <element signature="e#1382#1908#0" expanded="true" />
-                <element signature="e#1907#1908#0" expanded="true" />
-                <element signature="e#2095#2269#0" expanded="true" />
-                <element signature="e#2268#2269#0" expanded="true" />
-                <element signature="e#2365#2604#0" expanded="true" />
-                <element signature="e#2603#2604#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="59" column="34" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="34" />
+            <state relative-caret-position="196">
+              <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
               <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#517#518#0" expanded="true" />
+                <element signature="e#557#558#0" expanded="true" />
+                <element signature="e#531#532#0" expanded="true" />
+                <element signature="e#562#563#0" expanded="true" />
                 <element signature="e#601#602#0" expanded="true" />
                 <element signature="e#633#634#0" expanded="true" />
+                <element signature="e#664#665#0" expanded="true" />
+                <element signature="e#691#692#0" expanded="true" />
                 <element signature="e#732#733#0" expanded="true" />
                 <element signature="e#766#767#0" expanded="true" />
+                <element signature="e#797#798#0" expanded="true" />
+                <element signature="e#825#826#0" expanded="true" />
                 <element signature="e#866#867#0" expanded="true" />
                 <element signature="e#900#901#0" expanded="true" />
+                <element signature="e#931#932#0" expanded="true" />
+                <element signature="e#959#960#0" expanded="true" />
                 <element signature="e#1001#1002#0" expanded="true" />
-                <element signature="e#1036#1037#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/MyBooks.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
-              <folding>
-                <element signature="e#592#827#0" expanded="true" />
-                <element signature="e#826#827#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/LoginActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1211">
-              <caret line="151" column="1" selection-start-line="151" selection-start-column="1" selection-end-line="151" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/RegisterActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="650">
-              <caret line="179" column="9" selection-start-line="179" selection-start-column="9" selection-end-line="179" selection-end-column="9" />
-              <folding>
-                <element signature="e#2256#6142#0" expanded="true" />
-                <element signature="e#4127#5989#0" expanded="true" />
-                <element signature="e#5988#5989#0" expanded="true" />
-                <element signature="e#6141#6142#0" expanded="true" />
-                <element signature="e#6182#6411#0" expanded="true" />
-                <element signature="e#6410#6411#0" expanded="true" />
-                <element signature="e#6458#6687#0" expanded="true" />
-                <element signature="e#6686#6687#0" expanded="true" />
-                <element signature="e#9705#9741#0" expanded="true" />
+                <element signature="e#1037#1038#0" expanded="true" />
+                <element signature="e#1068#1069#0" expanded="true" />
+                <element signature="e#1097#1098#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -184,8 +144,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/Book.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="55" selection-start-line="55" selection-end-line="55" />
+            <state relative-caret-position="740">
+              <caret line="59" column="52" lean-forward="true" selection-start-line="59" selection-start-column="52" selection-end-line="59" selection-end-column="52" />
               <folding>
                 <element signature="e#565#566#0" expanded="true" />
                 <element signature="e#599#600#0" expanded="true" />
@@ -202,28 +162,6 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_my_books.xml">
-          <provider selected="true" editor-type-id="text-editor" />
-          <provider editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_book_info.xml">
-          <provider selected="true" editor-type-id="text-editor" />
-          <provider editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-manifest" />
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -237,8 +175,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/AddBookInfo.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/RegisterActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/Book.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/Book.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/User.java" />
       </list>
     </option>
@@ -254,9 +192,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -279,6 +215,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -374,11 +312,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="292" y="0" width="1214" height="976" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49785408" visible="true" weight="0.24740484" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49785408" visible="true" weight="0.32995737" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -449,10 +387,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
-          <folding>
-            <element signature="e#592#827#0" expanded="true" />
-            <element signature="e#826#827#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -481,10 +415,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="607">
+          <caret line="118" column="5" selection-start-line="118" selection-start-column="5" selection-end-line="118" selection-end-column="5" />
+          <folding>
+            <element signature="e#1382#1908#0" expanded="true" />
+            <element signature="e#1907#1908#0" expanded="true" />
+            <element signature="e#2095#2269#0" expanded="true" />
+            <element signature="e#2268#2269#0" expanded="true" />
+            <element signature="e#2365#2604#0" expanded="true" />
+            <element signature="e#2603#2604#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/Owner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/Location.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/Exchange.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/Book.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="55" selection-start-line="55" selection-end-line="55" />
+        <state relative-caret-position="740">
+          <caret line="59" column="52" lean-forward="true" selection-start-line="59" selection-start-column="52" selection-end-line="59" selection-end-column="52" />
           <folding>
             <element signature="e#565#566#0" expanded="true" />
             <element signature="e#599#600#0" expanded="true" />
@@ -502,32 +472,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="59" column="34" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="34" />
+        <state relative-caret-position="196">
+          <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
           <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#517#518#0" expanded="true" />
+            <element signature="e#557#558#0" expanded="true" />
+            <element signature="e#531#532#0" expanded="true" />
+            <element signature="e#562#563#0" expanded="true" />
             <element signature="e#601#602#0" expanded="true" />
             <element signature="e#633#634#0" expanded="true" />
+            <element signature="e#664#665#0" expanded="true" />
+            <element signature="e#691#692#0" expanded="true" />
             <element signature="e#732#733#0" expanded="true" />
             <element signature="e#766#767#0" expanded="true" />
+            <element signature="e#797#798#0" expanded="true" />
+            <element signature="e#825#826#0" expanded="true" />
             <element signature="e#866#867#0" expanded="true" />
             <element signature="e#900#901#0" expanded="true" />
+            <element signature="e#931#932#0" expanded="true" />
+            <element signature="e#959#960#0" expanded="true" />
             <element signature="e#1001#1002#0" expanded="true" />
-            <element signature="e#1036#1037#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cmput301w19t15/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
-          <caret line="118" column="5" selection-start-line="118" selection-start-column="5" selection-end-line="118" selection-end-column="5" />
-          <folding>
-            <element signature="e#1382#1908#0" expanded="true" />
-            <element signature="e#1907#1908#0" expanded="true" />
-            <element signature="e#2095#2269#0" expanded="true" />
-            <element signature="e#2268#2269#0" expanded="true" />
-            <element signature="e#2365#2604#0" expanded="true" />
-            <element signature="e#2603#2604#0" expanded="true" />
+            <element signature="e#1037#1038#0" expanded="true" />
+            <element signature="e#1068#1069#0" expanded="true" />
+            <element signature="e#1097#1098#0" expanded="true" />
           </folding>
         </state>
       </provider>
