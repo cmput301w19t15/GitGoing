@@ -15,7 +15,7 @@ public class Book {
     public Book(String title, String author, Integer ISBN) {
         this.title = title;
         this.author = author;
-        if(this.BookID.isEmpty() || this.BookID == null)
+        if(this.BookID == null || this.BookID.isEmpty())
             this.BookID = UUID.randomUUID().toString();
     }
     public void setTitle(String title) {

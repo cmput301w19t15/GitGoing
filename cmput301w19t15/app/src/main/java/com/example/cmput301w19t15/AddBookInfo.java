@@ -36,7 +36,7 @@ public class AddBookInfo extends AppCompatActivity {
         author = (EditText) findViewById(R.id.author);
         isbn = (EditText) findViewById(R.id.isbn);
 
-        Button saveButton = findViewById(R.id.save);
+        Button saveButton = findViewById(R.id.addBook);
 
 
 
@@ -45,10 +45,14 @@ public class AddBookInfo extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // still need to check for incorrect data types
+                booktitleText = booktitle.getText().toString();
+                authorText = author.getText().toString();
+                isbnText = Integer.parseInt(isbn.getText().toString()); // look up better way
                 Book book = new Book(booktitleText, authorText, isbnText);
                 Bundle result = new Bundle();
                 Intent returnIntent = new Intent(AddBookInfo.this, MyBooks.class);
+
                 //result.putSerializable("putresut", book);
                 //========SAVE TO FIREBASE IDK HOW=================//
 
@@ -80,6 +84,7 @@ public class AddBookInfo extends AppCompatActivity {
 
             }
         });
+
 
     }
 }
