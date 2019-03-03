@@ -80,7 +80,7 @@
         tools:layout_editor_absoluteY="134dp" />
 
     <TextView
-        android:id="@+id/booktitle"
+        android:id="@+id/editMyBookTitle"
         android:layout_width="48dp"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
@@ -111,7 +111,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="7dp"
         app:layout_constraintBottom_toTopOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/booktitle"
+        app:layout_constraintTop_toBottomOf="@+id/editMyBookTitle"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="8dp" />
 
