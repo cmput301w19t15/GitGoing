@@ -29,17 +29,19 @@ public class MainActivity extends AppCompatActivity {
     private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
             changeEmail, changePassword, sendEmail, remove, logOut, myBooks;
 
-    private static User loggedInUser;
+    //private User loggedinUser;
+    ArrayList<User> testUser = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        checkLogIn();
+        checkLoggedIn();
         getLoggedinUser();
 
         logOut = (Button) findViewById(R.id.logout_button);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
 
         //logout user
         logOut.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         //do nothing
     }
-    public void checkLogIn(){
+    public void checkLoggedIn(){
         auth = FirebaseAuth.getInstance();
         //check if the user is logged in/user exists
         authListener = new FirebaseAuth.AuthStateListener() {
@@ -100,11 +102,7 @@ public class MainActivity extends AppCompatActivity {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null) {
             String userID = user.getUid();
-            String emailID = user.getEmail();
-            loggedInUser = new User(emailID,userID);
+            User loggedInUser = new User(userID);
         }
-    }
-    public static User getUser(){
-        return loggedInUser;
     }
 }

@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
-import android.widget.TextView;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 
 public class MyBooks extends AppCompatActivity {
@@ -28,10 +26,5 @@ public class MyBooks extends AppCompatActivity {
                 startActivityForResult(addIntent, NEW_BOOK);
             }
         });
-
-        User loggedInUser = MainActivity.getUser();
-        ArrayList<Book> myBooks = loggedInUser.getMyBooks();
-        TextView textView = findViewById(R.id.textView2);
-        textView.setText("Number of books: " + myBooks.size());
     }
 }
