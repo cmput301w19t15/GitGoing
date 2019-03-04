@@ -25,7 +25,7 @@ public class AddBookInfo extends AppCompatActivity {
 
     private String booktitleText;
     private String authorText;
-    private Integer isbnText;
+    private String isbnText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class AddBookInfo extends AppCompatActivity {
                 // still need to check for incorrect data types
                 booktitleText = booktitle.getText().toString();
                 authorText = author.getText().toString();
-                isbnText = Integer.parseInt(isbn.getText().toString()); // look up better way
+                isbnText = isbn.getText().toString(); // look up better way
                 User loggedInUser = MainActivity.getUser();
 
                 Book book = new Book(booktitleText, authorText, isbnText,"null.png",loggedInUser.getEmail(),loggedInUser.getUserID());

@@ -26,8 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
     private ProgressBar progressBar;
-    private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
-            changeEmail, changePassword, sendEmail, remove, logOut, myBooks;
+    private Button logOut, myBooks;
 
     private static User loggedInUser;
     @Override
@@ -64,11 +63,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         progressBar.setVisibility(View.GONE);
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        auth.addAuthStateListener(authListener);
-    }
 
     @Override
     public void onStop() {
@@ -102,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
             String userID = user.getUid();
             String emailID = user.getEmail();
             loggedInUser = new User(emailID,userID);
+            loggedInUser.loadUserInformation();
+            loggedInUser.loadBooks("myBooks");
+            loggedInUser.loadBooks("myRequestedBooks");
+            loggedInUser.loadBooks("requestedBooks");
+            loggedInUser.loadBooks("borrowedBooks");
         }
     }
     public static User getUser(){

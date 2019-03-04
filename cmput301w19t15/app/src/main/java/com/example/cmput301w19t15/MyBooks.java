@@ -28,10 +28,14 @@ public class MyBooks extends AppCompatActivity {
                 startActivityForResult(addIntent, NEW_BOOK);
             }
         });
-
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
         User loggedInUser = MainActivity.getUser();
-        ArrayList<Book> myBooks = loggedInUser.getMyBooks();
+        int arraySize = loggedInUser.getMyBooks().size();
         TextView textView = findViewById(R.id.textView2);
-        textView.setText("Number of books: " + myBooks.size());
+        textView.setText("Number of books: " + arraySize);
+
     }
 }

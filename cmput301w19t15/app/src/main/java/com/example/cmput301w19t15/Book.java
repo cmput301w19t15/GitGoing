@@ -6,18 +6,19 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Book {
-    private String title;
-    private String author;
-    private int ISBN;
-    private String photo;
-    private String ownerEmail;
-    private String ownerID;
-    private String BookID;
-    private Date returnDate;
-    private Status status;
-    private String borrowerID;
+    private String title = "";//
+    private String author = "";//
+    private String ISBN = "";;//
+    private String photo = "";;//
+    private String ownerEmail = "";;//
+    private String ownerID = "";;//
+    private String BookID = "";;//
+    private Date returnDate = new Date();
+    private Status status = Status.Available;//
+    private String borrowerID = "";;
 
-    public Book(String title, String author, int ISBN, String photo, String ownerEmail, String ownerID) {
+    public Book(){}
+    public Book(String title, String author, String ISBN, String photo, String ownerEmail, String ownerID) {
         this.title = title;
         this.author = author;
         this.ISBN = ISBN;
@@ -46,10 +47,10 @@ public class Book {
     public String getAuthor() {
         return this.author;
     }
-    public void setISBN(int ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
-    public int getISBN() {
+    public String getISBN() {
         return this.ISBN;
     }
     public void setPhoto(String photo) {
