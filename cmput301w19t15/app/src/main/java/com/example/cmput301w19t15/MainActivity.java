@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -25,20 +26,21 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
-    private ProgressBar progressBar;
-    private Button logOut, myBooks;
+    //private ProgressBar progressBar;
+    private Button logOut, myBooks, myBorrows, myRequests, findUser, findBook;
+    private ImageButton myProfile, notifyButton;
 
     private static User loggedInUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_updated);
 
         checkLogIn();
         getLoggedinUser();
 
         logOut = (Button) findViewById(R.id.logout_button);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        //progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         //logout user
         logOut.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +48,60 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 auth.signOut();
                 finish();
+            }
+        });
+
+        myBorrows = (Button) findViewById(R.id.my_borrows);
+        myBorrows.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        findUser = (Button) findViewById(R.id.find_user);
+        findUser.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        findBook = (Button) findViewById(R.id.find_book);
+        findBook.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        notifyButton = (ImageButton) findViewById(R.id.notify);
+        notifyButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        myProfile = (ImageButton) findViewById(R.id.profile);
+        myProfile.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        myRequests = (Button) findViewById(R.id.my_requests);
+        myRequests.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                startActivity(intent);
+                //finish();
             }
         });
 
@@ -57,11 +113,10 @@ public class MainActivity extends AppCompatActivity {
                 //finish();
             }
         });
-
     }
     protected void onResume() {
         super.onResume();
-        progressBar.setVisibility(View.GONE);
+        //progressBar.setVisibility(View.GONE);
     }
 
     @Override
