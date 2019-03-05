@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity{
     private View progressBar;
     private Button btnLogin,btnRegister,btnResetPassword;
     private boolean usernameError = false, passwordError = false;
-    private String hiddenEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,22 +78,30 @@ public class LoginActivity extends AppCompatActivity{
                 } else{
                     //get email corresponding to username if its not email
                     DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users");
-                    userReference.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                    userReference.orderByChild("username").equalTo(username).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            TextView hiddenEmail = (TextView) findViewById(R.id.hiddenEmail);
                             if(dataSnapshot.exists()){
                                 for(DataSnapshot userID: dataSnapshot.getChildren()){
-                                    hiddenEmail = userID.child("email").getValue().toString();
-                                    usernameError = false;
+                                    hiddenEmail.setText(userID.child("email").getValue().toString());
                                 }
                             }else{
-                                usernameError = setFocus(inputUsername, "Email or Username does not Exist");
+                                hiddenEmail.setText("text");
                             }
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {}
+
                     });
-                    username = hiddenEmail;
+                    TextView hiddenEmail = (TextView) findViewById(R.id.hiddenEmail);
+                    if(username.equals(hiddenEmail.getText().toString())) {
+                        usernameError = true;
+                        usernameError = setFocus(inputUsername, "Email or Username does not Exist");
+                    }else{
+                        usernameError = false;
+                    }
+                    username = hiddenEmail.getText().toString();
                 }
 
                 if (password.isEmpty()) {
@@ -103,8 +111,6 @@ public class LoginActivity extends AppCompatActivity{
                 }else{
                     passwordError = false;
                 }
-                currentFocus.requestFocus();
-                //currentFocus = null;
                 if(!usernameError && !passwordError) {
                     progressBar.setVisibility(View.VISIBLE);
                     //authenticate user
@@ -125,6 +131,8 @@ public class LoginActivity extends AppCompatActivity{
                         }
                     });
                 }
+                if(currentFocus != null)
+                    currentFocus.requestFocus();
             }
         });
 
@@ -150,4 +158,3 @@ public class LoginActivity extends AppCompatActivity{
         return true;
     }
 }
-

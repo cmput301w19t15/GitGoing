@@ -4,41 +4,39 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
     private ProgressBar progressBar;
-    private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
-            changeEmail, changePassword, sendEmail, remove, logOut, myBooks;
+    private Button logOut, myBooks;
 
+    private static User loggedInUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        auth = FirebaseAuth.getInstance();
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        //check if the user is logged in/user exists
-        authListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
-                    // user auth state is changed - user is null user logsout
-                    // launch login activity
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    finish();
-                }
-            }
-        };
+        checkLogIn();
+        getLoggedinUser();
+
         logOut = (Button) findViewById(R.id.logout_button);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -52,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         myBooks = (Button) findViewById(R.id.my_books);
-
         myBooks.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MyBooks.class);
@@ -66,11 +63,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         progressBar.setVisibility(View.GONE);
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        auth.addAuthStateListener(authListener);
-    }
 
     @Override
     public void onStop() {
@@ -82,5 +74,36 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //do nothing
+    }
+    public void checkLogIn(){
+        auth = FirebaseAuth.getInstance();
+        //check if the user is logged in/user exists
+        authListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    // user auth state is changed - user is null user logout // launch login activity
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    finish();
+                }
+            }
+        };
+    }
+    private void getLoggedinUser(){
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null) {
+            String userID = user.getUid();
+            String emailID = user.getEmail();
+            loggedInUser = new User(emailID,userID);
+            loggedInUser.loadUserInformation();
+            loggedInUser.loadBooks("myBooks");
+            loggedInUser.loadBooks("myRequestedBooks");
+            loggedInUser.loadBooks("requestedBooks");
+            loggedInUser.loadBooks("borrowedBooks");
+        }
+    }
+    public static User getUser(){
+        return loggedInUser;
     }
 }

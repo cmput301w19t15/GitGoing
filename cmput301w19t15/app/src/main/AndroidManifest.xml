@@ -26,6 +26,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MyBooks"/>
+        <activity android:name=".BookInfo"/>
+        <activity android:name=".AddBookInfo"/>
         <activity android:name=".ShowAvaliableBookActivity" />
         <activity android:name=".SearchBooksorUsersActivity" />
     </application>

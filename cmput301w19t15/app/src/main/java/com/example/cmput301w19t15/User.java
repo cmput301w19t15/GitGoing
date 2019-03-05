@@ -1,113 +1,307 @@
 package com.example.cmput301w19t15;
 
-import android.media.Image;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.lang.reflect.GenericArrayType;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class User {
     private String username;
     private String name;
     private String email;
     private String phone;
+    private String userID;
     private Float rating;
+    public static ArrayList<String> testArray = new ArrayList<>();
+    private ArrayList<Book> myBooks = new ArrayList<>();//my books i own
+    private ArrayList<Book> myRequestedBooks = new ArrayList<>();//books i have requested from others - with status
+    private ArrayList<Book> myRequestedBooksAvailable = new ArrayList<>();//requested books that are available - with status
+    private ArrayList<Book> myRequestedBooksAccepted = new ArrayList<>();//requested books that have been accepted - with status
+    private ArrayList<Book> borrowedBooks = new ArrayList<>();//book that i have borrowed from others
+    private ArrayList<Book> requestedBooks = new ArrayList<>();//books others have requested from me
 
-    public User(String username, String name, String email, String phone) {
+    private String bookListType = "myBooks";
+
+    //need this constructor DO NOT REMOVE OR EDIT
+    public User(){}
+    public User(String emailID, String userID){
+        this.email = emailID;
+        this.userID = userID;
+        /*
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userID);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String phoneValue = dataSnapshot.child("phone").getValue().toString();
+                String nameValue = dataSnapshot.child("name").getValue().toString();
+                String emailValue = dataSnapshot.child("email").getValue().toString();
+                String usernameValue = dataSnapshot.child("username").getValue().toString();
+                phone = phoneValue;
+                name = nameValue;
+                email = emailValue;
+                username = usernameValue;
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
+        });
+        */
+    }
+    public User(String username, String name, String email, String phone, String userID) {
         this.username = username;
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.userID = userID;
     }
     public void setUsername(String username) {
+        this.username = username;
     }
     public String getUsername() {
         return username;
     }
     public void setName(String name) {
+        this.name = name;
     }
-
     public String getName() {
         return name;
     }
     public void setEmail(String email) {
+        this.email = email;
     }
     public String getEmail() {
         return email;
     }
     public void setPhone(String phone) {
+        this.phone = phone;
     }
     public String getPhone() {
         return phone;
     }
     public void setRating(Float rating) {
+        this.rating = rating;
     }
     public Float getRating() {
-        return 0f ;
+        return rating;
     }
-
-    private ArrayList<Book> requestedBooks = new ArrayList<Book>();
-    private ArrayList<Book> borrowedBooks = new ArrayList<Book>();
-
-    public void requestBook(Book book){
-        requestedBooks.add(book);
+    public void setUserID(String userID){
+        this.userID = userID;
     }
-    public Boolean requested(Book book){
-        return requestedBooks.contains(book);
-    }
-    public void addAcceptedRequest(Book book){
-        borrowedBooks.add(book);
-    }
-    public Boolean borrowed(Book book){
-        return borrowedBooks.contains(book);
-    }
-    public void deleteRequest(Book book){
-        requestedBooks.remove(book);
-    }
-    public void returnBook(Book book){
-        borrowedBooks.remove(book);
+    public String getUserID(){
+        return userID;
     }
 
 
 
-    private ArrayList<Book> myBooks = new ArrayList<Book>();
-    private ArrayList<Book> availableBooks = new ArrayList<Book>();
-    private ArrayList<Request> pendingRequests = new ArrayList<Request>();
-    private ArrayList<Request> acceptedRequests = new ArrayList<Request>();
+    //my books i own
+    public void addToMyBooks(Book book){
+        try {
+            myBooks.add(book);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myBooks").setValue(myBooks);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void removeMyBooks(Book book){
+        try {
+            myBooks.remove(book);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myBooks").setValue(myBooks);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-    public void addMyBook(Book book){
-        myBooks.add(book);
     }
-    public Boolean hasBook(Book book){
-        return myBooks.contains(book);
+    public ArrayList<Book> getMyBooks(){
+        return myBooks;
     }
-    public void deleteMyBook(Book book){
-        myBooks.remove(book);
+    //books i have requested from others - with status
+    public void addToMyRequestedBooks(Book book){
+        try {
+            myRequestedBooks.add(book);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooks").setValue(myRequestedBooks);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
-    public void addAvailableBook(Book book){
-        availableBooks.add(book);
+    public void removeMyRequestedBooks(Book book){
+        try {
+            myRequestedBooks.remove(book);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooks").setValue(myRequestedBooks);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
-    public Boolean bookAvailable(Book book){
-        return availableBooks.contains(book);
+    public ArrayList<Book> getMyRequestedBooks(){
+        return myRequestedBooks;
     }
-    public void deleteAvailableBook(Book book){
-        availableBooks.remove(book);
+    //books others have requested from me
+    public void addToRequestedBooks(Book book){
+        try {
+            requestedBooks.add(book);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("requestedBooks").setValue(requestedBooks);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
-    public void addPendingRequest(Request request){
-        pendingRequests.add(request);
+    public void removeRequestedBooks(Book book){
+        try {
+            requestedBooks.remove(book);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("requestedBooks").setValue(requestedBooks);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
-    public boolean requestPending(Request request){
-        return pendingRequests.contains(request);
+    public ArrayList<Book> getRequestedBooks(){
+        return requestedBooks;
     }
-    public void deletePendingRequest(Request request){
-        pendingRequests.remove(request);
+    //book that i have borrowed from others
+    public void addToMyBorrowedBooks(Book book){
+        try {
+            borrowedBooks.add(book);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("borrowedBooks").setValue(borrowedBooks);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
-    public void addAcceptedRequest(Request request){
-        acceptedRequests.add(request);
+    public void removeMyBorrowedBooks(Book book){
+        try {
+            borrowedBooks.remove(book);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("borrowedBooks").setValue(borrowedBooks);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
-    public boolean requestAccepted(Request request){
-        return acceptedRequests.contains(request);
+    public ArrayList<Book> getBorrowedBooks(){
+        return borrowedBooks;
     }
-    public void deleteAcceptedRequest(Request request){
-        acceptedRequests.remove(request);
+
+    public void loadUserInformation(){
+        loadUserInfoFromFireBase(new loadUserCallBack() {
+            @Override
+            public void loadUserDetailsCallBack(ArrayList<String> value) {
+                username = value.get(0);
+                name = value.get(1);
+                email = value.get(2);
+                phone = value.get(3);
+            }
+        });
     }
+    public void loadBooks(final String bookListType){
+        this.bookListType = bookListType;
+        loadMyBookFromFireBase(new loadBookCallBack() {
+            @Override
+            public void loadBooksCallBack(ArrayList<Book> value) {
+                switch(bookListType) {
+                    case "myBooks": myBooks = (ArrayList<Book>) value.clone(); break;
+                    case "myRequestedBooks": myRequestedBooks = (ArrayList<Book>) value.clone(); break;
+                    case "requestedBooks": requestedBooks = (ArrayList<Book>) value.clone(); break;
+                    case "borrowedBooks": borrowedBooks = (ArrayList<Book>) value.clone(); break;
+                }
+            }
+        });
+    }
+    public interface loadUserCallBack{
+        void loadUserDetailsCallBack(ArrayList<String> value);
+    }
+    public interface loadBookCallBack {
+        void loadBooksCallBack(ArrayList<Book> value);
+    }
+
+    public void loadUserInfoFromFireBase(final loadUserCallBack myCallback){
+        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users").child(this.userID);
+        userReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    try {
+                        ArrayList<String> userInformatiom = new ArrayList<>();
+                        userInformatiom.add(dataSnapshot.child("username").getValue().toString());
+                        userInformatiom.add(dataSnapshot.child("name").getValue().toString());
+                        userInformatiom.add(dataSnapshot.child("email").getValue().toString());
+                        userInformatiom.add(dataSnapshot.child("phone").getValue().toString());
+                        myCallback.loadUserDetailsCallBack(userInformatiom);
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("testing","Error: ", databaseError.toException());
+            }
+        });
+    }
+
+    public void loadMyBookFromFireBase(final loadBookCallBack myCallback){
+        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users").child(this.userID).child(bookListType);
+        userReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    try {
+                        ArrayList<Book> allBooks = new ArrayList<>();
+                        for (DataSnapshot books : dataSnapshot.getChildren()) {
+                            Book book = books.getValue(Book.class);
+                            allBooks.add(book);
+                        }
+                        myCallback.loadBooksCallBack(allBooks);
+
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("testing","Error: ", databaseError.toException());
+            }
+        });
+    }
+
+
+
+
+
+
+    /*** Planned to Remove***/
+
+
+    //requested books that are avaliable - with status
+    public void addToMyRequestedBooksAvailable(Book book){
+        myRequestedBooksAvailable.add(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAvailable").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAvailable").setValue(myRequestedBooksAvailable);
+    }
+    public void removeMyRequestedBooksAvailable(Book book){
+        myRequestedBooksAvailable.remove(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAvailable").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAvailable").setValue(myRequestedBooksAvailable);
+    }
+    public ArrayList<Book> getMyRequestedBooksAvailable(){
+        return myRequestedBooksAvailable;
+    }
+    //requested books that have been accepeted - with status
+    public void addToMyRequestedBooksAccepted(Book book){
+        myRequestedBooksAccepted.add(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAccepted").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAccepted").setValue(myRequestedBooksAccepted);
+    }
+    public void removeMyRequestedBooksAccepted(Book book){
+        myRequestedBooksAccepted.remove(book);
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAccepted").removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAccepted").setValue(myRequestedBooksAccepted);
+    }
+    public ArrayList<Book> getMyRequestedBooksAccepted(){
+        return myRequestedBooksAccepted;
+    }
+
 
 }

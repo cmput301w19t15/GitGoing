@@ -25,7 +25,7 @@ public class AddBookInfo extends AppCompatActivity {
 
     private String booktitleText;
     private String authorText;
-    private Integer isbnText;
+    private String isbnText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,21 +36,24 @@ public class AddBookInfo extends AppCompatActivity {
         author = (EditText) findViewById(R.id.author);
         isbn = (EditText) findViewById(R.id.isbn);
 
-        Button saveButton = findViewById(R.id.save);
-
-
-
-
+        Button saveButton = findViewById(R.id.addBook);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // still need to check for incorrect data types
+                booktitleText = booktitle.getText().toString();
+                authorText = author.getText().toString();
+                isbnText = isbn.getText().toString(); // look up better way
+                User loggedInUser = MainActivity.getUser();
 
-                Book book = new Book(booktitleText, authorText, isbnText);
+                Book book = new Book(booktitleText, authorText, isbnText,"null.png",loggedInUser.getEmail(),loggedInUser.getUserID());
+                loggedInUser.addToMyBooks(book);
+
                 Bundle result = new Bundle();
                 Intent returnIntent = new Intent(AddBookInfo.this, MyBooks.class);
+
                 //result.putSerializable("putresut", book);
-                //========SAVE TO FIREBASE IDK HOW=================//
 
                 //pick book table to same the book
                 DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(book.getBookID());
@@ -71,15 +74,12 @@ public class AddBookInfo extends AppCompatActivity {
                         }
                     }
                 });
-
-
                 returnIntent.putExtra("result", result);
                 setResult(RESULT_OK, returnIntent);
                 finish();
-                // Meow ^_^
-
             }
         });
+
 
     }
 }

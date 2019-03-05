@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
+import android.widget.TextView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 public class MyBooks extends AppCompatActivity {
@@ -22,9 +24,18 @@ public class MyBooks extends AppCompatActivity {
 
         addBook.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent addIntent = new Intent(MyBooks.this, BookInfo.class);
+                Intent addIntent = new Intent(MyBooks.this, AddBookInfo.class);
                 startActivityForResult(addIntent, NEW_BOOK);
             }
         });
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        User loggedInUser = MainActivity.getUser();
+        int arraySize = loggedInUser.getMyBooks().size();
+        TextView textView = findViewById(R.id.textView2);
+        textView.setText("Number of books: " + arraySize);
+
     }
 }
