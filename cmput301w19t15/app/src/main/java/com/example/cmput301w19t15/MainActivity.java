@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         checkLogIn();
         getLoggedinUser();
 
-        logOut = (Button) findViewById(R.id.logout_button);
+        logOut = findViewById(R.id.logout_button);
         //progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         //logout user
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        myBorrows = (Button) findViewById(R.id.my_borrows);
+        myBorrows = findViewById(R.id.my_borrows);
         myBorrows.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MyBooks.class);
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findUser = (Button) findViewById(R.id.find_user);
+        findUser = findViewById(R.id.find_user);
         findUser.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MyBooks.class);
@@ -69,16 +69,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findBook = (Button) findViewById(R.id.find_book);
+        findBook = findViewById(R.id.find_book);
         findBook.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                Intent intent = new Intent(MainActivity.this, FindBooks.class);
                 startActivity(intent);
                 //finish();
             }
         });
 
-        notifyButton = (ImageButton) findViewById(R.id.notify);
+        notifyButton = findViewById(R.id.notify);
         notifyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MyBooks.class);
@@ -87,25 +87,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        myProfile = (ImageButton) findViewById(R.id.profile);
+        myProfile = findViewById(R.id.profile);
         myProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                Intent intent = new Intent(MainActivity.this, Profile.class);
                 startActivity(intent);
                 //finish();
             }
         });
 
-        myRequests = (Button) findViewById(R.id.my_requests);
+        myRequests = findViewById(R.id.my_requests);
         myRequests.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                Intent intent = new Intent(MainActivity.this, RequestedBookList.class);
                 startActivity(intent);
                 //finish();
             }
         });
 
-        myBooks = (Button) findViewById(R.id.my_books);
+        myBooks = findViewById(R.id.my_books);
         myBooks.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MyBooks.class);

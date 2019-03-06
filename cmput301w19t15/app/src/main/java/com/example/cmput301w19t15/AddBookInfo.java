@@ -32,9 +32,9 @@ public class AddBookInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_book_info);
 
-        booktitle = (EditText) findViewById(R.id.booktitle);
-        author = (EditText) findViewById(R.id.author);
-        isbn = (EditText) findViewById(R.id.isbn);
+        booktitle = findViewById(R.id.booktitle);
+        author = findViewById(R.id.author);
+        isbn = findViewById(R.id.isbn);
 
         Button saveButton = findViewById(R.id.addBook);
 

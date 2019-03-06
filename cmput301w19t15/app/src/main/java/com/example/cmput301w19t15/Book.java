@@ -8,14 +8,14 @@ import java.util.UUID;
 public class Book {
     private String title = "";//
     private String author = "";//
-    private String ISBN = "";;//
-    private String photo = "";;//
-    private String ownerEmail = "";;//
-    private String ownerID = "";;//
-    private String BookID = "";;//
+    private String ISBN = "";//
+    private String photo = "";//
+    private String ownerEmail = "";//
+    private String ownerID = "";//
+    private String BookID = "";//
     private Date returnDate = new Date();
     private Status status = Status.Available;//
-    private String borrowerID = "";;
+    private String borrowerID = "";
 
     public Book(){}
     public Book(String title, String author, String ISBN, String photo, String ownerEmail, String ownerID) {

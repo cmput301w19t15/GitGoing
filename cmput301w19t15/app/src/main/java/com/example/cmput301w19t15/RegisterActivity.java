@@ -40,15 +40,15 @@ public class RegisterActivity extends AppCompatActivity {
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
-        btnLogin = (Button) findViewById(R.id.login_button);
-        btnRegister = (Button) findViewById(R.id.register_button);
-        btnResetPassword = (Button) findViewById(R.id.reset_button);
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputUsername = (EditText) findViewById(R.id.username);
-        inputPassword = (EditText) findViewById(R.id.password);
-        inputName = (EditText) findViewById(R.id.name);
-        inputPhoneNumber = (EditText) findViewById(R.id.phone);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        btnLogin = findViewById(R.id.login_button);
+        btnRegister = findViewById(R.id.register_button);
+        btnResetPassword = findViewById(R.id.reset_button);
+        inputEmail = findViewById(R.id.email);
+        inputUsername = findViewById(R.id.username);
+        inputPassword = findViewById(R.id.password);
+        inputName = findViewById(R.id.name);
+        inputPhoneNumber = findViewById(R.id.phone);
+        progressBar = findViewById(R.id.progressBar);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override

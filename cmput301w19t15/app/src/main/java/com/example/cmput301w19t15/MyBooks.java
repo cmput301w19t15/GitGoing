@@ -20,7 +20,7 @@ public class MyBooks extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_books);
 
-        Button addBook = (Button) findViewById(R.id.add_book);
+        Button addBook = findViewById(R.id.add_book);
 
         addBook.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

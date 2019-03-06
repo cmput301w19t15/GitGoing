@@ -56,13 +56,13 @@ public class LoginActivity extends AppCompatActivity{
             finish();
         }
         //else let user login
-        inputUsername = (EditText) findViewById(R.id.username);
-        inputPassword = (EditText) findViewById(R.id.password);
+        inputUsername = findViewById(R.id.username);
+        inputPassword = findViewById(R.id.password);
 
-        btnLogin = (Button) findViewById(R.id.login_button);
-        btnRegister = (Button) findViewById(R.id.register_button);
-        btnResetPassword = (Button) findViewById(R.id.reset_button);
-        progressBar = (ProgressBar) findViewById(R.id.login_progress);
+        btnLogin = findViewById(R.id.login_button);
+        btnRegister = findViewById(R.id.register_button);
+        btnResetPassword = findViewById(R.id.reset_button);
+        progressBar = findViewById(R.id.login_progress);
 
         btnLogin.setOnClickListener(new OnClickListener() {
             @Override
@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity{
                     userReference.orderByChild("username").equalTo(username).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            TextView hiddenEmail = (TextView) findViewById(R.id.hiddenEmail);
+                            TextView hiddenEmail = findViewById(R.id.hiddenEmail);
                             if(dataSnapshot.exists()){
                                 for(DataSnapshot userID: dataSnapshot.getChildren()){
                                     hiddenEmail.setText(userID.child("email").getValue().toString());
@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity{
                         public void onCancelled(@NonNull DatabaseError databaseError) {}
 
                     });
-                    TextView hiddenEmail = (TextView) findViewById(R.id.hiddenEmail);
+                    TextView hiddenEmail = findViewById(R.id.hiddenEmail);
                     if(username.equals(hiddenEmail.getText().toString())) {
                         usernameError = true;
                         usernameError = setFocus(inputUsername, "Email or Username does not Exist");
