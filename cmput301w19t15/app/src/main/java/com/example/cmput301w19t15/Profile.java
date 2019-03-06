@@ -3,19 +3,15 @@ package com.example.cmput301w19t15;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,130 +21,187 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-/**
- * A login screen that offers login via email/password.
- */
-public class Profile extends AppCompatActivity{
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
+public class Profile extends AppCompatActivity {
+    private EditText inputEmail, inputUsername, inputPassword, inputName, inputPhoneNumber, currentFocus;
+    Button saveButton;
+    //private ProgressBar progressBar;
     private FirebaseAuth auth;
-    // UI references.
-    private EditText inputUsername, inputPassword, currentFocus;
-    private View progressBar;
-    private Button save;
-    private boolean usernameError = false, passwordError = false;
+    private boolean emailError = false,usernameError = false,passwordError = false,nameError = false,phoneError = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Set up the login form.
         setContentView(R.layout.activity_profile);
-
+        Log.d("testing","im here");
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
-        //if user is already logged in goto main activity
-        if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(Profile.this, MainActivity.class));
-            finish();
-        }
-        //else let user login
+
+        saveButton = findViewById(R.id.save);
+        inputEmail = findViewById(R.id.email);
         inputUsername = findViewById(R.id.username);
         inputPassword = findViewById(R.id.password);
+        inputName = findViewById(R.id.name);
+        inputPhoneNumber = findViewById(R.id.phone);
+       //progressBar = findViewById(R.id.progressBar);
 
-        save = findViewById(R.id.login_button);
-        progressBar = findViewById(R.id.login_progress);
-
-        save.setOnClickListener(new OnClickListener() {
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = inputUsername.getText().toString().trim().toLowerCase();
-                final String password = inputPassword.getText().toString().trim();
+                final String email = inputEmail.getText().toString().trim().toLowerCase();
+                final String username = inputUsername.getText().toString().trim().toLowerCase();
+                String password = inputPassword.getText().toString().trim();
+                final String name = inputName.getText().toString().trim();
+                final String phone = inputPhoneNumber.getText().toString().trim();
 
-                if (username.isEmpty()) {
-                    usernameError = setFocus(inputUsername, "Enter Email or Username");
-                } else if (Patterns.EMAIL_ADDRESS.matcher(username).matches()) {
-                    //if its email do nothing
-                    usernameError = false;
-                } else{
-                    //get email corresponding to username if its not email
-                    DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users");
-                    userReference.orderByChild("username").equalTo(username).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            TextView hiddenEmail = findViewById(R.id.hiddenEmail);
-                            if(dataSnapshot.exists()){
-                                for(DataSnapshot userID: dataSnapshot.getChildren()){
-                                    hiddenEmail.setText(userID.child("email").getValue().toString());
-                                }
-                            }else{
-                                hiddenEmail.setText("text");
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {}
+                /*
+                Log.d("testing","Email " + emailError);
+                checkEmail(email);
+                Log.d("testing","Email " + emailError);
+                Log.d("testing","Username " + usernameError);
+                checkUsername(username);
+                Log.d("testing","Username " + usernameError);
+                Log.d("testing","Password " + passwordError);
+                checkPassword(password);
+                Log.d("testing","Password " + passwordError);
+                //Log.d("testing","Name " + nameError);
+                checkName(name);
+                //Log.d("testing","Name " + nameError);
+                //Log.d("testing","Phone " + phoneError);
+                checkPhoneNumber(phone);
+                //Log.d("testing","Phone " + phoneError);
 
-                    });
-                    TextView hiddenEmail = findViewById(R.id.hiddenEmail);
-                    if(username.equals(hiddenEmail.getText().toString())) {
-                        usernameError = true;
-                        usernameError = setFocus(inputUsername, "Email or Username does not Exist");
-                    }else{
-                        usernameError = false;
-                    }
-                    username = hiddenEmail.getText().toString();
-                }
+                Log.d("testing",".");
+                Log.d("testing",".");
 
-                if (password.isEmpty()) {
-                    passwordError = setFocus(inputPassword, "Password is required");
-                } else if (password.length() < 6) {
-                    passwordError = setFocus(inputPassword, getString(R.string.minimum_password));
-                }else{
-                    passwordError = false;
-                }
-                if(!usernameError && !passwordError) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    //authenticate user
-                    auth.signInWithEmailAndPassword(username, password).addOnCompleteListener(Profile.this, new OnCompleteListener<AuthResult>() {
+                */
+                //if(!emailError && !usernameError && !passwordError && !nameError && !phoneError) {
+                if(!checkEmail(email) && !checkUsername(username) && !checkPassword(password)
+                        && !checkName(name) && !checkPhoneNumber(phone)) {
+                    //progressBar.setVisibility(View.VISIBLE);
+                    //create user
+                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(
+                            Profile.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            Toast.makeText(Profile.this, "Successfully Registered:" +
+                                    task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                            //progressBar.setVisibility(View.GONE);
                             // If sign in fails, display a message to the user. If sign in succeeds
                             // the auth state listener will be notified and logic to handle the
                             // signed in user can be handled in the listener.
-                            progressBar.setVisibility(View.GONE);
                             if (task.isSuccessful()) {
+                                //get database
+                                DatabaseReference dataBase, newUser;
+                                FirebaseUser currentUser = task.getResult().getUser();
+                                String userID = currentUser.getUid();
+                                //pick users table to same the user in
+                                dataBase = FirebaseDatabase.getInstance().getReference().child("users");
+                                newUser = dataBase.child(currentUser.getUid());
+                                //create the user
+                                User addUser = new User(username,name,email,phone,userID);
+                                //save the user in the database
+                                newUser.setValue(addUser);
+                                //close register
                                 startActivity(new Intent(Profile.this, MainActivity.class));
                                 finish();
                             } else {
-                                // there was an error
-                                Toast.makeText(Profile.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
+                                Toast.makeText(Profile.this, "Authentication failed." +
+                                        task.getException(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
                 }
-                if(currentFocus != null)
+                if(currentFocus != null){
                     currentFocus.requestFocus();
+                }
             }
         });
+    }
+    private boolean checkEmail(String email){
+        if (email.isEmpty()) {
+            emailError = setFocus(inputEmail,"Email is required");
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            emailError = setFocus(inputEmail,"Please enter a valid email");
+        }else{
+            DatabaseReference databaseReference = FirebaseDatabase.
+                    getInstance().getReference().child("users");
+            databaseReference.orderByChild("email").equalTo(email).
+                    addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()){
+                        emailError = setFocus(inputEmail,"Email already Exists");
+                    }else{
+                        emailError = false;
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {}
+            });
+        }
+        return emailError;
+    }
+    private boolean checkUsername(String username){
+        if(username.isEmpty()) {
+            usernameError = setFocus(inputUsername,"Enter a username");
+        }else{
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+            databaseReference.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()){
+                        usernameError = setFocus(inputUsername,"Username already Exists");
+                        //check your password in the same way and grant access if it exists too
+                    }else {
+                        // wrong details entered/ user does not exist
+                        usernameError = false;
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        btnRegister.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Profile.this, RegisterActivity.class));
-                finish();
-            }
-        });
+                }
+            });
 
-        btnResetPassword.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Profile.this, RegisterActivity.class));
-                finish();
-            }
-        });
+        }
+        return usernameError;
+    }
+    private boolean checkPassword(String password){
+        if (password.isEmpty()) {
+            passwordError = setFocus(inputPassword,"Password is required");
+        }else if (password.length() < 6) {
+            passwordError = setFocus(inputPassword,getString(R.string.minimum_password));
+        }else{
+            passwordError = false;
+        }
+        return passwordError;
+    }
+    private boolean checkName(String name){
+        if (name.isEmpty()) {
+            nameError = setFocus(inputName,"Please Enter your Name!");
+        }else{
+            nameError = false;
+        }
+        return nameError;
+    }
+    private boolean checkPhoneNumber(String phone){
+        if (phone.isEmpty()){
+            phoneError = setFocus(inputPhoneNumber,"Please Enter your Name!");
+        }else{
+            phoneError = false;
+        }
+        return phoneError;
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //progressBar.setVisibility(View.GONE);
+    }
+    @Override
+    public void onBackPressed() {
+        //do nothing
     }
     private boolean setFocus(EditText editText, String message){
         editText.setError(message);

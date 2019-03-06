@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         inputUsername = findViewById(R.id.username);
         inputPassword = findViewById(R.id.password);
         inputName = findViewById(R.id.name);
-        inputPhoneNumber = findViewById(R.id.phone);
+        inputPhoneNumber = findViewById(R.id.pass);
         progressBar = findViewById(R.id.progressBar);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -201,7 +199,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
     private boolean checkPhoneNumber(String phone){
         if (phone.isEmpty()){
-            phoneError = setFocus(inputPhoneNumber,"Please Enter your Name!");
+            phoneError = setFocus(inputPhoneNumber,"Please Enter your Phone Number!");
         }else{
             phoneError = false;
         }
