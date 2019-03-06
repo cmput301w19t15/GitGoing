@@ -72,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <ListView
-        android:id="@+id/bookList"
+        android:id="@+id/book_list"
         android:layout_width="395dp"
         android:layout_height="485dp"
         tools:layout_editor_absoluteX="8dp"
