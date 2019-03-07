@@ -31,18 +31,13 @@ public class FindBooks extends AppCompatActivity {
         bookList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Book book = (Book) bookList.getItemAtPosition(i);
-                User owner = book.getOwner();
+                //User owner = book.getOwner();
                 User borrower = MainActivity.getUser();
-                Request request = new Request(owner, borrower, book);
+                //Request request = new Request(owner, borrower, book);
                 borrower.addToMyRequestedBooks(book);
-                owner.addToRequestedBooks(book);
+                //owner.addToRequestedBooks(book);
 
-
-
-                }
-            });
-
-        }
+            }
+        });
     }
-
 }
