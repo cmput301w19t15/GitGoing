@@ -38,23 +38,10 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        //get edit text
-        EditText username = (EditText)findViewById(R.id.username);
-        EditText name = (EditText)findViewById(R.id.name);
-        EditText email = (EditText)findViewById(R.id.email);
-        EditText password = (EditText)findViewById(R.id.pass);
-        EditText number = (EditText)findViewById(R.id.phone);
-
         //get info from logged in user
-        User user = MainActivity.getUser();
+        final User user = MainActivity.getUser();
 
-        //
-        username.setText(user.getUsername());
-        name.setText(user.getName());
-        email.setText(user.getEmail());
-        number.setText(user.getPhone());
-
-        Log.d("testing","im here");
+        Log.d("testing","im here");////can i delete this??? who knows??
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
@@ -64,6 +51,11 @@ public class Profile extends AppCompatActivity {
         inputPassword = findViewById(R.id.pass);
         inputName = findViewById(R.id.name);
         inputPhoneNumber = findViewById(R.id.phone);
+
+        inputUsername.setText(user.getUsername());
+        inputName.setText(user.getName());
+        inputEmail.setText(user.getEmail());
+        inputPhoneNumber.setText(user.getPhone());
        //progressBar = findViewById(R.id.progressBar);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -75,32 +67,16 @@ public class Profile extends AppCompatActivity {
                 final String name = inputName.getText().toString().trim();
                 final String phone = inputPhoneNumber.getText().toString().trim();
 
-                /*
-                Log.d("testing","Email " + emailError);
-                checkEmail(email);
-                Log.d("testing","Email " + emailError);
-                Log.d("testing","Username " + usernameError);
-                checkUsername(username);
-                Log.d("testing","Username " + usernameError);
-                Log.d("testing","Password " + passwordError);
-                checkPassword(password);
-                Log.d("testing","Password " + passwordError);
-                //Log.d("testing","Name " + nameError);
-                checkName(name);
-                //Log.d("testing","Name " + nameError);
-                //Log.d("testing","Phone " + phoneError);
-                checkPhoneNumber(phone);
-                //Log.d("testing","Phone " + phoneError);
-
-                Log.d("testing",".");
-                Log.d("testing",".");
-
-                */
-                //if(!emailError && !passwordError && !nameError && !phoneError) {
+                //check all things to make sure duplicate users not made and such
                 if(!checkEmail(email)  && !checkPassword(password)
                         && !checkName(name) && !checkPhoneNumber(phone)) {
                     //progressBar.setVisibility(View.VISIBLE);
-                    //create user
+                    //update user information
+                    user.setEmail(email);
+                    user.setName(name);
+                    user.setPhone(phone);
+                    user.setUsername(username);
+
                     MainActivity.updateUser();
                     finish();
 
@@ -135,36 +111,11 @@ public class Profile extends AppCompatActivity {
         }
         return emailError;
     }
-    /**
-    private boolean checkUsername(String username){
-        if(username.isEmpty()) {
-            usernameError = setFocus(inputUsername,"Enter a username");
-        }else{
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
-            databaseReference.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()){
-                        usernameError = setFocus(inputUsername,"Username already Exists");
-                        //check your password in the same way and grant access if it exists too
-                    }else {
-                        // wrong details entered/ user does not exist
-                        usernameError = false;
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
-
-        }
-        return usernameError;
-
-    }**/
     private boolean checkPassword(String password){
         if (password.isEmpty()) {
-            passwordError = setFocus(inputPassword,"Password is required");
+
+            //passwordError = setFocus(inputPassword,"Password is required");
         }else if (password.length() < 6) {
             passwordError = setFocus(inputPassword,getString(R.string.minimum_password));
         }else{
@@ -196,6 +147,7 @@ public class Profile extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //do nothing
+        finish();
     }
     private boolean setFocus(EditText editText, String message){
         editText.setError(message);
