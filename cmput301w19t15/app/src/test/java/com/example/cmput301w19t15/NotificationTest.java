@@ -13,7 +13,7 @@ public class NotificationTest extends Activity {
         String type = "request";
         Notification notification = new Notification(type);
         notification.notifyOwner(this);
-        NotificationCompat.Builder newNotification = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+        NotificationCompat.Builder newNotification = new NotificationCompat.Builder(this)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setContentTitle(type)
                 .setContentText("request");
@@ -24,7 +24,7 @@ public class NotificationTest extends Activity {
     public void NotifyBorrower(){
         String type = "accept";
         Notification notification = new Notification(type);
-        NotificationCompat.Builder newNotification = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+        NotificationCompat.Builder newNotification = new NotificationCompat.Builder(this)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setContentTitle(type)
                 .setContentText("accept");

@@ -10,9 +10,9 @@ public class BookTest {
     public void testBook() {
 
         Book x = new Book("testTitle","testAuthor",123);
-        assertEquals(x.getISBN(),(Integer) 123);
+        assertEquals(x.getISBN(), 123);
         Book y = new Book("testTitle","testAuthor",345);
-        assertEquals(y.getISBN(),(Integer) 345);
+        assertEquals(y.getISBN(), 345);
     }
     @Test
     public void testSetAuthor() {
@@ -34,9 +34,9 @@ public class BookTest {
     public void testSetISBN() {
         Book x = new Book("testTitle","testAuthor",123);
         x.setISBN(345);
-        assertEquals(x.getISBN(),(Integer) 345);
+        assertEquals(x.getISBN(), 345);
         x.setISBN(567);
-        assertEquals(x.getISBN(),(Integer) 567);
+        assertEquals(x.getISBN(), 567);
     }
     @Test
     public void testSetStatus() {

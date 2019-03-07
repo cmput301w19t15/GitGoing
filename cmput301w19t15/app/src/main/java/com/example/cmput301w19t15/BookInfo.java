@@ -19,9 +19,9 @@ public class BookInfo extends AppCompatActivity {
         final Book book = (Book) intent.getSerializableExtra("Book");
 
         //display book information as edit text
-        EditText title = (EditText)findViewById(R.id.editMyBookTitle);
-        EditText author = (EditText)findViewById(R.id.editMyBookAuthor);
-        EditText ISBN = (EditText)findViewById(R.id.editMyBookISBN);
+        EditText title = findViewById(R.id.editMyBookTitle);
+        EditText author = findViewById(R.id.editMyBookAuthor);
+        EditText ISBN = findViewById(R.id.editMyBookISBN);
 
         title.setText(book.getTitle());
         author.setText(book.getAuthor());

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -25,20 +26,21 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
-    private ProgressBar progressBar;
-    private Button logOut, myBooks;
+    //private ProgressBar progressBar;
+    private Button logOut, myBooks, myBorrows, myRequests, findUser, findBook;
+    private ImageButton myProfile, notifyButton;
 
     private static User loggedInUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_updated);
 
         checkLogIn();
         getLoggedinUser();
 
-        logOut = (Button) findViewById(R.id.logout_button);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        logOut = findViewById(R.id.logout_button);
+        //progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         //logout user
         logOut.setOnClickListener(new View.OnClickListener() {
@@ -49,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        myBooks = (Button) findViewById(R.id.my_books);
-        myBooks.setOnClickListener(new View.OnClickListener() {
+        myBorrows = findViewById(R.id.my_borrows);
+        myBorrows.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MyBooks.class);
                 startActivity(intent);
@@ -58,10 +60,63 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findUser = findViewById(R.id.find_user);
+        findUser.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        findBook = findViewById(R.id.find_book);
+        findBook.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, FindBooks.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        notifyButton = findViewById(R.id.notify);
+        notifyButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        myProfile = findViewById(R.id.profile);
+        myProfile.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Profile.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        myRequests = findViewById(R.id.my_requests);
+        myRequests.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RequestedBookList.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        myBooks = findViewById(R.id.my_books);
+        myBooks.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
     }
     protected void onResume() {
         super.onResume();
-        progressBar.setVisibility(View.GONE);
+        //progressBar.setVisibility(View.GONE);
     }
 
     @Override
