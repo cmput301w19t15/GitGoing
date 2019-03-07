@@ -3,9 +3,8 @@ package com.example.cmput301w19t15;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-<<<<<<< HEAD
 import android.widget.EditText;
-=======
+
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -14,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
->>>>>>> 50afdaa7c56ece89c44e36c79f764a59a76b4231
+
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
