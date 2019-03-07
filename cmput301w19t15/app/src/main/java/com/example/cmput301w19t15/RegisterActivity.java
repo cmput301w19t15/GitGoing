@@ -48,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         inputPhoneNumber = findViewById(R.id.pass);
         progressBar = findViewById(R.id.progressBar);
 
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
