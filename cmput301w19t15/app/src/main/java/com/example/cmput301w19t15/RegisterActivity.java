@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         inputUsername = findViewById(R.id.username);
         inputPassword = findViewById(R.id.password);
         inputName = findViewById(R.id.name);
-        inputPhoneNumber = findViewById(R.id.phone);
+        inputPhoneNumber = findViewById(R.id.pass);
         progressBar = findViewById(R.id.progressBar);
 >>>>>>> c28b5456b0888d8435be5fe1de8d15b147d1da2e
 
@@ -211,7 +211,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
     private boolean checkPhoneNumber(String phone){
         if (phone.isEmpty()){
-            phoneError = setFocus(inputPhoneNumber,"Please Enter your Name!");
+            phoneError = setFocus(inputPhoneNumber,"Please Enter your Phone Number!");
         }else{
             phoneError = false;
         }

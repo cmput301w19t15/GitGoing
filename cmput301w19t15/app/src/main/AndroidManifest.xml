@@ -18,7 +18,7 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
+            android:label="GitGoing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,6 +28,12 @@
         <activity android:name=".MyBooks"/>
         <activity android:name=".BookInfo"/>
         <activity android:name=".AddBookInfo"/>
+        <activity android:name=".Profile"/>
+        <activity android:name=".AcceptPage"/>
+        <activity android:name=".BorrowerBookView"/>
+        <activity android:name=".DetailedBookInfo"/>
+        <activity android:name=".FindBooks"/>
+        <activity android:name=".RequestedBookList"/>
         <activity android:name=".ShowAvaliableBookActivity" />
         <activity android:name=".SearchBooksorUsersActivity" />
     </application>

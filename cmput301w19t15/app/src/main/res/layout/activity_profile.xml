@@ -7,7 +7,7 @@
     tools:context=".Profile">
 
     <TextView
-        android:id="@+id/phone3"
+        android:id="@+id/rating"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -23,10 +23,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone2" />
+        app:layout_constraintTop_toBottomOf="@+id/phone" />
 
     <EditText
+<<<<<<< HEAD
         android:id="@+id/password"
+=======
+        android:id="@+id/pass"
+>>>>>>> 50afdaa7c56ece89c44e36c79f764a59a76b4231
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -44,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <EditText
-        android:id="@+id/phone2"
+        android:id="@+id/phone"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -59,7 +63,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+<<<<<<< HEAD
         app:layout_constraintTop_toBottomOf="@+id/password" />
+=======
+        app:layout_constraintTop_toBottomOf="@+id/pass" />
+>>>>>>> 50afdaa7c56ece89c44e36c79f764a59a76b4231
 
     <EditText
         android:id="@+id/email"
@@ -123,8 +131,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="646dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

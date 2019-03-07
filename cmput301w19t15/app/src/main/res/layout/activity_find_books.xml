@@ -7,7 +7,7 @@
     tools:context=".FindBooks">
 
     <EditText
-        android:id="@+id/filter3"
+        android:id="@+id/search"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/filter2"
+        android:id="@+id/filter"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
@@ -36,7 +36,7 @@
         tools:layout_editor_absoluteY="106dp" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/addF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -45,7 +45,7 @@
         android:layout_marginRight="8dp"
         android:text="@string/add"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/filter2"
+        app:layout_constraintStart_toEndOf="@+id/filter"
         tools:layout_editor_absoluteY="106dp" />
 
     <TextView
@@ -54,10 +54,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/filters"
-        app:layout_constraintTop_toBottomOf="@+id/filter2"
+        app:layout_constraintTop_toBottomOf="@+id/filter"
         tools:layout_editor_absoluteX="8dp" />
 
     <ListView
+        android:id="@+id/currentF"
         android:layout_width="395dp"
         android:layout_height="39dp"
         android:layout_marginStart="8dp"
@@ -71,6 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <ListView
+        android:id="@+id/book_list"
         android:layout_width="395dp"
         android:layout_height="485dp"
         tools:layout_editor_absoluteX="8dp"
