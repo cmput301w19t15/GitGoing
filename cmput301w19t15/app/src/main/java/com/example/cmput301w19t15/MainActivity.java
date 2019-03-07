@@ -161,4 +161,10 @@ public class MainActivity extends AppCompatActivity {
     public static User getUser(){
         return loggedInUser;
     }
+    public static void updateUser(){
+        FirebaseDatabase.getInstance().getReference("users").child(loggedInUser.getUserID()).removeValue();
+        FirebaseDatabase.getInstance().getReference("users").child(loggedInUser.getUserID()).setValue(loggedInUser);
+
+    }
 }
+

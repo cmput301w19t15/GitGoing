@@ -37,13 +37,13 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-/** Might keep, might not
+
         //get edit text
         EditText username = (EditText)findViewById(R.id.username);
         EditText name = (EditText)findViewById(R.id.name);
         EditText email = (EditText)findViewById(R.id.email);
-        EditText password = (EditText)findViewById(R.id.password);
-        EditText number = (EditText)findViewById(R.id.phone2);
+        EditText password = (EditText)findViewById(R.id.pass);
+        EditText number = (EditText)findViewById(R.id.phone);
 
         //get info from logged in user
         User user = MainActivity.getUser();
@@ -61,11 +61,11 @@ public class Profile extends AppCompatActivity {
         saveButton = findViewById(R.id.save);
         inputEmail = findViewById(R.id.email);
         inputUsername = findViewById(R.id.username);
-        inputPassword = findViewById(R.id.password);
+        inputPassword = findViewById(R.id.pass);
         inputName = findViewById(R.id.name);
         inputPhoneNumber = findViewById(R.id.phone);
        //progressBar = findViewById(R.id.progressBar);
-**/
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,42 +96,14 @@ public class Profile extends AppCompatActivity {
                 Log.d("testing",".");
 
                 */
-                //if(!emailError && !usernameError && !passwordError && !nameError && !phoneError) {
-                if(!checkEmail(email) && !checkUsername(username) && !checkPassword(password)
+                //if(!emailError && !passwordError && !nameError && !phoneError) {
+                if(!checkEmail(email)  && !checkPassword(password)
                         && !checkName(name) && !checkPhoneNumber(phone)) {
                     //progressBar.setVisibility(View.VISIBLE);
                     //create user
-                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(
-                            Profile.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            Toast.makeText(Profile.this, "Successfully Registered:" +
-                                    task.isSuccessful(), Toast.LENGTH_SHORT).show();
-                            //progressBar.setVisibility(View.GONE);
-                            // If sign in fails, display a message to the user. If sign in succeeds
-                            // the auth state listener will be notified and logic to handle the
-                            // signed in user can be handled in the listener.
-                            if (task.isSuccessful()) {
-                                //get database
-                                DatabaseReference dataBase, newUser;
-                                FirebaseUser currentUser = task.getResult().getUser();
-                                String userID = currentUser.getUid();
-                                //pick users table to same the user in
-                                dataBase = FirebaseDatabase.getInstance().getReference().child("users");
-                                newUser = dataBase.child(currentUser.getUid());
-                                //create the user
-                                User addUser = new User(username,name,email,phone,userID);
-                                //save the user in the database
-                                newUser.setValue(addUser);
-                                //close register
-                                startActivity(new Intent(Profile.this, MainActivity.class));
-                                finish();
-                            } else {
-                                Toast.makeText(Profile.this, "Authentication failed." +
-                                        task.getException(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+                    MainActivity.updateUser();
+                    finish();
+
                 }
                 if(currentFocus != null){
                     currentFocus.requestFocus();
@@ -163,6 +135,7 @@ public class Profile extends AppCompatActivity {
         }
         return emailError;
     }
+    /**
     private boolean checkUsername(String username){
         if(username.isEmpty()) {
             usernameError = setFocus(inputUsername,"Enter a username");
@@ -187,7 +160,8 @@ public class Profile extends AppCompatActivity {
 
         }
         return usernameError;
-    }
+
+    }**/
     private boolean checkPassword(String password){
         if (password.isEmpty()) {
             passwordError = setFocus(inputPassword,"Password is required");
