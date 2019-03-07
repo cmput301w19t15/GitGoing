@@ -38,8 +38,7 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-<<<<<<< HEAD
-
+/** Might keep, might not
         //get edit text
         EditText username = (EditText)findViewById(R.id.username);
         EditText name = (EditText)findViewById(R.id.name);
@@ -56,7 +55,6 @@ public class Profile extends AppCompatActivity {
         email.setText(user.getEmail());
         number.setText(user.getPhone());
 
-=======
         Log.d("testing","im here");
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -68,7 +66,7 @@ public class Profile extends AppCompatActivity {
         inputName = findViewById(R.id.name);
         inputPhoneNumber = findViewById(R.id.phone);
        //progressBar = findViewById(R.id.progressBar);
-
+**/
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -230,7 +228,6 @@ public class Profile extends AppCompatActivity {
         editText.setError(message);
         currentFocus = editText;
         return true;
->>>>>>> 50afdaa7c56ece89c44e36c79f764a59a76b4231
     }
 
 }
