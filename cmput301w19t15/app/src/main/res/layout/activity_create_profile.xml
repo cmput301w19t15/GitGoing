@@ -7,11 +7,9 @@
     tools:context=".Profile">
 
     <EditText
-<<<<<<< HEAD
+
         android:id="@+id/password"
-=======
-        android:id="@+id/pass"
->>>>>>> 50afdaa7c56ece89c44e36c79f764a59a76b4231
+
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -44,11 +42,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintTop_toBottomOf="@+id/password" />
-=======
+
         app:layout_constraintTop_toBottomOf="@+id/pass" />
->>>>>>> 50afdaa7c56ece89c44e36c79f764a59a76b4231
 
     <EditText
         android:id="@+id/email"
