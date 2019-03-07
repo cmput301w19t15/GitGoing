@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="197dp"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="121dp"
+            android:layout_height="165dp"
+            android:padding="4dp" />
+
+        <TextView
+            android:id="@+id/textViewBookTitle"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/imageView"
+            android:text="Book Title Here"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/textViewAuthor"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewBookTitle"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/imageView"
+            android:text="Author Name"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+        <TextView
+            android:id="@+id/textViewISBN"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewBookTitle"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="32dp"
+            android:layout_toRightOf="@id/imageView"
+            android:text="ISBN #"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+        <TextView
+            android:id="@+id/textViewOwnerEmail"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewBookTitle"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="58dp"
+            android:layout_toRightOf="@id/imageView"
+            android:text="Owner Email"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+        <TextView
+            android:id="@+id/textViewStatus"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewAuthor"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="61dp"
+            android:layout_toRightOf="@id/imageView"
+            android:background="@color/colorPrimary"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="Book Status"
+            android:textAlignment="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>
