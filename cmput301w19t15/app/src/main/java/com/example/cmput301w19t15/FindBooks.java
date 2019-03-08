@@ -27,6 +27,8 @@ public class FindBooks extends AppCompatActivity {
         bookSearch = findViewById(R.id.search);
         filter2Add = findViewById(R.id.filter);
         addFilter = findViewById(R.id.addF);
+    }
+}
 /** needs to be edited, we no longer have owner or borrower class
         bookList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -37,7 +39,9 @@ public class FindBooks extends AppCompatActivity {
                 borrower.addToMyRequestedBooks(book);
                 //owner.addToRequestedBooks(book);
 
+
             }
         });
     }
 }
+ */

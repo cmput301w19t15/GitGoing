@@ -1,10 +1,18 @@
 
 package com.example.cmput301w19t15;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +22,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.IOException;
 
 import static android.os.FileObserver.DELETE;
 
@@ -26,6 +36,9 @@ public class AddBookInfo extends AppCompatActivity {
     private String booktitleText;
     private String authorText;
     private String isbnText;
+    private String bookPhoto;
+
+    Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +50,7 @@ public class AddBookInfo extends AppCompatActivity {
         isbn = findViewById(R.id.isbn);
 
         Button saveButton = findViewById(R.id.addBook);
+        Button addPhoto = findViewById(R.id.addPhoto);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +61,7 @@ public class AddBookInfo extends AppCompatActivity {
                 isbnText = isbn.getText().toString(); // look up better way
                 User loggedInUser = MainActivity.getUser();
 
-                Book book = new Book(booktitleText, authorText, isbnText,"null.png",loggedInUser.getEmail(),loggedInUser.getUserID());
+                Book book = new Book(booktitleText, authorText, isbnText, bookPhoto, loggedInUser.getEmail(), loggedInUser.getUserID());
                 loggedInUser.addToMyBooks(book);
 
                 Bundle result = new Bundle();
@@ -63,12 +77,12 @@ public class AddBookInfo extends AppCompatActivity {
                 newBook.setValue(book).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(AddBookInfo.this,"Successfully Added Book",Toast.LENGTH_SHORT).show();
+                        if (task.isSuccessful()) {
+                            Toast.makeText(AddBookInfo.this, "Successfully Added Book", Toast.LENGTH_SHORT).show();
                             try {
                                 //set time in mili
                                 Thread.sleep(3000);
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
@@ -80,6 +94,79 @@ public class AddBookInfo extends AppCompatActivity {
             }
         });
 
-
+        addPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectPhoto();
+            }
+        });
     }
+
+    private void selectPhoto() {
+        /**
+         * build an AlertDialog
+         * let user choose among Camera, Gallery or Cancel this action
+         */
+        final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(AddBookInfo.this);
+        builder.setTitle("Upload Photo");
+
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                /**
+                 * if user chooses Camera, call camera and will return a bitmap as a result
+                 */
+                if (items[which] == "Camera"){
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, REQUEST_CAMERA);
+                }
+                /**
+                 * if user chooses gallery, call mediaStorage and will return a uri object
+                 */
+                else if (items[which] == "Gallery"){
+                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
+                    startActivityForResult(intent.createChooser(intent, "Select File"), SELECT_FILE);
+
+                }
+                else if (items[which] == "Cancel"){
+                    dialog.dismiss();
+                }
+            }
+        });
+        //this is to show the alertdiaglog
+        builder.show();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(resultCode == Activity.RESULT_OK){
+            /**
+             * return bitmap and assign it to book's attribute
+             */
+            if (requestCode == REQUEST_CAMERA){
+
+                Bundle bundle = data.getExtras();
+                final Bitmap bitmap =  (Bitmap) bundle.get("data");
+                String bookPhoto = ConvertPhoto.convert(bitmap);
+                this.bookPhoto = bookPhoto;
+
+            }
+            /**
+             * return uri, then comvert to bitmap and assign it to book's attribute
+             */
+            else if (requestCode == SELECT_FILE){
+                Uri photoUri = data.getData();
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),photoUri);
+                    String bookPhoto = ConvertPhoto.convert(bitmap);
+                    this.bookPhoto = bookPhoto;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 }
