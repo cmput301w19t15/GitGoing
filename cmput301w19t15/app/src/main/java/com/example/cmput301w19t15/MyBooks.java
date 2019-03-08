@@ -25,10 +25,6 @@ public class MyBooks extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_books);
 
-        mRecyclerView = findViewById(R.id.recylcerView);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         mBookList = new ArrayList<>();
         //mBookAdapter = new BookAdapter(MyBooks.this, mBookList);
         //mRecyclerView.setAdapter(mBookAdapter);
@@ -43,6 +39,16 @@ public class MyBooks extends AppCompatActivity {
             }
         });
     }
+
+    private void listBook() {
+        try{
+            mRecyclerView = findViewById(R.id.recylcerView);
+            mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        } catch (Exception e) {
+            e.printStackTrace();         }
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
