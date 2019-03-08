@@ -3,6 +3,7 @@ package com.example.cmput301w19t15;
 import android.graphics.Bitmap;
 import android.media.Image;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -18,7 +19,7 @@ public class Book {
     private Status status = Status.Available;//
     private String borrowerID = "";
 
-    public Book(){}
+    public Book(FindBooks findBooks, ArrayList<Book> listOfBooks){}
     public Book(String title, String author, String ISBN, String photo, String ownerEmail, String ownerID) {
         this.title = title;
         this.author = author;

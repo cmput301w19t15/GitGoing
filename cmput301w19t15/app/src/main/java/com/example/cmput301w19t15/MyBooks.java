@@ -13,12 +13,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class MyBooks extends AppCompatActivity {
+public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClickListener {
 
     private static final int NEW_BOOK = 1;
     private RecyclerView mRecyclerView;
-    //private BookAdapter mBookAdapter;
+    private BookAdapter mBookAdapter;
     private ArrayList<Book> mBookList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class MyBooks extends AppCompatActivity {
         setContentView(R.layout.activity_my_books);
 
         mBookList = new ArrayList<>();
-        //mBookAdapter = new BookAdapter(MyBooks.this, mBookList);
+        mBookAdapter = new BookAdapter(MyBooks.this, mBookList);
         //mRecyclerView.setAdapter(mBookAdapter);
         //mBookAdapter.setOnItemClickListener(MyBooks.this);
 
