@@ -2,6 +2,7 @@ package com.example.cmput301w19t15;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.constraint.helper.Layer;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -61,7 +62,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.mTextViewTitle.setText(bookTitle);
         holder.mTextViewAuthor.setText(bookauthor);
         holder.mTextViewISBN.setText(bookISBN);
-        holder.mTextViewPhoto.setText(bookPhoto);
+        Bitmap bookImage = ConvertPhoto.convert(bookPhoto);
+        holder.mImageView.setImageBitmap(bookImage);
+        //holder.mTextViewPhoto.setText(bookPhoto);
         holder.mTextViewOwnerEmail.setText(ownerEmail);
         holder.mTextViewOwnerID.setText(ownerID);
         holder.mTextViewBookID.setText(bookID);

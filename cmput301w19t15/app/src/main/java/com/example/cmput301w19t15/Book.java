@@ -1,5 +1,6 @@
 package com.example.cmput301w19t15;
 
+import android.graphics.Bitmap;
 import android.media.Image;
 
 import java.util.Date;
