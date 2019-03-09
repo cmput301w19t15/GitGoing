@@ -33,7 +33,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
 
     public BookAdapter(Context context, ArrayList<Book> bookList) {
-
         mContext = context;
         mBookList = bookList;
     }
@@ -50,7 +49,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Book currentBook = mBookList.get((postion));
 
         String bookTitle = currentBook.getTitle();
-        String bookauthor = currentBook.getAuthor();
+        String bookAuthor = currentBook.getAuthor();
         String bookISBN = currentBook.getISBN();
         String bookPhoto = currentBook.getPhoto();
         String ownerEmail = currentBook.getOwnerEmail();
@@ -61,16 +60,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         String borrowerID = currentBook.getBorrowerID();
 
         holder.mTextViewTitle.setText(bookTitle);
-        holder.mTextViewAuthor.setText(bookauthor);
+        holder.mTextViewAuthor.setText(bookAuthor);
         holder.mTextViewISBN.setText(bookISBN);
-        Bitmap bookImage = ConvertPhoto.convert(bookPhoto);
-        holder.mImageView.setImageBitmap(bookImage);
+        //Bitmap bookImage = ConvertPhoto.convert(bookPhoto);
+        //holder.mImageView.setImageBitmap(bookImage);
         //holder.mTextViewPhoto.setText(bookPhoto);
         holder.mTextViewOwnerEmail.setText(ownerEmail);
-        holder.mTextViewOwnerID.setText(ownerID);
-        holder.mTextViewBookID.setText(bookID);
         holder.mTextViewStatus.setText(bookStatus);
-        holder.mTextViewBorrowerID.setText(borrowerID);
+        //holder.mTextViewBorrowerID.setText(borrowerID);
     }
 
 
@@ -81,8 +78,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     public class BookViewHolder extends RecyclerView.ViewHolder {
         public ImageView mImageView;
-        public TextView mTextViewTitle, mTextViewAuthor, mTextViewISBN, mTextViewPhoto, mTextViewOwnerEmail,
-                mTextViewOwnerID, mTextViewBookID, mTextViewDate, mTextViewStatus, mTextViewBorrowerID;
+        public TextView mTextViewTitle, mTextViewAuthor, mTextViewISBN, mTextViewOwnerEmail, mTextViewStatus, mTextViewBorrowerID;
 
         public BookViewHolder (View itemView) {
             super(itemView);
