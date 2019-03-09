@@ -4,6 +4,7 @@ package com.example.cmput301w19t15;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -28,8 +29,7 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
     private ListView bookList;
     private static User loggedInUser;
     private BookAdapter adapter;
-    private ArrayList<Book> listOfBooks = new ArrayList<Book>();
-    private String bookListType = "listOfBooks";
+    private ArrayList<Book> listOfBooks;
     private RecyclerView mRecyclerView;
 
 
@@ -41,9 +41,17 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
         // Set up the login form.
         setContentView(R.layout.activity_find_books);
 
-        bookList = (ListView) findViewById(R.id.book_list);
-        bookSearch = findViewById(R.id.search);
-        searchBtn = findViewById(R.id.search_button);
+
+
+
+        mRecyclerView = findViewById(R.id.recylcerView);
+        //mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        listOfBooks = new ArrayList<>();
+        loadBooks();
+
+
+        Log.d("testing","done");
 
 
 /*
@@ -69,37 +77,29 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
         });
 */
 
-        adapter = new BookAdapter(FindBooks.this,listOfBooks);
+
         //adapter = new ArrayAdapter<Book>(this, R.layout.list_item, listOfBooks);
-        mRecyclerView.setAdapter(adapter);
-    }
-    @Override
-    protected void onStart() {
-        // TODO Auto-generated method stub
-        super.onStart();
-        loadBooks();
+
 
     }
 
     public void loadBooks(){
-        loadMyBookFromFireBase(new User.loadBookCallBack() {
+        loadMyBookFromFireBase(new loadBookCallBack() {
             @Override
-            public void loadBooksCallBack(ArrayList<Book> value) {
+            public void loadBookCallBack(ArrayList<Book> value) {
                 listOfBooks = (ArrayList<Book>) value.clone();
+                Log.d("testing","book size: "+listOfBooks.size());
+                adapter = new BookAdapter(FindBooks.this,listOfBooks);
+                mRecyclerView.setAdapter(adapter);
+                adapter.setOnItemClickListener(FindBooks.this);
             }
         });
     }
-
-    @Override
-    public void onItemClick(int position) {
-
-    }
-
-
     public interface loadBookCallBack {
-        void loadBooksCallBack(ArrayList<Book> value);
+        void loadBookCallBack(ArrayList<Book> value);
     }
-    public void loadMyBookFromFireBase(final User.loadBookCallBack myCallback){
+
+    public void loadMyBookFromFireBase(final loadBookCallBack myCallback){
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("books");
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -108,11 +108,14 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
                     try {
                         ArrayList<Book> allBooks = new ArrayList<>();
                         for (DataSnapshot books : dataSnapshot.getChildren()) {
-                            Book book = books.getValue(Book.class);
-                            allBooks.add(book);
+                            if(books.child("date").getValue().equals(null) || books.child("date").getValue().equals("null")) {
+                                Log.d("testing",books.getKey());
+                            }else{
+                                Book book = books.getValue(Book.class);
+                                allBooks.add(book);
+                            }
                         }
-                        myCallback.loadBooksCallBack(allBooks);
-
+                        myCallback.loadBookCallBack(allBooks);
                     } catch (Exception e){
                         e.printStackTrace();
                     }
@@ -124,5 +127,13 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
             }
         });
     }
+
+
+
+    @Override
+    public void onItemClick(int position) {
+
+    }
+
 
 }

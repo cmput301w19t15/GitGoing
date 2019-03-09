@@ -3,6 +3,8 @@ package com.example.cmput301w19t15;
 import android.graphics.Bitmap;
 import android.media.Image;
 
+import com.google.firebase.database.ServerValue;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -15,10 +17,12 @@ public class Book {
     private String ownerEmail = "";//
     private String ownerID = "";//
     private String BookID = "";//
-    private Date returnDate = new Date();
+    private long returnDate = System.currentTimeMillis();
     private Status status = Status.Available;//
     private String borrowerID = "";
 
+
+    public Book(){}
     public Book(FindBooks findBooks, ArrayList<Book> listOfBooks){}
     public Book(String title, String author, String ISBN, String photo, String ownerEmail, String ownerID) {
         this.title = title;
@@ -61,17 +65,20 @@ public class Book {
     public String getPhoto() {
         return this.photo;
     }
-    public void setOwnerEmail(String ownerID){this.ownerEmail = ownerEmail;}
+    public void setOwnerEmail(String ownerEmail){this.ownerEmail = ownerEmail;}
     public String getOwnerEmail(){return this.ownerEmail;}
     public void setOwnerID(String ownerID){this.ownerID = ownerID;}
     public String getOwnerID(){return this.ownerID;}
+    public void setBookID(String BookID){
+        this.BookID = BookID;
+    }
     public String getBookID() {
         return this.BookID;
     }
-    public void setReturnDate(Date date){
+    public void setDate(long date){
         this.returnDate = date;
     }
-    public Date getDate(){return returnDate;}
+    public long getDate(){return returnDate;}
     public void setStatus(String status){
         switch (status) {
             case "available" : this.status = Status.Available; break;
