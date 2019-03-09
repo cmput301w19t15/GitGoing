@@ -32,7 +32,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     }
 
 
-    public void BookAdapter(Context context, ArrayList<Book> bookList) {
+    public BookAdapter(Context context, ArrayList<Book> bookList) {
         mContext = context;
         mBookList = bookList;
     }
