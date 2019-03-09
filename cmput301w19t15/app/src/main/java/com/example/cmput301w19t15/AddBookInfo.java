@@ -166,6 +166,7 @@ public class AddBookInfo extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+            Log.d("testing",this.bookPhoto);
         }
     }
 

@@ -62,8 +62,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.mTextViewTitle.setText(bookTitle);
         holder.mTextViewAuthor.setText(bookAuthor);
         holder.mTextViewISBN.setText(bookISBN);
-        //Bitmap bookImage = ConvertPhoto.convert(bookPhoto);
-        //holder.mImageView.setImageBitmap(bookImage);
+        if(bookPhoto != null) {
+            Bitmap bookImage = ConvertPhoto.convert(bookPhoto);
+            holder.mImageView.setImageBitmap(bookImage);
+        }
         //holder.mTextViewPhoto.setText(bookPhoto);
         holder.mTextViewOwnerEmail.setText(ownerEmail);
         holder.mTextViewStatus.setText(bookStatus);
