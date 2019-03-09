@@ -186,7 +186,7 @@ public class User {
     public void loadUserInformation(){
         loadUserInfoFromFireBase(new loadUserCallBack() {
             @Override
-            public void loadUserDetailsCallBack(ArrayList<String> value) {
+            public void loadUserCallBack(ArrayList<String> value) {
                 username = value.get(0);
                 name = value.get(1);
                 email = value.get(2);
@@ -198,7 +198,7 @@ public class User {
         this.bookListType = bookListType;
         loadMyBookFromFireBase(new loadBookCallBack() {
             @Override
-            public void loadBooksCallBack(ArrayList<Book> value) {
+            public void loadBookCallBack(ArrayList<Book> value) {
                 switch(bookListType) {
                     case "myBooks": myBooks = (ArrayList<Book>) value.clone(); break;
                     case "myRequestedBooks": myRequestedBooks = (ArrayList<Book>) value.clone(); break;
@@ -209,10 +209,10 @@ public class User {
         });
     }
     public interface loadUserCallBack{
-        void loadUserDetailsCallBack(ArrayList<String> value);
+        void loadUserCallBack(ArrayList<String> value);
     }
     public interface loadBookCallBack {
-        void loadBooksCallBack(ArrayList<Book> value);
+        void loadBookCallBack(ArrayList<Book> value);
     }
 
     public void loadUserInfoFromFireBase(final loadUserCallBack myCallback){
@@ -227,7 +227,7 @@ public class User {
                         userInformatiom.add(dataSnapshot.child("name").getValue().toString());
                         userInformatiom.add(dataSnapshot.child("email").getValue().toString());
                         userInformatiom.add(dataSnapshot.child("phone").getValue().toString());
-                        myCallback.loadUserDetailsCallBack(userInformatiom);
+                        myCallback.loadUserCallBack(userInformatiom);
                     } catch (Exception e){
                         e.printStackTrace();
                     }
@@ -252,7 +252,7 @@ public class User {
                             Book book = books.getValue(Book.class);
                             allBooks.add(book);
                         }
-                        myCallback.loadBooksCallBack(allBooks);
+                        myCallback.loadBookCallBack(allBooks);
 
                     } catch (Exception e){
                         e.printStackTrace();
