@@ -1,0 +1,4 @@
+#Fri Mar 08 17:11:14 MST 2019
+base.0=C\:\\Users\\Admin\\Documents\\GitHub\\GitGoing\\cmput301w19t15\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\5
+path.0=classes.dex
+renamed.0=classes.dex
