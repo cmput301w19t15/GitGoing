@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +32,8 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
     private BookAdapter adapter;
     private ArrayList<Book> listOfBooks;
     private RecyclerView mRecyclerView;
-
+    private String filterText;
+    private EditText filterView;
 
 
     @Override
@@ -52,6 +54,17 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
 
 
         Log.d("testing","done");
+
+
+        filterView = findViewById(R.id.searchTextView);
+        Button searchButton = findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterText = filterView.getText().toString();
+                loadBooks();
+            }
+        });
 
 
 /*
@@ -107,15 +120,26 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
                 if(dataSnapshot.exists()) {
                     try {
                         ArrayList<Book> allBooks = new ArrayList<>();
+                        ArrayList<Book> filteredBooks = new ArrayList<>();
                         for (DataSnapshot books : dataSnapshot.getChildren()) {
                             if(books.child("date").getValue().equals(null) || books.child("date").getValue().equals("null")) {
-                                Log.d("testing",books.getKey());
-                            }else{
-                                Book book = books.getValue(Book.class);
+                                Log.d("testing", books.getKey());
+                            } else {Book book = books.getValue(Book.class);
                                 allBooks.add(book);
                             }
                         }
-                        myCallback.loadBookCallBack(allBooks);
+                        // filter books
+                        if (filterText != " ") {
+                            Log.d("debuging", filterText);
+                            for (Book book : allBooks) {
+                                if(book.getTitle().toLowerCase().contains(filterText.toLowerCase())) {
+                                    filteredBooks.add(book);
+                                }
+                            }
+                        } else {
+                            filteredBooks = allBooks;
+                        }
+                        myCallback.loadBookCallBack(filteredBooks);
                     } catch (Exception e){
                         e.printStackTrace();
                     }
