@@ -134,7 +134,10 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
                         if (filterText != " ") {
                             Log.d("debuging", filterText);
                             for (Book book : allBooks) {
-                                if(book.getTitle().toLowerCase().contains(filterText.toLowerCase())) {
+                                if(book.getTitle().toLowerCase().contains(filterText.toLowerCase())
+                                || book.getAuthor().toLowerCase().contains(filterText.toLowerCase())
+                                || book.getOwnerEmail().toLowerCase().contains(filterText.toLowerCase())
+                                || book.getISBN().toLowerCase().contains(filterText.toLowerCase())) {
                                     filteredBooks.add(book);
                                 }
                             }
