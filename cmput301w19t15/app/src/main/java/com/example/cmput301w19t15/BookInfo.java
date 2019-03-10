@@ -28,6 +28,8 @@ public class BookInfo extends AppCompatActivity {
         ISBN.setText(book.getISBN());
 
 
+
+
         /*
         // only show if user is not the owner of this book
         /*
