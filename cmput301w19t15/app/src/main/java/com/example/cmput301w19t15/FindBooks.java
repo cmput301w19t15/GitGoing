@@ -48,6 +48,9 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
 
         mRecyclerView = findViewById(R.id.recylcerView);
         //mRecyclerView.setHasFixedSize(true);
+        filterView = findViewById(R.id.searchTextView);
+        filterText = filterView.getText().toString();
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         listOfBooks = new ArrayList<>();
         loadBooks();
@@ -56,7 +59,6 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
         Log.d("testing","done");
 
 
-        filterView = findViewById(R.id.searchTextView);
         Button searchButton = findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
