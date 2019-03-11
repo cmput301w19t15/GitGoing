@@ -1,4 +1,27 @@
+/*
+ * Class Name: RegisterActivity
+ *
+ * Version: 1.0
+ *
+ * Copyright 2019 TEAM GITGOING
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package com.example.cmput301w19t15;
+
+/**
+ * Represents an important Tweet
+ * @author Thomas, Anjesh, Breanne
+ * @version 1.0
+ * @see LonelyTwitterActivity
+ * @see ImportantTweet
+ * @since 1.0
+ */
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -24,11 +47,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText inputEmail, inputUsername, inputPassword, inputName, inputPhoneNumber,currentFocus;
+    private EditText inputEmail, inputPassword, inputName, inputPhoneNumber,currentFocus;
+
     Button btnLogin, btnRegister, btnResetPassword;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
-    private boolean emailError = false,usernameError = false,passwordError = false,nameError = false,phoneError = false;
+    private boolean emailError = false,passwordError = false,nameError = false,phoneError = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +66,10 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.register_button);
         btnResetPassword = findViewById(R.id.reset_button);
         inputEmail = findViewById(R.id.email);
-        inputUsername = findViewById(R.id.username);
         inputPassword = findViewById(R.id.password);
         inputName = findViewById(R.id.name);
         inputPhoneNumber = findViewById(R.id.pass);
         progressBar = findViewById(R.id.progressBar);
-
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +132,13 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * prompts user to enter email which must match the email pattern (must contain '@' and '.xx
+     *  where xx is some email extension) and must not already exist
+     * @param email
+     * @return
+     */
     private boolean checkEmail(String email){
         if (email.isEmpty()) {
             emailError = setFocus(inputEmail,"Email is required");
@@ -132,6 +161,13 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return emailError;
     }
+
+    /**
+     * prompts user to select a passowrd which must be a least 6 characters long; no other
+     * restrictions are present
+     * @param password
+     * @return
+     */
     private boolean checkPassword(String password){
         if (password.isEmpty()) {
             passwordError = setFocus(inputPassword,"Password is required");
@@ -142,6 +178,12 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return passwordError;
     }
+
+    /**
+     * prompts user to select a name; no restrictions on the name
+     * @param name
+     * @return
+     */
     private boolean checkName(String name){
         if (name.isEmpty()) {
             nameError = setFocus(inputName,"Please Enter your Name!");
@@ -150,6 +192,12 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return nameError;
     }
+
+    /**
+     * prompts user to enter a phone number; no restrictions are present
+     * @param phone
+     * @return
+     */
     private boolean checkPhoneNumber(String phone){
         if (phone.isEmpty()){
             phoneError = setFocus(inputPhoneNumber,"Please Enter your Phone Number!");
@@ -158,6 +206,10 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return phoneError;
     }
+
+    /**
+     * displays progress bar when action is selected
+     */
     @Override
     protected void onResume() {
         super.onResume();

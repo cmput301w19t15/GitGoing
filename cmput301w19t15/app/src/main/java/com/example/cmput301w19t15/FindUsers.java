@@ -52,7 +52,9 @@ public class FindUsers extends AppCompatActivity implements UserAdapter.OnItemCl
     }
 
 
-
+    /**
+     * reference from https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
+     */
     public void loadUsers(){
         loadUsersFromFireBase(new loadUserCallBack() {
             @Override

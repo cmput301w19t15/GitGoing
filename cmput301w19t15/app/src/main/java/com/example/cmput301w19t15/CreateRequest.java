@@ -19,21 +19,27 @@ public class CreateRequest extends AppCompatActivity {
     private Book newBook;
     private User owner;
     User loggedInUser = MainActivity.getUser();
+    String ownerId, author, title, ownerEmail, isbn, status, bookId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_request);
 
+        /*
+         * save the book values passed from the FindBooks classes when clicked on
+         */
         Bundle bundle = getIntent().getExtras();
-        final String ownerId = (String) bundle.get("OWNERID");
-        String author = (String) bundle.get("AUTHOR");
-        String ownerEmail = (String) bundle.get("OWNEREMAIL");
-        String isbn = (String) bundle.get("ISBN");
-        final String title = (String) bundle.get("TITLE");
-        String status = (String) bundle.get("STATUS");
-        final String bookId = (String) bundle.get("BOOKID");
+        ownerId = (String) bundle.get("OWNERID");
+        author = (String) bundle.get("AUTHOR");
+        ownerEmail = (String) bundle.get("OWNEREMAIL");
+        isbn = (String) bundle.get("ISBN");
+        title = (String) bundle.get("TITLE");
+        status = (String) bundle.get("STATUS");
+        bookId = (String) bundle.get("BOOKID");
 
-
+        /*
+         * set the text field with the values that was passed over
+         */
         TextView authorText = (TextView) findViewById(R.id.bookauthor);
         authorText.setText(author);
         TextView titleText = (TextView) findViewById(R.id.booktitle);
@@ -49,32 +55,7 @@ public class CreateRequest extends AppCompatActivity {
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseDatabase.getInstance().getReference("users")
-                        .orderByChild("userID").addListenerForSingleValueEvent(new ValueEventListener() {
-                    public void onDataChange(DataSnapshot snapshot) {
-                        for (DataSnapshot child : snapshot.getChildren()) {
-                            if (child.getKey().equals(ownerId)) {
-                                owner = (child.getValue(User.class));
-                                ArrayList<Book> ownersBooks = owner.getMyBooks();
-                                for (Book book : ownersBooks) {
-                                    if (bookId.equals(book.getBookID())) {
-                                        String borrowerID = loggedInUser.getUserID();
-                                        newBook = new Book(book);
-                                        newBook.setBorrowerID(borrowerID);
-                                        break;
-                                    }
-                                }
-                                break;
-                            }
-                        }
-                        owner.addToRequestedBooks(newBook);
-                        loggedInUser.addToMyRequestedBooks(newBook);
-                        finish();
-                    }
-                    public void onCancelled(DatabaseError databaseError) {
-                        // ...
-                    }
-                });
+                addBookToRequest();
             }
         });
 
@@ -87,5 +68,37 @@ public class CreateRequest extends AppCompatActivity {
         });
 
     }
-
+    /*
+     * add the book to to my requested books for the user requesting the book
+     * and add the book as a book that has been requested
+     * updates firebase
+     */
+    private void addBookToRequest(){
+        FirebaseDatabase.getInstance().getReference("users")
+                .orderByChild("userID").addListenerForSingleValueEvent(new ValueEventListener() {
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    if (child.getKey().equals(ownerId)) {
+                        owner = (child.getValue(User.class));
+                        ArrayList<Book> ownersBooks = owner.getMyBooks();
+                        for (Book book : ownersBooks) {
+                            if (bookId.equals(book.getBookID())) {
+                                String borrowerID = loggedInUser.getUserID();
+                                newBook = new Book(book);
+                                newBook.setBorrowerID(borrowerID);
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+                owner.addToRequestedBooks(newBook);
+                loggedInUser.addToMyRequestedBooks(newBook);
+                finish();
+            }
+            public void onCancelled(DatabaseError databaseError) {
+                // ...
+            }
+        });
+    }
 }

@@ -147,7 +147,6 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
      * @param view
      */
     public void scan(View view){
-        //
         //https://github.com/ravi8x/Barcode-Reader
         Intent scannerIntent = new Intent(AddBookInfo.this,ScanBarcode.class);
         startActivityForResult(scannerIntent,5);
