@@ -47,7 +47,11 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         //gets books from user and loads them into screen
         listBook();
         loggedInUser = MainActivity.getUser();
-        mBookList = loggedInUser.getMyBooks();
+        try {
+            mBookList = loggedInUser.getMyBooks();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         mBookAdaptor = new BookAdapter(MyBooks.this,mBookList);
         mRecyclerView.setAdapter(mBookAdaptor);
         mBookAdaptor.setOnItemClickListener(MyBooks.this);
@@ -78,7 +82,7 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
     @Override
     protected void onStart() {
         super.onStart();
-        int arraySize = loggedInUser.getMyBooks().size();
+        //int arraySize = loggedInUser.getMyBooks().size();
         //TextView textView = findViewById(R.id.textView2);
         //textView.setText("Number of books: " + arraySize);
 

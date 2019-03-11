@@ -153,7 +153,8 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
      * @param view
      */
     public void scan(View view){
-        //https://code.tutsplus.com/tutorials/android-sdk-create-a-barcode-reader--mobile-17162
+        //
+        //https://github.com/ravi8x/Barcode-Reader
         Intent scannerIntent = new Intent(AddBookInfo.this,ScanBarcode.class);
         startActivityForResult(scannerIntent,5);
         /*
@@ -190,8 +191,8 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode == 5){
-            ;
-            Log.d("testing",data.getStringExtra("ISBN"));
+            String barcode = data.getStringExtra("ISBN");
+            isbn.setText(barcode);
         }
 
         if(resultCode == Activity.RESULT_OK){
@@ -218,7 +219,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                     e.printStackTrace();
                 }
             }
-            Log.d("testing",this.bookPhoto);
+            //Log.d("testing",this.bookPhoto);
         }
     }
 }

@@ -16,6 +16,7 @@ public class ScanBarcode extends AppCompatActivity implements BarcodeReader.Barc
     private BarcodeReader barcodeReader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //https://github.com/ravi8x/Barcode-Reader
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_barcode);
         barcodeReader = (BarcodeReader) getSupportFragmentManager().findFragmentById(R.id.barcode_fragment);
@@ -25,7 +26,8 @@ public class ScanBarcode extends AppCompatActivity implements BarcodeReader.Barc
     public void onScanned(Barcode barcode) {
         barcodeReader.playBeep();
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("ISBN",barcode.displayValue);
+        returnIntent.putExtra("ISBN",barcode.displayValue.toString());
+        setResult(RESULT_OK, returnIntent);
         finish();
     }
 
