@@ -13,6 +13,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * this activity is intended to send request to owner of the book,
+ * at current state, it will change the status of the book and
+ * update in firebase
+ * @version : 1.0
+ * @see : Request, MyBooks, Fingbooks
+ */
 public class CreateRequest extends AppCompatActivity {
 
     private Button request,cancel;
