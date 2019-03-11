@@ -15,7 +15,7 @@
 package com.example.cmput301w19t15;
 
 /**
- * Represents an important Tweet
+ * Represents a user's profile
  * @author Thomas, Anjesh, Breanne
  * @version 1.0
  * @see User

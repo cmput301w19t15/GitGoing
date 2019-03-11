@@ -15,7 +15,7 @@
 package com.example.cmput301w19t15;
 
 /**
-  * Represents an important Tweet
+  * Represents a request for book
   * @author Thomas
   * @version 1.0
   * @see RequestedBookList
