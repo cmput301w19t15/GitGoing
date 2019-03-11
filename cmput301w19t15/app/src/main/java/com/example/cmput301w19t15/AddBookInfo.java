@@ -21,10 +21,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.zxing.Result;
 
 import java.io.IOException;
 
-public class AddBookInfo extends AppCompatActivity {
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
+public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
     private EditText booktitle;
     private EditText author;
@@ -35,6 +38,7 @@ public class AddBookInfo extends AppCompatActivity {
     private String isbnText;
     private String bookPhoto;
 
+    private ZXingScannerView scannerView;
     Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
 
     @Override
@@ -48,6 +52,7 @@ public class AddBookInfo extends AppCompatActivity {
 
         Button saveButton = findViewById(R.id.deleteBook);
         Button addPhoto = findViewById(R.id.addPhoto);
+        Button scanInfo = findViewById(R.id.scanInfo);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +96,12 @@ public class AddBookInfo extends AppCompatActivity {
                 selectPhoto();
             }
         });
+        scanInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scan(v);
+            }
+        });
     }
 
     private void selectPhoto() {
@@ -130,14 +141,59 @@ public class AddBookInfo extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * Source: https://github.com/dm77/barcodescanner
+     * this methods initialize scanner
+     * @param view
+     */
+    public void scan(View view){
+        //
+        //https://github.com/ravi8x/Barcode-Reader
+        Intent scannerIntent = new Intent(AddBookInfo.this,ScanBarcode.class);
+        startActivityForResult(scannerIntent,5);
+        /*
+        scannerView = new ZXingScannerView(getApplicationContext());
+        setContentView(scannerView);
+        scannerView.setResultHandler(this);
+        scannerView.startCamera();
+        */
+    }
+
+    /**
+     * this method will override the pause class,
+     * in this case, it'll stop camera.
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        scannerView.stopCamera();
+    }
+    */
+
+    /**
+     * this method is from the ZXing class we implement,
+     * it will override the handleResult class from its interface
+     * and display a message whenever we scan barcode
+     * @param result
+     */
+    @Override
+    public void handleResult(Result result){
+        Toast.makeText(getApplicationContext(),result.getText(),Toast.LENGTH_LONG).show();
+        scannerView.resumeCameraPreview(this);
+    }
+
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode == 5){
+            String barcode = data.getStringExtra("ISBN");
+            isbn.setText(barcode);
+        }
+
         if(resultCode == Activity.RESULT_OK){
             /**
              * return bitmap and assign it to book's attribute
              */
             if (requestCode == REQUEST_CAMERA){
-
                 Bundle bundle = data.getExtras();
                 final Bitmap bitmap =  (Bitmap) bundle.get("data");
                 String bookPhoto = ConvertPhoto.convert(bitmap);
@@ -157,8 +213,7 @@ public class AddBookInfo extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            Log.d("testing",this.bookPhoto);
+            //Log.d("testing",this.bookPhoto);
         }
     }
-
 }

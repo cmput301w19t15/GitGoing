@@ -48,10 +48,14 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
 
         //gets books from user and loads them into screen
         loggedInUser = MainActivity.getUser();
-        mBookList = loggedInUser.getMyBooks();
-        mBookAdapter = new BookAdapter(MyBooks.this,mBookList);
-        mRecyclerView.setAdapter(mBookAdapter);
-        mBookAdapter.setOnItemClickListener(MyBooks.this);
+        try {
+            mBookList = loggedInUser.getMyBooks();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        mBookAdaptor = new BookAdapter(MyBooks.this,mBookList);
+        mRecyclerView.setAdapter(mBookAdaptor);
+        mBookAdaptor.setOnItemClickListener(MyBooks.this);
 
         //adds new book by starting add book info class
         Button addBook = (Button) findViewById(R.id.add_book);
