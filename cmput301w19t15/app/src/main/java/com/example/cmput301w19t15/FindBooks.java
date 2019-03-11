@@ -1,6 +1,7 @@
 package com.example.cmput301w19t15;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -161,7 +162,20 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
 
     @Override
     public void onItemClick(int position) {
+        Book book = (Book) listOfBooks.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("TITLE",book.getTitle());
+        bundle.putString("AUTHOR",book.getAuthor());
+        bundle.putString("ISBN",book.getISBN());
+        bundle.putString("OWNEREMAIL",book.getOwnerEmail());
+        bundle.putString("OWNERID",book.getOwnerID());
+        bundle.putString("STATUS",book.getStatus());
+        bundle.putString("BOOKID",book.getBookID());
 
+        Intent intent = new Intent(FindBooks.this, CreateRequest.class);
+        intent.putExtras(bundle);
+        setResult(RESULT_OK, intent);
+        startActivity(intent);
     }
 
 
