@@ -1,4 +1,26 @@
+/*
+ * Class Name: FindUser
+ *
+ * Version: 1.0
+ *
+ * Copyright 2019 TEAM GITGOING
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package com.example.cmput301w19t15;
+
+/**
+ * Represents a user search
+ * @author Anjesh, Eisha
+ * @version 1.0
+ * @see com.example.cmput301w19t15.UserAdapter
+ * @see com.example.cmput301w19t15.User
+ * @since 1.0
+ */
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,7 +49,10 @@ public class FindUsers extends AppCompatActivity implements UserAdapter.OnItemCl
     private String filterText;
     private EditText filterView;
 
-
+    /**
+     * Called when activity is created
+     * @param savedInstancesState
+     */
     @Override
     protected void onCreate (Bundle savedInstancesState) {
         super.onCreate(savedInstancesState);
@@ -54,7 +79,9 @@ public class FindUsers extends AppCompatActivity implements UserAdapter.OnItemCl
 
     /**
      * @reuse: https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
+     * loads all the current users into a recyclerview
      */
+
     public void loadUsers(){
         loadUsersFromFireBase(new loadUserCallBack() {
             @Override
@@ -66,15 +93,15 @@ public class FindUsers extends AppCompatActivity implements UserAdapter.OnItemCl
             }
         });
     }
-    /**
-     * @reuse: https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
-     */
     public interface loadUserCallBack {
+        /**
+         * Load user call back.
+         *
+         * @param value the value
+         */
         void loadUserCallBack(ArrayList<User> value);
     }
-    /**
-     * @reuse: https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
-     */
+
     public void loadUsersFromFireBase(final loadUserCallBack myCallback){
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users");
         userReference.addValueEventListener(new ValueEventListener() {
@@ -114,6 +141,11 @@ public class FindUsers extends AppCompatActivity implements UserAdapter.OnItemCl
                     }
                 }
             }
+
+            /**
+             * used for testing to detect database error
+             * @param databaseError
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.w("testing", "Error: ", databaseError.toException());
@@ -121,6 +153,10 @@ public class FindUsers extends AppCompatActivity implements UserAdapter.OnItemCl
         });
     }
 
+    /**
+     * gets position of click
+     * @param position the position
+     */
     @Override
     public void onItemClick(int position) {
 

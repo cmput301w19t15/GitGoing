@@ -30,6 +30,8 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 /**
  * this activity is to add information about the book
  * when creating a new book.
+ * @see : Book, BookInfo
+ * @version : 1.0
  */
 public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 

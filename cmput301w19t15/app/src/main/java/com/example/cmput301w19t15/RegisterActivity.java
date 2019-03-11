@@ -15,7 +15,7 @@
 package com.example.cmput301w19t15;
 
 /**
- * Represents an important Tweet
+ * Represents the user registration activity
  * @author Thomas, Anjesh, Breanne
  * @version 1.0
  * @see LonelyTwitterActivity

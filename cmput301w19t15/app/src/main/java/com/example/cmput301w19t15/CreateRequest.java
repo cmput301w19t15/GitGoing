@@ -25,7 +25,7 @@ public class CreateRequest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_request);
 
-        /*
+        /**
          * save the book values passed from the FindBooks classes when clicked on
          */
         Bundle bundle = getIntent().getExtras();
@@ -37,7 +37,7 @@ public class CreateRequest extends AppCompatActivity {
         status = (String) bundle.get("STATUS");
         bookId = (String) bundle.get("BOOKID");
 
-        /*
+        /**
          * set the text field with the values that was passed over
          */
         TextView authorText = (TextView) findViewById(R.id.bookauthor);
@@ -68,7 +68,7 @@ public class CreateRequest extends AppCompatActivity {
         });
 
     }
-    /*
+    /**
      * add the book to to my requested books for the user requesting the book
      * and add the book as a book that has been requested
      * updates firebase

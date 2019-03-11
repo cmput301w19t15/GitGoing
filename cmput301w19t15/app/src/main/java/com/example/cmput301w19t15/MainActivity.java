@@ -15,7 +15,7 @@
 package com.example.cmput301w19t15;
 
 /**
- * Represents an important Tweet
+ * Represents the primary activity
  * @author Thomas, Eisha, Breanne, Anjesh
  * @version 1.0
  * @since 1.0
@@ -52,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton myProfile, notifyButton;
 
     private static User loggedInUser;
+
+    /**
+     * Calls when activity is first made
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,11 +141,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Called when activity is resumed
+     */
     protected void onResume() {
         super.onResume();
         //progressBar.setVisibility(View.GONE);
     }
 
+    /**
+     * Called when activity is stopped
+     */
     @Override
     public void onStop() {
         super.onStop();
@@ -148,13 +160,17 @@ public class MainActivity extends AppCompatActivity {
             auth.removeAuthStateListener(authListener);
         }
     }
+
+    /**
+     * calls when back button is pressed; currently does nothing
+     */
     @Override
     public void onBackPressed() {
         //do nothing
     }
 
     /**
-     * Check log in.
+     * Checks if user is currently logged in or if user exists
      */
     public void checkLogIn(){
         auth = FirebaseAuth.getInstance();
@@ -171,6 +187,10 @@ public class MainActivity extends AppCompatActivity {
             }
         };
     }
+
+    /**
+     * loads the proper data when user is logged in
+     */
     private void getLoggedinUser(){
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null) {
@@ -186,8 +206,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Get user user.
-     *
+     * Returns the current logged in user
      * @return the user
      */
     public static User getUser(){
@@ -195,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Update user.
+     * Updates the user and their information
      */
     public static void updateUser(){
         FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID()).setValue(loggedInUser);

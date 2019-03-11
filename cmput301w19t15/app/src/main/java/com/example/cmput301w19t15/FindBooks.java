@@ -1,5 +1,28 @@
+/*
+ * Class Name: FindBooks
+ *
+ * Version: 1.0
+ *
+ * Copyright 2019 TEAM GITGOING
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package com.example.cmput301w19t15;
 
+/**
+ * Represents a database search for the books
+ * @author Thomas, Anjesh, Eisha, Breanne, Yourui, Josh
+ * @version 1.0
+ * @see com.example.cmput301w19t15.Book
+ * @see com.example.cmput301w19t15.BookAdapter
+ *
+ * @since 1.0
+ */
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +47,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * load all the books from firebase and then search them,
+ * display the searching result
+ */
 public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemClickListener{
     private FindBooks activity = this;
     private EditText bookSearch, filter2Add;
@@ -37,6 +64,10 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
     private EditText filterView;
 
 
+    /**
+     * Calls when activity is first created
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +122,9 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
 
     }
 
+    /**
+     * Load books into recyclerview
+     */
     public void loadBooks(){
         loadMyBookFromFireBase(new loadBookCallBack() {
             @Override
@@ -103,10 +137,24 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
             }
         });
     }
+
+    /**
+     * The interface Load book callback.
+     */
     public interface loadBookCallBack {
+        /**
+         * Load book call back.
+         *
+         * @param value the value
+         */
         void loadBookCallBack(ArrayList<Book> value);
     }
 
+    /**
+     * Load my book from firebase.
+     *
+     * @param myCallback part of loadMyBookFromFireBase
+     */
     public void loadMyBookFromFireBase(final loadBookCallBack myCallback){
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("books");
         userReference.addValueEventListener(new ValueEventListener() {
@@ -150,6 +198,10 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
         });
     }
 
+    /**
+     * Returns book details on click
+     * @param position the index of an item from the arrayList
+     */
     @Override
     public void onItemClick(int position) {
         Book book = (Book) listOfBooks.get(position);
