@@ -75,7 +75,6 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                 DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(book.getBookID());
 
                 //add the book in the database
-                newBook.setValue(book);
                 newBook.setValue(book).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
