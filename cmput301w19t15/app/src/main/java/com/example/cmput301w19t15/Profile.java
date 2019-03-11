@@ -182,7 +182,8 @@ public class Profile extends AppCompatActivity {
     }
 
     /**
-     * check if the password is correct format
+     * prompts user to select a passowrd which must be at least 6 characters long; no other
+     * restrictions are present
      * @param password
      * @return
      */
@@ -196,7 +197,8 @@ public class Profile extends AppCompatActivity {
     }
 
     /**
-     * check if the new password the user enter is valid format
+     * prompts user to select a new password which must be at least 6 characters long; no other
+     * restrictions are present
      * @param password
      * @return
      */
@@ -210,7 +212,7 @@ public class Profile extends AppCompatActivity {
     }
 
     /**
-     * check if the name is valid format
+     * prompts user to select a name; no restrictions on the name
      * @param name
      * @return
      */
@@ -222,7 +224,7 @@ public class Profile extends AppCompatActivity {
     }
 
     /**
-     * check if the phone is valid format
+     * prompts user to enter a phone number; no restrictions are present
      * @param phone
      * @return
      */
@@ -232,6 +234,10 @@ public class Profile extends AppCompatActivity {
         }
         return phoneError;
     }
+
+    /**
+     * Resumes activity
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -246,6 +252,13 @@ public class Profile extends AppCompatActivity {
         //do nothing
         finish();
     }
+
+    /**
+     * Changes focus of activity
+     * @param editText
+     * @param message
+     * @return
+     */
     private boolean setFocus(EditText editText, String message){
         editText.setError(message);
         currentFocus = editText;

@@ -15,7 +15,7 @@ package com.example.cmput301w19t15;
  import android.support.v7.widget.RecyclerView;
 
  /**
-  * Adapter for User class
+  * Adapter for User class to display users
   * @author Eisha
   * @version 1.0
   *
@@ -40,19 +40,13 @@ package com.example.cmput301w19t15;
     private ArrayList<User> mUserList;
     private OnItemClickListener mListener;
 
-
-     /**
-      * The interface On item click listener.
-      */
      public interface OnItemClickListener {
          /**
-          * On item click.
-          *
+          * returns position of item click
           * @param position the position
           */
          void onItemClick(int position);
     }
-
      /**
       * Sets on item click listener.
       *
@@ -66,8 +60,8 @@ package com.example.cmput301w19t15;
      /**
       * Instantiates a new User adapter.
       *
-      * @param context  the context
-      * @param userList the user list
+      * @param: mContext, the context used to call this adapter
+      * @param: mUserList, the user list that will be displayed
       */
      public UserAdapter(Context context, ArrayList<User> userList) {
         mContext = context;
@@ -82,6 +76,11 @@ package com.example.cmput301w19t15;
     }
 
 
+     /**
+      * Sets the user's name, email, and phone number
+      * @param holder
+      * @param position, click position
+      */
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {
         User currentUser = mUserList.get(position);
@@ -108,24 +107,12 @@ package com.example.cmput301w19t15;
       * The type User view holder.
       */
      public class UserViewHolder extends RecyclerView.ViewHolder {
-         /**
-          * The M text view name.
-          */
-         public TextView mTextViewName, /**
-          * The M text view email.
-          */
-         mTextViewEmail, /**
-          * The M text view id.
-          */
-         mTextViewID, /**
-          * The M text view rating.
-          */
-         mTextViewRating;
+         public TextView mTextViewName, mTextViewEmail, mTextViewID, mTextViewRating;
 
          /**
           * Instantiates a new User view holder.
           *
-          * @param itemView the item view
+          * @param itemView view for the respective attribute
           */
          public UserViewHolder (View itemView) {
             super(itemView);

@@ -226,6 +226,13 @@ public class RegisterActivity extends AppCompatActivity {
     public void onBackPressed() {
         //do nothing
     }
+
+    /**
+     * changes the focus of the activity
+     * @param editText
+     * @param message
+     * @return
+     */
     private boolean setFocus(EditText editText, String message){
         editText.setError(message);
         currentFocus = editText;
