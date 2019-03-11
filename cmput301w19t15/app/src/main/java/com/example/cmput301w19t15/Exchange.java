@@ -33,6 +33,7 @@ public class Exchange {
     private Book book;
 
     /**
+     * @deprecated will not be using current state of exchange
      * Setup an exchange/borrow book from the owner
      * @param owner - owner of the book
      * @param borrower - person requesting the book

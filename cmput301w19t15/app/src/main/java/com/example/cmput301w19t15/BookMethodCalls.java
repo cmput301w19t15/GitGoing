@@ -15,6 +15,10 @@ public class BookMethodCalls {
     static Book book;
     static String bookID;
 
+    /**
+     * return book based on the book id
+     * @deprecated current out of date, need to be updated
+     */
     public BookMethodCalls(){}
 
     public static Book getBook(){
