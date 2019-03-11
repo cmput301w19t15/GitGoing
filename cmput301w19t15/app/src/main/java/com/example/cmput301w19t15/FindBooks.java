@@ -24,6 +24,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * load all the books from firebase and then search them,
+ * display the searching result
+ */
 public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemClickListener{
     private FindBooks activity = this;
     private EditText bookSearch, filter2Add;
@@ -91,6 +95,9 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
 
     }
 
+    /**
+     * this method will load books from firebase
+     */
     public void loadBooks(){
         loadMyBookFromFireBase(new loadBookCallBack() {
             @Override
