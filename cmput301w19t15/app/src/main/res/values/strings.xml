@@ -56,4 +56,5 @@
     <string name="location">Location</string>
     <string name="go_to_my_books">Go To My Books</string>
     <string name="filter_by">Filter By:</string>
+    <string name="request_book">Request Book</string>
 </resources>

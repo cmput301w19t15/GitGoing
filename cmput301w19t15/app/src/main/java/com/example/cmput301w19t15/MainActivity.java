@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 auth.signOut();
+                startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 finish();
             }
         });
@@ -162,9 +163,7 @@ public class MainActivity extends AppCompatActivity {
         return loggedInUser;
     }
     public static void updateUser(){
-        FirebaseDatabase.getInstance().getReference("users").child(loggedInUser.getUserID()).removeValue();
-        FirebaseDatabase.getInstance().getReference("users").child(loggedInUser.getUserID()).setValue(loggedInUser);
-
+        FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID()).setValue(loggedInUser);
     }
 }
 

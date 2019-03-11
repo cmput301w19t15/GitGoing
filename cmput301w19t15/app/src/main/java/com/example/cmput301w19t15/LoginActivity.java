@@ -37,10 +37,10 @@ public class LoginActivity extends AppCompatActivity{
      */
     private FirebaseAuth auth;
     // UI references.
-    private EditText inputUsername, inputPassword, currentFocus;
+    private EditText inputEmail, inputPassword, currentFocus;
     private View progressBar;
     private Button btnLogin,btnRegister,btnResetPassword;
-    private boolean usernameError = false, passwordError = false;
+    private boolean emailError = false, passwordError = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity{
             finish();
         }
         //else let user login
-        inputUsername = findViewById(R.id.username);
+        inputEmail = findViewById(R.id.email);
         inputPassword = findViewById(R.id.password);
 
         btnLogin = findViewById(R.id.login_button);
@@ -67,41 +67,16 @@ public class LoginActivity extends AppCompatActivity{
         btnLogin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = inputUsername.getText().toString().trim().toLowerCase();
+                String email = inputEmail.getText().toString().trim().toLowerCase();
                 final String password = inputPassword.getText().toString().trim();
 
-                if (username.isEmpty()) {
-                    usernameError = setFocus(inputUsername, "Enter Email or Username");
-                } else if (Patterns.EMAIL_ADDRESS.matcher(username).matches()) {
+                if (email.isEmpty()) {
+                    emailError = setFocus(inputEmail, "Enter Email");
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     //if its email do nothing
-                    usernameError = false;
+                    emailError = setFocus(inputEmail, "Enter Email");
                 } else{
-                    //get email corresponding to username if its not email
-                    DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users");
-                    userReference.orderByChild("username").equalTo(username).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            TextView hiddenEmail = findViewById(R.id.hiddenEmail);
-                            if(dataSnapshot.exists()){
-                                for(DataSnapshot userID: dataSnapshot.getChildren()){
-                                    hiddenEmail.setText(userID.child("email").getValue().toString());
-                                }
-                            }else{
-                                hiddenEmail.setText("text");
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {}
-
-                    });
-                    TextView hiddenEmail = findViewById(R.id.hiddenEmail);
-                    if(username.equals(hiddenEmail.getText().toString())) {
-                        usernameError = true;
-                        usernameError = setFocus(inputUsername, "Email or Username does not Exist");
-                    }else{
-                        usernameError = false;
-                    }
-                    username = hiddenEmail.getText().toString();
+                    emailError = false;
                 }
 
                 if (password.isEmpty()) {
@@ -111,10 +86,10 @@ public class LoginActivity extends AppCompatActivity{
                 }else{
                     passwordError = false;
                 }
-                if(!usernameError && !passwordError) {
+                if(!emailError && !passwordError) {
                     progressBar.setVisibility(View.VISIBLE);
                     //authenticate user
-                    auth.signInWithEmailAndPassword(username, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             // If sign in fails, display a message to the user. If sign in succeeds
