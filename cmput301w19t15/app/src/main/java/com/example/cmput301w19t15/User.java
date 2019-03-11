@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class User {
-    private String username;
     private String name;
     private String email;
     private String phone;
@@ -55,18 +54,11 @@ public class User {
         });
         */
     }
-    public User(String username, String name, String email, String phone, String userID) {
-        this.username = username;
+    public User(String name, String email, String phone, String userID) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.userID = userID;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getUsername() {
-        return username;
     }
     public void setName(String name) {
         this.name = name;
@@ -187,10 +179,9 @@ public class User {
         loadUserInfoFromFireBase(new loadUserCallBack() {
             @Override
             public void loadUserCallBack(ArrayList<String> value) {
-                username = value.get(0);
-                name = value.get(1);
-                email = value.get(2);
-                phone = value.get(3);
+                name = value.get(0);
+                email = value.get(1);
+                phone = value.get(2);
             }
         });
     }
@@ -223,7 +214,6 @@ public class User {
                 if(dataSnapshot.exists()) {
                     try {
                         ArrayList<String> userInformatiom = new ArrayList<>();
-                        userInformatiom.add(dataSnapshot.child("username").getValue().toString());
                         userInformatiom.add(dataSnapshot.child("name").getValue().toString());
                         userInformatiom.add(dataSnapshot.child("email").getValue().toString());
                         userInformatiom.add(dataSnapshot.child("phone").getValue().toString());
@@ -253,7 +243,6 @@ public class User {
                             allBooks.add(book);
                         }
                         myCallback.loadBookCallBack(allBooks);
-
                     } catch (Exception e){
                         e.printStackTrace();
                     }

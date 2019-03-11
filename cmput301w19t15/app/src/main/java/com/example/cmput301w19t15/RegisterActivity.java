@@ -53,34 +53,11 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String email = inputEmail.getText().toString().trim().toLowerCase();
-                final String username = inputUsername.getText().toString().trim().toLowerCase();
                 String password = inputPassword.getText().toString().trim();
                 final String name = inputName.getText().toString().trim();
                 final String phone = inputPhoneNumber.getText().toString().trim();
 
-                /*
-                Log.d("testing","Email " + emailError);
-                checkEmail(email);
-                Log.d("testing","Email " + emailError);
-                Log.d("testing","Username " + usernameError);
-                checkUsername(username);
-                Log.d("testing","Username " + usernameError);
-                Log.d("testing","Password " + passwordError);
-                checkPassword(password);
-                Log.d("testing","Password " + passwordError);
-                //Log.d("testing","Name " + nameError);
-                checkName(name);
-                //Log.d("testing","Name " + nameError);
-                //Log.d("testing","Phone " + phoneError);
-                checkPhoneNumber(phone);
-                //Log.d("testing","Phone " + phoneError);
-
-                Log.d("testing",".");
-                Log.d("testing",".");
-
-                */
-                //if(!emailError && !usernameError && !passwordError && !nameError && !phoneError) {
-                if(!checkEmail(email) && !checkUsername(username) && !checkPassword(password) && !checkName(name) && !checkPhoneNumber(phone)) {
+                if(!checkEmail(email) && !checkPassword(password) && !checkName(name) && !checkPhoneNumber(phone)) {
                     progressBar.setVisibility(View.VISIBLE);
                     //create user
                     auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
@@ -100,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 dataBase = FirebaseDatabase.getInstance().getReference().child("users");
                                 newUser = dataBase.child(currentUser.getUid());
                                 //create the user
-                                User addUser = new User(username,name,email,phone,userID);
+                                User addUser = new User(name,email,phone,userID);
                                 //save the user in the database
                                 newUser.setValue(addUser);
                                 //close register
@@ -154,31 +131,6 @@ public class RegisterActivity extends AppCompatActivity {
             });
         }
         return emailError;
-    }
-    private boolean checkUsername(String username){
-        if(username.isEmpty()) {
-            usernameError = setFocus(inputUsername,"Enter a username");
-        }else{
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
-            databaseReference.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()){
-                        usernameError = setFocus(inputUsername,"Username already Exists");
-                        //check your password in the same way and grant access if it exists too
-                    }else {
-                        // wrong details entered/ user does not exist
-                        usernameError = false;
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
-        }
-        return usernameError;
     }
     private boolean checkPassword(String password){
         if (password.isEmpty()) {
