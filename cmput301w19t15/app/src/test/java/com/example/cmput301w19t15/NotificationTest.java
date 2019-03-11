@@ -1,6 +1,7 @@
-package com.example.cmput301w19t15;
+/**package com.example.cmput301w19t15;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.content.Context;
 import android.support.v4.app.NotificationCompat;
 
@@ -30,4 +31,4 @@ public class NotificationTest extends Activity {
                 .setContentText("accept");
         assertEquals(notification,newNotification);
     }
-}
+}**/
