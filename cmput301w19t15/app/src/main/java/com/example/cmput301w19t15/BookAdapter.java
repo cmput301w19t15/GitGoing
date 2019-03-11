@@ -20,6 +20,7 @@ import java.util.Date;
  * @param: mContext the context that we will work on to call this adapter
  * @param: mBookList ArrayList of the books, which will be displayed by this adapter
  * @reuse: https://github.com/anjeshshrestha/uAlberta5Star
+ * @see : BookInfo, Book, FindBooks, MyBooks
  */
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
