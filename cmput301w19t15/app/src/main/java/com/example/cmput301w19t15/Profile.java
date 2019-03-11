@@ -1,4 +1,26 @@
+/*
+ * Class Name: Profile
+ *
+ * Version: 1.0
+ *
+ * Copyright 2019 TEAM GITGOING
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package com.example.cmput301w19t15;
+
+/**
+ * Represents an important Tweet
+ * @author Thomas, Anjesh, Breanne
+ * @version 1.0
+ * @see User
+ * @since 1.0
+ */
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -30,12 +52,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * Enables user to change the details of their profile
+ */
 public class Profile extends AppCompatActivity {
     private EditText inputEmail, inputPassword, inputNewPassword, inputName, inputPhoneNumber, currentFocus;
+
     Button saveButton, cancelButton;
     //private ProgressBar progressBar;
     private FirebaseAuth auth;
     private boolean emailError = false,usernameError = false,passwordError = false,nameError = false,phoneError = false, newPasswordError = false;
+
     final User user = MainActivity.getUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +70,6 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         //get info from logged in user
-        //final User user = MainActivity.getUser();
-
-        //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
         saveButton = findViewById(R.id.save);
@@ -60,8 +84,6 @@ public class Profile extends AppCompatActivity {
         inputEmail.setText(user.getEmail());
         inputPhoneNumber.setText(user.getPhone());
 
-        //progressBar = findViewById(R.id.progressBar);
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +95,6 @@ public class Profile extends AppCompatActivity {
 
                 //check all things to make sure duplicate users not made and such
                 if(!checkEmail(email)  && !checkPassword(password) && !checkName(name) && !checkPhoneNumber(phone) && !checkNewPassword(newPassword)) {
-                    //progressBar.setVisibility(View.VISIBLE);
                     //update user information
                     if(currentFocus != null){
                         currentFocus.requestFocus();
@@ -125,6 +146,13 @@ public class Profile extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * prompts user to enter email which must match the email pattern (must contain '@' and '.xx
+     *  where xx is some email extension) and must not already exist
+     * @param email
+     * @return
+     */
     private boolean checkEmail(String email){
         if (email.isEmpty()) {
             emailError = setFocus(inputEmail,"Email is required");
