@@ -55,7 +55,7 @@ public class BookInfo extends AppCompatActivity {
                 book.setAuthor(newAuthor);
                 book.setISBN(newISBN);
                 finish();
-                ///currently updates list but does not show until you go to main menu and then back to mybooks again. have to fix this.
+                ///currently updates list but does not update firebase
 
             }
         });
