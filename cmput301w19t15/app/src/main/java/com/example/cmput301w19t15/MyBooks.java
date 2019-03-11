@@ -40,7 +40,6 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Set up the login form.
         setContentView(R.layout.activity_my_books);
 
 
@@ -51,10 +50,10 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         mBookList = loggedInUser.getMyBooks();
         mBookAdaptor = new BookAdapter(MyBooks.this,mBookList);
         mRecyclerView.setAdapter(mBookAdaptor);
+        mBookAdaptor.setOnItemClickListener(MyBooks.this);
 
         //adds new book by starting add book info class
         Button addBook = (Button) findViewById(R.id.add_book);
-
         addBook.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent addIntent = new Intent(MyBooks.this, AddBookInfo.class);
@@ -85,12 +84,16 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
 
     }
 
-
+    @Override
     public void onItemClick(int position) {
-        Intent detailIntent = new Intent(this, BookInfo.class);
         Book clickedBook = mBookList.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putInt("POS",position);
+        bundle.putString("BOOKID",clickedBook.getBookID());
+        Intent detailIntent = new Intent(this, BookInfo.class);
+        detailIntent.putExtra("BOOKINFO", bundle);
+        startActivityForResult(detailIntent, NEW_BOOK);
 
-        //detailIntent.putExtra()
     }
 
 }

@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,8 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
-
-import static android.os.FileObserver.DELETE;
 
 public class AddBookInfo extends AppCompatActivity {
 
@@ -49,7 +46,7 @@ public class AddBookInfo extends AppCompatActivity {
         author = findViewById(R.id.author);
         isbn = findViewById(R.id.isbn);
 
-        Button saveButton = findViewById(R.id.addBook);
+        Button saveButton = findViewById(R.id.deleteBook);
         Button addPhoto = findViewById(R.id.addPhoto);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
