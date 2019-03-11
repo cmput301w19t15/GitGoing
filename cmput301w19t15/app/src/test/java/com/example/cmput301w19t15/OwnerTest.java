@@ -50,7 +50,7 @@ public class OwnerTest {
     }
     @Test
     public void testAddPendingRequest(){
-        User owner = new User(("user123", "first last", "example@email.com", "111-111-1111", "exampleID");
+        User owner = new User("user123", "first last", "example@email.com", "111-111-1111", "exampleID");
         User borrower = new User("user123", "first last", "example@email.com", "111-111-1111", "exampleID");
         Book b = new Book("testTitle","testAuthor","123","testPhoto","testOwnerEmail","testOwnerID");
         Request request = new Request(owner,borrower,b);
@@ -90,5 +90,4 @@ public class OwnerTest {
 
     }
 
-}
-**/
+}**/

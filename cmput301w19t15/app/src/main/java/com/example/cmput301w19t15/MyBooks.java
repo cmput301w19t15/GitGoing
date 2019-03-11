@@ -55,7 +55,6 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
 
         //adds new book by starting add book info class
         Button addBook = (Button) findViewById(R.id.add_book);
-
         addBook.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent addIntent = new Intent(MyBooks.this, AddBookInfo.class);
