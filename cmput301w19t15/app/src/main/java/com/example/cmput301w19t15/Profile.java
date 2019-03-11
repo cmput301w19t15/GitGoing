@@ -94,7 +94,6 @@ public class Profile extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             if(!newPassword.isEmpty()){
                                                 auth.getCurrentUser().updatePassword(newPassword);
-                                                
                                             }
                                             //email was successfully updated, with name and phone
                                             user.setEmail(email);
