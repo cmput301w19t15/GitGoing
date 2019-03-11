@@ -153,10 +153,15 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
      * @param view
      */
     public void scan(View view){
+        //https://code.tutsplus.com/tutorials/android-sdk-create-a-barcode-reader--mobile-17162
+        Intent scannerIntent = new Intent(AddBookInfo.this,ScanBarcode.class);
+        startActivityForResult(scannerIntent,5);
+        /*
         scannerView = new ZXingScannerView(getApplicationContext());
         setContentView(scannerView);
         scannerView.setResultHandler(this);
         scannerView.startCamera();
+        */
     }
 
     /**
@@ -184,12 +189,16 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode == 5){
+            ;
+            Log.d("testing",data.getStringExtra("ISBN"));
+        }
+
         if(resultCode == Activity.RESULT_OK){
             /**
              * return bitmap and assign it to book's attribute
              */
             if (requestCode == REQUEST_CAMERA){
-
                 Bundle bundle = data.getExtras();
                 final Bitmap bitmap =  (Bitmap) bundle.get("data");
                 String bookPhoto = ConvertPhoto.convert(bitmap);
