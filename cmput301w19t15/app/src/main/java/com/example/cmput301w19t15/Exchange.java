@@ -15,6 +15,7 @@ package com.example.cmput301w19t15;
 
 /**
  * Represents a book exchange
+ * @deprecated will not be using current state of exchange
  * @author Yourui, Eisha, Breanne, Anjesh
  * @version 1.0
  * @see com.example.cmput301w19t15.User
@@ -33,7 +34,6 @@ public class Exchange {
     private Book book;
 
     /**
-     * @deprecated will not be using current state of exchange
      * Setup an exchange/borrow book from the owner
      * @param owner - owner of the book
      * @param borrower - person requesting the book
