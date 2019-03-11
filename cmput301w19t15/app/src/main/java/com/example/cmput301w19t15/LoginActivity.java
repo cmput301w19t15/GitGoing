@@ -142,8 +142,9 @@ public class LoginActivity extends AppCompatActivity{
 
     /**
      * check if the email is the correct format
-     * @param email
-     * @return
+     * @param email a string which is user's email address
+     * @return a boolean, false if email is empty/invalid email address
+     * true if email address is valid
      */
     private boolean checkEmail(String email){
         if (email.isEmpty()) {
@@ -159,8 +160,9 @@ public class LoginActivity extends AppCompatActivity{
 
     /**
      * check if the password is the correct format
-     * @param password
-     * @return
+     * @param password a string which is user acc's password
+     * @return a boolean, true if the password is valid, return false
+     * otherwise
      */
     private boolean checkPassword(String password){
         if (password.isEmpty()) {
