@@ -1,3 +1,17 @@
+/*
+ * Class Name: MyBooks
+ *
+ * Version: 1.0
+ *
+ * Copyright 2019 TEAM GITGOING
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package com.example.cmput301w19t15;
 
 import android.support.annotation.NonNull;
@@ -24,6 +38,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
+
+/**
+ * Represents the books that an owner owns
+ * @author Thomas, Anjesh, Breanne, Josh, Yourui
+ * @version 1.0
+ * @see Book
+ * @see BookAdapter
+ * @see BookInfo
+ * @see AcceptPage
+ * @see Exchange
+ * @see Location
+ * @since 1.0
+ */
 public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClickListener {
 
     private MyBooks activity = this;
@@ -34,10 +61,11 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
     private static final int NEW_BOOK = 1;
     private Book clickedBook;
 
-
-
+    /**
+     * Called when activity is first created
+     * @param savedInstanceState
+     */
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_books);
@@ -68,6 +96,9 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
 
     }
 
+    /**
+     * called everytime the activity is started
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -75,6 +106,10 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         //textView.setText("Number of books: " + arraySize);
     }
 
+    /**
+     * called when an item is clicked; saves position and id of clicked item
+     * @param position
+     */
     @Override
     public void onItemClick(int position) {
         clickedBook = (Book) mBookList.get(position);
@@ -85,6 +120,12 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         startActivityForResult(intent,1);
     }
 
+    /**
+     * saves changes to book adapter
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
