@@ -67,47 +67,7 @@ public class LoginActivity extends AppCompatActivity{
         btnLogin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = inputEmail.getText().toString().trim().toLowerCase();
-                final String password = inputPassword.getText().toString().trim();
-
-                if (email.isEmpty()) {
-                    emailError = setFocus(inputEmail, "Enter Email");
-                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    //if its email do nothing
-                    emailError = setFocus(inputEmail, "Enter Email");
-                } else{
-                    emailError = false;
-                }
-
-                if (password.isEmpty()) {
-                    passwordError = setFocus(inputPassword, "Password is required");
-                } else if (password.length() < 6) {
-                    passwordError = setFocus(inputPassword, getString(R.string.minimum_password));
-                }else{
-                    passwordError = false;
-                }
-                if(!emailError && !passwordError) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    //authenticate user
-                    auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            // If sign in fails, display a message to the user. If sign in succeeds
-                            // the auth state listener will be notified and logic to handle the
-                            // signed in user can be handled in the listener.
-                            progressBar.setVisibility(View.GONE);
-                            if (task.isSuccessful()) {
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                finish();
-                            } else {
-                                // there was an error
-                                Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-                }
-                if(currentFocus != null)
-                    currentFocus.requestFocus();
+                loginUser();
             }
         });
 
@@ -126,6 +86,71 @@ public class LoginActivity extends AppCompatActivity{
                 finish();
             }
         });
+    }
+
+    /**
+     * Log the user into the app
+     */
+    private void loginUser(){
+        String email = inputEmail.getText().toString().trim().toLowerCase();
+        final String password = inputPassword.getText().toString().trim();
+
+        if(!checkEmail(email) && !checkPassword(password)) {
+            progressBar.setVisibility(View.VISIBLE);
+            //authenticate user
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    // If sign in fails, display a message to the user. If sign in succeeds
+                    // the auth state listener will be notified and logic to handle the
+                    // signed in user can be handled in the listener.
+                    progressBar.setVisibility(View.GONE);
+                    if (task.isSuccessful()) {
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
+                    } else {
+                        // there was an error
+                        Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+        if(currentFocus != null) {
+            currentFocus.requestFocus();
+        }
+    }
+
+    /**
+     * check if the email is the correct format
+     * @param email
+     * @return
+     */
+    private boolean checkEmail(String email){
+        if (email.isEmpty()) {
+            emailError = setFocus(inputEmail, "Enter Email");
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            //if its email does not match email address format
+            emailError = setFocus(inputEmail, "Enter a valid Email");
+        } else{
+            emailError = false;
+        }
+        return emailError;
+    }
+
+    /**
+     * check if the password is the correct format
+     * @param password
+     * @return
+     */
+    private boolean checkPassword(String password){
+        if (password.isEmpty()) {
+            passwordError = setFocus(inputPassword, "Password is required");
+        } else if (password.length() < 6) {
+            passwordError = setFocus(inputPassword, getString(R.string.minimum_password));
+        }else{
+            passwordError = false;
+        }
+        return passwordError;
     }
     private boolean setFocus(EditText editText, String message){
         editText.setError(message);

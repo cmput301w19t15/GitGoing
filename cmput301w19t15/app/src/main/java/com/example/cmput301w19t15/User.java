@@ -367,6 +367,8 @@ public class User {
 
     /**
      * The interface Load user call back.
+     *
+     * reference from https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      */
     public interface loadUserCallBack{
         /**
@@ -379,6 +381,7 @@ public class User {
 
     /**
      * The interface Load book call back.
+     * reference from https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      */
     public interface loadBookCallBack {
         /**
@@ -391,7 +394,7 @@ public class User {
 
     /**
      * Load user info from fire base.
-     *
+     * reference from https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      * @param myCallback the my callback
      */
     public void loadUserInfoFromFireBase(final loadUserCallBack myCallback){
@@ -420,7 +423,7 @@ public class User {
 
     /**
      * Load my book from fire base.
-     *
+     * reference from https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      * @param myCallback the my callback
      */
     public void loadMyBookFromFireBase(final loadBookCallBack myCallback){
