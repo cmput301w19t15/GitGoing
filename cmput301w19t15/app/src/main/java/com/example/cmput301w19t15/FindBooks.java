@@ -153,7 +153,7 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
     /**
      * Load my book from firebase.
      *
-     * @param myCallback
+     * @param myCallback part of loadMyBookFromFireBase
      */
     public void loadMyBookFromFireBase(final loadBookCallBack myCallback){
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("books");
@@ -200,7 +200,7 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
 
     /**
      * Returns book details on click
-     * @param position
+     * @param position the index of an item from the arrayList
      */
     @Override
     public void onItemClick(int position) {

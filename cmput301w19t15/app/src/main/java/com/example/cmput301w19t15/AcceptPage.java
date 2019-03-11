@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 /**
  * this activity is intended to allow user to accept book request
+ * @see: requestBookList
  */
 public class AcceptPage extends AppCompatActivity {
 
