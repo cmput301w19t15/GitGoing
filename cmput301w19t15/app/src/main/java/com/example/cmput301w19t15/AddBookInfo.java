@@ -24,6 +24,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 
+/**
+ * this activity is to add information about the book
+ * when creating a new book.
+ */
 public class AddBookInfo extends AppCompatActivity {
 
     private EditText booktitle;
@@ -49,6 +53,10 @@ public class AddBookInfo extends AppCompatActivity {
         Button saveButton = findViewById(R.id.deleteBook);
         Button addPhoto = findViewById(R.id.addPhoto);
 
+        /**
+         * this method will create a new book object with all the
+         * information entered and upload it to firebase
+         */
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +93,7 @@ public class AddBookInfo extends AppCompatActivity {
             }
         });
 
+
         addPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,28 +102,30 @@ public class AddBookInfo extends AppCompatActivity {
         });
     }
 
+    /**
+     * build an AlertDialog
+     * let user choose among Camera, Gallery or Cancel this action
+     */
     private void selectPhoto() {
-        /**
-         * build an AlertDialog
-         * let user choose among Camera, Gallery or Cancel this action
-         */
+
         final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(AddBookInfo.this);
         builder.setTitle("Upload Photo");
 
+        /**
+         * if user chooses Camera, call camera and will return a bitmap as a result
+         */
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                /**
-                 * if user chooses Camera, call camera and will return a bitmap as a result
-                 */
+
                 if (items[which] == "Camera"){
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(intent, REQUEST_CAMERA);
                 }
-                /**
-                 * if user chooses gallery, call mediaStorage and will return a uri object
-                 */
+
+                //if user chooses gallery, call mediaStorage and will return a uri object
+
                 else if (items[which] == "Gallery"){
                     Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     intent.setType("image/*");
@@ -130,12 +141,16 @@ public class AddBookInfo extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * this method is to handle the result that's been passed back from intent
+     * @param requestCode a code that's required when an intent ihs called
+     * @param resultCode a code that's required when an intent is to return data
+     * @param data the data that's returned by the activity
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
+        //return bitmap and assign it to book's attribute
         if(resultCode == Activity.RESULT_OK){
-            /**
-             * return bitmap and assign it to book's attribute
-             */
             if (requestCode == REQUEST_CAMERA){
 
                 Bundle bundle = data.getExtras();
@@ -144,9 +159,8 @@ public class AddBookInfo extends AppCompatActivity {
                 this.bookPhoto = bookPhoto;
 
             }
-            /**
-             * return uri, then comvert to bitmap and assign it to book's attribute
-             */
+
+            //return uri, then comvert to bitmap and assign it to book's attribute
             else if (requestCode == SELECT_FILE){
                 Uri photoUri = data.getData();
                 try {
