@@ -12,9 +12,17 @@ import java.util.UUID;
 /**
  * This Book class has book object's attributes.
  *
- * @see: AddBookInfo, BookAdapter, BookInfo, BookMethodCalls, BorrowerBookView,DetailedBookView,
- *          FindBooks, MyBooks, Request, RequestedBookList
- * @version: 1.0
+ * @see AddBookInfo
+ * @see BookAdapter
+ * @see BookInfo
+ * @see BookMethodCalls
+ * @see BorrowerBookView
+ * @see DetailedBookInfo
+ * @see FindBooks
+ * @see MyBooks
+ * @see Request
+ * @see RequestedBookList
+ * @version 1.0
  */
 public class Book {
     private String title = "";//
@@ -30,20 +38,30 @@ public class Book {
 
 
     /**
-     * @param: title  String - book title
-     * @param: author  String -  book author
-     * @param: ISBN String -  book ISBN
-     * @param: photo String a photo that user can add manually (base-64)
-     * @param: ownerEmail String - Email address for owner
-     * @param: ownerID String - owner's unique id when he/she register
-     * @param: bookID String - book's unique id, a UUID, every book object will receive a different
-     *          unique id, differ from ISBN
-     * @param: returnDate long - the time book will be returned, so far it's set up just for test purpose
-     * @param: status Status - a user defined type of variable that has 4 value(Avaliable, Requested
-     *          Accepted and Borrowed)
-     * @param: borrowerID String - ID of borrower, similar to ownerID
+     * @param title  String - book title
+     * @param author  String -  book author
+     * @param ISBN String -  book ISBN
+     * @param photo String a photo that user can add manually (base-64)
+     * @param ownerEmail String - Email address for owner
+     * @param ownerID String - owner's unique id when he/she register
+     //* @param "bookID String - book's unique id, a UUID, every book object will receive a different unique id, differ from ISBN
+     //* @param "returnDate long - the time book will be returned, so far it's set up just for test purpose
+     *
+     //* @param "status Status - a user defined type of variable that has 4 value(Avaliable, Requested Accepted and Borrowed)
+     //* @param "borrowerID String - ID of borrower, similar to ownerID
      *
      */
+    public Book(String title, String author, String ISBN, String photo, String ownerEmail, String ownerID) {
+        this.title = title;
+        this.author = author;
+        this.ISBN = ISBN;
+        this.photo = photo;
+        this.ownerEmail = ownerEmail;
+        this.ownerID = ownerID;
+        this.status = Status.Available;
+        if(this.BookID == null || this.BookID.isEmpty())
+            this.BookID = UUID.randomUUID().toString();
+    }
     public Book(){}
     public Book(Book book){
         this.title = book.title;
@@ -57,17 +75,6 @@ public class Book {
     }
 
     public Book(FindBooks findBooks, ArrayList<Book> listOfBooks){}
-    public Book(String title, String author, String ISBN, String photo, String ownerEmail, String ownerID) {
-        this.title = title;
-        this.author = author;
-        this.ISBN = ISBN;
-        this.photo = photo;
-        this.ownerEmail = ownerEmail;
-        this.ownerID = ownerID;
-        this.status = Status.Available;
-        if(this.BookID == null || this.BookID.isEmpty())
-            this.BookID = UUID.randomUUID().toString();
-    }
     public enum Status{
         Available,
         Requested,

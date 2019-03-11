@@ -14,14 +14,6 @@
 
 package com.example.cmput301w19t15;
 
-/**
- * Represents the user registration activity
- * @author Thomas, Anjesh, Breanne
- * @version 1.0
- * @see LonelyTwitterActivity
- * @see ImportantTweet
- * @since 1.0
- */
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -46,6 +38,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * Represents the user registration activity
+ * @author Thomas, Anjesh, Breanne
+ * @version 1.0
+ * @see LonelyTwitterActivity
+ * @see ImportantTweet
+ * @since 1.0
+ */
 public class RegisterActivity extends AppCompatActivity {
     private EditText inputEmail, inputPassword, inputName, inputPhoneNumber,currentFocus;
 

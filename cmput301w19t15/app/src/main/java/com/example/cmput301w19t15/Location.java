@@ -13,16 +13,15 @@
  */
 package com.example.cmput301w19t15;
 
+import android.media.Image;
+import java.util.ArrayList;
+
 /**
  * Represents the location for book pickup
  * @author Josh, Anjesh
  * @version 1.0
  * @since 1.0
  */
-
-import android.media.Image;
-import java.util.ArrayList;
-
 public class Location {
 
     private double longitude;
@@ -51,7 +50,7 @@ public class Location {
 
     /**
      * return the location of meeting place
-     * @return
+     * @return geoCode
      */
     public double[] getLocation() {
         return geoCode;

@@ -14,12 +14,7 @@
 
 package com.example.cmput301w19t15;
 
-/**
- * Represents the primary activity
- * @author Thomas, Eisha, Breanne, Anjesh
- * @version 1.0
- * @since 1.0
- */
+
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -43,7 +38,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-
+/**
+ * Represents the primary activity after login
+ * @author Thomas, Eisha, Breanne, Anjesh
+ * @version 1.0
+ * @since 1.0
+ */
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;

@@ -30,8 +30,9 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 /**
  * this activity is to add information about the book
  * when creating a new book.
- * @see : Book, BookInfo
- * @version : 1.0
+ * @see Book
+ * @see BookInfo
+ * @version 1.0
  */
 public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
@@ -152,7 +153,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
     }
 
     /**
-     * @reuse: https://github.com/dm77/barcodescanner
+     * @reuse https://github.com/dm77/barcodescanner
      * this methods initialize scanner
      */
     public void scan(View view){

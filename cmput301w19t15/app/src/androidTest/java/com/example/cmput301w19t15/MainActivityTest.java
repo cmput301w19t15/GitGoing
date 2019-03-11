@@ -18,7 +18,9 @@ import java.util.Random;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static junit.framework.TestCase.assertTrue;
 
-
+/**
+ * test main activity
+ */
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest extends ActivityTestRule<MainActivity> {
     public MainActivityTest(){
@@ -44,7 +46,7 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
 
     /**
      * genereate random email id
-     * @return
+     * @return generatedString
      */
     public String givenUsingPlainJava_whenGeneratingRandomStringUnbounded_thenCorrect() {
         int leftLimit = 97; // letter 'a'

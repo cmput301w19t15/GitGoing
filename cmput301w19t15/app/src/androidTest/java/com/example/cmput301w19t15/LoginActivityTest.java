@@ -24,6 +24,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.*;
 
+/**
+ * test login activity
+ */
 @RunWith(AndroidJUnit4.class)
 public class LoginActivityTest extends ActivityTestRule<LoginActivity> {
     public LoginActivityTest(){

@@ -6,7 +6,9 @@ import java.util.Date;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-
+/**
+ * Test Exchange requests
+ */
 public class ExchangeTest {
     /**
      * test making a new exchange location

@@ -18,7 +18,9 @@ import java.util.ArrayList;
  * at current state, it will change the status of the book and
  * update in firebase
  * @version : 1.0
- * @see : Request, MyBooks, Fingbooks
+ * @see Request
+ * @see MyBooks
+ * @see FindBooks
  */
 public class CreateRequest extends AppCompatActivity {
 

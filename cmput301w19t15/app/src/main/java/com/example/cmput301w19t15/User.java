@@ -35,7 +35,7 @@ import java.util.Map;
  * @see FindUsers
  * @see Profile
  * @see LoginActivity
- * @sine 1.0
+ * @since 1.0
  */
 public class User {
     private String name;
@@ -334,7 +334,7 @@ public class User {
 
     /**
      * Load user information.
-     * @reuse: https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
+     * @reuse https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      */
     public void loadUserInformation(){
         loadUserInfoFromFireBase(new loadUserCallBack() {
@@ -349,7 +349,7 @@ public class User {
 
     /**
      * Load books.
-     * @reuse: https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
+     * @reuse https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      * @param bookListType the book list type
      */
     public void loadBooks(final String bookListType){
@@ -370,7 +370,7 @@ public class User {
     /**
      * The interface Load user call back.
      *
-     * @reuse: https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
+     * @reuse https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      */
     public interface loadUserCallBack{
         /**
@@ -382,7 +382,7 @@ public class User {
 
     /**
      * The interface Load book call back.
-     * @reuser https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
+     * @reuse https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      */
     public interface loadBookCallBack {
         /**
@@ -395,7 +395,7 @@ public class User {
 
     /**
      * Load user info from fire base.
-     * @reuser https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
+     * @reuse https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      * @param myCallback the my callback
      */
     public void loadUserInfoFromFireBase(final loadUserCallBack myCallback){
@@ -424,7 +424,7 @@ public class User {
 
     /**
      * Load my book from fire base.
-     * @reuser https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
+     * @reuse https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      * @param myCallback the my callback
      */
     public void loadMyBookFromFireBase(final loadBookCallBack myCallback){

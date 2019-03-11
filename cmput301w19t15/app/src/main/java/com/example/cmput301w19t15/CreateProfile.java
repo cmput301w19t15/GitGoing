@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 
 /**
- * @deprecated: this class is duplicated, no longer needed
+ * @deprecated this class is duplicated, no longer needed
  */
 public class CreateProfile extends AppCompatActivity {
 

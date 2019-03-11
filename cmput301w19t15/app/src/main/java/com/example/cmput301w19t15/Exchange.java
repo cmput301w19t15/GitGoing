@@ -13,6 +13,9 @@
  */
 package com.example.cmput301w19t15;
 
+
+
+import java.util.Date;
 /**
  * Represents a book exchange
  * @deprecated will not be using current state of exchange
@@ -23,9 +26,6 @@ package com.example.cmput301w19t15;
  * @see com.example.cmput301w19t15.Location
  * @since 1.0
  */
-
-import java.util.Date;
-
 public class Exchange {
     private Location location;
     private Date date;

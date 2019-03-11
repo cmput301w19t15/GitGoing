@@ -4,7 +4,9 @@ import android.media.Image;
 import junit.framework.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
+/**
+ * test location changes
+ */
 public class LocationTest {
     /**
      * test to see if the location class actually works

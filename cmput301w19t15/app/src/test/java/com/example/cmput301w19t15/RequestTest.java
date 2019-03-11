@@ -3,6 +3,9 @@ package com.example.cmput301w19t15;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * test requesting books
+ */
 public class RequestTest {
     /***
      * default requestStatus will return false

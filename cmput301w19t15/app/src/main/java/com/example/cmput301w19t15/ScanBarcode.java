@@ -40,8 +40,8 @@ public class ScanBarcode extends AppCompatActivity implements BarcodeReader.Barc
 
     /**
      * use library to read barcode
-     * @reuse: https://github.com/ravi8x/Barcode-Reader
-     * @param savedInstanceState
+     * @reuse https://github.com/ravi8x/Barcode-Reader
+     * @param savedInstanceState - saved instance
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

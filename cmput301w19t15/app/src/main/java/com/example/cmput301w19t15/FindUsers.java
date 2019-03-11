@@ -13,14 +13,7 @@
  */
 package com.example.cmput301w19t15;
 
-/**
- * Represents a user search
- * @author Anjesh, Eisha
- * @version 1.0
- * @see com.example.cmput301w19t15.UserAdapter
- * @see com.example.cmput301w19t15.User
- * @since 1.0
- */
+
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -41,7 +34,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-
+/**
+ * Represents a user search
+ * @author Anjesh, Eisha
+ * @version 1.0
+ * @see com.example.cmput301w19t15.UserAdapter
+ * @see com.example.cmput301w19t15.User
+ * @since 1.0
+ */
 public class FindUsers extends AppCompatActivity implements UserAdapter.OnItemClickListener {
     private UserAdapter adapter;
     private ArrayList<User> listOfUsers;
@@ -78,7 +78,7 @@ public class FindUsers extends AppCompatActivity implements UserAdapter.OnItemCl
 
 
     /**
-     * @reuse: https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
+     * @reuse https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      * loads all the current users into a recyclerview
      */
     public void loadUsers(){

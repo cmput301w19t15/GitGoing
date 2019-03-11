@@ -33,7 +33,7 @@ package com.example.cmput301w19t15;
 
   /**
    * The type User adapter.
-   * @reuse:  https://github.com/anjeshshrestha/uAlberta5Star
+   * @reuse https://github.com/anjeshshrestha/uAlberta5Star
    */
  public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
     private Context mContext;
@@ -59,9 +59,8 @@ package com.example.cmput301w19t15;
 
      /**
       * Instantiates a new User adapter.
-      *
-      * @param: mContext, the context used to call this adapter
-      * @param: mUserList, the user list that will be displayed
+      * @param context - the context used to call this adapter
+      * @param userList - the user list that will be displayed
       */
      public UserAdapter(Context context, ArrayList<User> userList) {
         mContext = context;
@@ -78,8 +77,8 @@ package com.example.cmput301w19t15;
 
      /**
       * Sets the user's name, email, and phone number
-      * @param holder
-      * @param position, click position
+      * @param holder - holder
+      * @param position - click position
       */
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {

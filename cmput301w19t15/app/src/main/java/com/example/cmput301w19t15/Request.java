@@ -14,16 +14,16 @@
 
 package com.example.cmput301w19t15;
 
-/**
-  * Represents a request for book
-  * @author Thomas
-  * @version 1.0
-  * @see RequestedBookList
-  * @since 1.0
-  */
+
 
 import java.util.Date;
-
+/**
+ * Represents a request for book
+ * @author Thomas
+ * @version 1.0
+ * @see RequestedBookList
+ * @since 1.0
+ */
 public class Request {
     private User owner;
     private User borrower;

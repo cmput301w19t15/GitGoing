@@ -10,7 +10,7 @@ import java.io.ByteArrayOutputStream;
  * this class is to convert the image type
  * either from base64 to bitmap
  * or from bitmap to base64
- * @see : addBookInfo
+ * @see AddBookInfo
  */
 public class ConvertPhoto {
     /**

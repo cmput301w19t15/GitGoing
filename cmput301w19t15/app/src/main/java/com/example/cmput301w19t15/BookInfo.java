@@ -19,8 +19,8 @@ public class BookInfo extends AppCompatActivity {
     //on create happens when book in list of my books is clicked
     /**
      *User is able to edit or delete the book they have selected
-     * @param: saveInstanceState
-     * @see : MyBooks, FindBooks
+     * @param saveInstanceState
+     * @see MyBooks, FindBooks
      */
     User loggedInUser;
     Book book;

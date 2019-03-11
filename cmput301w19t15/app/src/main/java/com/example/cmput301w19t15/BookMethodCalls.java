@@ -11,14 +11,15 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * return book based on the book id
+ * @deprecated current out of date, need to be updated
+ */
 public class BookMethodCalls {
     static Book book;
     static String bookID;
 
-    /**
-     * return book based on the book id
-     * @deprecated current out of date, need to be updated
-     */
+
     public BookMethodCalls(){}
 
     public static Book getBook(){
@@ -26,8 +27,8 @@ public class BookMethodCalls {
     }
 
     /**
-     * @reuse: https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
-     * @param bookid
+     * @reuse https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
+     * @param bookid - id of the book
      */
     public static void getBookWithID(final String bookid){
         bookID = bookid;
@@ -39,13 +40,13 @@ public class BookMethodCalls {
         });
     }
     /**
-     * @reuse: https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
+     * @reuse https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      */
     public interface loadBookCallBack {
         void loadBookCallBack(Book value);
     }
     /**
-     * @reuse: https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
+     * @reuse https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      */
     public static void loadMyBookFromFireBase(final loadBookCallBack myCallback){
         DatabaseReference bookReference = FirebaseDatabase.getInstance().getReference().child("books");

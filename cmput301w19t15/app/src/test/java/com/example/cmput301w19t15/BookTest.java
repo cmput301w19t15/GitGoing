@@ -5,6 +5,9 @@ import junit.framework.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Tests the book class
+ */
 public class BookTest {
     @Test
     public void testBook() {
