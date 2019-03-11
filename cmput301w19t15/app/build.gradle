@@ -47,4 +47,5 @@ dependencies {
 
 dependencies {
   implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'me.dm7.barcodescanner:zxing:1.9'
 }
