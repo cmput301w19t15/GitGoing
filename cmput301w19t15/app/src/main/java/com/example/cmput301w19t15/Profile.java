@@ -176,6 +176,12 @@ public class Profile extends AppCompatActivity {
         return emailError;
     }
 
+    /**
+     * prompts user to select a passowrd which must be at least 6 characters long; no other
+     * restrictions are present
+     * @param password
+     * @return
+     */
     private boolean checkPassword(String password){
         if (password.isEmpty()) {
             passwordError = setFocus(inputPassword,"Password is required");
@@ -184,6 +190,13 @@ public class Profile extends AppCompatActivity {
         }
         return passwordError;
     }
+
+    /**
+     * prompts user to select a new password which must be at least 6 characters long; no other
+     * restrictions are present
+     * @param password
+     * @return
+     */
     private boolean checkNewPassword(String password){
         if (password.isEmpty()) {
             //ignore
@@ -192,28 +205,55 @@ public class Profile extends AppCompatActivity {
         }
         return newPasswordError;
     }
+
+    /**
+     * prompts user to select a name; no restrictions on the name
+     * @param name
+     * @return
+     */
     private boolean checkName(String name){
         if (name.isEmpty()) {
             nameError = setFocus(inputName,"Please Enter your Name!");
         }
         return nameError;
     }
+
+    /**
+     * prompts user to enter a phone number; no restrictions are present
+     * @param phone
+     * @return
+     */
     private boolean checkPhoneNumber(String phone){
         if (phone.isEmpty()) {
             phoneError = setFocus(inputPhoneNumber, "Please Enter your Name!");
         }
         return phoneError;
     }
+
+    /**
+     * Resumes activity
+     */
     @Override
     protected void onResume() {
         super.onResume();
         //progressBar.setVisibility(View.GONE);
     }
+
+    /**
+     * Goes to previous activity but currently does nothing
+     */
     @Override
     public void onBackPressed() {
         //do nothing
         finish();
     }
+
+    /**
+     * Changes focus of activity
+     * @param editText
+     * @param message
+     * @return
+     */
     private boolean setFocus(EditText editText, String message){
         editText.setError(message);
         currentFocus = editText;

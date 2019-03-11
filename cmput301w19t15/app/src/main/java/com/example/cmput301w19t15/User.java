@@ -34,6 +34,7 @@ import java.util.Map;
  * @version 1.0
  * @see FindUsers
  * @see Profile
+ * @see LoginActivity
  * @sine 1.0
  */
 public class User {
