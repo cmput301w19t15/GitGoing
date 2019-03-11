@@ -88,8 +88,8 @@ public class AddBookInfo extends AppCompatActivity {
                         }
                     }
                 });
-                returnIntent.putExtra("result", result);
-                setResult(RESULT_OK, returnIntent);
+                //returnIntent.putExtra("result", result);
+                //setResult(RESULT_OK, returnIntent);
                 finish();
             }
         });

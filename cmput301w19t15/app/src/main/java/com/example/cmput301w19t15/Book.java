@@ -23,6 +23,16 @@ public class Book {
 
 
     public Book(){}
+    public Book(Book book){
+        this.title = book.title;
+        this.author = book.author;
+        this.ISBN = book.ISBN;
+        this.photo = book.photo;
+        this.ownerEmail = book.ownerEmail;
+        this.ownerID = book.ownerID;
+        this.status = Status.Available;
+        this.BookID = book.BookID;
+    }
     public Book(FindBooks findBooks, ArrayList<Book> listOfBooks){}
     public Book(String title, String author, String ISBN, String photo, String ownerEmail, String ownerID) {
         this.title = title;

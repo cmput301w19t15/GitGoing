@@ -18,23 +18,27 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class RequestedBookList extends AppCompatActivity implements BookAdapter.OnItemClickListener{
-
+    private RequestedBookList activity = this;
     private Button all, accepted;
     private BookAdapter adapter;
     private ArrayList<Book> listOfBooks;
     private RecyclerView mRecyclerView;
+    private static User loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requested_book_list);
-
-
-        mRecyclerView = findViewById(R.id.recyclerView);
-        //mRecyclerView.setHasFixedSize(true);
+        mRecyclerView = findViewById(R.id.recylcerView);
+        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         listOfBooks = new ArrayList<>();
-        loadBooks();
+        loggedInUser = MainActivity.getUser();
+        listOfBooks = loggedInUser.getMyRequestedBooks();
+        adapter = new BookAdapter(RequestedBookList.this,listOfBooks);
+        mRecyclerView.setAdapter(adapter);
+
+        //loadBooks();
 
 
         Log.d("testing","done");
