@@ -37,7 +37,6 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
 
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_books);
@@ -75,6 +74,10 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         //textView.setText("Number of books: " + arraySize);
     }
 
+    /**
+     * Open a open a book that is clicked on that will be editable
+     * @param position - index of clicked book
+     */
     @Override
     public void onItemClick(int position) {
         clickedBook = (Book) mBookList.get(position);
@@ -85,6 +88,12 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         startActivityForResult(intent,1);
     }
 
+    /**
+     * update the booklist based of what the user does
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {

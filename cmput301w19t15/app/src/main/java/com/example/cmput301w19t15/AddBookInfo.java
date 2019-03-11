@@ -150,7 +150,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
     }
 
     /**
-     * Source: https://github.com/dm77/barcodescanner
+     * @reuse: https://github.com/dm77/barcodescanner
      * this methods initialize scanner
      */
     public void scan(View view){

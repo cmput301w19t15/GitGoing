@@ -156,6 +156,7 @@ public class Profile extends AppCompatActivity {
      *  where xx is some email extension) and must not already exist
      * @param email
      * @return
+     * @reuse: https://stackoverflow.com/questions/1819142/how-should-i-validate-an-e-mail-address?rq=1
      */
     private boolean checkEmail(String email){
         if (email.isEmpty()) {
@@ -180,6 +181,11 @@ public class Profile extends AppCompatActivity {
         return emailError;
     }
 
+    /**
+     * check if the password is correct format
+     * @param password
+     * @return
+     */
     private boolean checkPassword(String password){
         if (password.isEmpty()) {
             passwordError = setFocus(inputPassword,"Password is required");
@@ -188,6 +194,12 @@ public class Profile extends AppCompatActivity {
         }
         return passwordError;
     }
+
+    /**
+     * check if the new password the user enter is valid format
+     * @param password
+     * @return
+     */
     private boolean checkNewPassword(String password){
         if (password.isEmpty()) {
             //ignore
@@ -196,12 +208,24 @@ public class Profile extends AppCompatActivity {
         }
         return newPasswordError;
     }
+
+    /**
+     * check if the name is valid format
+     * @param name
+     * @return
+     */
     private boolean checkName(String name){
         if (name.isEmpty()) {
             nameError = setFocus(inputName,"Please Enter your Name!");
         }
         return nameError;
     }
+
+    /**
+     * check if the phone is valid format
+     * @param phone
+     * @return
+     */
     private boolean checkPhoneNumber(String phone){
         if (phone.isEmpty()) {
             phoneError = setFocus(inputPhoneNumber, "Please Enter your Name!");
@@ -213,6 +237,10 @@ public class Profile extends AppCompatActivity {
         super.onResume();
         //progressBar.setVisibility(View.GONE);
     }
+
+    /**
+     * dont let the user ress back
+     */
     @Override
     public void onBackPressed() {
         //do nothing

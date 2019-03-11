@@ -144,6 +144,7 @@ public class RegisterActivity extends AppCompatActivity {
      *  where xx is some email extension) and must not already exist
      * @param email
      * @return
+     * @reuse: https://stackoverflow.com/questions/1819142/how-should-i-validate-an-e-mail-address?rq=1
      */
     private boolean checkEmail(String email){
         if (email.isEmpty()) {

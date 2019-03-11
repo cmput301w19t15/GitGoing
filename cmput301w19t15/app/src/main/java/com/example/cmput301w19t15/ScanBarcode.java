@@ -37,6 +37,12 @@ import info.androidhive.barcode.BarcodeReader;
  */
 public class ScanBarcode extends AppCompatActivity implements BarcodeReader.BarcodeReaderListener{
     private BarcodeReader barcodeReader;
+
+    /**
+     * use library to read barcode
+     * @reuse: https://github.com/ravi8x/Barcode-Reader
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //https://github.com/ravi8x/Barcode-Reader

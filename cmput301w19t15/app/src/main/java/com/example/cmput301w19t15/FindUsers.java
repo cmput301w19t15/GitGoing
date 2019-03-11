@@ -53,7 +53,7 @@ public class FindUsers extends AppCompatActivity implements UserAdapter.OnItemCl
 
 
     /**
-     * reference from https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
+     * @reuse: https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      */
     public void loadUsers(){
         loadUsersFromFireBase(new loadUserCallBack() {
@@ -66,10 +66,15 @@ public class FindUsers extends AppCompatActivity implements UserAdapter.OnItemCl
             }
         });
     }
+    /**
+     * @reuse: https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
+     */
     public interface loadUserCallBack {
         void loadUserCallBack(ArrayList<User> value);
     }
-
+    /**
+     * @reuse: https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
+     */
     public void loadUsersFromFireBase(final loadUserCallBack myCallback){
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users");
         userReference.addValueEventListener(new ValueEventListener() {

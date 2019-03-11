@@ -33,6 +33,7 @@ package com.example.cmput301w19t15;
 
   /**
    * The type User adapter.
+   * @reuse:  https://github.com/anjeshshrestha/uAlberta5Star
    */
  public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
     private Context mContext;

@@ -19,15 +19,13 @@ import java.util.Date;
  * this class is to construct an adapter in order to display a list of book
  * @param: mContext the context that we will work on to call this adapter
  * @param: mBookList ArrayList of the books, which will be displayed by this adapter
- * @param:
+ * @reuse: https://github.com/anjeshshrestha/uAlberta5Star
  */
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
     private Context mContext;
     private ArrayList<Book> mBookList;
     private OnItemClickListener mListener;
-
-
 
     public interface OnItemClickListener {
         void onItemClick(int position);
