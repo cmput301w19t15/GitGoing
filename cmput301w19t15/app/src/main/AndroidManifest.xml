@@ -38,6 +38,7 @@
         <activity android:name=".BorrowerBookView"/>
         <activity android:name=".DetailedBookInfo"/>
         <activity android:name=".FindBooks"/>
+        <activity android:name=".FindUsers"/>
         <activity android:name=".RequestedBookList"/>
         <activity android:name=".CreateRequest"/>
         <activity android:name=".ShowAvaliableBookActivity" />

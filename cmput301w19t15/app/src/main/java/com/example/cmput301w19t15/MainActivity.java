@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         findUser = findViewById(R.id.find_user);
         findUser.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                Intent intent = new Intent(MainActivity.this, FindUsers.class);
                 startActivity(intent);
                 //finish();
             }

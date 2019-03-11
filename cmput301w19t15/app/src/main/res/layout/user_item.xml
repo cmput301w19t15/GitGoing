@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textViewUserName"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="User Name Here"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/textViewUserEmail"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewUserName"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text="User Email"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+        <TextView
+            android:id="@+id/textViewUserID"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewUserEmail"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="8dp"
+            android:text="User ID #"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
