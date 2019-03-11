@@ -74,46 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String email = inputEmail.getText().toString().trim().toLowerCase();
-                String password = inputPassword.getText().toString().trim();
-                final String name = inputName.getText().toString().trim();
-                final String phone = inputPhoneNumber.getText().toString().trim();
-
-                if(!checkEmail(email) && !checkPassword(password) && !checkName(name) && !checkPhoneNumber(phone)) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    //create user
-                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            Toast.makeText(RegisterActivity.this, "Successfully Registered:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
-                            // If sign in fails, display a message to the user. If sign in succeeds
-                            // the auth state listener will be notified and logic to handle the
-                            // signed in user can be handled in the listener.
-                            if (task.isSuccessful()) {
-                                //get database
-                                DatabaseReference dataBase, newUser;
-                                FirebaseUser currentUser = task.getResult().getUser();
-                                String userID = currentUser.getUid();
-                                //pick users table to same the user in
-                                dataBase = FirebaseDatabase.getInstance().getReference().child("users");
-                                newUser = dataBase.child(currentUser.getUid());
-                                //create the user
-                                User addUser = new User(name,email,phone,userID);
-                                //save the user in the database
-                                newUser.setValue(addUser);
-                                //close register
-                                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                                finish();
-                            } else {
-                                Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
-                if(currentFocus != null){
-                    currentFocus.requestFocus();
-                }
+                registerUser();
             }
         });
 
@@ -133,6 +94,51 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Register the User to the database and login the user
+     */
+    private void registerUser(){
+        final String email = inputEmail.getText().toString().trim().toLowerCase();
+        String password = inputPassword.getText().toString().trim();
+        final String name = inputName.getText().toString().trim();
+        final String phone = inputPhoneNumber.getText().toString().trim();
+
+        if(!checkEmail(email) && !checkPassword(password) && !checkName(name) && !checkPhoneNumber(phone)) {
+            progressBar.setVisibility(View.VISIBLE);
+            //create user
+            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    Toast.makeText(RegisterActivity.this, "Successfully Registered:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                    // If sign in fails, display a message to the user. If sign in succeeds
+                    // the auth state listener will be notified and logic to handle the
+                    // signed in user can be handled in the listener.
+                    if (task.isSuccessful()) {
+                        //get database
+                        DatabaseReference dataBase, newUser;
+                        FirebaseUser currentUser = task.getResult().getUser();
+                        String userID = currentUser.getUid();
+                        //pick users table to same the user in
+                        dataBase = FirebaseDatabase.getInstance().getReference().child("users");
+                        newUser = dataBase.child(currentUser.getUid());
+                        //create the user
+                        User addUser = new User(name,email,phone,userID);
+                        //save the user in the database
+                        newUser.setValue(addUser);
+                        //close register
+                        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                        finish();
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+        if(currentFocus != null){
+            currentFocus.requestFocus();
+        }
+    }
     /**
      * prompts user to enter email which must match the email pattern (must contain '@' and '.xx
      *  where xx is some email extension) and must not already exist

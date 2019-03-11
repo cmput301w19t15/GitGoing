@@ -87,55 +87,7 @@ public class Profile extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String email = inputEmail.getText().toString().trim().toLowerCase();
-                final String password = inputPassword.getText().toString().trim();
-                final String name = inputName.getText().toString().trim();
-                final String phone = inputPhoneNumber.getText().toString().trim();
-                final String newPassword = inputNewPassword.getText().toString().trim();
-
-                //check all things to make sure duplicate users not made and such
-                if(!checkEmail(email)  && !checkPassword(password) && !checkName(name) && !checkPhoneNumber(phone) && !checkNewPassword(newPassword)) {
-                    //update user information
-                    if(currentFocus != null){
-                        currentFocus.requestFocus();
-                    }
-
-
-                    //reauthenciate user to make sure it is actual owner
-                    AuthCredential credential = EmailAuthProvider.getCredential(auth.getCurrentUser().getEmail(),password);
-                    auth.getCurrentUser().reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()) {
-                                //user is reauthenticated
-                                //update the email and other values that have been changed
-                                auth.getCurrentUser().updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            if(!newPassword.isEmpty()){
-                                                auth.getCurrentUser().updatePassword(newPassword);
-                                            }
-                                            //email was successfully updated, with name and phone
-                                            user.setEmail(email);
-                                            user.setName(name);
-                                            user.setPhone(phone);
-                                            MainActivity.updateUser();
-                                            finish();
-                                        }else{
-                                            emailError = setFocus(inputEmail,"Email already Exists");
-                                        }
-                                    }
-                                });
-                            } else{
-                                passwordError = setFocus(inputPassword,"Password is incorrect");
-                                Log.d("testing","Password is Incorrect");
-                            }
-
-                        }
-                    });
-                }
-
+                saveUpdates();
             }
         });
 
@@ -145,6 +97,58 @@ public class Profile extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    /**
+     * Update the user information with the changes made
+     */
+    private void saveUpdates(){
+        final String email = inputEmail.getText().toString().trim().toLowerCase();
+        final String password = inputPassword.getText().toString().trim();
+        final String name = inputName.getText().toString().trim();
+        final String phone = inputPhoneNumber.getText().toString().trim();
+        final String newPassword = inputNewPassword.getText().toString().trim();
+
+        //check all things to make sure duplicate users not made and such
+        if(!checkEmail(email)  && !checkPassword(password) && !checkName(name) && !checkPhoneNumber(phone) && !checkNewPassword(newPassword)) {
+            //update user information
+            if(currentFocus != null){
+                currentFocus.requestFocus();
+            }
+            //reauthenciate user to make sure it is actual owner
+            AuthCredential credential = EmailAuthProvider.getCredential(auth.getCurrentUser().getEmail(),password);
+            auth.getCurrentUser().reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()) {
+                        //user is reauthenticated
+                        //update the email and other values that have been changed
+                        auth.getCurrentUser().updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    if(!newPassword.isEmpty()){
+                                        auth.getCurrentUser().updatePassword(newPassword);
+                                    }
+                                    //email was successfully updated, with name and phone
+                                    user.setEmail(email);
+                                    user.setName(name);
+                                    user.setPhone(phone);
+                                    MainActivity.updateUser();
+                                    finish();
+                                }else{
+                                    emailError = setFocus(inputEmail,"Email already Exists");
+                                }
+                            }
+                        });
+                    } else{
+                        passwordError = setFocus(inputPassword,"Password is incorrect");
+                        //Log.d("testing","Password is Incorrect");
+                    }
+
+                }
+            });
+        }
     }
 
     /**

@@ -67,7 +67,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         //loadBooks();
 
 
-        Log.d("testing","done");
+        //Log.d("testing","done");
 
     }
 
@@ -79,7 +79,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
             @Override
             public void loadBookCallBack(ArrayList<Book> value) {
                 listOfBooks = (ArrayList<Book>) value.clone();
-                Log.d("testing","book size: "+listOfBooks.size());
+                //Log.d("testing","book size: "+listOfBooks.size());
                 adapter = new BookAdapter(RequestedBookList.this,listOfBooks);
                 mRecyclerView.setAdapter(adapter);
                 adapter.setOnItemClickListener(RequestedBookList.this);
