@@ -40,8 +40,6 @@
         <activity android:name=".FindBooks"/>
         <activity android:name=".RequestedBookList"/>
         <activity android:name=".CreateRequest"/>
-        <activity android:name=".ShowAvaliableBookActivity" />
-        <activity android:name=".SearchBooksorUsersActivity" />
     </application>
 
 </manifest>

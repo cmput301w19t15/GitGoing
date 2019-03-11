@@ -35,24 +35,11 @@ public class User {
     public User(String emailID, String userID){
         this.email = emailID;
         this.userID = userID;
-        /*
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userID);
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String phoneValue = dataSnapshot.child("phone").getValue().toString();
-                String nameValue = dataSnapshot.child("name").getValue().toString();
-                String emailValue = dataSnapshot.child("email").getValue().toString();
-                String usernameValue = dataSnapshot.child("username").getValue().toString();
-                phone = phoneValue;
-                name = nameValue;
-                email = emailValue;
-                username = usernameValue;
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {}
-        });
-        */
+    }
+    public User(String emailID, String userID, String phone){
+        this.email = emailID;
+        this.userID = userID;
+        this.phone = phone;
     }
     public User(String name, String email, String phone, String userID) {
         this.name = name;
@@ -109,7 +96,6 @@ public class User {
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
     public ArrayList<Book> getMyBooks(){
         return myBooks;

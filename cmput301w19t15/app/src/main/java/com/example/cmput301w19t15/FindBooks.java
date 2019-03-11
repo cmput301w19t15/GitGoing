@@ -38,14 +38,10 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
 
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Set up the login form.
         setContentView(R.layout.activity_find_books);
-
-
-
 
         mRecyclerView = findViewById(R.id.recylcerView);
         //mRecyclerView.setHasFixedSize(true);
@@ -55,10 +51,6 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         listOfBooks = new ArrayList<>();
         loadBooks();
-
-
-        Log.d("testing","done");
-
 
         Button searchButton = findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -157,8 +149,6 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
             }
         });
     }
-
-
 
     @Override
     public void onItemClick(int position) {

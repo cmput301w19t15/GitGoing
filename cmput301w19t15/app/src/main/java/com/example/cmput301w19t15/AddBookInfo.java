@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,8 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
-
-import static android.os.FileObserver.DELETE;
 
 public class AddBookInfo extends AppCompatActivity {
 
@@ -46,10 +43,10 @@ public class AddBookInfo extends AppCompatActivity {
         setContentView(R.layout.activity_add_book_info);
 
         booktitle = findViewById(R.id.booktitle);
-        author = findViewById(R.id.author);
+        author = findViewById(R.id.bookAuthor);
         isbn = findViewById(R.id.isbn);
 
-        Button saveButton = findViewById(R.id.addBook);
+        Button saveButton = findViewById(R.id.deleteBook);
         Button addPhoto = findViewById(R.id.addPhoto);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -79,17 +76,11 @@ public class AddBookInfo extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(AddBookInfo.this, "Successfully Added Book", Toast.LENGTH_SHORT).show();
-                            try {
-                                //set time in mili
-                                Thread.sleep(3000);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
                         }
                     }
                 });
                 //returnIntent.putExtra("result", result);
-                //setResult(RESULT_OK, returnIntent);
+                setResult(1,returnIntent);
                 finish();
             }
         });

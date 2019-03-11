@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class CreateRequest extends AppCompatActivity {
 
-    private Button request;
+    private Button request,cancel;
     private Book newBook;
     private User owner;
     User loggedInUser = MainActivity.getUser();
@@ -34,7 +34,7 @@ public class CreateRequest extends AppCompatActivity {
         final String bookId = (String) bundle.get("BOOKID");
 
 
-        TextView authorText = (TextView) findViewById(R.id.author);
+        TextView authorText = (TextView) findViewById(R.id.bookauthor);
         authorText.setText(author);
         TextView titleText = (TextView) findViewById(R.id.booktitle);
         titleText.setText(title);
@@ -67,21 +67,25 @@ public class CreateRequest extends AppCompatActivity {
                                 break;
                             }
                         }
-
-
                         owner.addToRequestedBooks(newBook);
                         loggedInUser.addToMyRequestedBooks(newBook);
                         finish();
-
-
                     }
-
                     public void onCancelled(DatabaseError databaseError) {
                         // ...
                     }
                 });
             }
         });
+
+        cancel = (Button) findViewById(R.id.cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
 }

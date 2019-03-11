@@ -28,11 +28,11 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
 
     private MyBooks activity = this;
     private static User loggedInUser;
-    private BookAdapter mBookAdaptor;
+    private BookAdapter mBookAdapter;
     private ArrayList<Book> mBookList;
     private RecyclerView mRecyclerView;
     private static final int NEW_BOOK = 1;
-
+    private Book clickedBook;
 
 
 
@@ -40,17 +40,18 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Set up the login form.
         setContentView(R.layout.activity_my_books);
 
-
+        mRecyclerView = findViewById(R.id.recylcerView);
+        //mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //gets books from user and loads them into screen
-        listBook();
         loggedInUser = MainActivity.getUser();
         mBookList = loggedInUser.getMyBooks();
-        mBookAdaptor = new BookAdapter(MyBooks.this,mBookList);
-        mRecyclerView.setAdapter(mBookAdaptor);
+        mBookAdapter = new BookAdapter(MyBooks.this,mBookList);
+        mRecyclerView.setAdapter(mBookAdapter);
+        mBookAdapter.setOnItemClickListener(MyBooks.this);
 
         //adds new book by starting add book info class
         Button addBook = (Button) findViewById(R.id.add_book);
@@ -64,33 +65,33 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
 
     }
 
-    /**
-     * checks to make sure we can get recyclerview set up
-     */
-    private void listBook() {
-        try{
-            mRecyclerView = findViewById(R.id.recylcerView);
-            mRecyclerView.setHasFixedSize(true);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        } catch (Exception e) {
-            e.printStackTrace();         }
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
-        int arraySize = loggedInUser.getMyBooks().size();
         //TextView textView = findViewById(R.id.textView2);
         //textView.setText("Number of books: " + arraySize);
 
     }
 
-
+    @Override
     public void onItemClick(int position) {
-        Intent detailIntent = new Intent(this, BookInfo.class);
-        Book clickedBook = mBookList.get(position);
-
-        //detailIntent.putExtra()
+        clickedBook = (Book) mBookList.get(position);
+        Intent intent = new Intent(MyBooks.this, BookInfo.class);
+        intent.putExtra("BOOKID",clickedBook.getBookID());
+        intent.putExtra("POSITION",position);
+        //setResult(RESULT_OK, intent);
+        startActivityForResult(intent,1);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            mBookList = loggedInUser.getMyBooks();
+            mBookAdapter.notifyDataSetChanged();
+        }
+        if(requestCode == 2){
+            mBookList = loggedInUser.getMyBooks();
+            mBookAdapter.notifyDataSetChanged();
+        }
+    }//onActivityResult
 }
