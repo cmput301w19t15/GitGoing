@@ -85,11 +85,13 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
-            mBookList = loggedInUser.getMyBooks();
+            mBookList.clear();
+            mBookList.addAll(loggedInUser.getMyBooks());
             mBookAdapter.notifyDataSetChanged();
         }
         if(requestCode == 2){
-            mBookList = loggedInUser.getMyBooks();
+            mBookList.clear();
+            mBookList.addAll(loggedInUser.getMyBooks());
             mBookAdapter.notifyDataSetChanged();
         }
     }//onActivityResult
