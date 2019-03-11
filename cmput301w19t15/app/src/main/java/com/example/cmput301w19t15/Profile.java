@@ -31,11 +31,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Profile extends AppCompatActivity {
-    private EditText inputEmail, inputPassword, inputName, inputPhoneNumber, currentFocus;
+    private EditText inputEmail, inputPassword, inputNewPassword, inputName, inputPhoneNumber, currentFocus;
     Button saveButton, cancelButton;
     //private ProgressBar progressBar;
     private FirebaseAuth auth;
-    private boolean emailError = false,usernameError = false,passwordError = false,nameError = false,phoneError = false;
+    private boolean emailError = false,usernameError = false,passwordError = false,nameError = false,phoneError = false, newPasswordError = false;
     final User user = MainActivity.getUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,7 @@ public class Profile extends AppCompatActivity {
         cancelButton = findViewById(R.id.cancel);
         inputEmail = findViewById(R.id.email);
         inputPassword = findViewById(R.id.pass);
+        inputNewPassword = findViewById(R.id.newPassword);
         inputName = findViewById(R.id.name);
         inputPhoneNumber = findViewById(R.id.phone);
 
@@ -65,17 +66,20 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String email = inputEmail.getText().toString().trim().toLowerCase();
-                String password = inputPassword.getText().toString().trim();
+                final String password = inputPassword.getText().toString().trim();
                 final String name = inputName.getText().toString().trim();
                 final String phone = inputPhoneNumber.getText().toString().trim();
+                final String newPassword = inputNewPassword.getText().toString().trim();
 
                 //check all things to make sure duplicate users not made and such
-                if(!checkEmail(email)  && !checkPassword(password) && !checkName(name) && !checkPhoneNumber(phone)) {
+                if(!checkEmail(email)  && !checkPassword(password) && !checkName(name) && !checkPhoneNumber(phone) && !checkNewPassword(newPassword)) {
                     //progressBar.setVisibility(View.VISIBLE);
                     //update user information
                     if(currentFocus != null){
                         currentFocus.requestFocus();
                     }
+
+
                     //reauthenciate user to make sure it is actual owner
                     AuthCredential credential = EmailAuthProvider.getCredential(auth.getCurrentUser().getEmail(),password);
                     auth.getCurrentUser().reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -88,6 +92,10 @@ public class Profile extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
+                                            if(!newPassword.isEmpty()){
+                                                auth.getCurrentUser().updatePassword(newPassword);
+                                                
+                                            }
                                             //email was successfully updated, with name and phone
                                             user.setEmail(email);
                                             user.setName(name);
@@ -146,24 +154,26 @@ public class Profile extends AppCompatActivity {
             passwordError = setFocus(inputPassword,"Password is required");
         }else if (password.length() < 6) {
             passwordError = setFocus(inputPassword,getString(R.string.minimum_password));
-        }else{
-            passwordError = false;
         }
         return passwordError;
+    }
+    private boolean checkNewPassword(String password){
+        if (password.isEmpty()) {
+            //ignore
+        }else if (password.length() < 6) {
+            newPasswordError = setFocus(inputNewPassword,getString(R.string.minimum_password));
+        }
+        return newPasswordError;
     }
     private boolean checkName(String name){
         if (name.isEmpty()) {
             nameError = setFocus(inputName,"Please Enter your Name!");
-        }else{
-            nameError = false;
         }
         return nameError;
     }
     private boolean checkPhoneNumber(String phone){
-        if (phone.isEmpty()){
-            phoneError = setFocus(inputPhoneNumber,"Please Enter your Name!");
-        }else{
-            phoneError = false;
+        if (phone.isEmpty()) {
+            phoneError = setFocus(inputPhoneNumber, "Please Enter your Name!");
         }
         return phoneError;
     }
