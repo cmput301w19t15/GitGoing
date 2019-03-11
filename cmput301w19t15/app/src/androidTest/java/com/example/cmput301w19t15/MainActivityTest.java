@@ -42,6 +42,10 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
         Activity activity = rule.getActivity();
     }
 
+    /**
+     * genereate random email id
+     * @return
+     */
     public String givenUsingPlainJava_whenGeneratingRandomStringUnbounded_thenCorrect() {
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
@@ -59,6 +63,9 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
         return generatedString;
     }
 
+    /**
+     * test creating account works
+     */
     public void CreateAccount() {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView( solo.getCurrentActivity().findViewById(
@@ -78,6 +85,10 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
 
 
     }
+
+    /**
+     * test creating account
+     */
     @Test
     public void TestCreateAccount() {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
@@ -85,6 +96,9 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }
 
+    /**
+     * test goto book to request
+     */
     public void getToRequest() {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnText("Find Books");
@@ -96,6 +110,9 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
         assertTrue(solo.waitForText("Anjesh weird", 1, 2000));
     }
 
+    /**
+     * test requesting book works
+     */
     @Test
     public void testRequest() {
         getToRequest();

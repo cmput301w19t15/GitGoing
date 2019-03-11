@@ -45,12 +45,18 @@ public class LoginActivityTest extends ActivityTestRule<LoginActivity> {
         Activity activity = rule.getActivity();
     }
 
+    /**
+     * test login with user
+     */
     @Test
     public void checkView() {
         onView(withId(R.id.email)).perform(clearText(),typeText("test@test.com"));
         onView(withId(R.id.password)).perform(clearText(),typeText("testtest"));
     }
 
+    /**
+     * check if the user is logged in
+     */
     @Test
     public  void checkLogin(){
         onView(withId(R.id.email)).perform(clearText(),typeText("test"));
@@ -64,7 +70,9 @@ public class LoginActivityTest extends ActivityTestRule<LoginActivity> {
 
     }
 
-
+    /**
+     * test user has successuly logged in
+     */
     @Test
     public void checkEntry(){
         LoginActivity activity = (LoginActivity) solo.getCurrentActivity();

@@ -6,6 +6,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class LocationTest {
+    /**
+     * test to see if the location class actually works
+     */
     @Test
     public void testLocation() {
         Location x = new Location(123,-120);
@@ -17,6 +20,10 @@ public class LocationTest {
         assertEquals(array2[0], -178.12345, 0.1);
         assertEquals(array2[1],0, 0.1);
     }
+
+    /**
+     * test editing the location class
+     */
     @Test
     public void testSetLocation() {
         Location x = new Location(123,-120);

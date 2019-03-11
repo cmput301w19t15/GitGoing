@@ -8,6 +8,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 public class ExchangeTest {
+    /**
+     * test making a new exchange location
+     */
     @Test
     public void SetLocation(){
         User owner = new User("first last", "example@email.com", "111-111-1111", "exampleID");
@@ -20,6 +23,10 @@ public class ExchangeTest {
         exchange.setLocation(location);
         assertEquals(location,exchange.getLocation());
     }
+
+    /**
+     * test making a change of date
+     */
     @Test
     public void SetDate(){
         User owner = new User("first last", "example@email.com", "111-111-1111", "exampleID");
