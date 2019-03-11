@@ -27,6 +27,10 @@ import java.io.IOException;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
+/**
+ * this activity is to add information about the book
+ * when creating a new book.
+ */
 public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
     private EditText booktitle;
@@ -54,6 +58,10 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
         Button addPhoto = findViewById(R.id.addPhoto);
         Button scanInfo = findViewById(R.id.scanInfo);
 
+        /**
+         * this method will create a new book object with all the
+         * information entered and upload it to firebase
+         */
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,28 +112,29 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
         });
     }
 
+    /**
+     * build an AlertDialog
+     * let user choose among Camera, Gallery or Cancel this action
+     */
     private void selectPhoto() {
-        /**
-         * build an AlertDialog
-         * let user choose among Camera, Gallery or Cancel this action
-         */
         final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(AddBookInfo.this);
         builder.setTitle("Upload Photo");
 
+        /**
+         * if user chooses Camera, call camera and will return a bitmap as a result
+         */
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                /**
-                 * if user chooses Camera, call camera and will return a bitmap as a result
-                 */
+
                 if (items[which] == "Camera"){
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(intent, REQUEST_CAMERA);
                 }
-                /**
-                 * if user chooses gallery, call mediaStorage and will return a uri object
-                 */
+
+                 //if user chooses gallery, call mediaStorage and will return a uri object
+
                 else if (items[which] == "Gallery"){
                     Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     intent.setType("image/*");
@@ -144,7 +153,6 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
     /**
      * Source: https://github.com/dm77/barcodescanner
      * this methods initialize scanner
-     * @param view
      */
     public void scan(View view){
         //https://github.com/ravi8x/Barcode-Reader
@@ -159,21 +167,10 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
     }
 
     /**
-     * this method will override the pause class,
-     * in this case, it'll stop camera.
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-        scannerView.stopCamera();
-    }
-    */
-
-    /**
      * this method is from the ZXing class we implement,
      * it will override the handleResult class from its interface
      * and display a message whenever we scan barcode
-     * @param result
+     * @param result the result that's returned from scanner intent
      */
     @Override
     public void handleResult(Result result){
@@ -181,6 +178,12 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
         scannerView.resumeCameraPreview(this);
     }
 
+    /**
+     * this method is to handle the result that's been passed back from intent
+     * @param requestCode a code that's required when an intent ihs called
+     * @param resultCode a code that's required when an intent is to return data
+     * @param data the data that's returned by the activity
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode == 5){
