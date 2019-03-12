@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="60dp"
                     android:layout_marginRight="60dp"
-                    android:hint="@string/prompt_username"
+                    android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"
@@ -114,8 +114,8 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="60dp"
                 android:layout_marginBottom="60dp"
-                tools:ignore="ContentDescription"
-                tools:src="@drawable/nerd_cat_pixilart" />
+                android:src="@drawable/nerd_cat_pixilart"
+                tools:ignore="ContentDescription" />
 
             <!-- Login progress -->
             <ProgressBar
