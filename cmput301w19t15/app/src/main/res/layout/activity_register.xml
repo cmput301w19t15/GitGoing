@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@drawable/grad2"
     tools:context=".LoginActivity">
 
     <LinearLayout
@@ -17,20 +18,26 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColorLink="@color/colorAccent" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/password"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
@@ -46,6 +53,8 @@
             android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/name"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
@@ -61,10 +70,9 @@
             android:layout_height="wrap_content">
 
             <EditText
-
-
                 android:id="@+id/pass"
-
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
@@ -80,10 +88,12 @@
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
             android:layout_marginTop="16dip"
-            android:background="@color/colorAccent"
+            android:layout_marginRight="60dp"
+            android:background="@color/colorPrimaryDark"
             android:text="@string/action_register"
-            android:textColor="@android:color/black"
+            android:textColor="#ffffff"
             android:textStyle="bold" />
         <!-- Link to Login Screen -->
         <Button
@@ -91,6 +101,11 @@
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:background="@drawable/button1"
+            android:textColor="#ffffff"
+            android:textColorLink="@color/colorPrimaryDark"
             android:layout_marginTop="16dip"
             android:text="@string/action_login"
             android:textAllCaps="false"
@@ -100,6 +115,11 @@
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:background="@drawable/button1"
+            android:textColor="#ffffff"
+            android:textColorLink="@color/colorPrimaryDark"
             android:layout_marginTop="16dip"
             android:text="@string/action_reset"
             android:textAllCaps="false"
