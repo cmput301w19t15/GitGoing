@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         notifyButton = findViewById(R.id.notify);
         notifyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                Intent intent = new Intent(MainActivity.this, NotifyActivity.class);
                 startActivity(intent);
                 //finish();
             }

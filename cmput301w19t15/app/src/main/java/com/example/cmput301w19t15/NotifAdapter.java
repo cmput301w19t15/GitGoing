@@ -59,7 +59,7 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.NotifViewHol
             notifType = "Your request has been accepted";
         }
         String fromUser = FirebaseDatabase.getInstance().getReference().child("users")
-                .child(currentNotif.getNotifyFromID()).child("username").toString();
+                .child(currentNotif.getNotifyFromID()).child("email").toString();
         String bookTitle = FirebaseDatabase.getInstance().getReference().child("books")
                 .child(currentNotif.getBookID()).child("title").toString();
 
