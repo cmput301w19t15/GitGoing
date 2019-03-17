@@ -41,6 +41,8 @@
         <activity android:name=".FindUsers"/>
         <activity android:name=".RequestedBookList"/>
         <activity android:name=".CreateRequest"/>
+        <activity android:name=".NotifyActivity"/>
+
     </application>
 
 </manifest>
