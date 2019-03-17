@@ -20,6 +20,8 @@ public class Notification {
             this.notifID = UUID.randomUUID().toString();
     }
 
+    public Notification() {}
+
     public void setType (String type) {
         this.type = type;
     }
