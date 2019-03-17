@@ -71,7 +71,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
 
                 //result.putSerializable("putresut", book);
 
-                //pick book table to same the book
+                //pick book table to save the book
                 DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(book.getBookID());
 
                 //add the book in the database
