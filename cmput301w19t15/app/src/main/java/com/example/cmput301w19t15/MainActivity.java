@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     //private ProgressBar progressBar;
     private Button logOut, myBooks, myBorrows, myRequests, findUser, findBook;
     private ImageButton myProfile, notifyButton;
+    private Notification notif;
 
     private static User loggedInUser;
 
@@ -106,6 +107,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         notifyButton = findViewById(R.id.notify);
+        if (notif.getRead() == Boolean.FALSE) {
+            notifyButton.setImageResource(R.drawable.nerd_cat_pixilart);
+        }
         notifyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, NotifyActivity.class);
