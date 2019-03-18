@@ -61,11 +61,11 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
                         ArrayList<Notification> allNotif = new ArrayList<>();
                         for (DataSnapshot notif : dataSnapshot.getChildren()) {
                             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            Log.d("testing1",user.getUid());
+                            //Log.d("testing1",user.getUid());
 
                             if (user.getUid() != null){
                                 Notification currentNotif = notif.getValue(Notification.class);
-                                Log.d("testing",user.getUid());
+                                //Log.d("testing",user.getUid());
                                 if (currentNotif.getNotifyToID().equals(user.getUid())){
                                     allNotif.add(currentNotif);
                                 }
