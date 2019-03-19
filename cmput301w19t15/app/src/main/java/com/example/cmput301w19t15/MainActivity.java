@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
     //private ProgressBar progressBar;
-    private Button logOut, myBooks, myBorrows, myRequests, findUser, findBook;
+    private Button logOut, myBooks, myBorrows, myRequests, findUser, findBook, myMap;
     private ImageButton myProfile, notifyButton;
 
     private static User loggedInUser;
@@ -138,6 +138,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, MyBooks.class);
                 startActivity(intent);
                 //finish();
+            }
+        });
+
+        myMap = findViewById(R.id.my_map);
+        myMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (MainActivity.this, GeoLocation.class);
+                startActivity(intent);
             }
         });
     }
