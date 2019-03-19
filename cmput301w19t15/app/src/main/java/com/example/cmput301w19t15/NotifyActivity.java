@@ -21,7 +21,6 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
     private NotifAdapter adapter;
     private ArrayList<Notification> listOfNotif;
     private RecyclerView mRecyclerView;
-    private Notification notif;
 
 
     @Override
@@ -87,5 +86,5 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
     }
 
     @Override
-    public void onItemClick(int position) {notif.setReadTrue();}
+    public void onItemClick(int position) {}
 }
