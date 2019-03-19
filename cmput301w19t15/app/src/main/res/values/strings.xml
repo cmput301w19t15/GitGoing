@@ -48,10 +48,13 @@
     <string name="create">Create Profile </string>
     <string name="filters">Filters: </string>
     <string name="add">Add </string>
+    <string name="all">All</string>
+    <string name="accepted">Accepted</string>
     <string name="status">Status </string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
     <string name="location">Location</string>
     <string name="go_to_my_books">Go To My Books</string>
     <string name="filter_by">Filter By:</string>
+    <string name="request_book">Request Book</string>
 </resources>

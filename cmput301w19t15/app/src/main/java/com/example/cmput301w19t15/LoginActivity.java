@@ -1,4 +1,24 @@
+/*
+ * Class Name: LoginActivity
+ *
+ * Version: 1.0
+ *
+ * Copyright 2019 TEAM GITGOING
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package com.example.cmput301w19t15;
+
+/**
+ * Represents an important Tweet
+ * @author Thomas, Anjesh, Josh
+ * @version 1.0
+ * @since 1.0
+ */
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -37,10 +57,10 @@ public class LoginActivity extends AppCompatActivity{
      */
     private FirebaseAuth auth;
     // UI references.
-    private EditText inputUsername, inputPassword, currentFocus;
+    private EditText inputEmail, inputPassword, currentFocus;
     private View progressBar;
     private Button btnLogin,btnRegister,btnResetPassword;
-    private boolean usernameError = false, passwordError = false;
+    private boolean emailError = false, passwordError = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,83 +76,18 @@ public class LoginActivity extends AppCompatActivity{
             finish();
         }
         //else let user login
-        inputUsername = (EditText) findViewById(R.id.username);
-        inputPassword = (EditText) findViewById(R.id.password);
+        inputEmail = findViewById(R.id.email);
+        inputPassword = findViewById(R.id.password);
 
-        btnLogin = (Button) findViewById(R.id.login_button);
-        btnRegister = (Button) findViewById(R.id.register_button);
-        btnResetPassword = (Button) findViewById(R.id.reset_button);
-        progressBar = (ProgressBar) findViewById(R.id.login_progress);
+        btnLogin = findViewById(R.id.login_button);
+        btnRegister = findViewById(R.id.register_button);
+        btnResetPassword = findViewById(R.id.reset_button);
+        progressBar = findViewById(R.id.login_progress);
 
         btnLogin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = inputUsername.getText().toString().trim().toLowerCase();
-                final String password = inputPassword.getText().toString().trim();
-
-                if (username.isEmpty()) {
-                    usernameError = setFocus(inputUsername, "Enter Email or Username");
-                } else if (Patterns.EMAIL_ADDRESS.matcher(username).matches()) {
-                    //if its email do nothing
-                    usernameError = false;
-                } else{
-                    //get email corresponding to username if its not email
-                    DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users");
-                    userReference.orderByChild("username").equalTo(username).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            TextView hiddenEmail = (TextView) findViewById(R.id.hiddenEmail);
-                            if(dataSnapshot.exists()){
-                                for(DataSnapshot userID: dataSnapshot.getChildren()){
-                                    hiddenEmail.setText(userID.child("email").getValue().toString());
-                                }
-                            }else{
-                                hiddenEmail.setText("text");
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {}
-
-                    });
-                    TextView hiddenEmail = (TextView) findViewById(R.id.hiddenEmail);
-                    if(username.equals(hiddenEmail.getText().toString())) {
-                        usernameError = true;
-                        usernameError = setFocus(inputUsername, "Email or Username does not Exist");
-                    }else{
-                        usernameError = false;
-                    }
-                    username = hiddenEmail.getText().toString();
-                }
-
-                if (password.isEmpty()) {
-                    passwordError = setFocus(inputPassword, "Password is required");
-                } else if (password.length() < 6) {
-                    passwordError = setFocus(inputPassword, getString(R.string.minimum_password));
-                }else{
-                    passwordError = false;
-                }
-                if(!usernameError && !passwordError) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    //authenticate user
-                    auth.signInWithEmailAndPassword(username, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            // If sign in fails, display a message to the user. If sign in succeeds
-                            // the auth state listener will be notified and logic to handle the
-                            // signed in user can be handled in the listener.
-                            progressBar.setVisibility(View.GONE);
-                            if (task.isSuccessful()) {
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                finish();
-                            } else {
-                                // there was an error
-                                Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-                }
-                if(currentFocus != null)
-                    currentFocus.requestFocus();
+                loginUser();
             }
         });
 
@@ -151,6 +106,73 @@ public class LoginActivity extends AppCompatActivity{
                 finish();
             }
         });
+    }
+
+    /**
+     * Log the user into the app
+     */
+    private void loginUser(){
+        String email = inputEmail.getText().toString().trim().toLowerCase();
+        final String password = inputPassword.getText().toString().trim();
+
+        if(!checkEmail(email) && !checkPassword(password)) {
+            progressBar.setVisibility(View.VISIBLE);
+            //authenticate user
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    // If sign in fails, display a message to the user. If sign in succeeds
+                    // the auth state listener will be notified and logic to handle the
+                    // signed in user can be handled in the listener.
+                    progressBar.setVisibility(View.GONE);
+                    if (task.isSuccessful()) {
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
+                    } else {
+                        // there was an error
+                        Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+        if(currentFocus != null) {
+            currentFocus.requestFocus();
+        }
+    }
+
+    /**
+     * check if the email is the correct format
+     * @param email a string which is user's email address
+     * @return a boolean, false if email is empty/invalid email address
+     * true if email address is valid
+     */
+    private boolean checkEmail(String email){
+        if (email.isEmpty()) {
+            emailError = setFocus(inputEmail, "Enter Email");
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            //if its email does not match email address format
+            emailError = setFocus(inputEmail, "Enter a valid Email");
+        } else{
+            emailError = false;
+        }
+        return emailError;
+    }
+
+    /**
+     * check if the password is the correct format
+     * @param password a string which is user acc's password
+     * @return a boolean, true if the password is valid, return false
+     * otherwise
+     */
+    private boolean checkPassword(String password){
+        if (password.isEmpty()) {
+            passwordError = setFocus(inputPassword, "Password is required");
+        } else if (password.length() < 6) {
+            passwordError = setFocus(inputPassword, getString(R.string.minimum_password));
+        }else{
+            passwordError = false;
+        }
+        return passwordError;
     }
     private boolean setFocus(EditText editText, String message){
         editText.setError(message);

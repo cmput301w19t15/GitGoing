@@ -5,18 +5,21 @@ import junit.framework.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Tests the book class
+ */
 public class BookTest {
     @Test
     public void testBook() {
 
-        Book x = new Book("testTitle","testAuthor",123);
-        assertEquals(x.getISBN(),(Integer) 123);
-        Book y = new Book("testTitle","testAuthor",345);
-        assertEquals(y.getISBN(),(Integer) 345);
+        Book x = new Book("testTitle","testAuthor","123","testPhoto","testOwnerEmail","testOwnerID");
+        assertEquals(x.getISBN(), "123");
+        Book y = new Book("testTitle","testAuthor","345","testPhoto","testOwnerEmail","testOwnerID");
+        assertEquals(y.getISBN(), "345");
     }
     @Test
     public void testSetAuthor() {
-        Book x = new Book("testTitle","testAuthor",123);
+        Book x = new Book("testTitle","testAuthor","123","testPhoto","testOwnerEmail","testOwnerID");
         x.setAuthor("Gradle");
         assertEquals(x.getAuthor(),"Gradle");
         x.setAuthor("Example2");
@@ -24,7 +27,7 @@ public class BookTest {
     }
     @Test
     public void testSetTitle() {
-        Book x = new Book("testTitle","testAuthor",123);
+        Book x = new Book("testTitle","testAuthor","123","testPhoto","testOwnerEmail","testOwnerID");
         x.setTitle("Gradle");
         assertEquals(x.getTitle(),"Gradle");
         x.setTitle("Example2");
@@ -32,23 +35,25 @@ public class BookTest {
     }
     @Test
     public void testSetISBN() {
-        Book x = new Book("testTitle","testAuthor",123);
-        x.setISBN(345);
-        assertEquals(x.getISBN(),(Integer) 345);
-        x.setISBN(567);
-        assertEquals(x.getISBN(),(Integer) 567);
+        Book x = new Book("testTitle","testAuthor","123","testPhoto","testOwnerEmail","testOwnerID");
+        x.setISBN("345");
+        assertEquals(x.getISBN(), "345");
+        x.setISBN("567");
+        assertEquals(x.getISBN(), "567");
     }
     @Test
     public void testSetStatus() {
-        Book x = new Book("testTitle","testAuthor",123);
-        x.setStatus("Borrowed");
+        Book x = new Book("testTitle","testAuthor","123","testPhoto","testOwnerEmail","testOwnerID");
+        x.setStatus("borrowed");
         assertEquals(x.getStatus(),"Borrowed");
-        x.setTitle("Available");
+        x.setStatus("requested");
+        assertEquals(x.getStatus(),"Requested");
+        x.setStatus("available");
         assertEquals(x.getStatus(),"Available");
     }
     @Test
     public void testSetPhoto() {
-        Book x = new Book("testTitle","testAuthor",123);
+        Book x = new Book("testTitle","testAuthor","123","testPhoto","testOwnerEmail","testOwnerID");
         String image = "https://s3.amazonaws.com/spoonflower/public/design_thumbnails/0464/6961/rr12x12_Dirt_Block_2015_shop_thumb.png";
         x.setPhoto(image);
         assertEquals(x.getPhoto(),image);

@@ -6,13 +6,18 @@ import java.util.Date;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-
+/**
+ * Test Exchange requests
+ */
 public class ExchangeTest {
+    /**
+     * test making a new exchange location
+     */
     @Test
     public void SetLocation(){
-        User owner = new User("user123", "first last", "example@email.com", "111-111-1111");
-        User borrower = new User("userb", "first last", "example@email.com", "111-111-1111");
-        Book book = new Book("test title","test author",123);
+        User owner = new User("first last", "example@email.com", "111-111-1111", "exampleID");
+        User borrower = new User("first last", "example@email.com", "111-111-1111", "exampleID");
+        Book book = new Book("testTitle","testAuthor","123","testPhoto","testOwnerEmail","testOwnerID");
         Exchange exchange = new Exchange(owner, borrower, book);
         double longitude = 25;
         double latitude = 30;
@@ -20,11 +25,15 @@ public class ExchangeTest {
         exchange.setLocation(location);
         assertEquals(location,exchange.getLocation());
     }
+
+    /**
+     * test making a change of date
+     */
     @Test
     public void SetDate(){
-        User owner = new User("user123", "first last", "example@email.com", "111-111-1111");
-        User borrower = new User("userb", "first last", "example@email.com", "111-111-1111");
-        Book book = new Book("test title","test author",123);
+        User owner = new User("first last", "example@email.com", "111-111-1111", "exampleID");
+        User borrower = new User("first last", "example@email.com", "111-111-1111", "exampleID");
+        Book book = new Book("testTitle","testAuthor","123","testPhoto","testOwnerEmail","testOwnerID");
         Exchange exchange = new Exchange(owner, borrower, book);
         Date date = new Date();
         exchange.setDate(date);
