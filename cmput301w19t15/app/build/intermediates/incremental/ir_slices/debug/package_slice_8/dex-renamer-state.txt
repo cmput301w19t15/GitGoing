@@ -1,4 +1,0 @@
-#Thu Feb 28 21:11:56 MST 2019
-base.0=/home/queen/Documents/301 Bullshit/Project/Actual/GitGoing/cmput301w19t15/app/build/intermediates/transforms/dexMerger/debug/8
-path.0=classes.dex
-renamed.0=classes.dex
