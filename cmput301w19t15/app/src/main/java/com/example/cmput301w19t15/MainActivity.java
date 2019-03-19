@@ -220,4 +220,3 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID()).setValue(loggedInUser);
     }
 }
-
