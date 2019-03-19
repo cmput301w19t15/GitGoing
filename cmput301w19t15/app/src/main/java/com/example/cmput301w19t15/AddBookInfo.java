@@ -1,3 +1,4 @@
+
 package com.example.cmput301w19t15;
 
 import android.app.Activity;
@@ -134,7 +135,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                     startActivityForResult(intent, REQUEST_CAMERA);
                 }
 
-                //if user chooses gallery, call mediaStorage and will return a uri object
+                 //if user chooses gallery, call mediaStorage and will return a uri object
 
                 else if (items[which] == "Gallery"){
                     Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

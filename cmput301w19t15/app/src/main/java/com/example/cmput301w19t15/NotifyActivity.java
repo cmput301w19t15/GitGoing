@@ -37,13 +37,13 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
 
     public void loadNotif() {
         loadNotifFromFirebBase(new loadNotifCallBack() {
-            @Override
-            public void loadNotifCallBack(ArrayList<Notification> value) {
-                listOfNotif = (ArrayList<Notification>) value.clone();
-                adapter = new NotifAdapter(NotifyActivity.this, listOfNotif);
-                mRecyclerView.setAdapter(adapter);
-                adapter.setOnItemClickListener(NotifyActivity.this);
-            }
+           @Override
+           public void loadNotifCallBack(ArrayList<Notification> value) {
+               listOfNotif = (ArrayList<Notification>) value.clone();
+               adapter = new NotifAdapter(NotifyActivity.this, listOfNotif);
+               mRecyclerView.setAdapter(adapter);
+               adapter.setOnItemClickListener(NotifyActivity.this);
+           }
         });
     }
 
