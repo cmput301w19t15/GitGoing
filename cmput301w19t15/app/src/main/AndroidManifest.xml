@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.camera2" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -41,6 +42,21 @@
         <activity android:name=".FindUsers"/>
         <activity android:name=".RequestedBookList"/>
         <activity android:name=".CreateRequest"/>
+        <activity android:name=".NotifyActivity"/>
+
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service android:name=".FirebaseIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+
     </application>
 
 </manifest>
