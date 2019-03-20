@@ -39,7 +39,7 @@ dependencies {
 dependencies {
     implementation 'com.google.firebase:firebase-storage:16.1.0'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
-    implementation 'com.google.android.gms:play-services:10.2.0'
+    implementation 'com.google.android.gms:play-services:12.0.1'
     implementation 'com.google.firebase:firebase-messaging:17.1.0'
 }
 
@@ -66,6 +66,7 @@ dependencies {
 }
 
 dependencies {
-  implementation 'com.google.android.gms:play-services-maps:+'
+  implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
   implementation 'com.android.support:appcompat-v7:28.+'
 }
