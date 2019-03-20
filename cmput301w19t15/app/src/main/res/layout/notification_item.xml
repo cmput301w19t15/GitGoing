@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/NotifType"
-            android:layout_width="262dp"
+            android:layout_width="263dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="Notification Type Here"
@@ -41,6 +41,17 @@
             android:layout_marginTop="8dp"
             android:text="On Book"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+        <TextView
+            android:id="@+id/NotifUnread"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginStart="41dp"
+            android:layout_marginLeft="41dp"
+            android:layout_toEndOf="@+id/NotifType"
+            android:layout_toRightOf="@+id/NotifType"
+            android:text="UNREAD"
+            android:textColor="@android:color/holo_red_light" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>
