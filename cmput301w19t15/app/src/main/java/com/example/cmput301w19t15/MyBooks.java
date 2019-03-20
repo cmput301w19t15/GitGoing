@@ -104,6 +104,8 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         super.onStart();
         //TextView textView = findViewById(R.id.textView2);
         //textView.setText("Number of books: " + arraySize);
+        mBookAdapter.notifyDataSetChanged();
+
     }
 
     /**
@@ -120,23 +122,4 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         startActivityForResult(intent,1);
     }
 
-    /**
-     * update the booklist based of what the user does
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1) {
-            //mBookList.clear();
-            mBookList.addAll(loggedInUser.getMyBooks());
-            mBookAdapter.notifyDataSetChanged();
-        }
-        if(requestCode == 2){
-            mBookList.clear();
-            mBookList.addAll(loggedInUser.getMyBooks());
-            mBookAdapter.notifyDataSetChanged();
-        }
-    }//onActivityResult
 }
