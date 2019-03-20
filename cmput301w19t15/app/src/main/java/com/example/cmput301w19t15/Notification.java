@@ -9,15 +9,16 @@ public class Notification {
     private String notifyFromID;
     private String notifyToID;
     private String notifID;
+    private Boolean read;
 
-
-    public Notification(String type, String bookID, String notifyFromID, String notifyToID) {
+    public Notification(String type, String bookID, String notifyFromID, String notifyToID, Boolean read) {
         this.type = type;
         this.bookID = bookID;
         this.notifyFromID = notifyFromID;
         this.notifyToID = notifyToID;
         if(this.notifID == null || this.notifID.isEmpty())
             this.notifID = UUID.randomUUID().toString();
+        this.read = read;
     }
 
     public Notification() {}
@@ -57,5 +58,9 @@ public class Notification {
     public String getNotifID() {
         return notifID;
     }
+
+    public Boolean getRead() { return read; }
+
+    public void setRead(Boolean read) {this.read = read; }
 }
 

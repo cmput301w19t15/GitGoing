@@ -70,8 +70,8 @@ public class CreateRequest extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addBookToRequest();
-                Notification notif = new Notification("requested", bookId, loggedInUser.getUserID(), ownerId);
-                //pivk notification table to save the notif
+                Notification notif = new Notification("requested", bookId, loggedInUser.getUserID(), ownerId, false);
+                //pick notification table to save the notif
                 DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
 
                 //add notif to database

@@ -132,14 +132,16 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.NotifViewHol
     public int getItemCount() {
         return mNotifList.size();
     }
+
     public class NotifViewHolder extends RecyclerView.ViewHolder {
-        public TextView mTextViewType, mTextViewUser, mTextViewBook;
+        public TextView mTextViewType, mTextViewUser, mTextViewBook, mTextViewRead;
 
         public NotifViewHolder (View itemView) {
             super(itemView);
             mTextViewType = itemView.findViewById(R.id.NotifType);
             mTextViewUser = itemView.findViewById(R.id.NotifUserEmail);
             mTextViewBook = itemView.findViewById(R.id.NotifBookTitle);
+            mTextViewRead = itemView.findViewById(R.id.NotifUnread);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -148,6 +150,14 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.NotifViewHol
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             mListener.onItemClick(position);
+                        }
+                        for (Notification notif : mNotifList) {
+                            if(notif.getRead()) {
+                                mTextViewRead.setVisibility(View.INVISIBLE);
+                            }
+                            else {
+                                //mTextViewRead.setVisibility(View.VISIBLE);
+                            }
                         }
                     }
                 }
