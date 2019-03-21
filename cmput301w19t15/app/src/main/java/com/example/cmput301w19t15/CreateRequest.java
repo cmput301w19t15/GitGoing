@@ -67,6 +67,7 @@ public class CreateRequest extends AppCompatActivity {
         statusText.setText(status);
         request = (Button) findViewById(R.id.request_button);
 
+
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

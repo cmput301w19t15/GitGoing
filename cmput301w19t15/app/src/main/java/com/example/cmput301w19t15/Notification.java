@@ -14,6 +14,7 @@ public class Notification {
     private String ISBN;
     private String photo;
     private String notifID;
+
     private Boolean read;
 
     public Notification(String type, String bookID, String title, String notifyFromID, String notifyFromEmail,
