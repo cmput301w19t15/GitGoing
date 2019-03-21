@@ -65,8 +65,9 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.NotifViewHol
             notifType = "Your request has been accepted";
         }
         holder.mTextViewType.setText(notifType);
-
-
+        if(currentNotif.getRead()) {
+            holder.mTextViewRead.setVisibility(View.INVISIBLE);
+        }
 
         //get user email from ID
         FirebaseDatabase.getInstance().getReference().child("users")
@@ -154,9 +155,6 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.NotifViewHol
                         for (Notification notif : mNotifList) {
                             if(notif.getRead()) {
                                 mTextViewRead.setVisibility(View.INVISIBLE);
-                            }
-                            else {
-                                //mTextViewRead.setVisibility(View.VISIBLE);
                             }
                         }
                     }
