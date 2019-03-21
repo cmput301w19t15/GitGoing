@@ -29,6 +29,7 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.NotifViewHol
          */
         void onItemClick(int position);
     }
+
     /**
      * Sets on item click listener
      * @param  listener the listener
@@ -57,6 +58,7 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.NotifViewHol
     public void onBindViewHolder (final NotifAdapter.NotifViewHolder holder, int position) {
         Notification currentNotif = mNotifList.get(position);
 
+        //set text depending on notif type
         String notifType = "";
         if (currentNotif.getType().equals("requested")) {
             notifType = "Request on your book";
@@ -64,68 +66,14 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.NotifViewHol
         else if (currentNotif.getType().equals("accepted")) {
             notifType = "Your request has been accepted";
         }
+        String title = currentNotif.getTitle();
+        String notifyFromEmail = currentNotif.getNotifyFromEmail();
+        String ISBN = currentNotif.getISBN();
+        String photo = currentNotif.getPhoto();
+
         holder.mTextViewType.setText(notifType);
-
-
-
-        //get user email from ID
-        FirebaseDatabase.getInstance().getReference().child("users")
-                .child(currentNotif.getNotifyFromID()).child("email").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                try {
-                    if (dataSnapshot.getValue() != null) {
-                        try {
-                            String name = dataSnapshot.getValue().toString();
-                            holder.mTextViewUser.setText(name);
-                            //Log.e("TAG", "" + name[0]);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Log.e("TAG", " it's null.");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("onCancelled", " cancelled");
-            }
-        });
-
-
-        //get book title email from ID
-        FirebaseDatabase.getInstance().getReference().child("books")
-                .child(currentNotif.getBookID()).child("title").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                try {
-                    if (dataSnapshot.getValue() != null) {
-                        try {
-                            String title = dataSnapshot.getValue().toString();
-                            holder.mTextViewBook.setText(title);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Log.e("TAG", " it's null.");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("onCancelled", " cancelled");
-            }
-        });
-        String bookTitle = FirebaseDatabase.getInstance().getReference().child("books")
-                .child(currentNotif.getBookID()).child("title").toString();
-
+        holder.mTextViewUser.setText(notifyFromEmail);
+        holder.mTextViewBook.setText(title);
     }
 
     @Override
