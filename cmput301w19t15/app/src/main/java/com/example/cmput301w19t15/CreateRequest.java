@@ -33,7 +33,7 @@ public class CreateRequest extends AppCompatActivity {
     private Book newBook;
     private User owner;
     User loggedInUser = MainActivity.getUser();
-    String ownerId, author, title, ownerEmail, isbn, status, bookId;
+    String ownerId, author, title, ownerEmail, isbn, status, bookId, photo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +50,7 @@ public class CreateRequest extends AppCompatActivity {
         title = (String) bundle.get("TITLE");
         status = (String) bundle.get("STATUS");
         bookId = (String) bundle.get("BOOKID");
+        photo = (String) bundle.get("PHOTO");
 
         /**
          * set the text field with the values that was passed over
@@ -66,11 +67,13 @@ public class CreateRequest extends AppCompatActivity {
         statusText.setText(status);
         request = (Button) findViewById(R.id.request_button);
 
+
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addBookToRequest();
-                Notification notif = new Notification("requested", bookId, loggedInUser.getUserID(), ownerId, false);
+                Notification notif = new Notification("requested", bookId, title, loggedInUser.getUserID(), loggedInUser.getEmail(),
+                        ownerId, ownerEmail, isbn, photo, false);
                 //pick notification table to save the notif
                 DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
 
