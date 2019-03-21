@@ -213,6 +213,7 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
         bundle.putString("OWNERID",book.getOwnerID());
         bundle.putString("STATUS",book.getStatus());
         bundle.putString("BOOKID",book.getBookID());
+        bundle.putString("PHOTO", book.getPhoto());
 
         Intent intent = new Intent(FindBooks.this, CreateRequest.class);
         intent.putExtras(bundle);
