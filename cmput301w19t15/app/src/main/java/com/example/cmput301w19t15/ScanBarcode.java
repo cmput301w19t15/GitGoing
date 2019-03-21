@@ -61,7 +61,6 @@ public class ScanBarcode extends AppCompatActivity implements BarcodeReader.Barc
         barcodeReader.playBeep();
         Intent returnIntent = new Intent();
         returnIntent.putExtra("ISBN",barcode.displayValue.toString());
-        setResult(RESULT_OK, returnIntent);
         finish();
     }
 

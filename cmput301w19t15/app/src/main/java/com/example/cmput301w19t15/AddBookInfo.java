@@ -46,7 +46,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
     private String bookPhoto;
 
     private ZXingScannerView scannerView;
-    Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
+    Integer SELECT_FILE = 0, REQUEST_CAMERA = 1, SCAN_ISBN = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,13 +159,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
     public void scan(View view){
         //https://github.com/ravi8x/Barcode-Reader
         Intent scannerIntent = new Intent(AddBookInfo.this,ScanBarcode.class);
-        startActivityForResult(scannerIntent,5);
-        /*
-        scannerView = new ZXingScannerView(getApplicationContext());
-        setContentView(scannerView);
-        scannerView.setResultHandler(this);
-        scannerView.startCamera();
-        */
+        startActivityForResult(scannerIntent,SCAN_ISBN);
     }
 
     /**
@@ -186,38 +180,38 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
      * @param resultCode a code that's required when an intent is to return data
      * @param data the data that's returned by the activity
      */
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode,resultCode,data);
-        if(requestCode == 5){
-            String barcode = data.getStringExtra("ISBN");
-            isbn.setText(barcode);
-        }
-
-        if(resultCode == Activity.RESULT_OK){
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SCAN_ISBN) {
+                String barcode = data.getStringExtra("ISBN");
+                isbn.setText(barcode);
+            }
             /**
              * return bitmap and assign it to book's attribute
              */
-            if (requestCode == REQUEST_CAMERA){
+            if (requestCode == REQUEST_CAMERA) {
                 Bundle bundle = data.getExtras();
-                final Bitmap bitmap =  (Bitmap) bundle.get("data");
+                final Bitmap bitmap = (Bitmap) bundle.get("data");
                 String bookPhoto = ConvertPhoto.convert(bitmap);
                 this.bookPhoto = bookPhoto;
-
             }
+
             /**
              * return uri, then comvert to bitmap and assign it to book's attribute
              */
-            else if (requestCode == SELECT_FILE){
+            else if (requestCode == SELECT_FILE) {
                 Uri photoUri = data.getData();
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),photoUri);
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
                     String bookPhoto = ConvertPhoto.convert(bitmap);
                     this.bookPhoto = bookPhoto;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            //Log.d("testing",this.bookPhoto);
         }
+        //Log.d("testing",this.bookPhoto);
     }
 }
