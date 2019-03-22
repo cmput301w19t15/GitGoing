@@ -78,7 +78,6 @@ public class CreateRequest extends AppCompatActivity {
                 DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
 
                 //add notif to database
-                newNotif.setValue(notif);
                 newNotif.setValue(notif).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -87,6 +86,7 @@ public class CreateRequest extends AppCompatActivity {
                         }
                     }
                 });
+                finish();
             }
         });
 
@@ -123,7 +123,7 @@ public class CreateRequest extends AppCompatActivity {
                         break;
                     }
                 }
-                owner.addToRequestedBooks(newBook);
+                //owner.addToRequestedBooks(newBook);
                 loggedInUser.addToMyRequestedBooks(newBook);
                 finish();
             }
