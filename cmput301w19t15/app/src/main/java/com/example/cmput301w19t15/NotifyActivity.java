@@ -96,13 +96,30 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
 
     @Override
     public void onItemClick(int position) {
+
         Notification notif = listOfNotif.get(position);
-        if (notif.getRead()) {
-            notif.setRead(false);
+        String bookID = notif.getBookID();
+        String ISBN = notif.getISBN();
+        String notifID = notif.getNotifID();
+        String notifyFromEmail = notif.getNotifyFromEmail();
+        String notifyFromID = notif.getNotifyFromID();
+        String notifyToEmail = notif.getNotifyToEmail();
+        String notifyToID = notif.getNotifyToID();
+        String photo = notif.getPhoto();
+        Boolean read = notif.getRead();
+        String title = notif.getTitle();
+        String type = notif.getType();
+
+        if (read == true) {
+            read = false;
         }
         else {
-            notif.setRead(true);
+            read = true;
         }
+
+        FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
+
+        notif.setRead(read);
 
         FirebaseDatabase.getInstance().getReference("notifications").child(notif.getBookID()).setValue(notif);
     }
