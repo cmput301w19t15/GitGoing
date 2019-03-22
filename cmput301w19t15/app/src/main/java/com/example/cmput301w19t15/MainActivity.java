@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
         checkLogIn();
         getLoggedinUser();
+        //numNotif = 0;
+        //loadNotifMain();
 
         logOut = findViewById(R.id.logout_button);
         //progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -155,10 +157,8 @@ public class MainActivity extends AppCompatActivity {
      */
     protected void onResume() {
         super.onResume();
-        //loadNotifMain();
-        final String temp;
-        temp = String.valueOf(numNotif);
-        Toast.makeText(this, "numNotif: "+temp, Toast.LENGTH_SHORT).show();;
+        numNotif = 0;
+        loadNotifMain();
         //progressBar.setVisibility(View.GONE);
     }
 
@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    /*public void loadNotifMain() {
+    public void loadNotifMain() {
         loadNotifFromFirebBase(new loadNotifCallBack() {
             @Override
             public void loadNotifCallBack(ArrayList<Notification> value) {
@@ -271,10 +271,16 @@ public class MainActivity extends AppCompatActivity {
                                 if (currentNotif.getNotifyToID().equals(user.getUid())){
                                     //allNotif.add(currentNotif);
                                     numNotif+=1;
+                                    //Log.d("TAG", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHnumNotif: "+numNotif);
+                                }
+                                else{
+                                    //Log.d("TAG", "OOOOOOOOOOOOOOOOOOOOOO: " + currentNotif.getNotifyToID() + "EEEEEEEEEEEEEE: " + user.getUid());
                                 }
                             }
                         }
                         //myCallback.loadNotifCallBack(allNotif);
+                        Toast.makeText(MainActivity.this, "Num Notif: " + numNotif, Toast.LENGTH_SHORT).show();
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -286,9 +292,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-    }*/
 
-    /*public void onItemClick(int position) {
+    }
+
+    public void onItemClick(int position) {
         Notification notif = listOfNotif.get(position);
         if (notif.getRead()) {
             notif.setRead(false);
@@ -298,6 +305,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         FirebaseDatabase.getInstance().getReference("notifications").child(notif.getBookID()).setValue(notif);
-    }*/
+    }
 }
 
