@@ -47,6 +47,7 @@ import java.util.ArrayList;
  * @version 1.0
  * @since 1.0
  */
+
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
@@ -296,7 +297,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onItemClick(int position) {
-        Notification notif = listOfNotif.get(position);
+        /*Notification notif = listOfNotif.get(position);
         if (notif.getRead()) {
             notif.setRead(false);
         }
@@ -305,6 +306,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         FirebaseDatabase.getInstance().getReference("notifications").child(notif.getBookID()).setValue(notif);
-    }
+    */}
 }
 
