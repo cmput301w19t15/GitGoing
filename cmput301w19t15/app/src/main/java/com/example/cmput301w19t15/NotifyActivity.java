@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,7 +28,6 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
     protected void onCreate (Bundle savedInstancesState) {
         super.onCreate(savedInstancesState);
         setContentView(R.layout.activity_notify);
-
         mRecyclerView = findViewById(R.id.recylcerNotifView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         listOfNotif = new ArrayList<>();
@@ -35,15 +35,22 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadNotif();
+        Log.d("TAG", "wutttt");
+    }
+
     public void loadNotif() {
         loadNotifFromFirebBase(new loadNotifCallBack() {
-           @Override
-           public void loadNotifCallBack(ArrayList<Notification> value) {
-               listOfNotif = (ArrayList<Notification>) value.clone();
-               adapter = new NotifAdapter(NotifyActivity.this, listOfNotif);
-               mRecyclerView.setAdapter(adapter);
-               adapter.setOnItemClickListener(NotifyActivity.this);
-           }
+            @Override
+            public void loadNotifCallBack(ArrayList<Notification> value) {
+                listOfNotif = (ArrayList<Notification>) value.clone();
+                adapter = new NotifAdapter(NotifyActivity.this, listOfNotif);
+                mRecyclerView.setAdapter(adapter);
+                adapter.setOnItemClickListener(NotifyActivity.this);
+            }
         });
     }
 
@@ -65,9 +72,11 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
 
                             if (user.getUid() != null){
                                 Notification currentNotif = notif.getValue(Notification.class);
-                                //Log.d("testing",user.getUid());
+                                Log.d("testing",user.getUid());
                                 if (currentNotif.getNotifyToID().equals(user.getUid())){
                                     allNotif.add(currentNotif);
+                                    //Toast.makeText(NotifyActivity.this, currentNotif.getTitle(), Toast.LENGTH_SHORT).show();
+
                                 }
                             }
                         }

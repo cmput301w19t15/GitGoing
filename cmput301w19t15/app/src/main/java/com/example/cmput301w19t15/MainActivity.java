@@ -20,6 +20,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,6 +30,7 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -53,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
     private static User loggedInUser;
 
+    private NotifAdapter adapter;
+    private ArrayList<Notification> listOfNotif;
+    private RecyclerView mRecyclerView;
+    private int numNotif = 0;
+
     /**
      * Calls when activity is first made
      * @param savedInstanceState
@@ -64,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
         checkLogIn();
         getLoggedinUser();
+        //numNotif = 0;
+        //loadNotifMain();
 
         logOut = findViewById(R.id.logout_button);
         //progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -147,6 +157,8 @@ public class MainActivity extends AppCompatActivity {
      */
     protected void onResume() {
         super.onResume();
+        numNotif = 0;
+        loadNotifMain();
         //progressBar.setVisibility(View.GONE);
     }
 
@@ -218,6 +230,81 @@ public class MainActivity extends AppCompatActivity {
      */
     public static void updateUser(){
         FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID()).setValue(loggedInUser);
+    }
+
+
+
+
+
+
+    public void loadNotifMain() {
+        loadNotifFromFirebBase(new loadNotifCallBack() {
+            @Override
+            public void loadNotifCallBack(ArrayList<Notification> value) {
+                //listOfNotif = (ArrayList<Notification>) value.clone();
+                //adapter = new NotifAdapter(NotifyActivity, listOfNotif);
+                //mRecyclerView.setAdapter(adapter);
+                //adapter.setOnItemClickListener(NotifyActivity.class);
+            }
+        });
+    }
+
+    public interface loadNotifCallBack {
+        void loadNotifCallBack(ArrayList<Notification> value);
+    }
+
+    public void loadNotifFromFirebBase(final loadNotifCallBack myCallback) {
+        DatabaseReference notifReference = FirebaseDatabase.getInstance().getReference().child("notifications");
+        notifReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    try {
+                        //ArrayList<Notification> allNotif = new ArrayList<>();
+                        for (DataSnapshot notif : dataSnapshot.getChildren()) {
+                            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            //Log.d("testing1",user.getUid());
+
+                            if (user.getUid() != null){
+                                Notification currentNotif = notif.getValue(Notification.class);
+                                //Log.d("testing",user.getUid());
+                                if (currentNotif.getNotifyToID().equals(user.getUid())){
+                                    //allNotif.add(currentNotif);
+                                    numNotif+=1;
+                                    //Log.d("TAG", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHnumNotif: "+numNotif);
+                                }
+                                else{
+                                    //Log.d("TAG", "OOOOOOOOOOOOOOOOOOOOOO: " + currentNotif.getNotifyToID() + "EEEEEEEEEEEEEE: " + user.getUid());
+                                }
+                            }
+                        }
+                        //myCallback.loadNotifCallBack(allNotif);
+                        Toast.makeText(MainActivity.this, "Num Notif: " + numNotif, Toast.LENGTH_SHORT).show();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void onItemClick(int position) {
+        Notification notif = listOfNotif.get(position);
+        if (notif.getRead()) {
+            notif.setRead(false);
+        }
+        else {
+            notif.setRead(true);
+        }
+
+        FirebaseDatabase.getInstance().getReference("notifications").child(notif.getBookID()).setValue(notif);
     }
 }
 

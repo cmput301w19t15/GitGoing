@@ -29,7 +29,6 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.NotifViewHol
          */
         void onItemClick(int position);
     }
-
     /**
      * Sets on item click listener
      * @param  listener the listener
