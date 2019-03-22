@@ -73,6 +73,10 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.NotifViewHol
         holder.mTextViewType.setText(notifType);
         holder.mTextViewUser.setText(notifyFromEmail);
         holder.mTextViewBook.setText(title);
+
+        if (currentNotif.getRead() == true) {
+            holder.mTextViewRead.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -111,4 +115,6 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.NotifViewHol
             });
         }
     }
+
+
 }
