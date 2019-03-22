@@ -1,8 +1,9 @@
 package com.example.cmput301w19t15;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Notification {
+public class Notification implements Serializable {
 
     private String type;  // requested, accepted
     private String bookID;

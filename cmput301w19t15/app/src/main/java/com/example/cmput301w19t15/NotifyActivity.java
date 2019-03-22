@@ -1,5 +1,6 @@
 package com.example.cmput301w19t15;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -60,6 +61,7 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
 
     public void loadNotifFromFirebBase(final loadNotifCallBack myCallback) {
         DatabaseReference notifReference = FirebaseDatabase.getInstance().getReference().child("notifications");
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         notifReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -67,7 +69,7 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
                     try {
                         ArrayList<Notification> allNotif = new ArrayList<>();
                         for (DataSnapshot notif : dataSnapshot.getChildren()) {
-                            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
                             //Log.d("testing1",user.getUid());
 
                             if (user.getUid() != null){
@@ -113,14 +115,18 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
         if (read == true) {
             read = false;
         }
-        else {
-            read = true;
-        }
+        //else {
+            //read = true;
+        //}
 
         FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
 
         notif.setRead(read);
 
         FirebaseDatabase.getInstance().getReference("notifications").child(notif.getBookID()).setValue(notif);
+        Intent intent = new Intent(NotifyActivity.this, AcceptRequest.class);
+        intent.putExtra("Notification",notif);
+        startActivityForResult(intent,1);
+
     }
 }

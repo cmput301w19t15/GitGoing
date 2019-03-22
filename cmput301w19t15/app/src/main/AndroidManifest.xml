@@ -43,6 +43,7 @@
         <activity android:name=".RequestedBookList"/>
         <activity android:name=".CreateRequest"/>
         <activity android:name=".NotifyActivity"/>
+        <activity android:name=".AcceptRequest"/>
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
