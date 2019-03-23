@@ -28,8 +28,8 @@ public class Notification implements Serializable {
         this.notifyToEmail = notifyToEmail;
         this.ISBN = ISBN;
         this.photo = photo;
-        if(this.notifID == null || this.notifID.isEmpty())
-            this.notifID = UUID.randomUUID().toString();
+        if(this.notifID == null || this.notifID.isEmpty()){
+            this.notifID = UUID.randomUUID().toString();}
         this.read = read;
     }
 

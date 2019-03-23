@@ -52,17 +52,17 @@ public class AcceptRequest extends AppCompatActivity {
                     //Notification notif = new Notification("requested", bookId, loggedInUser.getUserID(), ownerId);
                     //pivk notification table to save the notif
 
-                    Notification notif2 = new Notification("accepted", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
+                    final Notification notif2 = new Notification("accepted", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
                             notif.getNotifyFromID(), notif.getNotifyFromEmail(), notif.getISBN(), notif.getPhoto(), false);
                     DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif2.getNotifID());
 
                     //add notif to database
-                    newNotif.setValue(notif2);
-                    newNotif.setValue(notif).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    //newNotif.setValue(notif2);
+                    newNotif.setValue(notif2).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(com.example.cmput301w19t15.AcceptRequest.this, "Successfully Added Notification", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(com.example.cmput301w19t15.AcceptRequest.this, "Successfully Added Notification ", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
