@@ -112,21 +112,24 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
         String title = notif.getTitle();
         String type = notif.getType();
 
-        if (read == true) {
-            read = false;
+        if (read == false) {
+            read = true;
+            FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
+            notif.setRead(read);
+            FirebaseDatabase.getInstance().getReference("notifications").child(notif.getBookID()).setValue(notif);
+
         }
         //else {
             //read = true;
         //}
 
-        FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
+        // delete old notif and save with updated read value
 
-        notif.setRead(read);
 
-        FirebaseDatabase.getInstance().getReference("notifications").child(notif.getBookID()).setValue(notif);
-        Intent intent = new Intent(NotifyActivity.this, AcceptRequest.class);
-        intent.putExtra("Notification",notif);
-        startActivityForResult(intent,1);
-
+        if (notif.getType().equals("requested")) {
+            Intent intent = new Intent(NotifyActivity.this, AcceptRequest.class);
+            intent.putExtra("Notification", notif);
+            startActivityForResult(intent, 1);
+        }
     }
 }
