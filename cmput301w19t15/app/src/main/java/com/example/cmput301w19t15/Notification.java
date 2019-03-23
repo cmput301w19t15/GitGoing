@@ -87,6 +87,10 @@ public class Notification implements Serializable {
         return notifID;
     }
 
+    public void setNotifID(String notifID) {
+        this.notifID = notifID;
+    }
+
     public void setNotifyToEmail(String notifyToName) {
         this.notifyToEmail = notifyToName;
     }

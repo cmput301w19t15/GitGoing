@@ -116,6 +116,7 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
             read = true;
             FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
             notif.setRead(read);
+            notif.setNotifID(notifID);
             FirebaseDatabase.getInstance().getReference("notifications").child(notif.getBookID()).setValue(notif);
 
         }
