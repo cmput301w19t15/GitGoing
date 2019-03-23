@@ -1,8 +1,9 @@
 package com.example.cmput301w19t15;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Notification {
+public class Notification implements Serializable {
 
     private String type;  // requested, accepted
     private String bookID;
@@ -14,7 +15,6 @@ public class Notification {
     private String ISBN;
     private String photo;
     private String notifID;
-
     private Boolean read;
 
     public Notification(String type, String bookID, String title, String notifyFromID, String notifyFromEmail,
@@ -28,8 +28,8 @@ public class Notification {
         this.notifyToEmail = notifyToEmail;
         this.ISBN = ISBN;
         this.photo = photo;
-        if(this.notifID == null || this.notifID.isEmpty())
-            this.notifID = UUID.randomUUID().toString();
+        if(this.notifID == null || this.notifID.isEmpty()){
+            this.notifID = UUID.randomUUID().toString();}
         this.read = read;
     }
 
@@ -85,6 +85,10 @@ public class Notification {
 
     public String getNotifID() {
         return notifID;
+    }
+
+    public void setNotifID(String notifID) {
+        this.notifID = notifID;
     }
 
     public void setNotifyToEmail(String notifyToName) {
