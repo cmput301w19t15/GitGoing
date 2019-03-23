@@ -121,7 +121,7 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
 
         }
         //else {
-            //read = true;
+        //read = true;
         //}
 
         // delete old notif and save with updated read value
@@ -129,6 +129,11 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
 
         if (notif.getType().equals("requested")) {
             Intent intent = new Intent(NotifyActivity.this, AcceptRequest.class);
+            intent.putExtra("Notification", notif);
+            startActivityForResult(intent, 1);
+        }
+        if (notif.getType().equals("accepted")) {
+            Intent intent = new Intent(NotifyActivity.this, ViewAcceptedRequest.class);
             intent.putExtra("Notification", notif);
             startActivityForResult(intent, 1);
         }

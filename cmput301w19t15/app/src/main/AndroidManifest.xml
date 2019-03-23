@@ -44,6 +44,7 @@
         <activity android:name=".CreateRequest"/>
         <activity android:name=".NotifyActivity"/>
         <activity android:name=".AcceptRequest"/>
+        <activity android:name=".ViewAcceptedRequest"/>
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
