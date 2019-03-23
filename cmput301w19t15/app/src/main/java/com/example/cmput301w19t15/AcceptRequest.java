@@ -29,7 +29,6 @@ public class AcceptRequest extends AppCompatActivity {
              * save the book values passed from the FindBooks classes when clicked on
              */
             final Notification notif = (Notification) getIntent().getSerializableExtra("Notification");
-            Bundle bundle = getIntent().getExtras();
 
 
             /**
