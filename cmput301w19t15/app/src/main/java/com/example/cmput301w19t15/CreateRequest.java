@@ -1,8 +1,9 @@
 package com.example.cmput301w19t15;
-
+//:)
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -104,31 +105,84 @@ public class CreateRequest extends AppCompatActivity {
      * and add the book as a book that has been requested
      * updates firebase
      */
-    private void addBookToRequest(){
+    /*private void addBookToRequest(){
         FirebaseDatabase.getInstance().getReference("users")
                 .orderByChild("userID").addListenerForSingleValueEvent(new ValueEventListener() {
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot child : snapshot.getChildren()) {
+                    Log.d("TAG: ", "I'M HEREEEEEEEEE");
                     if (child.getKey().equals(ownerId)) {
-                        owner = (child.getValue(User.class));
+                        //owner = (child.getValue(User.class));
+                        owner = new User(ownerEmail, ownerId);
                         ArrayList<Book> ownersBooks = owner.getMyBooks();
                         for (Book book : ownersBooks) {
                             if (bookId.equals(book.getBookID())) {
                                 String borrowerID = loggedInUser.getUserID();
                                 newBook = new Book(book);
                                 newBook.setBorrowerID(borrowerID);
+                                DatabaseReference user = FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID());
+                                user.child("myRequestedBooksAccepted").setValue(newBook);
+                                Log.d("TAG: ", "SAVE MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+
+                                Log.d("TAG: ", "SAVE MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE" + newBook.getTitle());
+                                //owner.addToMyRequestedBooks(newBook);
                                 break;
+                            }
+                            else{
+                                Log.d("TAG ", "NOT MATCH "+ bookId + " " + book.getBookID());
                             }
                         }
                         break;
                     }
                 }
                 owner.addToMyRequestedBooks(newBook);
+                //Log.d("TAG: ", "SAVE MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE" + newBook.getTitle());
                 //loggedInUser.addToMyRequestedBooks(newBook);
+                //DatabaseReference user = FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID());
+                //user.child("myRequestedBooksAccepted").setValue(newBook);
                 finish();
             }
             public void onCancelled(DatabaseError databaseError) {
                 // ...
+            }
+        });
+    }*/
+
+    public interface loadBookCallBack {
+        /**
+         * Load book call back.
+         *
+         * @param value the value
+         */
+        void loadBookCallBack(ArrayList<Book> value);
+    }
+
+
+    public void addBookToRequest(){
+        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users").child(ownerId).child("myBooks");
+        userReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    try {
+                        //ArrayList<Book> allBooks = new ArrayList<>();
+                        for (DataSnapshot books : dataSnapshot.getChildren()) {
+                            Log.d("TAG", "HEREEEEEEEee");
+                            Book book = books.getValue(Book.class);
+                            if (book.getBookID().equals(bookId)){
+                                loggedInUser.addToMyRequestedBooks(book);
+                            }
+                            //allBooks.add(book);
+                        }
+                        //myCallback.loadBookCallBack(allBooks);
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("testing","Error: ", databaseError.toException());
             }
         });
     }

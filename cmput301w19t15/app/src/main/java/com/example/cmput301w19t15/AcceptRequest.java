@@ -1,5 +1,6 @@
 package com.example.cmput301w19t15;
-
+//:)
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +25,7 @@ public class AcceptRequest extends AppCompatActivity {
         private Book newBook;
         private User owner;
         User loggedInUser = MainActivity.getUser();
-        String ownerID, borrowerID, author, title, borrowerEmail, isbn, status, bookId;
+        String ownerID, borrowerID, author, title, borrowerEmail, isbn, status, bookId, ownerEmail;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -63,6 +64,7 @@ public class AcceptRequest extends AppCompatActivity {
                     final Notification notif2 = new Notification("accepted", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
                             notif.getNotifyFromID(), notif.getNotifyFromEmail(), notif.getISBN(), notif.getPhoto(), false);
                     ownerID = loggedInUser.getUserID();
+                    ownerEmail = loggedInUser.getEmail();
                     DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif2.getNotifID());
 
                     //add notif to database
@@ -79,6 +81,8 @@ public class AcceptRequest extends AppCompatActivity {
                     //add to borrower's myAcceptedRequests
                     addBookToAccepted();
                     finish();
+                    //Intent intent = new Intent(AcceptRequest.this, NotifyActivity.class);
+                    //startActivity(intent);
                 }
             });
 
@@ -112,7 +116,8 @@ public class AcceptRequest extends AppCompatActivity {
                 public void onDataChange(DataSnapshot snapshot) {
                     for (DataSnapshot child : snapshot.getChildren()) {
                         if (child.getKey().equals(ownerID)) {
-                            owner = (child.getValue(User.class));
+                            //owner = (child.getValue(User.class));
+                            owner = new User(ownerEmail, ownerID);
                             ArrayList<Book> ownersBooks = owner.getMyBooks();
                             for (Book book : ownersBooks) {
                                 if (bookId.equals(book.getBookID())) {
