@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
@@ -110,7 +111,7 @@ public class AcceptRequest extends AppCompatActivity {
          * and add the book as a book that has been accepted
          * updates firebase
          */
-        private void addBookToAccepted(){
+        /*private void addBookToAccepted(){
             FirebaseDatabase.getInstance().getReference("users")
                     .orderByChild("userID").addListenerForSingleValueEvent(new ValueEventListener() {
                 public void onDataChange(DataSnapshot snapshot) {
@@ -139,8 +140,45 @@ public class AcceptRequest extends AppCompatActivity {
                 }
             });
 
+        }*/
+
+    /**
+     * add owner's book to accepted requests for the borrower
+     */
+    public void addBookToAccepted(){
+            DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID()).child("myBooks");
+            userReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()) {
+                        try {
+                            //ArrayList<Book> allBooks = new ArrayList<>();
+                            for (DataSnapshot books : dataSnapshot.getChildren()) {
+                                Log.d("TAG", "HEREEEEEEEee");
+                                Book book = books.getValue(Book.class);
+                                if (book.getBookID().equals(bookId)){
+                                    //borrowerID.addToMyRequestedBooks(book);
+                                    DatabaseReference borrower = FirebaseDatabase.getInstance().getReference().child("users")
+                                            .child(borrowerID);
+                                    //borrower.child("myRequestedBooksAccepted").setValue(book);
+                                    User user = new User(borrowerEmail, borrowerID);
+                                    user.addToMyRequestedBooksAccepted(book);
+                                }
+                                //allBooks.add(book);
+                            }
+                            //myCallback.loadBookCallBack(allBooks);
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.w("testing","Error: ", databaseError.toException());
+                }
+            });
         }
 
-        }
+}
 
 
