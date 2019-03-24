@@ -126,9 +126,7 @@ public class AcceptRequest extends AppCompatActivity {
                     }
                     DatabaseReference borrower = FirebaseDatabase.getInstance().getReference().child("users")
                             .child(borrowerID);
-                    borrower.child("myAcceptedBooks").setValue(newBook);
-                    //borrower.addToMyRequestedBooksAccepted(newBook);
-                    //loggedInUser.addToMyRequestedBooks(newBook);
+                    borrower.child("myRequestedBooksAccepted").setValue(newBook);
                     finish();
                 }
                 public void onCancelled(DatabaseError databaseError) {
