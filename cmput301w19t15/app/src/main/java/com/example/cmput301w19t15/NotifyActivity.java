@@ -116,7 +116,7 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
             FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
             notif.setRead(read);
             notif.setNotifID(notifID);
-            FirebaseDatabase.getInstance().getReference("notifications").child(notif.getBookID()).setValue(notif);
+            FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).setValue(notif);
 
         }
         //else {
@@ -129,11 +129,15 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
         if (notif.getType().equals("requested")) {
             Intent intent = new Intent(NotifyActivity.this, AcceptRequest.class);
             intent.putExtra("Notification", notif);
+            intent.putExtra("NotifID", notifID);
+            Log.d("TAG" , "NOTIFFFFFFFFFFFFFFFFFFID: "+ notifID);
             startActivityForResult(intent, 1);
         }
         if (notif.getType().equals("accepted")) {
             Intent intent = new Intent(NotifyActivity.this, ViewAcceptedRequest.class);
             intent.putExtra("Notification", notif);
+            intent.putExtra("NotifID", notifID);
+            //Log.d("TAG" , "NOTIFFFFFFFFFFFFFFFFFFID: "+ notifID);
             startActivityForResult(intent, 1);
         }
     }

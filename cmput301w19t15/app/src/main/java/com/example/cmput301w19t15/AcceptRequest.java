@@ -25,6 +25,8 @@ public class AcceptRequest extends AppCompatActivity {
         private Button exit,request,decline;
         private Book newBook;
         private User owner;
+        private String notifID;
+        private Notification notif2;
         User loggedInUser = MainActivity.getUser();
         String ownerID, borrowerID, author, title, borrowerEmail, isbn, status, bookId, ownerEmail;
         @Override
@@ -36,7 +38,9 @@ public class AcceptRequest extends AppCompatActivity {
              * save the book values passed from the FindBooks classes when clicked on
              */
             final Notification notif = (Notification) getIntent().getSerializableExtra("Notification");
-
+            notifID = (String) getIntent().getSerializableExtra("NotifID");
+            notif.setNotifID(notifID);
+            Toast.makeText(this, "NOTIFID: "+ notifID, Toast.LENGTH_SHORT).show();
 
             /**
              * set the text field with the values that was passed over
@@ -61,8 +65,8 @@ public class AcceptRequest extends AppCompatActivity {
                     //Notification notif = new Notification("requested", bookId, loggedInUser.getUserID(), ownerId);
 
 
-                    //pivk notification table to save the notif
-                    final Notification notif2 = new Notification("accepted", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
+                    //pick notification table to save the notif
+                    notif2 = new Notification("accepted", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
                             notif.getNotifyFromID(), notif.getNotifyFromEmail(), notif.getISBN(), notif.getPhoto(), false);
                     ownerID = loggedInUser.getUserID();
                     ownerEmail = loggedInUser.getEmail();
@@ -98,8 +102,9 @@ public class AcceptRequest extends AppCompatActivity {
             decline.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Log.d("TAG: ", "WHYYYYYYYYYYYYYYYYYYYYYYYYYYy");
                     FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
+                    Toast.makeText(AcceptRequest.this, "Deleted " + notif.getNotifID(), Toast.LENGTH_SHORT).show();
                     finish();
                 }
             });
