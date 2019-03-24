@@ -53,7 +53,7 @@ public class AcceptRequest extends AppCompatActivity {
                     //Notification notif = new Notification("requested", bookId, loggedInUser.getUserID(), ownerId);
                     //pivk notification table to save the notif
 
-                    /*Change book status to accepted*/
+                    /*Change book status to accepted, DOES NOT work keeping for personal reference currently
                     Book book = loggedInUser.findBookbyID(loggedInUser.getMyBooks(),notif.getBookID());
                     book.setStatus("accepted");
                     Integer index = loggedInUser.getMyBooks().indexOf(book);
@@ -63,7 +63,7 @@ public class AcceptRequest extends AppCompatActivity {
 
                     FirebaseDatabase.getInstance().getReference("users").child(loggedInUser.getUserID()).child("myBooks").setValue(loggedInUser.getMyBooks());
                     FirebaseDatabase.getInstance().getReference("books").child(book.getBookID()).setValue(book);
-
+                    */
 
 
 
