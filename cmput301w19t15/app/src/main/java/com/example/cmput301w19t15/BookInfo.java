@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class BookInfo extends AppCompatActivity {
     //on create happens when book in list of my books is clicked
     /**
@@ -50,7 +52,7 @@ public class BookInfo extends AppCompatActivity {
         updateBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateBook();
+                updateBook(position);
             }
         });
 
@@ -75,15 +77,20 @@ public class BookInfo extends AppCompatActivity {
      * When the User clicks update book it will remove the book from the user and add
      * the new book then update firebase
      */
-    private void updateBook(){
+    private void updateBook(Integer position){
         String title = titleEditText.getText().toString();
         String author = authorEditText.getText().toString();
         String isbn = ISBNEditText.getText().toString();
-        loggedInUser.removeMyBooks(book);
+
+        //loggedInUser.removeMyBooks(book);
         book.setTitle(title);
         book.setAuthor(author);
         book.setISBN(isbn);
-        loggedInUser.addToMyBooks(book);
+        //book.setStatus(book.getStatus());
+        book.setBookID(book.getBookID());
+        book.setISBN(book.getISBN());
+        loggedInUser.getMyBooks().set(position,book);
+        FirebaseDatabase.getInstance().getReference("users").child(loggedInUser.getUserID()).child("myBooks").setValue(loggedInUser.getMyBooks());
         FirebaseDatabase.getInstance().getReference("books").child(book.getBookID()).setValue(book);// update books
         finish();
     }

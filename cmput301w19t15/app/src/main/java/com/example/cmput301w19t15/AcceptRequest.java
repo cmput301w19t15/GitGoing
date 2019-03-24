@@ -13,6 +13,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 public class AcceptRequest extends AppCompatActivity {
 
         private Button exit,request,decline;
@@ -50,6 +52,22 @@ public class AcceptRequest extends AppCompatActivity {
                     //addBookToRequest();
                     //Notification notif = new Notification("requested", bookId, loggedInUser.getUserID(), ownerId);
                     //pivk notification table to save the notif
+
+                    /*Change book status to accepted*/
+                    Book book = loggedInUser.findBookbyID(loggedInUser.getMyBooks(),notif.getBookID());
+                    book.setStatus("accepted");
+                    Integer index = loggedInUser.getMyBooks().indexOf(book);
+                    Integer index2 =loggedInUser.getRequestedBooks().indexOf(book);
+                    loggedInUser.getMyBooks().set(index, book);
+                    loggedInUser.getRequestedBooks().set(index2,book);
+
+                    FirebaseDatabase.getInstance().getReference("users").child(loggedInUser.getUserID()).child("myBooks").setValue(loggedInUser.getMyBooks());
+                    FirebaseDatabase.getInstance().getReference("books").child(book.getBookID()).setValue(book);
+
+
+
+
+
 
                     final Notification notif2 = new Notification("accepted", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
                             notif.getNotifyFromID(), notif.getNotifyFromEmail(), notif.getISBN(), notif.getPhoto(), false);

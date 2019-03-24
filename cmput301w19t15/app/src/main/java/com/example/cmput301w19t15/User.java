@@ -513,5 +513,22 @@ public class User {
         return myRequestedBooksAccepted;
     }
 
+    /**
+     * Finds a book in a book list by book ID
+     *
+     * @param booklist
+     * @param bookID
+     * @return book
+     */
+    public Book findBookbyID(ArrayList<Book> booklist, String bookID){
+        Book found = null;
+        for(Book book : booklist){
+            if(bookID.equals(book.getBookID())){
+                found = book;
+            }
+        }
+       return found;
+    }
+
 
 }

@@ -33,7 +33,7 @@ public class Book {
     private String ownerID = "";//
     private String BookID = "";//
     private long returnDate = System.currentTimeMillis();
-    private Status status = Status.Available;//
+    private Status status=Status.Available;//
     private String borrowerID = "";
 
 
@@ -70,7 +70,7 @@ public class Book {
         this.photo = book.photo;
         this.ownerEmail = book.ownerEmail;
         this.ownerID = book.ownerID;
-        this.status = Status.Available;
+        this.status = book.status;
         this.BookID = book.BookID;
     }
 
