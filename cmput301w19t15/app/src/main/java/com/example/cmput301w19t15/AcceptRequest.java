@@ -10,8 +10,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class AcceptRequest extends AppCompatActivity {
 
@@ -19,7 +24,7 @@ public class AcceptRequest extends AppCompatActivity {
         private Book newBook;
         private User owner;
         User loggedInUser = MainActivity.getUser();
-        String ownerId, author, title, ownerEmail, isbn, status, bookId;
+        String ownerID, borrowerID, author, title, borrowerEmail, isbn, status, bookId;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -42,6 +47,9 @@ public class AcceptRequest extends AppCompatActivity {
             isbnText.setText(notif.getISBN());
             TextView ownerEmailText = (TextView) findViewById(R.id.owner);
             ownerEmailText.setText(notif.getNotifyFromEmail());
+            bookId = notif.getBookID();
+            borrowerID = notif.getNotifyFromID();
+            borrowerEmail = notif.getNotifyFromEmail();
 
             request = (Button) findViewById(R.id.accept_button);
 
@@ -50,10 +58,12 @@ public class AcceptRequest extends AppCompatActivity {
                 public void onClick(View v) {
                     //addBookToRequest();
                     //Notification notif = new Notification("requested", bookId, loggedInUser.getUserID(), ownerId);
-                    //pivk notification table to save the notif
 
+
+                    //pivk notification table to save the notif
                     final Notification notif2 = new Notification("accepted", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
                             notif.getNotifyFromID(), notif.getNotifyFromEmail(), notif.getISBN(), notif.getPhoto(), false);
+                    ownerID = loggedInUser.getUserID();
                     DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif2.getNotifID());
 
                     //add notif to database
@@ -66,6 +76,9 @@ public class AcceptRequest extends AppCompatActivity {
                             }
                         }
                     });
+
+                    //add to borrower's myAcceptedRequests
+                    addBookToAccepted();
                     finish();
                 }
             });
@@ -90,21 +103,20 @@ public class AcceptRequest extends AppCompatActivity {
 
         }
         /**
-         * add the book to to my requested books for the user requesting the book
-         * and add the book as a book that has been requested
+         * add the book to to borrower's accepted books
+         * and add the book as a book that has been accepted
          * updates firebase
-         *
-        private void addBookToRequest(){
+         */
+        private void addBookToAccepted(){
             FirebaseDatabase.getInstance().getReference("users")
                     .orderByChild("userID").addListenerForSingleValueEvent(new ValueEventListener() {
                 public void onDataChange(DataSnapshot snapshot) {
                     for (DataSnapshot child : snapshot.getChildren()) {
-                        if (child.getKey().equals(ownerId)) {
+                        if (child.getKey().equals(ownerID)) {
                             owner = (child.getValue(User.class));
                             ArrayList<Book> ownersBooks = owner.getMyBooks();
                             for (Book book : ownersBooks) {
                                 if (bookId.equals(book.getBookID())) {
-                                    String borrowerID = loggedInUser.getUserID();
                                     newBook = new Book(book);
                                     newBook.setBorrowerID(borrowerID);
                                     break;
@@ -113,8 +125,11 @@ public class AcceptRequest extends AppCompatActivity {
                             break;
                         }
                     }
-                    owner.addToRequestedBooks(newBook);
-                    loggedInUser.addToMyRequestedBooks(newBook);
+                    DatabaseReference borrower = FirebaseDatabase.getInstance().getReference().child("users")
+                            .child(borrowerID);
+                    borrower.child("myAcceptedBooks").setValue(newBook);
+                    //borrower.addToMyRequestedBooksAccepted(newBook);
+                    //loggedInUser.addToMyRequestedBooks(newBook);
                     finish();
                 }
                 public void onCancelled(DatabaseError databaseError) {
@@ -123,7 +138,7 @@ public class AcceptRequest extends AppCompatActivity {
             });
 
         }
-        */
+
         }
 
 
