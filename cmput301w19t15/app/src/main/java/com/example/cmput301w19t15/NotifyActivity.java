@@ -130,14 +130,12 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
             Intent intent = new Intent(NotifyActivity.this, AcceptRequest.class);
             intent.putExtra("Notification", notif);
             intent.putExtra("NotifID", notifID);
-            Log.d("TAG" , "NOTIFFFFFFFFFFFFFFFFFFID: "+ notifID);
             startActivityForResult(intent, 1);
         }
         if (notif.getType().equals("accepted")) {
             Intent intent = new Intent(NotifyActivity.this, ViewAcceptedRequest.class);
             intent.putExtra("Notification", notif);
             intent.putExtra("NotifID", notifID);
-            //Log.d("TAG" , "NOTIFFFFFFFFFFFFFFFFFFID: "+ notifID);
             startActivityForResult(intent, 1);
         }
     }

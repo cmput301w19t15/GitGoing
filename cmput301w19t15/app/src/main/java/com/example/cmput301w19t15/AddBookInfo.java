@@ -94,7 +94,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                         }
                     }
                 });
-                //returnIntent.putExtra("result", result);
+                returnIntent.putExtra("result", result);
                 setResult(1,returnIntent);
                 finish();
             }
