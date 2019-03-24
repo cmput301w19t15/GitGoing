@@ -48,7 +48,7 @@ import java.util.ArrayList;
  * @since 1.0
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NotifAdapter.OnItemClickListener {
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
     //private ProgressBar progressBar;
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Notification> listOfNotif;
     private RecyclerView mRecyclerView;
     private int numNotif = 0;
+    private int unreadAmt = 0;
 
     /**
      * Calls when activity is first made
@@ -159,8 +160,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         numNotif = 0;
+        unreadAmt = 0;
+        listOfNotif = new ArrayList<>();
         loadNotifMain();
         //progressBar.setVisibility(View.GONE);
+        if (unreadAmt > 0) {
+            notifyButton.setImageResource(R.drawable.nerd_cat_pixilart);
+        }
+        else if (unreadAmt == 0) {
+            notifyButton.setImageResource(R.drawable.button1);
+        }
     }
 
     /**
@@ -234,22 +243,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
     public void loadNotifMain() {
-        loadNotifFromFirebBase(new loadNotifCallBack() {
+        loadNotifFromFirebBase(new MainActivity.loadNotifCallBack() {
             @Override
             public void loadNotifCallBack(ArrayList<Notification> value) {
-                //listOfNotif = (ArrayList<Notification>) value.clone();
-                //adapter = new NotifAdapter(NotifyActivity, listOfNotif);
-                //mRecyclerView.setAdapter(adapter);
-                //adapter.setOnItemClickListener(NotifyActivity.class);
+                listOfNotif = (ArrayList<Notification>) value.clone();
+                adapter = new NotifAdapter(MainActivity.this, listOfNotif);
+                adapter.setOnItemClickListener(MainActivity.this);
             }
         });
     }
-
     public interface loadNotifCallBack {
         void loadNotifCallBack(ArrayList<Notification> value);
     }
@@ -261,7 +264,13 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     try {
+                        ArrayList<Notification> allNotif = new ArrayList<>();
                         //ArrayList<Notification> allNotif = new ArrayList<>();
+                        for (Notification notif : allNotif) {
+                            if(notif.getRead() == false) {
+                                unreadAmt += 1;
+                            }
+                        }
                         for (DataSnapshot notif : dataSnapshot.getChildren()) {
                             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             //Log.d("testing1",user.getUid());

@@ -33,7 +33,6 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         listOfNotif = new ArrayList<>();
         loadNotif();
-
     }
 
     @Override
