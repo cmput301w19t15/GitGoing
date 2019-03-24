@@ -13,7 +13,7 @@
  */
 
 package com.example.cmput301w19t15;
-
+//:)
 /**
  * Adapter for book class
  * @author Thomas, Josh

@@ -13,7 +13,7 @@
  */
 
 package com.example.cmput301w19t15;
-
+//:)
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -488,9 +488,15 @@ public class User {
      */
 
     public void addToMyRequestedBooksAccepted(Book book){
-        myRequestedBooksAccepted.add(book);
-        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAccepted").removeValue();
-        FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAccepted").setValue(myRequestedBooksAccepted);
+        //myRequestedBooksAccepted.add(book);
+        //FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAccepted").removeValue();
+        //FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAccepted").setValue(myRequestedBooksAccepted);
+        try {
+            myRequestedBooksAccepted.add(book);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksAccepted").child(book.getBookID()).setValue(book);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**

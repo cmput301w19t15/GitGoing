@@ -13,7 +13,7 @@
  */
 
 package com.example.cmput301w19t15;
-
+//:)
 /**
  * Represents a user's profile
  * @author Thomas, Anjesh, Breanne
