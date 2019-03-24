@@ -123,8 +123,8 @@ public class CreateRequest extends AppCompatActivity {
                         break;
                     }
                 }
-                //owner.addToRequestedBooks(newBook);
-                loggedInUser.addToMyRequestedBooks(newBook);
+                owner.addToMyRequestedBooks(newBook);
+                //loggedInUser.addToMyRequestedBooks(newBook);
                 finish();
             }
             public void onCancelled(DatabaseError databaseError) {
