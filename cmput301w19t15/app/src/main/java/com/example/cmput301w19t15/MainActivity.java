@@ -164,12 +164,6 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
         listOfNotif = new ArrayList<>();
         loadNotifMain();
         //progressBar.setVisibility(View.GONE);
-        if (unreadAmt > 0) {
-            notifyButton.setImageResource(R.drawable.nerd_cat_pixilart);
-        }
-        else if (unreadAmt == 0) {
-            notifyButton.setImageResource(R.drawable.button1);
-        }
     }
 
     /**
@@ -264,23 +258,33 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     try {
-                        ArrayList<Notification> allNotif = new ArrayList<>();
                         //ArrayList<Notification> allNotif = new ArrayList<>();
-                        for (Notification notif : allNotif) {
-                            if(notif.getRead() == false) {
-                                unreadAmt += 1;
-                            }
-                        }
                         for (DataSnapshot notif : dataSnapshot.getChildren()) {
                             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             //Log.d("testing1",user.getUid());
-
                             if (user.getUid() != null){
                                 Notification currentNotif = notif.getValue(Notification.class);
                                 //Log.d("testing",user.getUid());
+
                                 if (currentNotif.getNotifyToID().equals(user.getUid())){
                                     //allNotif.add(currentNotif);
                                     numNotif+=1;
+                                    Log.d("wtf","help plz 2");
+                                    Log.d("var", Boolean.toString(currentNotif.getRead()));
+                                    if(currentNotif.getRead() == false) {
+                                        Log.d("var", Boolean.toString(currentNotif.getRead()));
+                                        Log.d("unreadAmt",Integer.toString(unreadAmt));
+                                        unreadAmt += 1;
+                                        Log.d("unreadAmt",Integer.toString(unreadAmt));
+                                    }
+                                    if (unreadAmt > 0) {
+                                        Log.d("read",Integer.toString(unreadAmt));
+                                        notifyButton.setImageResource(R.drawable.nerd_cat_pixilart);
+                                    }
+                                    else if (unreadAmt == 0) {
+                                        Log.d("read",Integer.toString(unreadAmt));
+                                        notifyButton.setImageResource(R.drawable.imagetest);
+                                    }
                                     //Log.d("TAG", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHnumNotif: "+numNotif);
                                 }
                                 else{
