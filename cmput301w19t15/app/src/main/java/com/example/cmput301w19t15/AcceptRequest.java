@@ -40,7 +40,6 @@ public class AcceptRequest extends AppCompatActivity {
             final Notification notif = (Notification) getIntent().getSerializableExtra("Notification");
             notifID = (String) getIntent().getSerializableExtra("NotifID");
             notif.setNotifID(notifID);
-            Toast.makeText(this, "NOTIFID: "+ notifID, Toast.LENGTH_SHORT).show();
 
             /**
              * set the text field with the values that was passed over
@@ -102,9 +101,7 @@ public class AcceptRequest extends AppCompatActivity {
             decline.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("TAG: ", "WHYYYYYYYYYYYYYYYYYYYYYYYYYYy");
                     FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
-                    Toast.makeText(AcceptRequest.this, "Deleted " + notif.getNotifID(), Toast.LENGTH_SHORT).show();
                     finish();
                 }
             });

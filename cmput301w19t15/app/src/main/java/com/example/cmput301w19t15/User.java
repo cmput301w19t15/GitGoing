@@ -190,7 +190,7 @@ public class User {
     public void addToMyBooks(Book book){
         try {
             myBooks.add(book);
-            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myBooks").setValue(myBooks);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myBooks").child(book.getBookID()).setValue(book);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -204,7 +204,7 @@ public class User {
     public void removeMyBooks(Book book){
         try {
             myBooks.remove(book);
-            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myBooks").setValue(myBooks);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myBooks").child(book.getBookID()).removeValue();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -228,7 +228,7 @@ public class User {
     public void addToMyRequestedBooks(Book book){
         try {
             myRequestedBooks.add(book);
-            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooks").setValue(myRequestedBooks);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooks").child(book.getBookID()).setValue(book);
         }catch (Exception e){
             e.printStackTrace();
         }

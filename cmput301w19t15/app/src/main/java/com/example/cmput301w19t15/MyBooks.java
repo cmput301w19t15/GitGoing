@@ -96,6 +96,30 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //gets books from user and loads them into screen
+        loggedInUser = MainActivity.getUser();
+        try {
+            mBookList = loggedInUser.getMyBooks();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        mBookAdapter = new BookAdapter(MyBooks.this,mBookList);
+        mRecyclerView.setAdapter(mBookAdapter);
+        mBookAdapter.setOnItemClickListener(MyBooks.this);
+
+        mBookAdapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mBookAdapter.notifyDataSetChanged();
+    }
+
     /**
      * called everytime the activity is started
      */
