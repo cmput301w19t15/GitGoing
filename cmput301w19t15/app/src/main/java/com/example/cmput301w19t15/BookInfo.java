@@ -28,6 +28,7 @@ public class BookInfo extends AppCompatActivity {
     Book book;
     String bookID;
     EditText titleEditText,authorEditText,ISBNEditText;
+    ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,9 @@ public class BookInfo extends AppCompatActivity {
         titleEditText.setText(book.getTitle());
         authorEditText.setText(book.getAuthor());
         ISBNEditText.setText(book.getISBN());
+        String imageString = book.getPhoto();
+        image = findViewById(R.id.imageView);
+        image.setImageBitmap(ConvertPhoto.convert(imageString));
         ////need to get and set the current image - user will be able to update or delete the image
 
         Button updateBook = findViewById(R.id.updateBook);
@@ -69,6 +73,18 @@ public class BookInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        Button updatePhoto = findViewById(R.id.addPhoto);
+        updatePhoto.setEnabled(false);
+        Button deletePhoto = findViewById(R.id.deletePhoto);
+
+        deletePhoto.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                book.setPhoto("");
+                image.setImageResource(0);
             }
         });
     }

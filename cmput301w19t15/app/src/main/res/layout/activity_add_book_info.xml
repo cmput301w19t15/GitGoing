@@ -7,6 +7,99 @@
     android:background="@drawable/grad2"
     tools:context=".BookInfo">
 
+    <EditText
+        android:id="@+id/booktitle"
+        android:layout_width="0dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:hint="Enter Book Title:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/bookAuthor"
+        android:layout_width="0dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:hint="Enter Book Author:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/booktitle" />
+
+    <EditText
+        android:id="@+id/isbn"
+        android:layout_width="0dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:hint="Enter Book ISBN:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookAuthor" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="142dp"
+        android:layout_height="132dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:padding="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/isbn" />
+
+    <Button
+        android:id="@+id/addPhoto"
+        android:layout_width="170dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:background="@drawable/button1"
+        android:text="Upload Photo"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/deletePhoto"
+        android:layout_width="170dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:background="@drawable/button1"
+        android:text="Delete Photo"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addPhoto" />
+
     <Button
         android:id="@+id/scanInfo"
         android:layout_width="170dp"
@@ -22,52 +115,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addPhoto" />
-
-    <EditText
-        android:id="@+id/bookAuthor"
-        android:layout_width="170dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
-        android:hint="Enter Book Author:"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/booktitle" />
-
-    <EditText
-        android:id="@+id/booktitle"
-        android:layout_width="170dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
-        android:hint="Enter Book Title:"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/isbn"
-        android:layout_width="170dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
-        android:hint="Enter Book ISBN:"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookAuthor" />
+        app:layout_constraintTop_toBottomOf="@+id/deletePhoto" />
 
     <Button
-        android:id="@+id/deleteBook"
+        android:id="@+id/addBook"
         android:layout_width="170dp"
         android:layout_height="53dp"
         android:layout_marginStart="60dp"
@@ -83,21 +134,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scanInfo" />
 
-    <Button
-        android:id="@+id/addPhoto"
-        android:layout_width="170dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
-        android:background="@drawable/button1"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:text="Upload Photo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/isbn" />
 
 </android.support.constraint.ConstraintLayout>

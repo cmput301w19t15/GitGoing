@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,6 +40,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
     private EditText booktitle;
     private EditText author;
     private EditText isbn;
+    private ImageView image;
 
     private String booktitleText;
     private String authorText;
@@ -57,9 +59,11 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
         author = findViewById(R.id.bookAuthor);
         isbn = findViewById(R.id.isbn);
 
-        Button saveButton = findViewById(R.id.deleteBook);
+        Button saveButton = findViewById(R.id.addBook);
         Button addPhoto = findViewById(R.id.addPhoto);
+        Button deletePhoto = findViewById(R.id.deletePhoto);
         Button scanInfo = findViewById(R.id.scanInfo);
+        image = findViewById(R.id.imageView);
 
         /**
          * this method will create a new book object with all the
@@ -104,6 +108,13 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
             @Override
             public void onClick(View v) {
                 selectPhoto();
+            }
+        });
+        deletePhoto.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                bookPhoto = "";
+                image.setImageResource(0);
             }
         });
         scanInfo.setOnClickListener(new View.OnClickListener() {
@@ -187,6 +198,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
             if (requestCode == SCAN_ISBN) {
                 String barcode = data.getStringExtra("ISBN");
                 isbn.setText(barcode);
+                new FetchBook(author,booktitle,isbn).execute(barcode);
             }
             /**
              * return bitmap and assign it to book's attribute
@@ -196,6 +208,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                 final Bitmap bitmap = (Bitmap) bundle.get("data");
                 String bookPhoto = ConvertPhoto.convert(bitmap);
                 this.bookPhoto = bookPhoto;
+                image.setImageBitmap(bitmap);
             }
 
             /**
@@ -207,6 +220,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
                     String bookPhoto = ConvertPhoto.convert(bitmap);
                     this.bookPhoto = bookPhoto;
+                    image.setImageBitmap(bitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
