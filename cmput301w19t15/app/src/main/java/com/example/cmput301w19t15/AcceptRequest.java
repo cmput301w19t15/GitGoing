@@ -59,6 +59,9 @@ public class AcceptRequest extends AppCompatActivity {
 
             request = (Button) findViewById(R.id.accept_button);
 
+            /**
+             * owner accepts the request
+             */
             request.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
