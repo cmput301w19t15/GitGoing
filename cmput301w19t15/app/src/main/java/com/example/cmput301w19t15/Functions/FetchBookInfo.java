@@ -15,7 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 // @reuse: https://github.com/google-developer-training/android-fundamentals/tree/master/WhoWroteIt
-public class FetchBook extends AsyncTask<String,Void,String> {
+public class FetchBookInfo extends AsyncTask<String,Void,String> {
 
     private EditText mAuthorInput;
     private EditText mTitleInput;
@@ -23,7 +23,7 @@ public class FetchBook extends AsyncTask<String,Void,String> {
     private static final String base_url = "https://www.googleapis.com/books/v1/volumes?";
     private static final String query = "q=isbn:";
 
-    public FetchBook(EditText authorInput, EditText titleInput, EditText isbnInput){
+    public FetchBookInfo(EditText authorInput, EditText titleInput, EditText isbnInput){
         this.mAuthorInput = authorInput;
         this.mTitleInput = titleInput;
     }

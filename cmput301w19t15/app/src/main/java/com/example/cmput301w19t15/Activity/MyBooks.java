@@ -18,10 +18,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
 
+import com.example.cmput301w19t15.Functions.FetchBookWithID;
+import com.example.cmput301w19t15.Functions.FetchBookWithList;
 import com.example.cmput301w19t15.InProgress.Exchange;
 import com.example.cmput301w19t15.InProgress.AcceptPage;
 import com.example.cmput301w19t15.InProgress.Location;
@@ -76,6 +79,20 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         }catch(Exception e){
             e.printStackTrace();
         }
+        ArrayList<Book> testBookList = new ArrayList<>();
+        ArrayList<String> testBookID = new ArrayList<>();
+        try {
+            testBookID.add(mBookList.get(0).getBookID());
+            new FetchBookWithList(testBookList,testBookID).execute();
+            Log.d("testing","Test Size My Books before: "+testBookList.size());
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.d("testing","error");
+        }
+        Log.d("testing","Test Size My Books after: "+testBookList.size());
+
+
+
         mBookAdapter = new BookAdapter(MyBooks.this,mBookList);
         mRecyclerView.setAdapter(mBookAdapter);
         mBookAdapter.setOnItemClickListener(MyBooks.this);

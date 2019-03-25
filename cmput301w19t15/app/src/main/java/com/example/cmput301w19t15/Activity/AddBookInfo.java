@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.Functions.ConvertPhoto;
-import com.example.cmput301w19t15.Functions.FetchBook;
+import com.example.cmput301w19t15.Functions.FetchBookInfo;
 import com.example.cmput301w19t15.R;
 import com.example.cmput301w19t15.Functions.ScanBarcode;
 import com.example.cmput301w19t15.Objects.User;
@@ -32,6 +32,8 @@ import com.google.zxing.Result;
 import java.io.IOException;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
+import static com.example.cmput301w19t15.Functions.ConvertPhoto.*;
 
 /**
  * this activity is to add information about the book
@@ -70,7 +72,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
         Button scanInfo = findViewById(R.id.scanInfo);
         image = findViewById(R.id.imageView);
 
-        /**
+        /*
          * this method will create a new book object with all the
          * information entered and upload it to firebase
          */
@@ -139,7 +141,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
         AlertDialog.Builder builder = new AlertDialog.Builder(AddBookInfo.this);
         builder.setTitle("Upload Photo");
 
-        /**
+        /*
          * if user chooses Camera, call camera and will return a bitmap as a result
          */
         builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -203,28 +205,26 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
             if (requestCode == SCAN_ISBN) {
                 String barcode = data.getStringExtra("ISBN");
                 isbn.setText(barcode);
-                new FetchBook(author,booktitle,isbn).execute(barcode);
+                new FetchBookInfo(author,booktitle,isbn).execute(barcode);
             }
-            /**
-             * return bitmap and assign it to book's attribute
+            /*
+              return bitmap and assign it to book's attribute
              */
             if (requestCode == REQUEST_CAMERA) {
                 Bundle bundle = data.getExtras();
                 final Bitmap bitmap = (Bitmap) bundle.get("data");
-                String bookPhoto = ConvertPhoto.convert(bitmap);
-                this.bookPhoto = bookPhoto;
+                this.bookPhoto = convert(bitmap);
                 image.setImageBitmap(bitmap);
             }
 
-            /**
+            /*
              * return uri, then comvert to bitmap and assign it to book's attribute
              */
             else if (requestCode == SELECT_FILE) {
                 Uri photoUri = data.getData();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
-                    String bookPhoto = ConvertPhoto.convert(bitmap);
-                    this.bookPhoto = bookPhoto;
+                    this.bookPhoto = convert(bitmap);
                     image.setImageBitmap(bitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
