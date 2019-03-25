@@ -20,11 +20,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ScanBarcode"></activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Functions.ScanBarcode"></activity>
+        <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.MainActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.LoginActivity"
             android:label="GitGoing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,20 +32,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyBooks"/>
-        <activity android:name=".BookInfo"/>
-        <activity android:name=".AddBookInfo"/>
-        <activity android:name=".Profile"/>
-        <activity android:name=".AcceptPage"/>
-        <activity android:name=".BorrowerBookView"/>
-        <activity android:name=".DetailedBookInfo"/>
-        <activity android:name=".FindBooks"/>
-        <activity android:name=".FindUsers"/>
-        <activity android:name=".RequestedBookList"/>
-        <activity android:name=".CreateRequest"/>
-        <activity android:name=".NotifyActivity"/>
-        <activity android:name=".AcceptRequest"/>
-        <activity android:name=".ViewAcceptedRequest"/>
+        <activity android:name=".Activity.MyBooks"/>
+        <activity android:name=".Activity.BookInfo"/>
+        <activity android:name=".Activity.AddBookInfo"/>
+        <activity android:name=".Activity.Profile"/>
+        <activity android:name=".InProgress.AcceptPage"/>
+        <activity android:name=".InProgress.BorrowerBookView"/>
+        <activity android:name=".InProgress.DetailedBookInfo"/>
+        <activity android:name=".Activity.FindBooks"/>
+        <activity android:name=".Activity.FindUsers"/>
+        <activity android:name=".Activity.RequestedBookList"/>
+        <activity android:name=".Activity.CreateRequest"/>
+        <activity android:name=".Activity.NotifyActivity"/>
+        <activity android:name=".InProgress.AcceptRequest"/>
+        <activity android:name=".Activity.ViewAcceptedRequest"/>
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>

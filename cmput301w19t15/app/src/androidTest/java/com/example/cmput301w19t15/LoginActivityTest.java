@@ -4,8 +4,9 @@ import android.app.Activity;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.EditText;
-import android.widget.ListView;
 
+import com.example.cmput301w19t15.Activity.LoginActivity;
+import com.example.cmput301w19t15.Activity.MainActivity;
 import com.robotium.solo.Solo;
 
 import org.junit.After;
@@ -22,7 +23,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.*;
 
 /**
  * test login activity
@@ -93,7 +93,7 @@ public class LoginActivityTest extends ActivityTestRule<LoginActivity> {
         assertEquals("Test Tweet!", tweet.getMessage());**/
 
         solo.clickInList(0);
-        solo.assertCurrentActivity("Wrong Activity",MainActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
         assertTrue(solo.waitForText("Test Tweet!"));
 
