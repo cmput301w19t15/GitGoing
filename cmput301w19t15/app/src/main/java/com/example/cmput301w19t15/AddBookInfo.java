@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,7 +56,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
         author = findViewById(R.id.bookAuthor);
         isbn = findViewById(R.id.isbn);
 
-        Button saveButton = findViewById(R.id.deleteBook);
+        Button saveButton = findViewById(R.id.addBook);
         Button addPhoto = findViewById(R.id.addPhoto);
         Button scanInfo = findViewById(R.id.scanInfo);
 

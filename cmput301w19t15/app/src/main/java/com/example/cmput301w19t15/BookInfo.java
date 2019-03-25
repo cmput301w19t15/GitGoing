@@ -1,19 +1,12 @@
 package com.example.cmput301w19t15;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class BookInfo extends AppCompatActivity {
     //on create happens when book in list of my books is clicked
@@ -54,7 +47,7 @@ public class BookInfo extends AppCompatActivity {
             }
         });
 
-        Button deleteBook = findViewById(R.id.deleteBook);
+        Button deleteBook = findViewById(R.id.addBook);
         deleteBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
