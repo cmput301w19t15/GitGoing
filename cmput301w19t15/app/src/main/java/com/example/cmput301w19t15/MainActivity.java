@@ -182,7 +182,6 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
      */
     @Override
     public void onBackPressed() {
-        //do nothing
     }
 
     /**
@@ -268,21 +267,21 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
 
                                 if (currentNotif.getNotifyToID().equals(user.getUid())){
                                     //allNotif.add(currentNotif);
-                                    numNotif+=1;
-                                    Log.d("wtf","help plz 2");
-                                    Log.d("var", Boolean.toString(currentNotif.getRead()));
+                                    numNotif += 1;
+                                    //Log.d("wtf","help plz 2");
+                                    //Log.d("var", Boolean.toString(currentNotif.getRead()));
                                     if(currentNotif.getRead() == false) {
-                                        Log.d("var", Boolean.toString(currentNotif.getRead()));
-                                        Log.d("unreadAmt",Integer.toString(unreadAmt));
+                                        //Log.d("var", Boolean.toString(currentNotif.getRead()));
+                                        //Log.d("unreadAmt",Integer.toString(unreadAmt));
                                         unreadAmt += 1;
-                                        Log.d("unreadAmt",Integer.toString(unreadAmt));
+                                        //Log.d("unreadAmt",Integer.toString(unreadAmt));
                                     }
                                     if (unreadAmt > 0) {
-                                        Log.d("read",Integer.toString(unreadAmt));
+                                        //Log.d("read",Integer.toString(unreadAmt));
                                         notifyButton.setImageResource(R.drawable.nerd_cat_pixilart);
                                     }
-                                    else if (unreadAmt == 0) {
-                                        Log.d("read",Integer.toString(unreadAmt));
+                                    else if (unreadAmt == 0 || numNotif == 0) {
+                                        //Log.d("read",Integer.toString(unreadAmt));
                                         notifyButton.setImageResource(R.drawable.imagetest);
                                     }
                                     //Log.d("TAG", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHnumNotif: "+numNotif);
