@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
         myBorrows = findViewById(R.id.my_borrows);
         myBorrows.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                Intent intent = new Intent(MainActivity.this, MyBorrows.class);
                 startActivity(intent);
                 //finish();
             }
