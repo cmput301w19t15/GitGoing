@@ -20,6 +20,7 @@ package com.example.cmput301w19t15;
  * @since 1.0
  */
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -61,6 +62,7 @@ public class ScanBarcode extends AppCompatActivity implements BarcodeReader.Barc
         barcodeReader.playBeep();
         Intent returnIntent = new Intent();
         returnIntent.putExtra("ISBN",barcode.displayValue.toString());
+        setResult(Activity.RESULT_OK,returnIntent);
         finish();
     }
 
