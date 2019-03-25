@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/grad2"
     tools:context=".BookInfo">
 
     <TextView
@@ -134,23 +135,29 @@
 
     <Button
         android:id="@+id/request_button"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginRight="64dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:layout_marginBottom="32dp"
+        android:background="@drawable/button1"
         android:text="@string/request_book"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/cancel"
-        android:layout_width="107dp"
+        android:layout_width="130dp"
         android:layout_height="50dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginBottom="32dp"
+        android:background="@drawable/button1"
         android:text="Cancel"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

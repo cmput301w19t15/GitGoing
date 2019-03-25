@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/grad2"
     tools:context=".BookInfo">
 
     <TextView
@@ -84,23 +85,27 @@
 
     <Button
         android:id="@+id/accept_button"
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="50dp"
         android:layout_marginEnd="36dp"
         android:layout_marginRight="36dp"
         android:layout_marginBottom="164dp"
+        android:background="@drawable/button1"
         android:text="Accept Request"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/decline_button"
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="50dp"
         android:layout_marginStart="36dp"
         android:layout_marginLeft="36dp"
         android:layout_marginBottom="164dp"
+        android:background="@drawable/button1"
         android:text="DECLINE REQUEST"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -114,6 +119,8 @@
         android:layout_marginRight="176dp"
         android:layout_marginBottom="28dp"
         android:text="EXIT"
+        android:background="@drawable/button1"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
