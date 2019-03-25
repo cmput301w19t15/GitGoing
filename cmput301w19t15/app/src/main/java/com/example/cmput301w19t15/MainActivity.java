@@ -279,11 +279,11 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
                                     }
                                     if (unreadAmt > 0) {
                                         Log.d("read",Integer.toString(unreadAmt));
-                                        notifyButton.setImageResource(R.drawable.unread);
+                                        notifyButton.setImageResource(R.drawable.nerd_cat_pixilart);
                                     }
                                     else if (unreadAmt == 0) {
                                         Log.d("read",Integer.toString(unreadAmt));
-                                        notifyButton.setImageResource(R.drawable.read);
+                                        notifyButton.setImageResource(R.drawable.imagetest);
                                     }
                                     //Log.d("TAG", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHnumNotif: "+numNotif);
                                 }
