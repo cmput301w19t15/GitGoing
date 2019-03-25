@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/grad2"
     tools:context=".BookInfo">
-
+  
     <EditText
         android:id="@+id/booktitle"
         android:layout_width="0dp"
@@ -133,6 +133,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scanInfo" />
-
 
 </android.support.constraint.ConstraintLayout>
