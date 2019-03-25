@@ -13,7 +13,7 @@
  */
 
 package com.example.cmput301w19t15;
-
+//:)
 
 
 import android.content.Intent;
@@ -48,7 +48,7 @@ import java.util.ArrayList;
  * @since 1.0
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NotifAdapter.OnItemClickListener {
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
     //private ProgressBar progressBar;
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Notification> listOfNotif;
     private RecyclerView mRecyclerView;
     private int numNotif = 0;
+    private int unreadAmt = 0;
 
     /**
      * Calls when activity is first made
@@ -154,11 +155,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Caleed when activity restarted
+     */
+    protected void onRestart() {
+        super.onRestart();
+        numNotif = 0;
+        unreadAmt = 0;
+        listOfNotif = new ArrayList<>();
+        notifyButton.setImageResource(R.drawable.imagetest);
+        loadNotifMain();
+    }
+
+
+    /**
      * Called when activity is resumed
      */
     protected void onResume() {
         super.onResume();
         numNotif = 0;
+        unreadAmt = 0;
+        listOfNotif = new ArrayList<>();
+        notifyButton.setImageResource(R.drawable.imagetest);
         loadNotifMain();
         //progressBar.setVisibility(View.GONE);
     }
@@ -179,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public void onBackPressed() {
-        //do nothing
     }
 
     /**
@@ -234,27 +250,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
     public void loadNotifMain() {
-        loadNotifFromFirebBase(new loadNotifCallBack() {
+        loadNotifFromFirebBase(new MainActivity.loadNotifCallBack() {
             @Override
             public void loadNotifCallBack(ArrayList<Notification> value) {
-                //listOfNotif = (ArrayList<Notification>) value.clone();
-                //adapter = new NotifAdapter(NotifyActivity, listOfNotif);
-                //mRecyclerView.setAdapter(adapter);
-                //adapter.setOnItemClickListener(NotifyActivity.class);
+                listOfNotif = (ArrayList<Notification>) value.clone();
+                adapter = new NotifAdapter(MainActivity.this, listOfNotif);
+                adapter.setOnItemClickListener(MainActivity.this);
             }
         });
     }
-
     public interface loadNotifCallBack {
         void loadNotifCallBack(ArrayList<Notification> value);
     }
 
     public void loadNotifFromFirebBase(final loadNotifCallBack myCallback) {
+        Log.e("TAG: ", "LOADING");
         DatabaseReference notifReference = FirebaseDatabase.getInstance().getReference().child("notifications");
         notifReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -265,13 +276,29 @@ public class MainActivity extends AppCompatActivity {
                         for (DataSnapshot notif : dataSnapshot.getChildren()) {
                             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             //Log.d("testing1",user.getUid());
-
                             if (user.getUid() != null){
                                 Notification currentNotif = notif.getValue(Notification.class);
                                 //Log.d("testing",user.getUid());
+
                                 if (currentNotif.getNotifyToID().equals(user.getUid())){
                                     //allNotif.add(currentNotif);
-                                    numNotif+=1;
+                                    numNotif += 1;
+                                    //Log.d("wtf","help plz 2");
+                                    //Log.d("var", Boolean.toString(currentNotif.getRead()));
+                                    if(currentNotif.getRead() == false) {
+                                        //Log.d("var", Boolean.toString(currentNotif.getRead()));
+                                        //Log.d("unreadAmt",Integer.toString(unreadAmt));
+                                        unreadAmt += 1;
+                                        //Log.d("unreadAmt",Integer.toString(unreadAmt));
+                                    }
+                                    if (unreadAmt > 0) {
+                                        //Log.d("read",Integer.toString(unreadAmt));
+                                        notifyButton.setImageResource(R.drawable.nerd_cat_pixilart);
+                                    }
+                                    else if (unreadAmt == 0 || numNotif == 0) {
+                                        //Log.d("read",Integer.toString(unreadAmt));
+                                        notifyButton.setImageResource(R.drawable.imagetest);
+                                    }
                                     //Log.d("TAG", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHnumNotif: "+numNotif);
                                 }
                                 else{

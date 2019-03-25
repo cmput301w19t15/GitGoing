@@ -1,6 +1,6 @@
 package com.example.cmput301w19t15;
 
-
+//:)
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.constraint.helper.Layer;
@@ -95,6 +95,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     @Override
     public int getItemCount() {
+        if(mBookList == null){
+            return 0;
+        }
         return mBookList.size();
     }
 
