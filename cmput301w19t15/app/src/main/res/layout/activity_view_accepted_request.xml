@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/grad2"
     tools:context=".BookInfo">
 
     <TextView
@@ -92,6 +93,9 @@
         android:layout_marginRight="176dp"
         android:layout_marginBottom="28dp"
         android:text="EXIT"
+        android:background="@drawable/button1"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

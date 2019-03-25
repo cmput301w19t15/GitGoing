@@ -3,7 +3,6 @@ package com.example.cmput301w19t15;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +29,7 @@ public class BookInfo extends AppCompatActivity {
     Book book;
     String bookID;
     EditText titleEditText,authorEditText,ISBNEditText;
+    ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +48,9 @@ public class BookInfo extends AppCompatActivity {
         titleEditText.setText(book.getTitle());
         authorEditText.setText(book.getAuthor());
         ISBNEditText.setText(book.getISBN());
+        String imageString = book.getPhoto();
+        image = findViewById(R.id.imageView);
+        image.setImageBitmap(ConvertPhoto.convert(imageString));
         ////need to get and set the current image - user will be able to update or delete the image
 
         Button updateBook = findViewById(R.id.updateBook);
@@ -58,7 +61,7 @@ public class BookInfo extends AppCompatActivity {
             }
         });
 
-        Button deleteBook = findViewById(R.id.deleteBook);
+        Button deleteBook = findViewById(R.id.addBook);
         deleteBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +74,18 @@ public class BookInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        Button updatePhoto = findViewById(R.id.addPhoto);
+        updatePhoto.setEnabled(false);
+        Button deletePhoto = findViewById(R.id.deletePhoto);
+
+        deletePhoto.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                book.setPhoto("");
+                image.setImageResource(0);
             }
         });
     }

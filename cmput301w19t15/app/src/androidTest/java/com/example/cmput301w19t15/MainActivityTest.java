@@ -3,6 +3,7 @@ package com.example.cmput301w19t15;
 import android.app.Activity;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 import android.widget.EditText;
 
 import com.robotium.solo.Solo;
@@ -41,6 +42,7 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
 
     @Test
     public void start() throws Exception{
+        Log.d("myTag", "This is my message");
         Activity activity = rule.getActivity();
     }
 
@@ -70,9 +72,8 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
      */
     public void CreateAccount() {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        solo.clickOnView( solo.getCurrentActivity().findViewById(
-                R.id.logout_button));
-        assertTrue(solo.waitForText("Email", 1, 2000));
+        solo.clickOnView( solo.getCurrentActivity().findViewById(R.id.logout_button));
+        assertTrue(solo.waitForText("Forgot Password", 1, 2000));
         solo.clickOnView(solo.getCurrentActivity().findViewById(R.id.register_button));
         Email = givenUsingPlainJava_whenGeneratingRandomStringUnbounded_thenCorrect();
         System.out.println(Email);
