@@ -155,6 +155,19 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
     }
 
     /**
+     * Caleed when activity restarted
+     */
+    protected void onRestart() {
+        super.onRestart();
+        numNotif = 0;
+        unreadAmt = 0;
+        listOfNotif = new ArrayList<>();
+        notifyButton.setImageResource(R.drawable.imagetest);
+        loadNotifMain();
+    }
+
+
+    /**
      * Called when activity is resumed
      */
     protected void onResume() {
@@ -162,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
         numNotif = 0;
         unreadAmt = 0;
         listOfNotif = new ArrayList<>();
+        notifyButton.setImageResource(R.drawable.imagetest);
         loadNotifMain();
         //progressBar.setVisibility(View.GONE);
     }
@@ -251,6 +265,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
     }
 
     public void loadNotifFromFirebBase(final loadNotifCallBack myCallback) {
+        Log.e("TAG: ", "LOADING");
         DatabaseReference notifReference = FirebaseDatabase.getInstance().getReference().child("notifications");
         notifReference.addValueEventListener(new ValueEventListener() {
             @Override
