@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
         numNotif = 0;
         unreadAmt = 0;
         listOfNotif = new ArrayList<>();
-        notifyButton.setImageResource(R.drawable.imagetest);
+        notifyButton.setImageResource(R.drawable.read);
         loadNotifMain();
     }
 
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
         numNotif = 0;
         unreadAmt = 0;
         listOfNotif = new ArrayList<>();
-        notifyButton.setImageResource(R.drawable.imagetest);
+        notifyButton.setImageResource(R.drawable.read);
         loadNotifMain();
         //progressBar.setVisibility(View.GONE);
     }
@@ -297,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
                                     }
                                     else if (unreadAmt == 0 || numNotif == 0) {
                                         //Log.d("read",Integer.toString(unreadAmt));
-                                        notifyButton.setImageResource(R.drawable.imagetest);
+                                        notifyButton.setImageResource(R.drawable.read);
                                     }
                                     //Log.d("TAG", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHnumNotif: "+numNotif);
                                 }
