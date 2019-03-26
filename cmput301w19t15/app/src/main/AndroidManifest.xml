@@ -46,7 +46,7 @@
         <activity android:name=".Activity.NotifyActivity"/>
         <activity android:name=".InProgress.AcceptRequest"/>
         <activity android:name=".Activity.ViewAcceptedRequest"/>
-
+        <activity android:name=".Activity.ViewAcceptedOwnerRequest"/>
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>

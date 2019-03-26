@@ -123,6 +123,12 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadBooks();
+    }
+
     /**
      * Load books into recyclerview
      */
