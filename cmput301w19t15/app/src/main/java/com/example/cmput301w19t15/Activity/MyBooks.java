@@ -125,7 +125,6 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         mBookAdapter.notifyDataSetChanged();
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();

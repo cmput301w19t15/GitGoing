@@ -29,17 +29,16 @@ import java.util.ArrayList;
 public class RatingTest extends AppCompatActivity {
     EditText userComment;
     private static User loggedInUser;
-    Book book;
-    String bookID = "5251539c-0366-44f8-a27c-bb1edd837114";
+    private String temper = "4827b617-4675-492a-9af7-5decde33e89a";
     private ArrayList<Book> listOfRatings;
     Rating currentRating;
+    private Book newBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating_test);
-
         //bookID = (String) getIntent().getExtras().getString("BOOKID");
         loggedInUser = MainActivity.getUser();
 
@@ -50,10 +49,10 @@ public class RatingTest extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentRating.setComment(userComment.getText().toString());
-                currentRating.setValues(""+ratingBar.getRating());
-                FirebaseDatabase.getInstance().getReference("books").child(bookID).child("ratings").child(loggedInUser.userID).child("value").setValue(currentRating.getValues());
-                FirebaseDatabase.getInstance().getReference("books").child(bookID).child("ratings").child(loggedInUser.userID).child("comment").setValue(currentRating.getComment());
+                //currentRating.setComment(userComment.getText().toString());
+                //currentRating.setValues(""+ratingBar.getRating());
+                FirebaseDatabase.getInstance().getReference("books").child(temper).child("ratings").child(loggedInUser.userID).child("value").setValue(currentRating.getValues());
+                FirebaseDatabase.getInstance().getReference("books").child(temper).child("ratings").child(loggedInUser.userID).child("comment").setValue(currentRating.getComment());
                 getMainRating();
                 finish();
             }
@@ -71,7 +70,7 @@ public class RatingTest extends AppCompatActivity {
     }
 
     public void loadMyRatingFromFireBase(final FindBooks.loadBookCallBack myCallback){
-        final DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("books").child(bookID);
+        final DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("books");
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -80,14 +79,18 @@ public class RatingTest extends AppCompatActivity {
                 int numRating = 0;
                 float avgRating = 0;
                 String temp = "";
+                ArrayList<Book> allBooks = new ArrayList<>();
                 if(dataSnapshot.exists()) {
                     try {
                         for (DataSnapshot books : dataSnapshot.getChildren()) {
-                            Rating currentRating = books.getValue(Rating.class);
-                            temp = userReference.child("ratings").child(loggedInUser.userID).child("value").getValue().toString()
+                            //Rating currentRating = books.getValue(Rating.class);
+                            temp = books.child(temper).child("ratings").child(loggedInUser.userID).child("value").getValue().toString();
                             totalRatings += Float.parseFloat(temp);
                             Log.d("HELLO",""+totalRatings);
                             numRating += 1;
+
+                            Book book = books.getValue(Book.class);
+                            allBooks.add(book);
                         }
                     } catch (Exception e){
                         e.printStackTrace();
@@ -101,8 +104,14 @@ public class RatingTest extends AppCompatActivity {
                 else {
                     finalRating = ""+avgRating;
                 }
-                book.setRating(finalRating);
-                FirebaseDatabase.getInstance().getReference("books").child(bookID).child("avgRating").setValue(finalRating);
+
+                for (Book book : allBooks) {
+                    if (temper.equals(book.getBookID())) {
+                        newBook = new Book(book);
+                    }
+                }
+                newBook.setRating(finalRating);
+                FirebaseDatabase.getInstance().getReference("books").child(temper).child("avgRating").setValue(finalRating);
 
             }
             @Override
