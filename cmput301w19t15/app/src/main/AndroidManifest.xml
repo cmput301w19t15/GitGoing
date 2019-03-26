@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.camera2" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Functions.ScanBarcode"></activity>
+        <activity android:name=".Activity.RatingTest"></activity>
+        <activity android:name=".Functions.ScanBarcode" />
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.MainActivity" />
         <activity
@@ -32,34 +33,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.MyBooks"/>
-        <activity android:name=".Activity.BookInfo"/>
-        <activity android:name=".Activity.AddBookInfo"/>
-        <activity android:name=".Activity.Profile"/>
-        <activity android:name=".InProgress.AcceptPage"/>
-        <activity android:name=".InProgress.BorrowerBookView"/>
-        <activity android:name=".InProgress.DetailedBookInfo"/>
-        <activity android:name=".Activity.FindBooks"/>
-        <activity android:name=".Activity.FindUsers"/>
-        <activity android:name=".Activity.RequestedBookList"/>
-        <activity android:name=".Activity.CreateRequest"/>
-        <activity android:name=".Activity.NotifyActivity"/>
-        <activity android:name=".InProgress.AcceptRequest"/>
-        <activity android:name=".Activity.ViewAcceptedRequest"/>
+        <activity android:name=".Activity.MyBooks" />
+        <activity android:name=".Activity.BookInfo" />
+        <activity android:name=".Activity.AddBookInfo" />
+        <activity android:name=".Activity.Profile" />
+        <activity android:name=".InProgress.AcceptPage" />
+        <activity android:name=".InProgress.BorrowerBookView" />
+        <activity android:name=".InProgress.DetailedBookInfo" />
+        <activity android:name=".Activity.FindBooks" />
+        <activity android:name=".Activity.FindUsers" />
+        <activity android:name=".Activity.RequestedBookList" />
+        <activity android:name=".Activity.CreateRequest" />
+        <activity android:name=".Activity.NotifyActivity" />
+        <activity android:name=".InProgress.AcceptRequest" />
+        <activity android:name=".Activity.ViewAcceptedRequest" />
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".FirebaseIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
-
     </application>
 
 </manifest>
