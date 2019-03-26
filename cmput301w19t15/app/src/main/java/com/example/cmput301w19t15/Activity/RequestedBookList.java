@@ -104,7 +104,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
                         ArrayList<Book> allBooks = new ArrayList<>();
                         for (DataSnapshot books : dataSnapshot.getChildren()) {
                             if(books.child("date").getValue().equals(null) || books.child("date").getValue().equals("null")) {
-                                Log.d("testing",books.getKey());
+                                //Log.d("testing",books.getKey());
                             }else{
                                 Book book = books.getValue(Book.class);
                                 allBooks.add(book);
