@@ -516,7 +516,14 @@ public class User {
      * @return the array list
      */
     public ArrayList<Book> getMyRequestedBooksAccepted(){
-        return myRequestedBooksAccepted;
+        ArrayList<Book> myacceptedBooks = new ArrayList<>();
+        for (Book book : myRequestedBooks){
+            //Log.e("TAG: ", "BOOOOOK" + book.getBorrowerID() + "  " + this.userID);
+            if (book.getBorrowerID().equals(this.userID)) {
+                myacceptedBooks.add(book);
+            }
+        }
+        return myacceptedBooks;
     }
 
     /**
