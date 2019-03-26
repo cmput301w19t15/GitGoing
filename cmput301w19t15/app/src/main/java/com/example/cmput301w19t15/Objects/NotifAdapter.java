@@ -59,6 +59,9 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.NotifViewHol
         else if (currentNotif.getType().equals("accepted")) {
             notifType = "Your request has been accepted";
         }
+        else if (currentNotif.getType().equals("acceptedOwner")) {
+            notifType = "You have accepted this request";
+        }
         String title = currentNotif.getTitle();
         String notifyFromEmail = currentNotif.getNotifyFromEmail();
         String ISBN = currentNotif.getISBN();

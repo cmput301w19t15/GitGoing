@@ -28,7 +28,7 @@ public class AcceptRequest extends AppCompatActivity {
         private Book newBook;
         private User owner;
         private String notifID;
-        private Notification notif2;
+        private Notification notif2, notif3;
         User loggedInUser = MainActivity.getUser();
         String ownerID, borrowerID, author, title, borrowerEmail, isbn, status, bookId, ownerEmail;
         @Override
@@ -89,6 +89,21 @@ public class AcceptRequest extends AppCompatActivity {
 
                     //add to borrower's myAcceptedRequests
                     addBookToAccepted();
+
+                    notif3 = new Notification("acceptedOwner", notif.getBookID(), notif.getTitle(), notif.getNotifyFromID(), notif.getNotifyFromEmail(),
+                            notif.getNotifyToID(), notif.getNotifyToEmail(), notif.getISBN(), notif.getPhoto(), false);
+                    DatabaseReference newNotif2 = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif3.getNotifID());
+
+                    //add notif to database
+                    newNotif2.setValue(notif3).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(AcceptRequest.this, "Successfully Added Notification ", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                    FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
                     finish();
                     //Intent intent = new Intent(AcceptRequest.this, NotifyActivity.class);
                     //startActivity(intent);
