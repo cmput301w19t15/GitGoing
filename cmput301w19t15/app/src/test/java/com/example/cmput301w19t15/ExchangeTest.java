@@ -1,5 +1,10 @@
 package com.example.cmput301w19t15;
 
+import com.example.cmput301w19t15.InProgress.Exchange;
+import com.example.cmput301w19t15.InProgress.Location;
+import com.example.cmput301w19t15.Objects.Book;
+import com.example.cmput301w19t15.Objects.User;
+
 import org.junit.Test;
 import java.util.Date;
 
