@@ -1,10 +1,22 @@
-package com.example.cmput301w19t15;
+package com.example.cmput301w19t15.InProgress;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import com.example.cmput301w19t15.Activity.BookInfo;
+import com.example.cmput301w19t15.Activity.MainActivity;
+import com.example.cmput301w19t15.R;
+import com.example.cmput301w19t15.Functions.FetchBookWithID;
+import com.example.cmput301w19t15.Functions.FetchBookWithList;
+import com.example.cmput301w19t15.InProgress.Exchange;
+import com.example.cmput301w19t15.InProgress.AcceptPage;
+import com.example.cmput301w19t15.InProgress.Location;
+import com.example.cmput301w19t15.Objects.Book;
+import com.example.cmput301w19t15.Objects.BookAdapter;
+import com.example.cmput301w19t15.Objects.User;
 
 import java.util.ArrayList;
 
