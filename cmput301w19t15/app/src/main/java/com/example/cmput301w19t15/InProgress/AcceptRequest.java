@@ -180,7 +180,8 @@ public class AcceptRequest extends AppCompatActivity {
                                 Book book = books.getValue(Book.class);
                                 if (book.getBookID().equals(bookId)){
                                     //borrowerID.addToMyRequestedBooks(book);
-                                    book.setStatus("accepted");
+                                    book.setStatus("Accepted");
+                                    book.setBorrowerID(borrowerID);
                                     DatabaseReference borrower = FirebaseDatabase.getInstance().getReference().child("users")
                                             .child(borrowerID);
                                     //borrower.child("myRequestedBooksAccepted").setValue(book);

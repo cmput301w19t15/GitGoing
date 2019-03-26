@@ -518,11 +518,12 @@ public class User {
     public ArrayList<Book> getMyRequestedBooksAccepted(){
         ArrayList<Book> myacceptedBooks = new ArrayList<>();
         for (Book book : myRequestedBooks){
+            //Log.e("TAG: ", "BOOOOOK" + book.getBorrowerID() + "  " + this.userID);
             if (book.getBorrowerID().equals(this.userID)) {
                 myacceptedBooks.add(book);
             }
         }
-        return myRequestedBooksAccepted;
+        return myacceptedBooks;
     }
 
 
