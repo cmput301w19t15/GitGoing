@@ -29,9 +29,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
+import com.example.cmput301w19t15.InProgress.Request;
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.Objects.BookAdapter;
 import com.example.cmput301w19t15.Objects.User;
@@ -47,9 +50,9 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class RequestedBookList extends AppCompatActivity implements BookAdapter.OnItemClickListener{
     private RequestedBookList activity = this;
-    //private Button all, accepted;
-    private BookAdapter adapter;
-    private ArrayList<Book> listOfBooks;
+    private Button all, accepted;
+    private BookAdapter adapterAll, adapterAccepted;
+    private ArrayList<Book> listOfBooks, listAccepted;
     private RecyclerView mRecyclerView;
     private static User loggedInUser;
 
@@ -61,10 +64,38 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         listOfBooks = new ArrayList<>();
+        listAccepted = new ArrayList<>();
+
         loggedInUser = MainActivity.getUser();
         listOfBooks = loggedInUser.getMyRequestedBooks();
-        adapter = new BookAdapter(RequestedBookList.this,listOfBooks);
-        mRecyclerView.setAdapter(adapter);
+        listAccepted = loggedInUser.getMyRequestedBooksAccepted();
+        adapterAll = new BookAdapter(RequestedBookList.this,listOfBooks);
+        adapterAccepted = new BookAdapter(RequestedBookList.this, listAccepted);
+        mRecyclerView.setAdapter(adapterAll);
+
+
+        all = (Button) findViewById(R.id.all);
+        accepted = (Button) findViewById(R.id.accepted);
+
+        all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listOfBooks = loggedInUser.getMyRequestedBooks();
+                adapterAll.notifyDataSetChanged();;
+                mRecyclerView.setAdapter(adapterAll);
+            }
+        });
+
+
+
+        accepted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listAccepted = loggedInUser.getMyRequestedBooksAccepted();
+                adapterAccepted.notifyDataSetChanged();;
+                mRecyclerView.setAdapter(adapterAccepted);
+            }
+        });
 
         //loadBooks();
 
@@ -76,8 +107,8 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
     /**
      * Load books.
      */
-    public void loadBooks(){
-        loadMyBookFromFireBase(new FindBooks.loadBookCallBack() {
+    /*public void loadAcceptedBooks(){
+        loadMyRequestedBooksFromFireBase(new FindBooks.loadBookCallBack() {
             @Override
             public void loadBookCallBack(ArrayList<Book> value) {
                 listOfBooks = (ArrayList<Book>) value.clone();
@@ -94,7 +125,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
      *
      * @param myCallback the my callback
      */
-    public void loadMyBookFromFireBase(final FindBooks.loadBookCallBack myCallback){
+    public void loadMyRequestedBooksFromFireBase(final FindBooks.loadBookCallBack myCallback){
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("books");
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -104,7 +135,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
                         ArrayList<Book> allBooks = new ArrayList<>();
                         for (DataSnapshot books : dataSnapshot.getChildren()) {
                             if(books.child("date").getValue().equals(null) || books.child("date").getValue().equals("null")) {
-                                Log.d("testing",books.getKey());
+                                //Log.d("testing",books.getKey());
                             }else{
                                 Book book = books.getValue(Book.class);
                                 allBooks.add(book);
