@@ -1,11 +1,8 @@
 package com.example.cmput301w19t15;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.cmput301w19t15.Objects.User;
 
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;

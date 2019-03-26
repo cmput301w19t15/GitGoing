@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/grad2"
-    tools:context=".MyBooks">
+    tools:context=".Activity.MyBooks">
 
     <Button
         android:id="@+id/add_book"
