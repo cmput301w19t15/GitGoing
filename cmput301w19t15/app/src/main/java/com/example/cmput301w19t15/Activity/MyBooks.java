@@ -59,6 +59,10 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
     private static final int NEW_BOOK = 1;
     private Book clickedBook;
 
+
+    ArrayList<Book> testBookList = new ArrayList<>();
+    ArrayList<String> testBookID = new ArrayList<>();
+
     /**
      * Called when activity is first created
      * @param savedInstanceState
@@ -79,23 +83,27 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         }catch(Exception e){
             e.printStackTrace();
         }
-        ArrayList<Book> testBookList = new ArrayList<>();
-        ArrayList<String> testBookID = new ArrayList<>();
-        try {
-            testBookID.add(mBookList.get(0).getBookID());
-            new FetchBookWithList(testBookList,testBookID).execute();
-            Log.d("testing","Test Size My Books before: "+testBookList.size());
-        }catch (Exception e){
-            e.printStackTrace();
-            Log.d("testing","error");
-        }
-        Log.d("testing","Test Size My Books after: "+testBookList.size());
 
 
 
-        mBookAdapter = new BookAdapter(MyBooks.this,mBookList);
+        //Work in Progress
+        mBookAdapter = new BookAdapter(MyBooks.this,testBookList);
         mRecyclerView.setAdapter(mBookAdapter);
         mBookAdapter.setOnItemClickListener(MyBooks.this);
+
+
+        try {
+            testBookList.clear();
+            for(Book books : mBookList){
+                testBookID.add(books.getBookID());
+            }
+            new FetchBookWithList(testBookList,testBookID,mBookAdapter).execute();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //Work in Progress
+
+
 
         //adds new book by starting add book info class
         Button addBook = (Button) findViewById(R.id.add_book);
@@ -118,11 +126,25 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         }catch(Exception e){
             e.printStackTrace();
         }
-        mBookAdapter = new BookAdapter(MyBooks.this,mBookList);
+
+
+        //Work in Progress
+        mBookAdapter = new BookAdapter(MyBooks.this,testBookList);
         mRecyclerView.setAdapter(mBookAdapter);
         mBookAdapter.setOnItemClickListener(MyBooks.this);
-
         mBookAdapter.notifyDataSetChanged();
+
+
+        try {
+            testBookList.clear();
+            for(Book books : mBookList){
+                testBookID.add(books.getBookID());
+            }
+            new FetchBookWithList(testBookList,testBookID,mBookAdapter).execute();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //Work in Progress
     }
 
 
@@ -138,10 +160,7 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
     @Override
     protected void onStart() {
         super.onStart();
-        //TextView textView = findViewById(R.id.textView2);
-        //textView.setText("Number of books: " + arraySize);
         mBookAdapter.notifyDataSetChanged();
-
     }
 
     /**
@@ -150,7 +169,8 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
      */
     @Override
     public void onItemClick(int position) {
-        clickedBook = (Book) mBookList.get(position);
+        //Work in Progress
+        clickedBook = (Book) testBookList.get(position);
         Intent intent = new Intent(MyBooks.this, BookInfo.class);
         intent.putExtra("BOOKID",clickedBook.getBookID());
         intent.putExtra("POSITION",position);

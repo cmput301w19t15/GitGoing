@@ -176,6 +176,7 @@ public class CreateRequest extends AppCompatActivity {
                             Book book = books.getValue(Book.class);
                             if (book.getBookID().equals(bookId)){
                                 loggedInUser.addToMyRequestedBooks(book);
+                                loggedInUser.addToMyRequestedBooksID(bookId);
                             }
                             //allBooks.add(book);
                         }

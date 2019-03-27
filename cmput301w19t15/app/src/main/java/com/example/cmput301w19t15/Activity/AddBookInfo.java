@@ -87,6 +87,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
 
                 Book book = new Book(booktitleText, authorText, isbnText, bookPhoto, loggedInUser.getEmail(), loggedInUser.getUserID());
                 loggedInUser.addToMyBooks(book);
+                loggedInUser.addToMyBooksID(book.getBookID());
 
                 Bundle result = new Bundle();
                 Intent returnIntent = new Intent(AddBookInfo.this, MyBooks.class);
