@@ -44,8 +44,8 @@ import com.google.firebase.database.ValueEventListener;
  * Represents the user registration activity
  * @author Thomas, Anjesh, Breanne
  * @version 1.0
- * @see LonelyTwitterActivity
- * @see ImportantTweet
+ * @see MainActivity
+ * @see User
  * @since 1.0
  */
 public class RegisterActivity extends AppCompatActivity {

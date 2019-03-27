@@ -10,8 +10,10 @@
     <uses-permission android:name="android.permission.camera2" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -20,6 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".InProgress.MyBorrows"></activity>
+
         <activity android:name=".Functions.ScanBarcode"></activity>
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.MainActivity" />
@@ -32,6 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".Activity.MyBooks"/>
         <activity android:name=".Activity.BookInfo"/>
         <activity android:name=".Activity.AddBookInfo"/>
@@ -47,19 +52,18 @@
         <activity android:name=".InProgress.AcceptRequest"/>
         <activity android:name=".Activity.ViewAcceptedRequest"/>
 
+        <activity android:name=".Activity.ViewAcceptedOwnerRequest"/>
+
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".FirebaseIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
-
     </application>
 
 </manifest>

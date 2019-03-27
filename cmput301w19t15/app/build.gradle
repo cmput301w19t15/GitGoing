@@ -1,3 +1,4 @@
+
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
@@ -42,14 +43,14 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:17.1.0'
 }
 
-com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true 
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
 
 dependencies {
-  implementation 'com.android.support.constraint:constraint-layout:+'
+    implementation 'com.android.support.constraint:constraint-layout:+'
 }
 
 dependencies {
-  implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.google.firebase:firebase-database:16.0.1'
     implementation 'me.dm7.barcodescanner:zxing:1.9'
     // google mobile vision
     implementation 'com.google.android.gms:play-services-vision:17.0.2'

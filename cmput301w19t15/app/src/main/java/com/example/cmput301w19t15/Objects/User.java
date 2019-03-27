@@ -555,7 +555,31 @@ public class User {
      * @return the array list
      */
     public ArrayList<Book> getMyRequestedBooksAccepted(){
-        return myRequestedBooksAccepted;
+        ArrayList<Book> myacceptedBooks = new ArrayList<>();
+        for (Book book : myRequestedBooks){
+            //Log.e("TAG: ", "BOOOOOK" + book.getBorrowerID() + "  " + this.userID);
+            if (book.getBorrowerID().equals(this.userID)) {
+                myacceptedBooks.add(book);
+            }
+        }
+        return myacceptedBooks;
+    }
+
+    /**
+     * Finds a book in a book list by book ID
+     *
+     * @param booklist
+     * @param bookID
+     * @return book
+     */
+    public Book findBookbyID(ArrayList<Book> booklist, String bookID){
+        Book found = null;
+        for(Book book : booklist){
+            if(bookID.equals(book.getBookID())){
+                found = book;
+            }
+        }
+       return found;
     }
 
 

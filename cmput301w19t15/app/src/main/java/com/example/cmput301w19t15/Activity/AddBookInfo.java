@@ -85,7 +85,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                 isbnText = isbn.getText().toString(); // look up better way
                 User loggedInUser = MainActivity.getUser();
 
-                Book book = new Book(booktitleText, authorText, isbnText, bookPhoto, loggedInUser.getEmail(), loggedInUser.getUserID());
+                Book book = new Book(booktitleText, authorText, isbnText, bookPhoto, loggedInUser.getEmail(), loggedInUser.getUserID(), "Available");
                 loggedInUser.addToMyBooks(book);
                 loggedInUser.addToMyBooksID(book.getBookID());
 
