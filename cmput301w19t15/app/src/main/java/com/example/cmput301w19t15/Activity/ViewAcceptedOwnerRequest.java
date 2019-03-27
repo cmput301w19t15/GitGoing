@@ -4,6 +4,7 @@ package com.example.cmput301w19t15.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -12,10 +13,15 @@ import android.widget.Toast;
 
 import com.example.cmput301w19t15.Functions.FetchBookInfo;
 import com.example.cmput301w19t15.Functions.ScanBarcode;
+import com.example.cmput301w19t15.InProgress.AcceptRequest;
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.Objects.Notification;
 import com.example.cmput301w19t15.Objects.User;
 import com.example.cmput301w19t15.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -26,9 +32,10 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
     private Book newBook;
     private User owner;
     User loggedInUser = MainActivity.getUser();
-    String ownerId, author, title, ownerEmail, isbn, status, bookId;
+    String ownerID, author, title, ownerEmail, isbn, status, bookId;
     Integer SCAN_ISBN = 3;
     private ZXingScannerView scannerView;
+    Notification notif, notif2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +95,35 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
                 String barcode = data.getStringExtra("ISBN");
                 if (barcode.equals(isbn)) {
                     Toast.makeText(getApplicationContext(),"Isbn scan matched",Toast.LENGTH_LONG).show();
+                    /*
+                    notif2 = new Notification("scanned", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
+
+                            notif.getNotifyFromID(), notif.getNotifyFromEmail(), notif.getISBN(), notif.getPhoto(), false);
+                    ownerID = loggedInUser.getUserID();
+                    ownerEmail = loggedInUser.getEmail();
+                    DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif2.getNotifID());
+
+                    //add notif to database
+                    //newNotif.setValue(notif2);
+                    newNotif.setValue(notif2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(ViewAcceptedOwnerRequest.this, "Successfully Added Notification ", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                    */
+                    changeStatusForRequester();
+                    FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
                 }
             }
         }
     }
+    public void changeStatusForRequester() {
+        
+
+
+    }
+
 }
