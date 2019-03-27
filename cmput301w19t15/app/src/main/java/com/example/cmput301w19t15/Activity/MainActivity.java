@@ -293,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
                                     }
                                     if (unreadAmt > 0) {
                                         //Log.d("read",Integer.toString(unreadAmt));
-                                        notifyButton.setImageResource(R.drawable.nerd_cat_pixilart);
+                                        notifyButton.setImageResource(R.drawable.unread);
                                     }
                                     else if (unreadAmt == 0 || numNotif == 0) {
                                         //Log.d("read",Integer.toString(unreadAmt));
@@ -307,7 +307,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
                             }
                         }
                         //myCallback.loadNotifCallBack(allNotif);
-                        Toast.makeText(MainActivity.this, "Num Notif: " + numNotif, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "Num Notif: " + numNotif, Toast.LENGTH_SHORT).show();
 
                     } catch (Exception e) {
                         e.printStackTrace();
