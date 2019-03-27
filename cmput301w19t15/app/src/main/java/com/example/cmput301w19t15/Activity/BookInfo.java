@@ -101,10 +101,12 @@ public class BookInfo extends AppCompatActivity {
         String author = authorEditText.getText().toString();
         String isbn = ISBNEditText.getText().toString();
         loggedInUser.removeMyBooks(book);
+        loggedInUser.removeMyBooksID(book.getBookID());
         book.setTitle(title);
         book.setAuthor(author);
         book.setISBN(isbn);
         loggedInUser.addToMyBooks(book);
+        loggedInUser.addToMyBooksID(book.getBookID());
         FirebaseDatabase.getInstance().getReference("books").child(book.getBookID()).setValue(book);// update books
         finish();
     }
