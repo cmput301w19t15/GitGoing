@@ -50,9 +50,9 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class RequestedBookList extends AppCompatActivity implements BookAdapter.OnItemClickListener{
     private RequestedBookList activity = this;
-    private Button all, accepted;
-    private BookAdapter adapterAll, adapterAccepted;
-    private ArrayList<Book> listOfBooks, listAccepted;
+    private Button all, accepted, borrowed;
+    private BookAdapter adapterAll, adapterAccepted, adapterBorrowed;
+    private ArrayList<Book> listOfBooks, listAccepted, listBorrowed;
     private RecyclerView mRecyclerView;
     private static User loggedInUser;
 
@@ -65,17 +65,20 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         listOfBooks = new ArrayList<>();
         listAccepted = new ArrayList<>();
-
+        listBorrowed = new ArrayList<>();
         loggedInUser = MainActivity.getUser();
         listOfBooks = loggedInUser.getMyRequestedBooks();
         listAccepted = loggedInUser.getMyRequestedBooksAccepted();
+        listBorrowed = loggedInUser.getBorrowedBooks();
         adapterAll = new BookAdapter(RequestedBookList.this,listOfBooks);
         adapterAccepted = new BookAdapter(RequestedBookList.this, listAccepted);
+        adapterBorrowed = new BookAdapter(RequestedBookList.this,listBorrowed);
         mRecyclerView.setAdapter(adapterAll);
 
 
         all = (Button) findViewById(R.id.all);
         accepted = (Button) findViewById(R.id.accepted);
+        borrowed =(Button) findViewById(R.id.borrowed);
 
         all.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +99,16 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
                 mRecyclerView.setAdapter(adapterAccepted);
             }
         });
+
+        borrowed.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listBorrowed = loggedInUser.getBorrowedBooks();
+                        adapterBorrowed.notifyDataSetChanged();
+                        mRecyclerView.setAdapter(adapterBorrowed);
+                    }
+                }
+        );
 
         //loadBooks();
 
