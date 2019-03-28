@@ -66,6 +66,9 @@ public class Book {
         this.photo = photo;
         this.ownerEmail = ownerEmail;
         this.ownerID = ownerID;
+
+        //this.status = Status.Available;
+
         this.rating = rating;
         this.status = status;
         if(this.BookID == null || this.BookID.isEmpty())
