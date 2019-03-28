@@ -16,6 +16,7 @@ public class Notification implements Serializable {
     private String photo;
     private String notifID;
     private Boolean read;
+    private Boolean OwnerScanned;
 
     public Notification(String type, String bookID, String title, String notifyFromID, String notifyFromEmail,
                         String notifyToID, String notifyToEmail, String ISBN, String photo, Boolean read) {
@@ -31,6 +32,7 @@ public class Notification implements Serializable {
         if(this.notifID == null || this.notifID.isEmpty()){
             this.notifID = UUID.randomUUID().toString();}
         this.read = read;
+        this.OwnerScanned = Boolean.FALSE;
     }
 
     public Notification() {}

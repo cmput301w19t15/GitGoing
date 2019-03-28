@@ -52,6 +52,10 @@ public class User {
     private ArrayList<Book> borrowedBooks = new ArrayList<>();//book that i have borrowed from others
     private ArrayList<Book> requestedBooks = new ArrayList<>();//books others have requested from me
 
+
+    //
+    private ArrayList<String> myBooksID = new ArrayList<>();
+    private ArrayList<String> myRequestedBooksID = new ArrayList<>();
     private String bookListType = "myBooks";
 
     /**
@@ -195,7 +199,14 @@ public class User {
             e.printStackTrace();
         }
     }
-
+    public void addToMyBooksID(String bookID){
+        try {
+            myBooksID.add(bookID);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myBooksID").setValue(myBooksID);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     /**
      * Remove my books.
      *
@@ -209,6 +220,14 @@ public class User {
             e.printStackTrace();
         }
     }
+    public void removeMyBooksID(String bookID){
+        try {
+            myBooksID.remove(bookID);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myBooksID").setValue(myBooksID);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Returns my books array list.
@@ -217,6 +236,9 @@ public class User {
      */
     public ArrayList<Book> getMyBooks(){
         return myBooks;
+    }
+    public ArrayList<String> getMyBooksID(){
+        return myBooksID;
     }
 
     /**
@@ -229,6 +251,14 @@ public class User {
         try {
             myRequestedBooks.add(book);
             FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooks").child(book.getBookID()).setValue(book);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void addToMyRequestedBooksID(String bookID){
+        try {
+            myRequestedBooksID.add(bookID);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksID").setValue(myRequestedBooksID);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -247,7 +277,14 @@ public class User {
             e.printStackTrace();
         }
     }
-
+    public void removeMyRequestedBooksID(String bookID){
+        try {
+            myRequestedBooksID.remove(bookID);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myRequestedBooksID").setValue(myRequestedBooksID);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     /**
      * Get my requested books array list.
      *
@@ -256,7 +293,9 @@ public class User {
     public ArrayList<Book> getMyRequestedBooks(){
         return myRequestedBooks;
     }
-
+    public ArrayList<String> getMyRequestedBooksID(){
+        return myRequestedBooksID;
+    }
     /**
      * Add to requested books (books others have requested from me).
      *
@@ -516,7 +555,31 @@ public class User {
      * @return the array list
      */
     public ArrayList<Book> getMyRequestedBooksAccepted(){
-        return myRequestedBooksAccepted;
+        ArrayList<Book> myacceptedBooks = new ArrayList<>();
+        for (Book book : myRequestedBooks){
+            //Log.e("TAG: ", "BOOOOOK" + book.getBorrowerID() + "  " + this.userID);
+            if (book.getBorrowerID().equals(this.userID)) {
+                myacceptedBooks.add(book);
+            }
+        }
+        return myacceptedBooks;
+    }
+
+    /**
+     * Finds a book in a book list by book ID
+     *
+     * @param booklist
+     * @param bookID
+     * @return book
+     */
+    public Book findBookbyID(ArrayList<Book> booklist, String bookID){
+        Book found = null;
+        for(Book book : booklist){
+            if(bookID.equals(book.getBookID())){
+                found = book;
+            }
+        }
+       return found;
     }
 
 

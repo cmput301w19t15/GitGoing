@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.cmput301w19t15.InProgress.MyBorrows;
 import com.example.cmput301w19t15.Objects.NotifAdapter;
 import com.example.cmput301w19t15.Objects.Notification;
 import com.example.cmput301w19t15.R;
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
         myBorrows = findViewById(R.id.my_borrows);
         myBorrows.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MyBooks.class);
+                Intent intent = new Intent(MainActivity.this, MyBorrows.class);
                 startActivity(intent);
                 //finish();
             }

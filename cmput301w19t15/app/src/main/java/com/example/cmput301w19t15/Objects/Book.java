@@ -39,7 +39,9 @@ public class Book {
     private String BookID = "";//
     private String rating = "";
     private long returnDate = System.currentTimeMillis();
-    private Status status = Status.Available;//
+
+    private String status = "";//
+
     private String borrowerID = "";
 
 
@@ -66,6 +68,7 @@ public class Book {
         this.ownerID = ownerID;
         this.status = Status.Available;
         this.rating = rating;
+        this.status = status;
         if(this.BookID == null || this.BookID.isEmpty())
             this.BookID = UUID.randomUUID().toString();
     }
@@ -77,7 +80,7 @@ public class Book {
         this.photo = book.photo;
         this.ownerEmail = book.ownerEmail;
         this.ownerID = book.ownerID;
-        this.status = Status.Available;
+        this.status = book.status;
         this.BookID = book.BookID;
         //this.rating = book.rating;
     }
@@ -128,15 +131,10 @@ public class Book {
     }
     public long getDate(){return returnDate;}
     public void setStatus(String status){
-        switch (status) {
-            case "available" : this.status = Status.Available; break;
-            case "requested" : this.status = Status.Requested; break;
-            case "accepted"    : this.status = Status.Accepted; break;
-            case "borrowed"    : this.status = Status.Borrowed; break;
-        }
+        this.status = status;
     }
     public String getStatus(){
-        return status.toString();
+        return this.status;
     }
     public void setBorrowerID(String borrowerID){
         this.borrowerID = borrowerID;
