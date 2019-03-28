@@ -27,7 +27,7 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
         this.bookListID = idList;
     }
 
-    public FetchBookWithList(ArrayList<String> idList, BookAdapter bookAdapter){
+    public FetchBookWithList(ArrayList<Book> bookList, ArrayList<String> idList, BookAdapter bookAdapter){
         this.bookList = bookList;
         this.bookListID = idList;
         this.bookAdapter = bookAdapter;
@@ -52,6 +52,9 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
                             e.printStackTrace();
                         }
                     }
+                    if(bookAdapter != null) {
+                        bookAdapter.notifyDataSetChanged();
+                    }
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -68,9 +71,7 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
     protected void onPostExecute(ArrayList<Book> s){
         super.onPostExecute(s);
         try {
-            if(this.bookAdapter != null) {
-                this.bookAdapter.notifyDataSetChanged();
-            }
+
         } catch (Exception e){
             // If onPostExecute does not receive a proper JSON string,
             // update the UI to show failed results.

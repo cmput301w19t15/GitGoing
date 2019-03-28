@@ -201,6 +201,9 @@ public class CreateRequest extends AppCompatActivity {
     }
 
     public void addBookToRequest(){
+
+        loggedInUser.addToMyRequestedBooksID(bookId);
+        //Check over this
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users").child(ownerId).child("myBooks");
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -249,7 +252,6 @@ public class CreateRequest extends AppCompatActivity {
                                 });
                                 //loggedInUser.addToMyRequestedBooks(book);
                             }
-                            //allBooks.add(book);
                         }
                         //myCallback.loadBookCallBack(allBooks);
                     } catch (Exception e){

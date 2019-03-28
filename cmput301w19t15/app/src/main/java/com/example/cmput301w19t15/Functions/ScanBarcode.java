@@ -74,6 +74,22 @@ public class ScanBarcode extends AppCompatActivity implements BarcodeReader.Barc
      */
     @Override
     public void onScannedMultiple(List<Barcode> barcodes) {
+        String codes = "";
+        for (Barcode barcode : barcodes) {
+            codes += barcode.displayValue + ", ";
+        }
+
+        final String finalCodes = codes;
+         ScanBarcode.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(ScanBarcode.this, "Barcodes: " + finalCodes, Toast.LENGTH_SHORT).show();
+            }
+        });
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("ISBN",finalCodes);
+        setResult(Activity.RESULT_OK,returnIntent);
+        finish();
 
     }
 

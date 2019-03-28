@@ -37,6 +37,7 @@ public class Book {
     private String ownerEmail = "";//
     private String ownerID = "";//
     private String BookID = "";//
+    private String rating = "";
     private long returnDate = System.currentTimeMillis();
 
     private String status = "";//
@@ -58,13 +59,15 @@ public class Book {
      //* @param "borrowerID String - ID of borrower, similar to ownerID
      *
      */
-    public Book(String title, String author, String ISBN, String photo, String ownerEmail, String ownerID, String status) {
+    public Book(String title, String author, String ISBN, String photo, String ownerEmail, String ownerID, String rating) {
         this.title = title;
         this.author = author;
         this.ISBN = ISBN;
         this.photo = photo;
         this.ownerEmail = ownerEmail;
         this.ownerID = ownerID;
+        //this.status = Status.Available;
+        this.rating = rating;
         this.status = status;
         if(this.BookID == null || this.BookID.isEmpty())
             this.BookID = UUID.randomUUID().toString();
@@ -79,6 +82,7 @@ public class Book {
         this.ownerID = book.ownerID;
         this.status = book.status;
         this.BookID = book.BookID;
+        //this.rating = book.rating;
     }
 
     public Book(FindBooks findBooks, ArrayList<Book> listOfBooks){}
@@ -138,4 +142,6 @@ public class Book {
     public String getBorrowerID(){
         return borrowerID;
     }
+    public String getRating() { return rating; }
+    public void setRating(String rating) {this.rating = rating; }
 }

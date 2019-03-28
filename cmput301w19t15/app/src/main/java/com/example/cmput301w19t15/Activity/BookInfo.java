@@ -100,16 +100,16 @@ public class BookInfo extends AppCompatActivity {
         String title = titleEditText.getText().toString();
         String author = authorEditText.getText().toString();
         String isbn = ISBNEditText.getText().toString();
-
-        //loggedInUser.removeMyBooks(book);
+        loggedInUser.removeMyBooksID(book.getBookID());
+        loggedInUser.removeMyBooks(book);
         book.setTitle(title);
         book.setAuthor(author);
         book.setISBN(isbn);
-        //book.setStatus(book.getStatus());
         book.setBookID(book.getBookID());
-        book.setISBN(book.getISBN());
-        loggedInUser.getMyBooks().set(position,book);
+        loggedInUser.addToMyBooksID(book.getBookID());
+        loggedInUser.addToMyBooks(book);
         FirebaseDatabase.getInstance().getReference("users").child(loggedInUser.getUserID()).child("myBooks").setValue(loggedInUser.getMyBooks());
+        loggedInUser.getMyBooks().set(position,book);
         FirebaseDatabase.getInstance().getReference("books").child(book.getBookID()).setValue(book);// update books
         finish();
     }
@@ -119,6 +119,7 @@ public class BookInfo extends AppCompatActivity {
      */
     private void deleteBook(){
         loggedInUser.removeMyBooks(book);
+        loggedInUser.removeMyBooksID(book.getBookID());
         FirebaseDatabase.getInstance().getReference("books").child(book.getBookID()).removeValue();// delete book
 
         /**
@@ -132,10 +133,35 @@ public class BookInfo extends AppCompatActivity {
                     try {
                         for (DataSnapshot user : dataSnapshot.getChildren()) {
 
+                            //remove requested book
+                            ArrayList<Book> userRequestedList = new ArrayList<>();
+                            for(DataSnapshot data: user.child("myRequestedBooks").getChildren()){
+                                Book singleBook = data.getValue(Book.class);
+                                if(!singleBook.getBookID().equalsIgnoreCase(book.getBookID())) {
+                                    userRequestedList.add(book);
+                                }
+                            }
+                            FirebaseDatabase.getInstance().getReference("users").child(user.getKey()).child("myRequestedBooks").setValue(userRequestedList);
+
+                            //remove requested book id
+                            ArrayList<String> userRequestedListID = new ArrayList<>();
+                            for(DataSnapshot data: user.child("myRequestedBooksID").getChildren()){
+                                String singleBookID = data.getValue(String.class);
+                                if(!singleBookID.equalsIgnoreCase(book.getBookID())) {
+                                    userRequestedListID.add(singleBookID);
+                                }
+                            }
+                            FirebaseDatabase.getInstance().getReference("users").child(user.getKey()).child("myRequestedBooks").setValue(userRequestedListID);
+
+
+
+                            //old method
+
                                 final String userID = user.child("userID").getValue().toString();
                                 /**
                                  * iterate through requested books for each user
                                  */
+                                /*
                                 DatabaseReference bookReference = FirebaseDatabase.getInstance().getReference().child("users")
                                         .child(userID).child("myRequestedBooks");
                                 bookReference.addValueEventListener(new ValueEventListener() {
@@ -161,6 +187,7 @@ public class BookInfo extends AppCompatActivity {
 
                                     }
                                 });
+                             */
                         }
                     } catch (Exception e){
                         e.printStackTrace();
