@@ -44,7 +44,7 @@
     <string name="addBook">Add Book</string>
     <string name="deleteBook">Delete Book</string>
     <string name="scan">Scan Book Information</string>
-    <string name="rating">User Rating: </string>
+    <string name="value">User Rating: </string>
     <string name="create">Create Profile </string>
     <string name="filters">Filters: </string>
     <string name="add">Add </string>

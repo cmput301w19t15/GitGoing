@@ -147,7 +147,6 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         //Work in Progress
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();

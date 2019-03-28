@@ -41,7 +41,7 @@ public class User {
     private String name;
     private String email;
     private String phone;
-    private String userID;
+    public String userID;
     private Float rating;
 
     //public static ArrayList<String> testArray = new ArrayList<>();

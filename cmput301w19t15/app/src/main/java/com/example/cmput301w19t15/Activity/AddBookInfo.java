@@ -53,6 +53,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
     private String authorText;
     private String isbnText;
     private String bookPhoto;
+    private String rating;
 
     private ZXingScannerView scannerView;
     Integer SELECT_FILE = 0, REQUEST_CAMERA = 1, SCAN_ISBN = 3;
@@ -85,7 +86,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                 isbnText = isbn.getText().toString(); // look up better way
                 User loggedInUser = MainActivity.getUser();
 
-                Book book = new Book(booktitleText, authorText, isbnText, bookPhoto, loggedInUser.getEmail(), loggedInUser.getUserID(), "Available");
+                Book book = new Book(booktitleText, authorText, isbnText, bookPhoto, loggedInUser.getEmail(), loggedInUser.getUserID(), rating);
                 loggedInUser.addToMyBooks(book);
                 loggedInUser.addToMyBooksID(book.getBookID());
 

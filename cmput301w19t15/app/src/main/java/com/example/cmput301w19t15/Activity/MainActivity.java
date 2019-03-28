@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
     //private ProgressBar progressBar;
-    private Button logOut, myBooks, myBorrows, myRequests, findUser, findBook;
+    private Button logOut, myBooks, myBorrows, myRequests, findUser, findBook, temp;
     private ImageButton myProfile, notifyButton;
 
     private static User loggedInUser;
@@ -87,6 +87,15 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
                 auth.signOut();
                 startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 finish();
+            }
+        });
+
+        temp = findViewById(R.id.button2);
+        temp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,RatingTest.class);
+                startActivity(intent);
             }
         });
 
@@ -283,17 +292,11 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
                                 if (currentNotif.getNotifyToID().equals(user.getUid())){
                                     //allNotif.add(currentNotif);
                                     numNotif += 1;
-                                    //Log.d("wtf","help plz 2");
-                                    //Log.d("var", Boolean.toString(currentNotif.getRead()));
                                     if(currentNotif.getRead() == false) {
-                                        //Log.d("var", Boolean.toString(currentNotif.getRead()));
-                                        //Log.d("unreadAmt",Integer.toString(unreadAmt));
                                         unreadAmt += 1;
-                                        //Log.d("unreadAmt",Integer.toString(unreadAmt));
                                     }
                                     if (unreadAmt > 0) {
-                                        //Log.d("read",Integer.toString(unreadAmt));
-                                        notifyButton.setImageResource(R.drawable.nerd_cat_pixilart);
+                                        notifyButton.setImageResource(R.drawable.unread);
                                     }
                                     else if (unreadAmt == 0 || numNotif == 0) {
                                         //Log.d("read",Integer.toString(unreadAmt));
