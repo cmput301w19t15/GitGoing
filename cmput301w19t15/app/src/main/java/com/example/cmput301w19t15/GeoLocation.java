@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.webkit.GeolocationPermissions;
 import android.widget.Toast;
+import android.location.Location;
 
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -56,9 +57,7 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
 
         userPermission();
         mapFragment.getMapAsync(this);
-
-
-
+        
     }
 
 
