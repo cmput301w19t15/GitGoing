@@ -22,7 +22,6 @@ package com.example.cmput301w19t15.Activity;
  * @see User
  * @since 1.0
  */
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -50,8 +49,8 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class RequestedBookList extends AppCompatActivity implements BookAdapter.OnItemClickListener{
     private RequestedBookList activity = this;
-    private Button all, accepted, borrowed;
-    private BookAdapter adapterAll, adapterAccepted, adapterBorrowed;
+    private Button all, accepted,borrowed;
+    private BookAdapter adapterAll, adapterAccepted,adapterBorrowed;
     private ArrayList<Book> listOfBooks, listAccepted, listBorrowed;
     private RecyclerView mRecyclerView;
     private static User loggedInUser;
@@ -66,19 +65,20 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         listOfBooks = new ArrayList<>();
         listAccepted = new ArrayList<>();
         listBorrowed = new ArrayList<>();
+
         loggedInUser = MainActivity.getUser();
         listOfBooks = loggedInUser.getMyRequestedBooks();
         listAccepted = loggedInUser.getMyRequestedBooksAccepted();
         listBorrowed = loggedInUser.getBorrowedBooks();
         adapterAll = new BookAdapter(RequestedBookList.this,listOfBooks);
         adapterAccepted = new BookAdapter(RequestedBookList.this, listAccepted);
-        adapterBorrowed = new BookAdapter(RequestedBookList.this,listBorrowed);
+        adapterBorrowed = new BookAdapter(RequestedBookList.this, listBorrowed);
         mRecyclerView.setAdapter(adapterAll);
 
 
         all = (Button) findViewById(R.id.all);
         accepted = (Button) findViewById(R.id.accepted);
-        borrowed =(Button) findViewById(R.id.borrowed);
+        borrowed = (Button) findViewById(R.id.borrowed);
 
         all.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,15 +100,16 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
             }
         });
 
+
         borrowed.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        listBorrowed = loggedInUser.getBorrowedBooks();
-                        adapterBorrowed.notifyDataSetChanged();
-                        mRecyclerView.setAdapter(adapterBorrowed);
-                    }
-                }
-        );
+            @Override
+            public void onClick(View v) {
+                listBorrowed = loggedInUser.getBorrowedBooks();
+                adapterBorrowed.notifyDataSetChanged();
+                mRecyclerView.setAdapter(adapterBorrowed);
+
+            }
+        });
 
         //loadBooks();
 
@@ -132,7 +133,6 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
             }
         });
     }
-
     /**
      * Load my book from fire base.
      *
@@ -172,3 +172,197 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
+import java.util.ArrayList;
+
+import com.example.cmput301w19t15.InProgress.BorrowerBookView;
+import com.example.cmput301w19t15.InProgress.MyBorrows;
+import com.example.cmput301w19t15.InProgress.Request;
+import com.example.cmput301w19t15.Objects.Book;
+import com.example.cmput301w19t15.Objects.BookAdapter;
+import com.example.cmput301w19t15.Objects.User;
+import com.example.cmput301w19t15.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+/**
+ * The type Requested book list.
+
+public class RequestedBookList extends AppCompatActivity implements BookAdapter.OnItemClickListener{
+    private RequestedBookList activity = this;
+    private Button all, accepted, borrowed;
+    private BookAdapter adapter, adapterAccepted, adapterBorrowed;
+    private ArrayList<Book> listOfBooks, listAccepted, listBorrowed,currentList;
+    private RecyclerView mRecyclerView;
+    private static User loggedInUser;
+    private Book clickedBook;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_requested_book_list);
+        mRecyclerView = findViewById(R.id.recylcerView);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        listOfBooks = new ArrayList<>();
+        listAccepted = new ArrayList<>();
+        listBorrowed = new ArrayList<>();
+        //currentList = new ArrayList<>();
+        loggedInUser = MainActivity.getUser();
+        //listAccepted = loggedInUser.getMyRequestedBooksAccepted();
+        //listBorrowed = loggedInUser.getBorrowedBooks();
+        currentList = loggedInUser.getMyRequestedBooks();
+        adapter = new BookAdapter(RequestedBookList.this,currentList);
+        //adapterAccepted = new BookAdapter(RequestedBookList.this, listAccepted);
+        //adapterBorrowed = new BookAdapter(RequestedBookList.this,listBorrowed);
+        mRecyclerView.setAdapter(adapter);
+
+
+        all = (Button) findViewById(R.id.all);
+        accepted = (Button) findViewById(R.id.accepted);
+        borrowed =(Button) findViewById(R.id.borrowed);
+/*
+        all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentList = loggedInUser.getMyRequestedBooks();
+                adapter = new BookAdapter(RequestedBookList.this,currentList);
+                mRecyclerView.setAdapter(adapter);
+
+            }
+        });
+
+
+
+        accepted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentList = loggedInUser.getMyRequestedBooksAccepted();
+                adapter = new BookAdapter(RequestedBookList.this,currentList);
+                mRecyclerView.setAdapter(adapter);
+
+            }
+        });
+
+        borrowed.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        currentList = loggedInUser.getBorrowedBooks();
+                        adapter = new BookAdapter(RequestedBookList.this,currentList);
+                        mRecyclerView.setAdapter(adapter);
+
+                    }
+                }
+        );
+
+        //loadBooks();
+
+
+        //Log.d("testing","done");
+
+    }
+
+    /**
+     * Load books.
+     */
+    /*public void loadAcceptedBooks(){
+        loadMyRequestedBooksFromFireBase(new FindBooks.loadBookCallBack() {
+            @Override
+            public void loadBookCallBack(ArrayList<Book> value) {
+                listOfBooks = (ArrayList<Book>) value.clone();
+                //Log.d("testing","book size: "+listOfBooks.size());
+                adapter = new BookAdapter(RequestedBookList.this,listOfBooks);
+                mRecyclerView.setAdapter(adapter);
+                adapter.setOnItemClickListener(RequestedBookList.this);
+            }
+        });
+    }
+
+    /**
+     * Load my book from fire base.
+     *
+     * @param myCallback the my callback
+     *
+    public void loadMyRequestedBooksFromFireBase(final FindBooks.loadBookCallBack myCallback){
+        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("books");
+        userReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    try {
+                        ArrayList<Book> allBooks = new ArrayList<>();
+                        for (DataSnapshot books : dataSnapshot.getChildren()) {
+                            if(books.child("date").getValue().equals(null) || books.child("date").getValue().equals("null")) {
+                                //Log.d("testing",books.getKey());
+                            }else{
+                                Book book = books.getValue(Book.class);
+                                allBooks.add(book);
+                            }
+                        }
+                        myCallback.loadBookCallBack(allBooks);
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("testing","Error: ", databaseError.toException());
+            }
+        });
+    }
+    @Override
+    public void onItemClick(int position) {
+        clickedBook = (Book) currentList.get(position);
+        Intent intent = new Intent(RequestedBookList.this, BorrowerBookView.class);
+        intent.putExtra("BOOKID",clickedBook.getBookID());
+        intent.putExtra("POSITION",position);
+        //setResult(RESULT_OK, intent);
+        startActivityForResult(intent,1);
+    }
+
+}
+*/
