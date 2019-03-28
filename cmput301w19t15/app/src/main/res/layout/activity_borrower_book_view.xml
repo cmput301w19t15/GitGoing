@@ -8,7 +8,23 @@
     tools:context=".Activity.BookInfo">
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/return_book"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button1"
+        android:text="@string/return_book"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="341dp" />
+
+    <Button
+        android:id="@+id/location"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
@@ -113,7 +129,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button12"
+        app:layout_constraintTop_toBottomOf="@+id/location"
         tools:ignore="MissingConstraints" />
 
     <ListView
