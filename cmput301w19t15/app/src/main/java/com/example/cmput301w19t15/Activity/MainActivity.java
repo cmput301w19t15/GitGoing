@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.cmput301w19t15.GeoLocation;
 import com.example.cmput301w19t15.Objects.NotifAdapter;
 import com.example.cmput301w19t15.Objects.Notification;
 import com.example.cmput301w19t15.R;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
     //private ProgressBar progressBar;
-    private Button logOut, myBooks, myBorrows, myRequests, findUser, findBook, temp;
+    private Button logOut, myBooks, myBorrows, myRequests, findUser, findBook, temp, myMap;
     private ImageButton myProfile, notifyButton;
 
     private static User loggedInUser;
@@ -149,6 +150,15 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
                 Intent intent = new Intent(MainActivity.this, MyBooks.class);
                 startActivity(intent);
                 //finish();
+            }
+        });
+
+        myMap = findViewById(R.id.my_map);
+        myMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GeoLocation.class);
+                startActivity(intent);
             }
         });
     }

@@ -72,14 +72,22 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
         setContentView(R.layout.activity_geo_location);
         selectLocation = findViewById(R.id.selectLocation);
 
+
         selectLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String la = Double.toString(resultLocation.latitude);
-                String lo = Double.toString(resultLocation.longitude);
-                Toast.makeText(GeoLocation.this, la + ' ' + lo,Toast.LENGTH_SHORT).show();
+                if (resultLocation != null) {
+                    String la = Double.toString(resultLocation.latitude);
+                    String lo = Double.toString(resultLocation.longitude);
+                    Toast.makeText(GeoLocation.this, la + ' ' + lo, Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(GeoLocation.this, "no marker decected",Toast.LENGTH_LONG).show();
+                }
             }
         });
+
+
 
         geoDataClient = Places.getGeoDataClient(this,null);
         placeDetectionClient = Places.getPlaceDetectionClient(this,null);
