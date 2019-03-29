@@ -13,51 +13,32 @@
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/button1"
         android:text="@string/return_book"
         android:textColor="#ffffff"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/location"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="341dp" />
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/location"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/button1"
         android:text="@string/location"
-        android:background="@drawable/button1"
         android:textColor="#ffffff"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/scanInfo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="419dp" />
-
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="@string/status"
-        android:background="@drawable/button1"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scanInfo"
         tools:ignore="MissingConstraints" />
 
     <ListView
@@ -65,49 +46,40 @@
         android:layout_height="50dp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="240dp" />
+        tools:layout_editor_absoluteY="248dp" />
 
     <TextView
         android:id="@+id/isbn"
         android:layout_width="48dp"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:text="@string/ISBN"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="216dp" />
+        tools:layout_editor_absoluteY="224dp" />
 
     <ListView
         android:layout_width="395dp"
         android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/isbn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="166dp" />
 
     <TextView
         android:id="@+id/author"
         android:layout_width="48dp"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:text="@string/author"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="134dp" />
+        tools:layout_editor_absoluteY="139dp" />
 
     <TextView
         android:id="@+id/booktitle"
         android:layout_width="48dp"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="49dp"
         android:text="@string/title"
         app:layout_constraintStart_toStartOf="parent"
@@ -118,43 +90,24 @@
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="@string/scan"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/button1"
+        android:text="@string/scan"
         android:textColor="#ffffff"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location"
         tools:ignore="MissingConstraints" />
 
     <ListView
         android:layout_width="395dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="7dp"
-        app:layout_constraintBottom_toTopOf="@+id/author"
-        app:layout_constraintTop_toBottomOf="@+id/booktitle"
+        android:layout_marginTop="80dp"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="8dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button9"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
 
 </android.support.constraint.ConstraintLayout>
