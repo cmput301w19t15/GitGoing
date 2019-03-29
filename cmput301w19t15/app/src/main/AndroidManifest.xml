@@ -27,7 +27,7 @@
         <activity android:name=".Activity.MainActivity" />
         <activity
             android:name=".Activity.LoginActivity"
-            android:label="GitGoing">
+            android:label="BookIT">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

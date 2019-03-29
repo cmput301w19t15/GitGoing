@@ -83,7 +83,7 @@ public class RatingTest extends AppCompatActivity {
                 if(dataSnapshot.exists()) {
                     try {
                         for (DataSnapshot books : dataSnapshot.getChildren()) {
-                            //Rating currentRating = books.getValue(Rating.class);
+                            Rating currentRating = books.getValue(Rating.class);
                             temp = books.child(temper).child("ratings").child(loggedInUser.userID).child("value").getValue().toString();
                             totalRatings += Float.parseFloat(temp);
                             Log.d("HELLO",""+totalRatings);
