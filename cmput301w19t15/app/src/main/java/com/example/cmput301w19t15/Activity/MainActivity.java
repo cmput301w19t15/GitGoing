@@ -310,7 +310,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
                             }
                         }
                         //myCallback.loadNotifCallBack(allNotif);
-                        Toast.makeText(MainActivity.this, "Num Notif: " + numNotif, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "Num Notif: " + numNotif, Toast.LENGTH_SHORT).show();
 
                     } catch (Exception e) {
                         e.printStackTrace();

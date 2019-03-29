@@ -14,6 +14,7 @@ import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.R;
 import com.example.cmput301w19t15.InProgress.Request;
 import com.example.cmput301w19t15.Objects.User;
+import com.google.android.gms.auth.api.credentials.IdToken;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -40,6 +41,7 @@ public class CreateRequest extends AppCompatActivity {
     private User owner;
     User loggedInUser = MainActivity.getUser();
     String ownerId, author, title, ownerEmail, isbn, status, bookId, photo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +79,7 @@ public class CreateRequest extends AppCompatActivity {
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                checkIfExists();
                 addBookToRequest();
                 Notification notif = new Notification("requested", bookId, title, loggedInUser.getUserID(), loggedInUser.getEmail(),
                         ownerId, ownerEmail, isbn, photo, false);
@@ -162,6 +165,40 @@ public class CreateRequest extends AppCompatActivity {
         void loadBookCallBack(ArrayList<Book> value);
     }
 
+    public void checkIfExists() {
+        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID()).child("myRequestedBooks");
+        userReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean cont = false;
+                if (dataSnapshot.exists()) {
+                    try {
+                        //ArrayList<Book> allBooks = new ArrayList<>();
+                        for (DataSnapshot books : dataSnapshot.getChildren()) {
+                            Book book = books.getValue(Book.class);
+                            if (!book.getBookID().equals(bookId)) {
+                                cont = true;
+                                Log.e("HI","YOU'RE A BOLD ONE");
+                            }
+                            //allBooks.add(book);
+                        }
+                        Log.d("TAG", ""+cont);
+                        if (cont) {
+                            Toast.makeText(CreateRequest.this, "Request Already Added", Toast.LENGTH_SHORT).show();
+                        }
+                        //myCallback.loadBookCallBack(allBooks);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("testing", "Error: ", databaseError.toException());
+            }
+        });
+    }
 
     public void addBookToRequest(){
 
@@ -176,10 +213,44 @@ public class CreateRequest extends AppCompatActivity {
                         //ArrayList<Book> allBooks = new ArrayList<>();
                         for (DataSnapshot books : dataSnapshot.getChildren()) {
                             Log.d("TAG", "HEREEEEEEEee");
-                            Book book = books.getValue(Book.class);
+                            final Book book = books.getValue(Book.class);
+                            /**
+                             * find book from owner
+                             */
                             if (book.getBookID().equals(bookId)){
-                                loggedInUser.addToMyRequestedBooks(book);
+                                /**
+                                 * check if books exists in user's myRequestedBooks
+                                 */
+                                DatabaseReference currentUserReference = FirebaseDatabase.getInstance().getReference()
+                                        .child("users").child(loggedInUser.getUserID()).child("myRequestedBooks");
+                                currentUserReference.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()){
+                                            boolean exists = false;
+                                            for (DataSnapshot requestedBooks : dataSnapshot.getChildren()) {
+                                                Book requestedBook = requestedBooks.getValue(Book.class);
+                                                if (requestedBook.getBookID().equals(bookId)) {
+                                                    exists = true;
+                                                }
+                                            }
+                                            /**
+                                             * add book if not exist in myRequestedBooks
+                                             */
+                                            if (exists == false) {
+                                                FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID())
+                                                        .child("myRequestedBooks").child(bookId).setValue(book);
+                                                //loggedInUser.addToMyRequestedBooks(book);
+                                            }
+                                        }
+                                    }
 
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                                //loggedInUser.addToMyRequestedBooks(book);
                             }
                         }
                         //myCallback.loadBookCallBack(allBooks);
