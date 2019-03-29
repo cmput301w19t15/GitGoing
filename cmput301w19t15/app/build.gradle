@@ -9,7 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        minSdkVersion 15
+        minSdkVersion 22
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
@@ -68,5 +68,6 @@ dependencies {
 dependencies {
   implementation 'com.google.android.gms:play-services-maps:16.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.google.android.gms:play-services-places:11.2.0'
   implementation 'com.android.support:appcompat-v7:28.+'
 }

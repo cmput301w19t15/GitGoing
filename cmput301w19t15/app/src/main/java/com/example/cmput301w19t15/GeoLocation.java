@@ -13,6 +13,10 @@ import android.widget.Toast;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
+import com.google.android.gms.location.places.GeoDataClient;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceDetectionClient;
+import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -28,13 +32,25 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
 
     private static final int LOCATION_REQUEST_CODE = 1;
     private GoogleMap mMap;
+    private boolean mapPermission;
     private Location currentLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
+    private GeoDataClient geoDataClient;
+    private PlaceDetectionClient placeDetectionClient;
+    private Location previousLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //instantiate all services required to detect device and geolocation
+        //fusedlocation is the sercive that gets user's location
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        geoDataClient = Places.getGeoDataClient(this,null);
+        placeDetectionClient = Places.getPlaceDetectionClient(this,null);
+
+
+
         setContentView(R.layout.activity_geo_location);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -67,6 +83,11 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
     }
 
 
+    /**
+     * this method is to get user's permission
+     * a window pops up to get user's location permission
+     * then call onrequestPermissionResult method to handle the result
+     */
     public void userPermission() {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -84,9 +105,11 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
 
 
 
-
-
     // source: https://androidclarified.com/display-current-location-google-map-fusedlocationproviderclient/
+
+    /**
+     * display location with latitude and longitude
+     */
     private void setCurrentLocation() {
         @SuppressLint("MissingPermission") Task<Location> task = fusedLocationProviderClient.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
@@ -94,7 +117,7 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
             public void onSuccess(Location location) {
                 if (location != null) {
                     currentLocation = location;
-                    Toast.makeText(GeoLocation.this,currentLocation.getLatitude()+" "+currentLocation.getLongitude(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GeoLocation.this,currentLocation.getLatitude()+" "+currentLocation.getLongitude(),Toast.LENGTH_LONG).show();
                     SupportMapFragment supportMapFragment= (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
                     supportMapFragment.getMapAsync(GeoLocation.this);
                 }else{
@@ -110,9 +133,11 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        mapPermission = false;
         switch (requestCode) {
             case LOCATION_REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mapPermission = true;
                     Toast.makeText(this,"Locaion Permission Allowed", Toast.LENGTH_SHORT).show();
                     setCurrentLocation();
                     //Permission Granted
@@ -120,5 +145,35 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
                     Toast.makeText(this, "Location Permission Denied", Toast.LENGTH_SHORT).show();
                 break;
         }
+        mapUpdate();
     }
+
+    /**
+     * this method is to update the map UI
+     */
+    private void mapUpdate(){
+        if (mMap == null){
+            return;
+        }
+        try{
+            if (mapPermission){
+                mMap.setMyLocationEnabled(true);
+                mMap.getUiSettings().setMyLocationButtonEnabled(true);
+            }
+            else{
+                mMap.setMyLocationEnabled(false);
+                mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                previousLocation = null;
+                userPermission();
+            }
+        }
+        catch(SecurityException e){
+            Toast.makeText(this,"Really?",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
+
 }
+
