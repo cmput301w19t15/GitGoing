@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -23,8 +24,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
@@ -33,7 +36,13 @@ import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
 public class GeoLocation extends FragmentActivity implements OnMapReadyCallback {
 
     private static final int LOCATION_REQUEST_CODE = 1;
+    private static final int DEFAULT_ZOOM = 20;
+
+    private static final String KEY_CAMERA_POSITION = "camera_position";
+    private static final String KEY_LOCATION = "location";
+
     private GoogleMap mMap;
+    private CameraPosition cameraPosition;
     private GeoDataClient geoDataClient;
     private PlaceDetectionClient placeDetectionClient;
     private FusedLocationProviderClient fusedLocationProviderClient;
@@ -53,7 +62,6 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
         placeDetectionClient = Places.getPlaceDetectionClient(this,null);
 
 
-
         setContentView(R.layout.activity_geo_location);
 
         geoDataClient = Places.getGeoDataClient(this,null);
@@ -64,11 +72,23 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
-        userPermission();
+
+        if (savedInstanceState != null) {
+            currentLocation = savedInstanceState.getParcelable(KEY_LOCATION);
+            cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
+        }
         mapFragment.getMapAsync(this);
         
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        if (mMap != null) {
+            outState.putParcelable(KEY_CAMERA_POSITION, mMap.getCameraPosition());
+            outState.putParcelable(KEY_LOCATION, previousLocation);
+            super.onSaveInstanceState(outState);
+        }
+    }
 
     /**
      * Manipulates the map once available.
@@ -83,10 +103,11 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        userPermission();
+        updateUI();
+        getDeviceLocation();
+
+
     }
 
     public void userPermission() {
@@ -107,28 +128,39 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
 
 
 
-    // source: https://androidclarified.com/display-current-location-google-map-fusedlocationproviderclient/
-
-    /**
-     * display location with latitude and longitude
-     */
-    private void setCurrentLocation() {
-        @SuppressLint("MissingPermission") Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    currentLocation = location;
-                    Toast.makeText(GeoLocation.this,currentLocation.getLatitude()+" "+currentLocation.getLongitude(),Toast.LENGTH_LONG).show();
-                    SupportMapFragment supportMapFragment= (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-                    supportMapFragment.getMapAsync(GeoLocation.this);
-                }else{
-                    Toast.makeText(GeoLocation.this,"No Location recorded",Toast.LENGTH_SHORT).show();
-                }
+    private void getDeviceLocation() {
+        /*
+         * Get the best and most recent location of the device, which may be null in rare
+         * cases when a location is not available.
+         */
+        try {
+            if (userPermission) {
+                Task locationResult = fusedLocationProviderClient.getLastLocation();
+                locationResult.addOnCompleteListener(this, new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if (task.isSuccessful()) {
+                            // Set the map's camera position to the current location of the device.
+                            previousLocation = (Location) task.getResult();
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                    new LatLng(previousLocation.getLatitude(),
+                                            previousLocation.getLongitude()), DEFAULT_ZOOM));
+                        } else {
+                            Log.d("TAG", "Current location is null. Using defaults.");
+                            Log.e("TAG", "Exception: %s", task.getException());
+                            //default location
+                            LatLng edmonton = new LatLng(54, -113);
+                            mMap.addMarker(new MarkerOptions().position(edmonton).title("Marker in Edmonton"));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(edmonton,DEFAULT_ZOOM));
+                            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+                            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                        }
+                    }
+                });
             }
-        });
-
-
+        } catch(SecurityException e)  {
+            Log.e("Exception: %s", e.getMessage());
+        }
     }
 
 
@@ -151,6 +183,9 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
     }
 
 
+    /**
+     * this method update map UI
+     */
     private void updateUI(){
         if (mMap == null) {
             return;
@@ -170,6 +205,11 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
         }
     }
 
+
+    // source: https://androidclarified.com/display-current-location-google-map-fusedlocationproviderclient/
+    /**
+     * display location with latitude and longitude
+     */
     private void displayLocation(){
         @SuppressLint("MissingPermission") Task<android.location.Location> task = fusedLocationProviderClient.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
