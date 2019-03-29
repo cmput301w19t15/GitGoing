@@ -12,17 +12,18 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginStart="164dp"
-        android:layout_marginLeft="164dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="164dp"
-        android:layout_marginRight="164dp"
-        android:text="@string/findu"
+        android:layout_marginBottom="12dp"
         android:background="@drawable/button1"
+        android:text="@string/findu"
         android:textColor="#ffffff"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/logout_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_borrows" />
+        app:layout_constraintTop_toBottomOf="@+id/my_requests" />
 
     <ImageButton
         android:id="@+id/notify"
@@ -37,24 +38,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@android:drawable/btn_star_big_on" />
-
-    <Button
-        android:id="@+id/my_borrows"
-        android:layout_width="0dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="@string/borrow"
-        android:background="@drawable/button1"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_requests" />
 
     <Button
         android:id="@+id/my_requests"
