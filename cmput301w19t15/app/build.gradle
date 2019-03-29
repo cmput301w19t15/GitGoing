@@ -24,7 +24,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-
+    implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation "com.android.support:support-compat:28.0.0"
     implementation 'com.android.support:design:28.0.0'
@@ -39,7 +39,7 @@ dependencies {
 dependencies {
     implementation 'com.google.firebase:firebase-storage:16.1.0'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
-    implementation 'com.google.android.gms:play-services:10.2.0'
+    //implementation 'com.google.android.gms:play-services:12.0.1'
     implementation 'com.google.firebase:firebase-messaging:17.1.0'
 }
 
@@ -65,4 +65,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.android.support:multidex:1.0.3'
+}
+
+dependencies {
+  implementation 'com.google.android.gms:play-services-maps:16.1.0'
+  implementation 'com.android.support:appcompat-v7:28.+'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.google.android.gms:play-services-places:16.0.0'
 }

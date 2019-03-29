@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 /**
  * Represents the location for book pickup
+ * @deprecated
  * @author Josh, Anjesh
  * @version 1.0
  * @since 1.0
