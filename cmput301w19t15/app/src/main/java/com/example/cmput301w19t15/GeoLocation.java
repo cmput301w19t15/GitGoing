@@ -5,9 +5,11 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
 import android.webkit.GeolocationPermissions;
 import android.widget.Toast;
 import android.location.Location;
@@ -26,6 +28,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,13 +36,15 @@ import com.google.android.gms.tasks.Task;
 
 import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
 
-public class GeoLocation extends FragmentActivity implements OnMapReadyCallback {
+public class GeoLocation extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
     private static final int LOCATION_REQUEST_CODE = 1;
     private static final int DEFAULT_ZOOM = 20;
 
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
+
+    private FloatingActionButton selectLocation;
 
     private GoogleMap mMap;
     private CameraPosition cameraPosition;
@@ -49,6 +54,8 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
     private Location previousLocation;
     private boolean userPermission;
     private Location currentLocation;
+
+    private LatLng resultLocation;
 
 
     @Override
@@ -63,6 +70,16 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
 
 
         setContentView(R.layout.activity_geo_location);
+        selectLocation = findViewById(R.id.selectLocation);
+
+        selectLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String la = Double.toString(resultLocation.latitude);
+                String lo = Double.toString(resultLocation.longitude);
+                Toast.makeText(GeoLocation.this, la + ' ' + lo,Toast.LENGTH_SHORT).show();
+            }
+        });
 
         geoDataClient = Places.getGeoDataClient(this,null);
         placeDetectionClient = Places.getPlaceDetectionClient(this,null);
@@ -106,20 +123,17 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
         userPermission();
         updateUI();
         getDeviceLocation();
+        mMap.setOnMapClickListener(this);
 
 
     }
 
     public void userPermission() {
-
+        /**
+         * ask user for location permission
+         */
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-        /**
-        Requesting the Location permission
-        1st Param - Activity
-        2nd Param - String Array of permissions requested
-        3rd Param -Unique Request code. Used to identify these set of requested permission
-        **/
             ActivityCompat.requestPermissions(this, new String[]{
                     android.Manifest.permission.ACCESS_FINE_LOCATION
             }, LOCATION_REQUEST_CODE);
@@ -129,9 +143,9 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
 
 
     private void getDeviceLocation() {
-        /*
-         * Get the best and most recent location of the device, which may be null in rare
-         * cases when a location is not available.
+        /**
+         * if permission is acquired, it will get user's current location and
+         * move camera
          */
         try {
             if (userPermission) {
@@ -167,6 +181,12 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        /**
+         * this class is to handle the permission request
+         * if permission is acquired, it will also display user's current location
+         * if not, then display an error message
+         * this method will always update the current UI no matter what
+         */
         userPermission = false;
         switch (requestCode) {
             case LOCATION_REQUEST_CODE:
@@ -174,19 +194,23 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
                     Toast.makeText(this,"Location Permission Allowed", Toast.LENGTH_SHORT).show();
                     userPermission = true;
                     displayLocation();
+                    Log.d("Test","Location Permission Allowed");
                     //Permission Granted
                 } else
-                    Toast.makeText(this, "Location Permission Denied", Toast.LENGTH_SHORT).show();
+                    //Log.d("Test","Location Permission Denied");
                 break;
         }
         updateUI();
     }
 
 
-    /**
-     * this method update map UI
-     */
+
     private void updateUI(){
+        /**
+         * this method update map UI
+         * if permission is acquired,
+         * this will add 'find current locatrion button' into UI
+         */
         if (mMap == null) {
             return;
         }
@@ -194,6 +218,8 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
             if (userPermission) {
                 mMap.setMyLocationEnabled(true);
                 mMap.getUiSettings().setMyLocationButtonEnabled(true);
+                mMap.getUiSettings().setMapToolbarEnabled(true);
+                mMap.getUiSettings().setZoomControlsEnabled(true);
             } else {
                 mMap.setMyLocationEnabled(false);
                 mMap.getUiSettings().setMyLocationButtonEnabled(false);
@@ -226,6 +252,17 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback 
                 }
             }
         });
+    }
+
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        MarkerOptions marker = new MarkerOptions().position(
+                new LatLng(latLng.latitude, latLng.longitude)).title("New Marker");
+        mMap.clear();
+        mMap.addMarker(new MarkerOptions().position(latLng));
+        resultLocation = latLng;
+
     }
 }
 
