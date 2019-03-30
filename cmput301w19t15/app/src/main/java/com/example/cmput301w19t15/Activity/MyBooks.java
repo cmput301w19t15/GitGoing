@@ -100,7 +100,8 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         addBook.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent addIntent = new Intent(MyBooks.this, AddBookInfo.class);
-                startActivityForResult(addIntent, NEW_BOOK);
+                //startActivityForResult(addIntent, NEW_BOOK);
+                startActivity(addIntent);
             }
         });
 
@@ -126,7 +127,6 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
     protected void onStart() {
         super.onStart();
         mBookAdapter.notifyDataSetChanged();
-
     }
 
     /**
@@ -141,7 +141,8 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         intent.putExtra("BOOKID",clickedBook.getBookID());
         intent.putExtra("POSITION",position);
         //setResult(RESULT_OK, intent);
-        startActivityForResult(intent,1);
+        //startActivityForResult(intent,1);
+        startActivity(intent);
     }
 
     //not used for now

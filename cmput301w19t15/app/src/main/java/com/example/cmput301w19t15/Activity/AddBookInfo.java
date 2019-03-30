@@ -87,7 +87,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                 User loggedInUser = MainActivity.getUser();
 
                 Book book = new Book(booktitleText, authorText, isbnText, bookPhoto, loggedInUser.getEmail(), loggedInUser.getUserID(), rating,0,0);
-                loggedInUser.addToMyBooks(book);
+                loggedInUser.addToMyBooks(book); //to be removed
                 loggedInUser.addToMyBooksID(book.getBookID());
 
                 Bundle result = new Bundle();
