@@ -75,28 +75,28 @@ public class CreateRequest extends AppCompatActivity {
         statusText.setText(status);
         request = (Button) findViewById(R.id.request_button);
 
+        Notification notif = new Notification("Requested", bookId, title, loggedInUser.getUserID(), loggedInUser.getEmail(),
+                ownerId, ownerEmail, isbn, photo, false);
+        //pick notification table to save the notif
+        DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
+
+        //add notif to database
+        Log.d("HEY","WHY THO");
+        newNotif.setValue(notif).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(CreateRequest.this, "Successfully Added Notification", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //checkIfExists();
                 addBookToRequest();
-                Notification notif = new Notification("requested", bookId, title, loggedInUser.getUserID(), loggedInUser.getEmail(),
-                        ownerId, ownerEmail, isbn, photo, false);
-                //pick notification table to save the notif
-                DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
-
-                //add notif to database
-                Log.d("HEY","WHY THO");
-                newNotif.setValue(notif).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(CreateRequest.this, "Successfully Added Notification", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                EndActivity();
+                finish();
             }
         });
 
@@ -222,10 +222,10 @@ public class CreateRequest extends AppCompatActivity {
                                 loggedInUser.addToWatchList(book);
                                 Log.d("TAG", "Yourui hipster");
                                 Toast.makeText(CreateRequest.this, "Added to Watchlist", Toast.LENGTH_SHORT).show();
-                                EndActivity();
                             }
-
-                            //loggedInUser.addToMyRequestedBooks(book);
+                            else {
+                                loggedInUser.addToMyRequestedBooks(book);
+                            }
                         }
                         //myCallback.loadBookCallBack(allBooks);
                     } catch (Exception e){
@@ -240,8 +240,4 @@ public class CreateRequest extends AppCompatActivity {
         });
     }
 
-    public void EndActivity() {
-        Log.d("HEY","LISTEN");
-        finish();
-    }
 }
