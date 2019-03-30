@@ -47,7 +47,7 @@ public class MyBorrows extends AppCompatActivity implements BookAdapter.OnItemCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_borrows);
 
-        mRecyclerView = findViewById(R.id.recyclerView1);
+        mRecyclerView = findViewById(R.id.recylcerView);
         //mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
