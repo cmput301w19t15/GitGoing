@@ -75,27 +75,27 @@ public class CreateRequest extends AppCompatActivity {
         statusText.setText(status);
         request = (Button) findViewById(R.id.request_button);
 
-        Notification notif = new Notification("Requested", bookId, title, loggedInUser.getUserID(), loggedInUser.getEmail(),
-                ownerId, ownerEmail, isbn, photo, false);
-        //pick notification table to save the notif
-        DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
-
-        //add notif to database
-        Log.d("HEY","WHY THO");
-        newNotif.setValue(notif).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(CreateRequest.this, "Successfully Added Notification", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //checkIfExists();
                 addBookToRequest();
+
+                Notification notif = new Notification("Requested", bookId, title, loggedInUser.getUserID(), loggedInUser.getEmail(),
+                        ownerId, ownerEmail, isbn, photo, false);
+                //pick notification table to save the notif
+                DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
+
+                //add notif to database
+                Log.d("HEY","WHY THO");
+                newNotif.setValue(notif).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(CreateRequest.this, "Successfully Added Notification", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
                 finish();
             }
         });
