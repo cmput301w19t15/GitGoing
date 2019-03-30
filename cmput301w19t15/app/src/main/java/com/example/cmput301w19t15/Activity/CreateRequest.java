@@ -229,6 +229,7 @@ public class CreateRequest extends AppCompatActivity {
                                 Toast.makeText(CreateRequest.this, "Added to Watchlist", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
+
                             else {
                                 loggedInUser.addToMyRequestedBooks(book);
 
@@ -248,6 +249,7 @@ public class CreateRequest extends AppCompatActivity {
                                     }
                                 });
                             }
+
                         }
                         //myCallback.loadBookCallBack(allBooks);
                     } catch (Exception e){

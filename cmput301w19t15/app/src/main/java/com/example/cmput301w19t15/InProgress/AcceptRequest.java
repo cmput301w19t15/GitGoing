@@ -81,9 +81,9 @@ public class AcceptRequest extends AppCompatActivity {
                     FirebaseDatabase.getInstance().getReference("users").child(loggedInUser.getUserID()).child("myBooks").setValue(loggedInUser.getMyBooks());
                     FirebaseDatabase.getInstance().getReference("books").child(book.getBookID()).setValue(book);
                     */
-                    if (notif.getType().equals("requested")) {
+                    if (notif.getType().equals("Requested")) {
                         //pick notification table to save the notif
-                        notif2 = new Notification("accepted", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
+                        notif2 = new Notification("Accepted", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
 
                                 notif.getNotifyFromID(), notif.getNotifyFromEmail(), notif.getISBN(), notif.getPhoto(), false);
                         ownerID = loggedInUser.getUserID();
@@ -104,7 +104,7 @@ public class AcceptRequest extends AppCompatActivity {
                         //add to borrower's myAcceptedRequests
                         addBookToAccepted();
 
-                        notif3 = new Notification("acceptedOwner", notif.getBookID(), notif.getTitle(), notif.getNotifyFromID(), notif.getNotifyFromEmail(),
+                        notif3 = new Notification("AcceptedOwner", notif.getBookID(), notif.getTitle(), notif.getNotifyFromID(), notif.getNotifyFromEmail(),
                                 notif.getNotifyToID(), notif.getNotifyToEmail(), notif.getISBN(), notif.getPhoto(), false);
                         DatabaseReference newNotif2 = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif3.getNotifID());
 
@@ -122,8 +122,45 @@ public class AcceptRequest extends AppCompatActivity {
                         //Intent intent = new Intent(AcceptRequest.this, NotifyActivity.class);
                         //startActivity(intent);
                     }
-                    else if (notif.getType().equals("returnRequest")){
+                    else if (notif.getType().equals("ReturnRequest")){
                         //set up notification for returning a book
+                        //pick notification table to save the notif
+                        notif2 = new Notification("Accepted", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
+
+                                notif.getNotifyFromID(), notif.getNotifyFromEmail(), notif.getISBN(), notif.getPhoto(), false);
+                        ownerID = loggedInUser.getUserID();
+                        ownerEmail = loggedInUser.getEmail();
+                        DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif2.getNotifID());
+
+                        //add notif to database
+                        //newNotif.setValue(notif2);
+                        newNotif.setValue(notif2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(AcceptRequest.this, "Successfully Added Notification ", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+                        //add to borrower's myAcceptedRequests
+                        addBookToAccepted();
+
+                        notif3 = new Notification("AcceptedOwner", notif.getBookID(), notif.getTitle(), notif.getNotifyFromID(), notif.getNotifyFromEmail(),
+                                notif.getNotifyToID(), notif.getNotifyToEmail(), notif.getISBN(), notif.getPhoto(), false);
+                        DatabaseReference newNotif2 = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif3.getNotifID());
+
+                        //add notif to database
+                        newNotif2.setValue(notif3).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(AcceptRequest.this, "Successfully Added Notification ", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                        FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
+                        finish();
                     }
 
                 }
