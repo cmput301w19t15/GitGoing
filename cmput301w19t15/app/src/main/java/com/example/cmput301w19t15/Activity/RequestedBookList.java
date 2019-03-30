@@ -35,7 +35,6 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 import com.example.cmput301w19t15.InProgress.BorrowerBookView;
-import com.example.cmput301w19t15.InProgress.Request;
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.Objects.BookAdapter;
 import com.example.cmput301w19t15.Objects.User;
@@ -51,7 +50,7 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class RequestedBookList extends AppCompatActivity implements BookAdapter.OnItemClickListener{
     private RequestedBookList activity = this;
-    private Button all, accepted,borrowed;
+    private Button requested, accepted,borrowed, watchlist;
     private BookAdapter adapter, adapterAccepted,adapterBorrowed;
     private ArrayList<Book> currentBookList, listAccepted, listBorrowed;
     private Book clickedBook;
@@ -80,11 +79,12 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         adapter.setOnItemClickListener(RequestedBookList.this);
 
 
-        all = (Button) findViewById(R.id.all);
+        requested = (Button) findViewById(R.id.requested);
         accepted = (Button) findViewById(R.id.accepted);
         borrowed = (Button) findViewById(R.id.borrowed);
+        watchlist = (Button) findViewById(R.id.watchlist);
 
-        all.setOnClickListener(new View.OnClickListener() {
+        requested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 currentBookList = loggedInUser.getMyRequestedBooks();
@@ -94,7 +94,6 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
                 adapter.setOnItemClickListener(RequestedBookList.this);
             }
         });
-
 
 
         accepted.setOnClickListener(new View.OnClickListener() {
@@ -108,11 +107,22 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
             }
         });
 
-
         borrowed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 currentBookList = loggedInUser.getBorrowedBooks();
+                adapter = new BookAdapter(RequestedBookList.this,currentBookList);
+                adapter.notifyDataSetChanged();
+                mRecyclerView.setAdapter(adapter);
+                adapter.setOnItemClickListener(RequestedBookList.this);
+
+            }
+        });
+
+        watchlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentBookList = loggedInUser.getWatchlistBooks();
                 adapter = new BookAdapter(RequestedBookList.this,currentBookList);
                 adapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(adapter);

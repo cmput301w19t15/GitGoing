@@ -45,13 +45,13 @@ public class User {
     private Float rating;
 
     //public static ArrayList<String> testArray = new ArrayList<>();
-    private ArrayList<Book> myBooks = new ArrayList<>();//my books i own
-    private ArrayList<Book> myRequestedBooks = new ArrayList<>();//books i have requested from others - with status
+    private ArrayList<Book> myBooks = new ArrayList<>();//books I own
+    private ArrayList<Book> myRequestedBooks = new ArrayList<>();//books I have requested from others - with status
     private ArrayList<Book> myRequestedBooksAvailable = new ArrayList<>();//requested books that are available - with status
     private ArrayList<Book> myRequestedBooksAccepted = new ArrayList<>();//requested books that have been accepted - with status
-    private ArrayList<Book> borrowedBooks = new ArrayList<>();//book that i have borrowed from others
+    private ArrayList<Book> borrowedBooks = new ArrayList<>();//book that I have borrowed from others
     private ArrayList<Book> requestedBooks = new ArrayList<>();//books others have requested from me
-
+    private ArrayList<Book> watchlistBooks = new ArrayList<>();//books I want to track status
 
     //
     private ArrayList<String> myBooksID = new ArrayList<>();
@@ -264,6 +264,15 @@ public class User {
         }
     }
 
+    public void addToWatchList(Book book){
+        try {
+            watchlistBooks.add(book);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("watchlist").setValue(watchlistBooks);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Remove my requested books.
      *
@@ -293,6 +302,11 @@ public class User {
     public ArrayList<Book> getMyRequestedBooks(){
         return myRequestedBooks;
     }
+
+    public ArrayList<Book> getWatchlistBooks() {
+        return watchlistBooks;
+    }
+
     public ArrayList<String> getMyRequestedBooksID(){
         return myRequestedBooksID;
     }
@@ -370,6 +384,7 @@ public class User {
     public ArrayList<Book> getBorrowedBooks(){
         return borrowedBooks;
     }
+
 
     /**
      * Load user information.
