@@ -147,5 +147,11 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
             intent.putExtra("NotifID", notifID);
             startActivityForResult(intent, 1);
         }
+        else if (notif.getType().equals("returnRequest")) {
+            Intent intent = new Intent(NotifyActivity.this, AcceptRequest.class);
+            intent.putExtra("Notification",notifID);
+            intent.putExtra("NotifID",notifID);
+            startActivityForResult(intent, 1);
+            }
     }
 }

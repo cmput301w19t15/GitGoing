@@ -189,9 +189,17 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
     @Override
     public void onItemClick(int position) {
         clickedBook = (Book) currentBookList.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("TITLE",clickedBook.getTitle());
+        bundle.putString("AUTHOR",clickedBook.getAuthor());
+        bundle.putString("ISBN",clickedBook.getISBN());
+        bundle.putString("OWNEREMAIL",clickedBook.getOwnerEmail());
+        bundle.putString("OWNERID",clickedBook.getOwnerID());
+        bundle.putString("STATUS",clickedBook.getStatus());
+        bundle.putString("BOOKID",clickedBook.getBookID());
+        bundle.putString("IMAGE",clickedBook.getPhoto());
         Intent intent = new Intent(RequestedBookList.this, BorrowerBookView.class);
-        intent.putExtra("BOOKID",clickedBook.getBookID());
-        intent.putExtra("POSITION",position);
+        intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         startActivity(intent);
 

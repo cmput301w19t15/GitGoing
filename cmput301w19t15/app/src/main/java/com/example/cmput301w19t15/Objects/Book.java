@@ -11,6 +11,7 @@ import com.example.cmput301w19t15.Activity.MyBooks;
 import com.example.cmput301w19t15.InProgress.Request;
 import com.example.cmput301w19t15.Activity.RequestedBookList;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -29,7 +30,7 @@ import java.util.UUID;
  * @see RequestedBookList
  * @version 1.0
  */
-public class Book {
+public class Book{
     private String title = "";//
     private String author = "";//
     private String ISBN = "";//
@@ -37,7 +38,7 @@ public class Book {
     private String ownerEmail = "";//
     private String ownerID = "";//
     private String BookID = "";//
-    private String rating = "";
+    private String rating = "";//
     private long returnDate = System.currentTimeMillis();
 
     private String status = "";//
@@ -67,7 +68,7 @@ public class Book {
         this.ownerEmail = ownerEmail;
         this.ownerID = ownerID;
         this.rating = rating;
-        this.status = status;
+        this.status = "available";
         if(this.BookID == null || this.BookID.isEmpty())
             this.BookID = UUID.randomUUID().toString();
     }

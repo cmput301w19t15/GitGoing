@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.cmput301w19t15.Objects.Book;
-import com.example.cmput301w19t15.Functions.ConvertPhoto;
 import com.example.cmput301w19t15.Functions.FetchBookInfo;
 import com.example.cmput301w19t15.R;
 import com.example.cmput301w19t15.Functions.ScanBarcode;

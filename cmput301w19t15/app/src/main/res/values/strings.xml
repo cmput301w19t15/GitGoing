@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GitGoing</string>
+    <string name="app_name">BookIT</string>
     <string name="title_activity_create_account">CreateAccountActivity</string>
     <string name="title_activity_user_account">UserAccountActivity</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
