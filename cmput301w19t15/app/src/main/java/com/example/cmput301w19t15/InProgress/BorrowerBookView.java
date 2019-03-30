@@ -80,7 +80,7 @@ public class BorrowerBookView extends AppCompatActivity {
         returnBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Notification notif = new Notification("returnRequest", bookID, title, loggedInUser.getUserID(), loggedInUser.getEmail(), ownerID, ownerEmail, ISBN, image,false);
+                Notification notif = new Notification("ReturnRequest", bookID, title, loggedInUser.getUserID(), loggedInUser.getEmail(), ownerID, ownerEmail, ISBN, image,false);
                 //pick notification table to save the notif
                 DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
 
