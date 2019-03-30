@@ -217,16 +217,18 @@ public class CreateRequest extends AppCompatActivity {
                             /**
                              * find book from owner
                              */
-                            if (book.getBookID().equals(bookId)){
+
+                            if (book.getBookID().equals(bookId)) {
                                 /**
                                  * check if books exists in user's myRequestedBooks
                                  */
+
                                 DatabaseReference currentUserReference = FirebaseDatabase.getInstance().getReference()
                                         .child("users").child(loggedInUser.getUserID()).child("myRequestedBooks");
                                 currentUserReference.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        if (dataSnapshot.exists()){
+                                        if (dataSnapshot.exists()) {
                                             boolean exists = false;
                                             for (DataSnapshot requestedBooks : dataSnapshot.getChildren()) {
                                                 Book requestedBook = requestedBooks.getValue(Book.class);
@@ -237,6 +239,7 @@ public class CreateRequest extends AppCompatActivity {
                                             /**
                                              * add book if not exist in myRequestedBooks
                                              */
+
                                             if (exists == false) {
                                                 FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID())
                                                         .child("myRequestedBooks").child(bookId).setValue(book);

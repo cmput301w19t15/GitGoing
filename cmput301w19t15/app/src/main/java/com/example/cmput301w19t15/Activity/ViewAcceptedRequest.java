@@ -28,11 +28,11 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
-    private Button exit, request, decline, scan;
+    private Button exit, request, decline, scan, verify;
     private Book newBook;
     private User owner;
     User loggedInUser = MainActivity.getUser();
-    String ownerId, author, title, ownerEmail, isbn, status, bookId;
+    String ownerId, author, title, ownerEmail, isbn, status, bookId, correctScan;
     private ZXingScannerView scannerView;
     Integer SCAN_ISBN = 3;
     Notification notif;
@@ -53,11 +53,30 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
         TextView ownerEmailText = (TextView) findViewById(R.id.owner);
         ownerEmailText.setText(notif.getNotifyFromEmail());
         Log.d("hello", "youri bad");
+        final TextView scanStatus = (TextView) findViewById(R.id.scan_status);
+        isbn =  notif.getISBN();
+        correctScan = "false";
+        if (correctScan.equals("false")){
+            scanStatus.setText("Scan Incomplete");
+        }
         exit = (Button) findViewById(R.id.cancel);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        verify = (Button) findViewById(R.id.verify);
+        verify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (correctScan.equals("true")) {
+                    scanStatus.setText("Scan Complete");
+                    loggedInUser.addToMyBorrowedBooks(notif.getBookID());
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Isbn scan not complete",Toast.LENGTH_LONG).show();
+                }
             }
         });
         Log.d("hello", notif.getOwnerScanned());
@@ -72,6 +91,7 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
                 }
             });
         }
+
     }
     /*
     @Override
@@ -105,12 +125,13 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            Toast.makeText(getApplicationContext(), "Result ok", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Result ok", Toast.LENGTH_LONG).show();
             if (requestCode == SCAN_ISBN) {
                 String barcode = data.getStringExtra("ISBN");
-                Toast.makeText(getApplicationContext(), "got proper request code", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "got proper request code", Toast.LENGTH_LONG).show();
                 if (barcode.equals(isbn)) {
                     Toast.makeText(getApplicationContext(), "Isbn scan matched", Toast.LENGTH_LONG).show();
+                    this.correctScan = "true";
                     /*
                     notif2 = new Notification("scanned", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
 
@@ -130,9 +151,11 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
                         }
                     });
                     */
-                    createReturnNotifications();
-                    addBookToBorrowedBooks();
-                    FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
+                    //createReturnNotifications();
+                    //addBookToBorrowedBooks();
+                    //FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
+                } else{
+                    Toast.makeText(getApplicationContext(), barcode, Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -142,9 +165,13 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
         //To do, will be very similar to ViewAccepted both
     }
 
-    public void addBookToBorrowedBooks(){
-        DatabaseReference book = FirebaseDatabase.getInstance().getReference().child("books").child(notif.getBookID());
-        //Book books =
-        //loggedInUser.addToMyRequestedBooks(book);
+    public void addBookToBorrowed(){
+
+        loggedInUser.addToMyRequestedBooksID(bookId);
+        //Check over this
+        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users").child(ownerId).child("myBooks");
+        FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID())
+                .child("myBorrowedBooks").setValue(bookId);
+
     }
 }
