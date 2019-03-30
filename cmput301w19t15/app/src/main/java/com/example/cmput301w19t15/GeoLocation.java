@@ -37,6 +37,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
 
@@ -88,6 +90,8 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
                     String lo = Double.toString(resultLocation.longitude);
                     Toast.makeText(GeoLocation.this, la + ' ' + lo, Toast.LENGTH_SHORT).show();
                     notif.setLatLng(resultLocation);
+
+                    DatabaseReference locationRef = FirebaseDatabase.getInstance().getReference().child("Notification").child(notif.getNotifID()).child("location").child(resultLocation.toString());
 
                 }
                 else{
