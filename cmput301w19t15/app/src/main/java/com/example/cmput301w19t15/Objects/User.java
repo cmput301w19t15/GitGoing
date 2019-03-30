@@ -267,12 +267,20 @@ public class User {
     public void addToWatchList(Book book){
         try {
             watchlistBooks.add(book);
-            FirebaseDatabase.getInstance().getReference("users").child(userID).child("watchlist").setValue(watchlistBooks);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("watchlist").child(book.getBookID()).setValue(watchlistBooks);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
+    public void removeFromWatchlist(Book book){
+        try {
+            watchlistBooks.remove(book);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("watchlist").child(book.getBookID()).removeValue();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     /**
      * Remove my requested books.
      *
@@ -597,5 +605,55 @@ public class User {
        return found;
     }
 
+
+
+
+
+    public void loadBooksID(final String bookListType){
+        this.bookListType = bookListType;
+        loadMyBookIDFromFireBase(new loadBookIDCallBack() {
+            @Override
+            public void loadBookIDCallBack(ArrayList<String> value) {
+                switch(bookListType) {
+                    case "IDmyBooks": myBooksID = new ArrayList<>(value); break;
+                    case "myRequestedBooksID": myRequestedBooksID = new ArrayList<>(value); break;
+                }
+
+            }
+        });
+    }
+
+    public interface loadBookIDCallBack {
+        /**
+         * Load book call back.
+         *
+         * @param value the value
+         */
+        void loadBookIDCallBack(ArrayList<String> value);
+    }
+    public void loadMyBookIDFromFireBase(final loadBookIDCallBack myCallback){
+        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users").child(this.userID).child(bookListType);
+        userReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    try {
+                        ArrayList<String> allBooks = new ArrayList<>();
+                        for (DataSnapshot books : dataSnapshot.getChildren()) {
+                            String bookID = (String) books.getValue();
+                            allBooks.add(bookID);
+                        }
+                        myCallback.loadBookIDCallBack(allBooks);
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("testing","Error: ", databaseError.toException());
+            }
+        });
+    }
 
 }

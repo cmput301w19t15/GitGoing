@@ -75,12 +75,12 @@ public class CreateRequest extends AppCompatActivity {
         statusText.setText(status);
         request = (Button) findViewById(R.id.request_button);
 
-
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //checkIfExists();
                 addBookToRequest();
+
                 Notification notif = new Notification("Requested", bookId, title, loggedInUser.getUserID(), loggedInUser.getEmail(),
                         ownerId, ownerEmail, isbn, photo, false);
                 //pick notification table to save the notif
@@ -96,7 +96,7 @@ public class CreateRequest extends AppCompatActivity {
                         }
                     }
                 });
-                EndActivity();
+                finish();
             }
         });
 
@@ -218,14 +218,17 @@ public class CreateRequest extends AppCompatActivity {
                             /**
                              * find book from owner
                              */
+
                             if (book.getStatus().equals("Borrowed") || book.getStatus().equals("Accepted")) {
                                 loggedInUser.addToWatchList(book);
                                 Log.d("TAG", "Yourui hipster");
                                 Toast.makeText(CreateRequest.this, "Added to Watchlist", Toast.LENGTH_SHORT).show();
-                                EndActivity();
                             }
 
-                            loggedInUser.addToMyRequestedBooks(book);
+                            else {
+                                loggedInUser.addToMyRequestedBooks(book);
+                            }
+
                         }
                         //myCallback.loadBookCallBack(allBooks);
                     } catch (Exception e){
@@ -240,8 +243,4 @@ public class CreateRequest extends AppCompatActivity {
         });
     }
 
-    public void EndActivity() {
-        Log.d("HEY","LISTEN");
-        finish();
-    }
 }

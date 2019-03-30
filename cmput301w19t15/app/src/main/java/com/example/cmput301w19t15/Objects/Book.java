@@ -11,7 +11,6 @@ import com.example.cmput301w19t15.Activity.MyBooks;
 import com.example.cmput301w19t15.InProgress.Request;
 import com.example.cmput301w19t15.Activity.RequestedBookList;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -30,7 +29,7 @@ import java.util.UUID;
  * @see RequestedBookList
  * @version 1.0
  */
-public class Book{
+public class Book {
     private String title = "";//
     private String author = "";//
     private String ISBN = "";//
@@ -38,10 +37,13 @@ public class Book{
     private String ownerEmail = "";//
     private String ownerID = "";//
     private String BookID = "";//
-    private String rating = "";//
+    private String rating = "";
     private long returnDate = System.currentTimeMillis();
 
-    private String status = "";//
+    private int ratingTotal = 0;
+    private int ratingCount = 0;
+
+    private String status = "Available";//
 
     private String borrowerID = "";
 
@@ -53,14 +55,14 @@ public class Book{
      * @param photo String a photo that user can add manually (base-64)
      * @param ownerEmail String - Email address for owner
      * @param ownerID String - owner's unique id when he/she register
-     //* @param "bookID String - book's unique id, a UUID, every book object will receive a different unique id, differ from ISBN
-     //* @param "returnDate long - the time book will be returned, so far it's set up just for test purpose
+    //* @param "bookID String - book's unique id, a UUID, every book object will receive a different unique id, differ from ISBN
+    //* @param "returnDate long - the time book will be returned, so far it's set up just for test purpose
      *
-     //* @param "status Status - a user defined type of variable that has 4 value(Avaliable, Requested Accepted and Borrowed)
-     //* @param "borrowerID String - ID of borrower, similar to ownerID
+    //* @param "status Status - a user defined type of variable that has 4 value(Avaliable, Requested Accepted and Borrowed)
+    //* @param "borrowerID String - ID of borrower, similar to ownerID
      *
      */
-    public Book(String title, String author, String ISBN, String photo, String ownerEmail, String ownerID, String rating) {
+    public Book(String title, String author, String ISBN, String photo, String ownerEmail, String ownerID, String rating, int ratingCount, int ratingTotal) {
         this.title = title;
         this.author = author;
         this.ISBN = ISBN;
@@ -68,12 +70,31 @@ public class Book{
         this.ownerEmail = ownerEmail;
         this.ownerID = ownerID;
         this.rating = rating;
-        this.status = "available";
+        //this.status = status;
         if(this.BookID == null || this.BookID.isEmpty())
             this.BookID = UUID.randomUUID().toString();
+
+        this.ratingCount = ratingCount;
+        this.ratingTotal = ratingTotal;
     }
+
+    public Book(long returnDate, String borrowerID, String author, String isbn, int ratingTotal, String ownerID, int ratingCount, String title, String bookID, String ownerEmail, String status) {
+        this.returnDate = returnDate;
+        this.borrowerID = borrowerID;
+        this.author = author;
+        this.ISBN = isbn;
+        this.ratingTotal = ratingTotal;
+        this.ownerID = ownerID;
+        this.ratingCount = ratingCount;
+        this.title = title;
+        this.BookID = bookID;
+        this.ownerEmail = ownerEmail;
+        this.status = status;
+    }
+
+
     public Book(){}
-    public Book(Book book){
+    public Book(Book book) {
         this.title = book.title;
         this.author = book.author;
         this.ISBN = book.ISBN;
@@ -82,6 +103,11 @@ public class Book{
         this.ownerID = book.ownerID;
         this.status = book.status;
         this.BookID = book.BookID;
+        this.rating = book.rating;
+        this.ratingCount = book.ratingCount;
+        this.ratingTotal = book.ratingTotal;
+        this.returnDate = book.returnDate;
+        this.borrowerID = book.borrowerID;
         //this.rating = book.rating;
     }
 
@@ -144,4 +170,13 @@ public class Book{
     }
     public String getRating() { return rating; }
     public void setRating(String rating) {this.rating = rating; }
+
+    public int getRatingTotal() { return ratingTotal;}
+    public int getRatingCount() { return ratingCount; }
+    public void setRatingTotal(int ratingTotal) { this.ratingTotal = ratingTotal;}
+    public void setRatingCount(int ratingCount) { this.ratingCount = ratingCount; }
+    public void addRating(int rating){ this.ratingTotal += rating; this.ratingCount += 1;}
+    public void removeRating(int rating){ this.ratingTotal -= rating; this.ratingCount -= 1;}
+
+
 }
