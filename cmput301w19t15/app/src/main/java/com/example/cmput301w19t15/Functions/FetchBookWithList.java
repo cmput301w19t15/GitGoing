@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 // @reuse: https://github.com/google-developer-training/android-fundamentals/tree/master/WhoWroteIt
 public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> {
@@ -43,18 +44,20 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
                     if(dataSnapshot.exists()) {
                         try {
                             for (DataSnapshot books : dataSnapshot.getChildren()) {
-                                if(bookListID.contains(books.child("bookID").getValue())) {
+                                String bookid = books.child("bookID").getValue().toString();
+                                String bookidlist = bookListID.toString();
+
+                                if(bookidlist.contains(bookid)){
                                     Book book = books.getValue(Book.class);
                                     bookList.add(book);
                                 }
                             }
                         } catch (Exception e){
+                            Log.d("Testing","1: " + e.toString());
                             e.printStackTrace();
                         }
                     }
-                    if(bookAdapter != null) {
-                        bookAdapter.notifyDataSetChanged();
-                    }
+                    bookAdapter.notifyDataSetChanged();
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -62,6 +65,7 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
                 }
             });
         } catch (Exception e) {
+            Log.d("Testing","2: " + e.toString());
             e.printStackTrace();
         }
         return bookList;

@@ -163,6 +163,15 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
         });
     }
 
+    protected void onStart(){
+        super.onStart();
+        numNotif = 0;
+        unreadAmt = 0;
+        listOfNotif = new ArrayList<>();
+        notifyButton.setImageResource(R.drawable.read);
+        loadNotifMain();
+        getLoggedinUser();
+    }
     /**
      * Caleed when activity restarted
      */
@@ -173,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
         listOfNotif = new ArrayList<>();
         notifyButton.setImageResource(R.drawable.read);
         loadNotifMain();
+        getLoggedinUser();
     }
 
 
@@ -186,6 +196,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
         listOfNotif = new ArrayList<>();
         notifyButton.setImageResource(R.drawable.read);
         loadNotifMain();
+        getLoggedinUser();
         //progressBar.setVisibility(View.GONE);
     }
 
@@ -240,6 +251,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
             loggedInUser.loadBooks("myRequestedBooks");
             loggedInUser.loadBooks("requestedBooks");
             loggedInUser.loadBooks("borrowedBooks");
+            loggedInUser.loadBooksID("IDmyBooks");
         }
     }
 

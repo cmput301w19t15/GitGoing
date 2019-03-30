@@ -106,11 +106,15 @@ public class BookInfo extends AppCompatActivity {
         book.setAuthor(author);
         book.setISBN(isbn);
         book.setBookID(book.getBookID());
+
         loggedInUser.addToMyBooksID(book.getBookID());
-        loggedInUser.addToMyBooks(book);
-        FirebaseDatabase.getInstance().getReference("users").child(loggedInUser.getUserID()).child("myBooks").setValue(loggedInUser.getMyBooks());
         loggedInUser.getMyBooks().set(position,book);
         FirebaseDatabase.getInstance().getReference("books").child(book.getBookID()).setValue(book);// update books
+
+        //to be removed
+        loggedInUser.addToMyBooks(book);
+        FirebaseDatabase.getInstance().getReference("users").child(loggedInUser.getUserID()).child("myBooks").setValue(loggedInUser.getMyBooks());
+
         finish();
     }
     /**
@@ -121,6 +125,9 @@ public class BookInfo extends AppCompatActivity {
         loggedInUser.removeMyBooks(book);
         loggedInUser.removeMyBooksID(book.getBookID());
         FirebaseDatabase.getInstance().getReference("books").child(book.getBookID()).removeValue();// delete book
+
+        //outdated have to update
+
 
         /**
          * iterate through all users
@@ -157,10 +164,10 @@ public class BookInfo extends AppCompatActivity {
 
                             //old method
 
-                                final String userID = user.child("userID").getValue().toString();
-                                /**
-                                 * iterate through requested books for each user
-                                 */
+                            final String userID = user.child("userID").getValue().toString();
+                            /**
+                             * iterate through requested books for each user
+                             */
                                 /*
                                 DatabaseReference bookReference = FirebaseDatabase.getInstance().getReference().child("users")
                                         .child(userID).child("myRequestedBooks");
