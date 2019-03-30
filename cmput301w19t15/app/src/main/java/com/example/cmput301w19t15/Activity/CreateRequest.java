@@ -87,6 +87,7 @@ public class CreateRequest extends AppCompatActivity {
                 DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
 
                 //add notif to database
+                Log.d("HEY","WHY THO");
                 newNotif.setValue(notif).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -95,7 +96,7 @@ public class CreateRequest extends AppCompatActivity {
                         }
                     }
                 });
-                finish();
+                EndActivity();
             }
         });
 
@@ -221,10 +222,10 @@ public class CreateRequest extends AppCompatActivity {
                                 loggedInUser.addToWatchList(book);
                                 Log.d("TAG", "Yourui hipster");
                                 Toast.makeText(CreateRequest.this, "Added to Watchlist", Toast.LENGTH_SHORT).show();
-                                return ;
+                                EndActivity();
                             }
 
-                                //loggedInUser.addToMyRequestedBooks(book);
+                            //loggedInUser.addToMyRequestedBooks(book);
                         }
                         //myCallback.loadBookCallBack(allBooks);
                     } catch (Exception e){
@@ -237,5 +238,10 @@ public class CreateRequest extends AppCompatActivity {
                 Log.w("testing","Error: ", databaseError.toException());
             }
         });
+    }
+
+    public void EndActivity() {
+        Log.d("HEY","LISTEN");
+        finish();
     }
 }
