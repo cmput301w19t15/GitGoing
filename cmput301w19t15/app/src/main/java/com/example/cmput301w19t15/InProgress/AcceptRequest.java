@@ -124,13 +124,6 @@ public class AcceptRequest extends AppCompatActivity {
                 }
             });
 
-            exit = (Button) findViewById(R.id.cancel);
-            exit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
             decline= (Button) findViewById(R.id.decline_button);
             decline.setOnClickListener(new View.OnClickListener() {
                 @Override
