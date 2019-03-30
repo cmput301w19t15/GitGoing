@@ -72,7 +72,6 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
         setContentView(R.layout.activity_geo_location);
         selectLocation = findViewById(R.id.selectLocation);
 
-
         selectLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +87,6 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
         });
 
 
-
         geoDataClient = Places.getGeoDataClient(this,null);
         placeDetectionClient = Places.getPlaceDetectionClient(this,null);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -97,13 +95,15 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
-
         if (savedInstanceState != null) {
             currentLocation = savedInstanceState.getParcelable(KEY_LOCATION);
             cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
+
         mapFragment.getMapAsync(this);
-        
+        userPermission();
+        updateUI();
+
     }
 
     @Override
@@ -128,13 +128,17 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        userPermission();
-        updateUI();
         getDeviceLocation();
         mMap.setOnMapClickListener(this);
 
+        if (currentLocation != null){
+            LatLng currentLo = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
+            googleMap.addMarker(new MarkerOptions().position(currentLo).title("Appointed Location"));
+
+        }
 
     }
+
 
     public void userPermission() {
         /**
@@ -147,7 +151,6 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
             }, LOCATION_REQUEST_CODE);
         }
     }
-
 
 
     private void getDeviceLocation() {
@@ -271,6 +274,11 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
         mMap.addMarker(new MarkerOptions().position(latLng));
         resultLocation = latLng;
 
+    }
+
+    public void setCurrentLocation(LatLng latLng){
+        this.currentLocation.setLatitude(latLng.latitude);
+        this.currentLocation.setLongitude(latLng.longitude);
     }
 }
 

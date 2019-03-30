@@ -1,5 +1,6 @@
 package com.example.cmput301w19t15.InProgress;
 //:)
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.cmput301w19t15.GeoLocation;
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.Activity.MainActivity;
 import com.example.cmput301w19t15.Objects.Notification;
@@ -118,6 +120,11 @@ public class AcceptRequest extends AppCompatActivity {
                         }
                     });
                     FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
+
+                    //call map and let owner pick up a geoLocation
+                    Intent intent = new Intent(AcceptRequest.this, GeoLocation.class);
+                    startActivity(intent);
+
                     finish();
                     //Intent intent = new Intent(AcceptRequest.this, NotifyActivity.class);
                     //startActivity(intent);
