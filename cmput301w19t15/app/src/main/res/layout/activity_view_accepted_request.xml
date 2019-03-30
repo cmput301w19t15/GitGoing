@@ -8,6 +8,22 @@
     tools:context=".Activity.BookInfo">
 
     <Button
+        android:id="@+id/verify"
+        android:layout_width="107dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="92dp"
+        android:background="@drawable/button1"
+        android:text="VERIFY"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/cancel" />
+
+    <Button
         android:id="@+id/scan"
         android:layout_width="107dp"
         android:layout_height="50dp"
@@ -127,13 +143,11 @@
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
-        android:layout_width="304dp"
-        android:layout_height="209dp"
+        android:layout_width="239dp"
+        android:layout_height="59dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/owner" />

@@ -17,6 +17,10 @@ import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.Objects.Notification;
 import com.example.cmput301w19t15.Objects.User;
 import com.example.cmput301w19t15.R;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,7 +31,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
-    private Button exit, scan;
+    private Button exit, scan, verify;
     private Book newBook;
     private User owner;
     User loggedInUser = MainActivity.getUser();
@@ -74,8 +78,15 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
             @Override
             public void onClick(View v) {
                 scan(v);
-
+                Toast.makeText(getApplicationContext(),"Isbn scan matched",Toast.LENGTH_LONG).show();
                 Log.d("hello", correctScan);
+            }
+
+        });
+        verify = (Button) findViewById(R.id.verify);
+        verify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 if (correctScan.equals("true")) {
                     scanStatus.setText("Scan Complete");
                     Log.d("hello", "thomas bad");
@@ -116,11 +127,13 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
                     }
 
                 }
-
+                else{
+                    Toast.makeText(getApplicationContext(),"Isbn scan not complete",Toast.LENGTH_LONG).show();
             }
 
+            }
         });
-    }
+}
 
     /**
      * @reuse https://github.com/dm77/barcodescanner
@@ -129,7 +142,6 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
     public void scan(View view){
         //https://github.com/ravi8x/Barcode-Reader
         Intent scannerIntent = new Intent(ViewAcceptedOwnerRequest.this, ScanBarcode.class);
-
         startActivityForResult(scannerIntent,SCAN_ISBN);
     }
 

@@ -218,6 +218,7 @@ public class CreateRequest extends AppCompatActivity {
                             /**
                              * find book from owner
                              */
+
                             if (book.getStatus().equals("Borrowed") || book.getStatus().equals("Accepted")) {
                                 loggedInUser.addToWatchList(book);
                                 Log.d("TAG", "Yourui hipster");
