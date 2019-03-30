@@ -81,9 +81,9 @@ public class AcceptRequest extends AppCompatActivity {
                     FirebaseDatabase.getInstance().getReference("users").child(loggedInUser.getUserID()).child("myBooks").setValue(loggedInUser.getMyBooks());
                     FirebaseDatabase.getInstance().getReference("books").child(book.getBookID()).setValue(book);
                     */
-                    if (notif.getType().equals("requested")) {
+                    if (notif.getType().equals("Requested")) {
                         //pick notification table to save the notif
-                        notif2 = new Notification("accepted", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
+                        notif2 = new Notification("Accepted", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
 
                                 notif.getNotifyFromID(), notif.getNotifyFromEmail(), notif.getISBN(), notif.getPhoto(), false);
                         ownerID = loggedInUser.getUserID();
