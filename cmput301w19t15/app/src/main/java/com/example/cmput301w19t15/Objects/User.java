@@ -302,6 +302,11 @@ public class User {
     public ArrayList<Book> getMyRequestedBooks(){
         return myRequestedBooks;
     }
+
+    public ArrayList<Book> getWatchlistBooks() {
+        return watchlistBooks;
+    }
+
     public ArrayList<String> getMyRequestedBooksID(){
         return myRequestedBooksID;
     }
@@ -379,6 +384,7 @@ public class User {
     public ArrayList<Book> getBorrowedBooks(){
         return borrowedBooks;
     }
+
 
     /**
      * Load user information.
