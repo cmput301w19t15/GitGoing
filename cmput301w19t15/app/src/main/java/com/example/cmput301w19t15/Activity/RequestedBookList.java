@@ -122,7 +122,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         watchlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentBookList = loggedInUser.getBorrowedBooks();
+                currentBookList = loggedInUser.getWatchlistBooks();
                 adapter = new BookAdapter(RequestedBookList.this,currentBookList);
                 adapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(adapter);

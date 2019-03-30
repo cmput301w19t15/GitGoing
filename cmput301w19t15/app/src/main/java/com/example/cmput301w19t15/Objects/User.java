@@ -264,6 +264,15 @@ public class User {
         }
     }
 
+    public void addToWatchList(Book book){
+        try {
+            watchlistBooks.add(book);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("watchlist").setValue(watchlistBooks);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Remove my requested books.
      *
@@ -293,6 +302,11 @@ public class User {
     public ArrayList<Book> getMyRequestedBooks(){
         return myRequestedBooks;
     }
+
+    public ArrayList<Book> getWatchlistBooks() {
+        return watchlistBooks;
+    }
+
     public ArrayList<String> getMyRequestedBooksID(){
         return myRequestedBooksID;
     }
@@ -370,6 +384,7 @@ public class User {
     public ArrayList<Book> getBorrowedBooks(){
         return borrowedBooks;
     }
+
 
     /**
      * Load user information.
