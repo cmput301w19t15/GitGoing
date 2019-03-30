@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,11 +19,17 @@ import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.Objects.Notification;
 import com.example.cmput301w19t15.Objects.User;
 import com.example.cmput301w19t15.R;
+import com.google.android.gms.common.internal.FallbackServiceBroker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
+
+import java.util.ArrayList;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -33,9 +40,10 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
     private User owner;
     User loggedInUser = MainActivity.getUser();
     String ownerID, author, title, ownerEmail, isbn, status, bookId;
+    private String correctScan, oldrequesterID;
     Integer SCAN_ISBN = 3;
     private ZXingScannerView scannerView;
-    Notification notif, notif2;
+    Notification notif, notif2, requesterNotification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +61,13 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
         isbnText.setText(isbn);
         TextView RequesterEmailText = (TextView) findViewById(R.id.owner);
         RequesterEmailText.setText(notif.getNotifyToEmail());
+        correctScan = "false";
+        final TextView scanStatus = (TextView) findViewById(R.id.scan_status);
+        if (correctScan.equals("false")){
+            scanStatus.setText("Scan Incomplete");
+        }
+
+
 
         exit = (Button) findViewById(R.id.cancel);
         exit.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +82,51 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
             @Override
             public void onClick(View v) {
                 scan(v);
+
+                Log.d("hello", correctScan);
+                if (correctScan.equals("true")) {
+                    scanStatus.setText("Scan Complete");
+                    Log.d("hello", "thomas bad");
+                    try {
+                        FirebaseDatabase.getInstance().getReference().child("notifications").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    try {
+                                        for (DataSnapshot notifs : dataSnapshot.getChildren()) {
+                                            Log.d("hello", notif.getNotifyFromID());
+                                            if (notifs.child("notifyFromID").getValue().equals(notif.getNotifyToID()) &&
+                                                    notifs.child("notifyToID").getValue().equals(notif.getNotifyFromID()) &&
+                                                    notifs.child("isbn").getValue().equals(notif.getISBN())) {
+                                                requesterNotification = notifs.getValue(Notification.class);
+                                                requesterNotification.setOwnerScanned("True");
+                                                oldrequesterID= notif.getNotifID();
+                                                FirebaseDatabase.getInstance().getReference("notifications").child(requesterNotification.getNotifID()).setValue(requesterNotification);
+                                                Log.d("hello", "thomas bad");
+                                                FirebaseDatabase.getInstance().getReference("notifications").child(oldrequesterID).removeValue();
+
+                                                break;
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Log.w("testing", "Error: ", databaseError.toException());
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
             }
+
         });
     }
 
@@ -78,6 +137,7 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
     public void scan(View view){
         //https://github.com/ravi8x/Barcode-Reader
         Intent scannerIntent = new Intent(ViewAcceptedOwnerRequest.this, ScanBarcode.class);
+
         startActivityForResult(scannerIntent,SCAN_ISBN);
     }
 
@@ -95,35 +155,82 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
                 String barcode = data.getStringExtra("ISBN");
                 if (barcode.equals(isbn)) {
                     Toast.makeText(getApplicationContext(),"Isbn scan matched",Toast.LENGTH_LONG).show();
+                    this.correctScan = "true";
                     /*
-                    notif2 = new Notification("scanned", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
-
-                            notif.getNotifyFromID(), notif.getNotifyFromEmail(), notif.getISBN(), notif.getPhoto(), false);
-                    ownerID = loggedInUser.getUserID();
-                    ownerEmail = loggedInUser.getEmail();
-                    DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif2.getNotifID());
-
-                    //add notif to database
-                    //newNotif.setValue(notif2);
-                    newNotif.setValue(notif2).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(ViewAcceptedOwnerRequest.this, "Successfully Added Notification ", Toast.LENGTH_SHORT).show();
+                    try {
+                        FirebaseDatabase.getInstance().getReference().child("notifications").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    try {
+                                        for (DataSnapshot notifs : dataSnapshot.getChildren()) {
+                                            Log.d("hello", this.notif.getNotifyFromID());
+                                            if (notifs.child("notifyFromID").getValue().equals(this.notif.getNotifyToID()) &&
+                                                    notifs.child("notifyToID").getValue().equals(this.notif.getNotifyFromID()) &&
+                                                    notifs.child("isbn").getValue().equals(this.notif.getISBN())) {
+                                                Notification requesterNotification = notifs.getValue(Notification.class);
+                                                requesterNotification.setOwnerScanned("True");
+                                                FirebaseDatabase.getInstance().getReference("notifications").child(requesterNotification.getNotifID()).setValue(requesterNotification);
+                                                Log.d("hello", "thomas bad");
+                                                FirebaseDatabase.getInstance().getReference("notifications").child(this.notif.getNotifID()).removeValue();
+                                                break;
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
                             }
-                        }
-                    });
-                    */
-                    changeStatusForRequester();
-                    FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Log.w("testing", "Error: ", databaseError.toException());
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //changeStatusForRequester();
+*/
                 }
             }
         }
     }
-    public void changeStatusForRequester() {
-        
+/*
+    public void changeStatusForRequester(Notification notif) {
 
+        try {
+            FirebaseDatabase.getInstance().getReference().child("notifications").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        try {
+                            for (DataSnapshot notifs : dataSnapshot.getChildren()) {
+                                Log.d("hello", notif.getNotifyFromID());
+                                if (notifs.child("notifyFromID").getValue().equals(notif.getNotifyToID()) &&
+                                        notifs.child("notifyToID").getValue().equals(notif.getNotifyFromID()) &&
+                                        notifs.child("isbn").getValue().equals(notif.getISBN())) {
+                                    Notification requesterNotification = notifs.getValue(Notification.class);
+                                    requesterNotification.setOwnerScanned("True");
+                                    FirebaseDatabase.getInstance().getReference("notifications").child(requesterNotification.getNotifID()).setValue(requesterNotification);
+                                    Log.d("hello", "thomas bad");
+                                    break;
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.w("testing", "Error: ", databaseError.toException());
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
+*/
 }

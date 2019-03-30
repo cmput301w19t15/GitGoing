@@ -336,13 +336,13 @@ public class User {
 
     /**
      * Add to my borrowed books (book that i have borrowed from others)
-     * @param book the book
+     * @param bookID the book
      */
 
-    public void addToMyBorrowedBooks(Book book){
+    public void addToMyBorrowedBooks(String bookID){
         try {
-            borrowedBooks.add(book);
-            FirebaseDatabase.getInstance().getReference("users").child(userID).child("borrowedBooks").setValue(borrowedBooks);
+            myBooksID.add(bookID);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myBooksID").setValue(myBooksID);
         }catch (Exception e){
             e.printStackTrace();
         }
