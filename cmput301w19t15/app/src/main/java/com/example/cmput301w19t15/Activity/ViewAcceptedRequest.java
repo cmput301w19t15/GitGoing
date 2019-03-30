@@ -3,7 +3,6 @@ package com.example.cmput301w19t15.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -11,17 +10,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cmput301w19t15.Functions.FetchBookWithID;
 import com.example.cmput301w19t15.Functions.ScanBarcode;
 import com.example.cmput301w19t15.Objects.Notification;
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.R;
 import com.example.cmput301w19t15.Objects.User;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
