@@ -79,7 +79,7 @@ public class CreateRequest extends AppCompatActivity {
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkIfExists();
+                //checkIfExists();
                 addBookToRequest();
                 Notification notif = new Notification("requested", bookId, title, loggedInUser.getUserID(), loggedInUser.getEmail(),
                         ownerId, ownerEmail, isbn, photo, false);
@@ -217,6 +217,10 @@ public class CreateRequest extends AppCompatActivity {
                             /**
                              * find book from owner
                              */
+                            if (book.getStatus().equals("Borrowed") || book.getStatus().equals("Accepted")) {
+                                loggedInUser.addToWatchList(book);
+                                Toast.makeText(CreateRequest.this, "Added to Watchlist", Toast.LENGTH_SHORT).show();
+                            }
                             if (book.getBookID().equals(bookId)){
                                 /**
                                  * check if books exists in user's myRequestedBooks

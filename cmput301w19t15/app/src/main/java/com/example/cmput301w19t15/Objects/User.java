@@ -264,6 +264,15 @@ public class User {
         }
     }
 
+    public void addToWatchList(Book book){
+        try {
+            watchlistBooks.add(book);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("watchlist").setValue(watchlistBooks);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Remove my requested books.
      *
