@@ -80,8 +80,10 @@ public class CreateRequest extends AppCompatActivity {
             public void onClick(View v) {
                 //checkIfExists();
                 addBookToRequest();
+                finish();
 
-                Notification notif = new Notification("Requested", bookId, title, loggedInUser.getUserID(), loggedInUser.getEmail(),
+
+                /* Notification notif = new Notification("Requested", bookId, title, loggedInUser.getUserID(), loggedInUser.getEmail(),
                         ownerId, ownerEmail, isbn, photo, false);
                 //pick notification table to save the notif
                 DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
@@ -96,7 +98,7 @@ public class CreateRequest extends AppCompatActivity {
                         }
                     }
                 });
-                finish();
+                finish();*/
             }
         });
 
@@ -222,10 +224,29 @@ public class CreateRequest extends AppCompatActivity {
                             if (book.getStatus().equals("Borrowed") || book.getStatus().equals("Accepted")) {
                                 loggedInUser.addToWatchList(book);
                                 Log.d("TAG", "Yourui hipster");
+                                /*FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID())
+                                        .child("watchList").child(book.getBookID()).setValue(book);*/
                                 Toast.makeText(CreateRequest.this, "Added to Watchlist", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                             else {
                                 loggedInUser.addToMyRequestedBooks(book);
+
+                                Notification notif = new Notification("Requested", bookId, title, loggedInUser.getUserID(), loggedInUser.getEmail(),
+                                        ownerId, ownerEmail, isbn, photo, false);
+                                //pick notification table to save the notif
+                                DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
+
+                                //add notif to database
+                                Log.d("HEY","WHY THO");
+                                newNotif.setValue(notif).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(CreateRequest.this, "Successfully Added Notification" + book.getStatus(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             }
                         }
                         //myCallback.loadBookCallBack(allBooks);
