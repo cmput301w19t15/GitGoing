@@ -1,6 +1,7 @@
 package com.example.cmput301w19t15;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.webkit.GeolocationPermissions;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 import android.location.Location;
 
 
+import com.example.cmput301w19t15.Activity.ViewAcceptedRequest;
+import com.example.cmput301w19t15.Objects.Notification;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
@@ -43,6 +47,7 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
 
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
     private FloatingActionButton selectLocation;
 
@@ -55,12 +60,15 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
     private boolean userPermission;
     private Location currentLocation;
 
+
+
     private LatLng resultLocation;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Notification notif = (Notification) getIntent().getSerializableExtra("Notification");
 
         //instantiate all services required to detect device and geolocation
         //fusedlocation is the sercive that gets user's location
@@ -79,9 +87,13 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
                     String la = Double.toString(resultLocation.latitude);
                     String lo = Double.toString(resultLocation.longitude);
                     Toast.makeText(GeoLocation.this, la + ' ' + lo, Toast.LENGTH_SHORT).show();
+                    notif.setLatLng(resultLocation);
+
                 }
                 else{
                     Toast.makeText(GeoLocation.this, "no marker decected",Toast.LENGTH_LONG).show();
+
+
                 }
             }
         });
@@ -101,8 +113,7 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
         }
 
         mapFragment.getMapAsync(this);
-        userPermission();
-        updateUI();
+
 
     }
 
@@ -128,14 +139,10 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        userPermission();
+        updateUI();
         getDeviceLocation();
         mMap.setOnMapClickListener(this);
-
-        if (currentLocation != null){
-            LatLng currentLo = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
-            googleMap.addMarker(new MarkerOptions().position(currentLo).title("Appointed Location"));
-
-        }
 
     }
 
@@ -144,11 +151,14 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
         /**
          * ask user for location permission
          */
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(this, new String[]{
-                    android.Manifest.permission.ACCESS_FINE_LOCATION
-            }, LOCATION_REQUEST_CODE);
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            userPermission = true;
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
 
@@ -276,9 +286,6 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
 
     }
 
-    public void setCurrentLocation(LatLng latLng){
-        this.currentLocation.setLatitude(latLng.latitude);
-        this.currentLocation.setLongitude(latLng.longitude);
-    }
+
 }
 

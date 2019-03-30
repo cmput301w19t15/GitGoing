@@ -123,6 +123,7 @@ public class AcceptRequest extends AppCompatActivity {
 
                     //call map and let owner pick up a geoLocation
                     Intent intent = new Intent(AcceptRequest.this, GeoLocation.class);
+                    intent.putExtra("Notification",notif);
                     startActivity(intent);
 
                     finish();

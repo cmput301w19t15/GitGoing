@@ -1,5 +1,7 @@
 package com.example.cmput301w19t15.Objects;
 //:)
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -17,6 +19,7 @@ public class Notification implements Serializable {
     private String notifID;
     private Boolean read;
     private Boolean OwnerScanned;
+    private LatLng latLng;
 
     public Notification(String type, String bookID, String title, String notifyFromID, String notifyFromEmail,
                         String notifyToID, String notifyToEmail, String ISBN, String photo, Boolean read) {
@@ -120,5 +123,9 @@ public class Notification implements Serializable {
     public Boolean getRead() { return read; }
 
     public void setRead(Boolean read) {this.read = read; }
+
+    public void setLatLng (LatLng latLng){ this.latLng = latLng; }
+
+    public LatLng getLatLng (){ return this.latLng; }
 }
 
