@@ -267,12 +267,20 @@ public class User {
     public void addToWatchList(Book book){
         try {
             watchlistBooks.add(book);
-            FirebaseDatabase.getInstance().getReference("users").child(userID).child("watchlist").setValue(watchlistBooks);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("watchlist").child(book.getBookID()).setValue(watchlistBooks);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
+    public void removeFromWatchlist(Book book){
+        try {
+            watchlistBooks.remove(book);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("watchlist").child(book.getBookID()).removeValue();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     /**
      * Remove my requested books.
      *
