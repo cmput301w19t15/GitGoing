@@ -218,11 +218,13 @@ public class CreateRequest extends AppCompatActivity {
                             /**
                              * find book from owner
                              */
+
                             if (book.getStatus().equals("Borrowed") || book.getStatus().equals("Accepted")) {
                                 loggedInUser.addToWatchList(book);
                                 Log.d("TAG", "Yourui hipster");
                                 Toast.makeText(CreateRequest.this, "Added to Watchlist", Toast.LENGTH_SHORT).show();
                                 EndActivity();
+
                             }
 
                             //loggedInUser.addToMyRequestedBooks(book);
