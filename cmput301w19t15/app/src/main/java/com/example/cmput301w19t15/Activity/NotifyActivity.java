@@ -135,13 +135,13 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
             intent.putExtra("NotifID", notifID);
             startActivityForResult(intent, 1);
         }
-        if (notif.getType().equals("accepted")) {
+        else if (notif.getType().equals("accepted")) {
             Intent intent = new Intent(NotifyActivity.this, ViewAcceptedRequest.class);
             intent.putExtra("Notification", notif);
             intent.putExtra("NotifID", notifID);
             startActivityForResult(intent, 1);
         }
-        if (notif.getType().equals("acceptedOwner")) {
+        else if (notif.getType().equals("acceptedOwner")) {
             Intent intent = new Intent(NotifyActivity.this, ViewAcceptedOwnerRequest.class);
             intent.putExtra("Notification", notif);
             intent.putExtra("NotifID", notifID);
