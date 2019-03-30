@@ -267,7 +267,8 @@ public class User {
     public void addToWatchList(Book book){
         try {
             watchlistBooks.add(book);
-            FirebaseDatabase.getInstance().getReference("users").child(userID).child("watchlist").child(book.getBookID()).setValue(watchlistBooks);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("watchlist").child(book.getBookID()).setValue(book);
+
         }catch (Exception e){
             e.printStackTrace();
         }
