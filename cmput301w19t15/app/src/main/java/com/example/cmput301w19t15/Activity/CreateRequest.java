@@ -90,7 +90,6 @@ public class CreateRequest extends AppCompatActivity {
      * and add the book as a book that has been requested
      * updates firebase
      */
-
     private void addBookToRequest() {
         final Book book = newBook.get(0);
         if (book.getStatus().equals("Accepted") || book.getStatus().equals("Borrowed")) {
@@ -100,7 +99,6 @@ public class CreateRequest extends AppCompatActivity {
                 loggedInUser.addToWatchList(book);
                 Toast.makeText(CreateRequest.this, "Added to Watch List", Toast.LENGTH_SHORT).show();
             }
-            finish();
         }else{
             //check if already requested by user
             String requestBookIDList = loggedInUser.getMyRequestedBooksID().toString();
