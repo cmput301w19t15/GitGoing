@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.Random;
+import com.example.cmput301w19t15.Activity.MainActivity;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -24,9 +25,9 @@ import static org.junit.Assert.assertFalse;
  * test login activity
  */
 @RunWith(AndroidJUnit4.class)
-public class AccountActivityTest extends ActivityTestRule<LoginActivity> {
+public class AccountActivityTest extends ActivityTestRule<MainActivity> {
     public AccountActivityTest(){
-        super(LoginActivity.class);
+        super(MainActivity.class);
     }
 
     private Solo solo;
