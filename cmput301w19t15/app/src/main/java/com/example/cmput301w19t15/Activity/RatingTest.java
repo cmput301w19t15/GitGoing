@@ -111,24 +111,6 @@ public class RatingTest extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-
-                String finalRating;
-                avgRating = totalRatings/numRating;
-                if (avgRating == 0) {
-                    finalRating = "No reviews";
-                }
-                else {
-                    finalRating = ""+avgRating;
-                }
-
-                for (Book book : allBooks) {
-                    if (temper.equals(book.getBookID())) {
-                        newBook = new Book(book);
-                    } //help
-                }
-                newBook.setRating(finalRating);
-                FirebaseDatabase.getInstance().getReference("books").child(temper).child("avgRating").setValue(finalRating);
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
