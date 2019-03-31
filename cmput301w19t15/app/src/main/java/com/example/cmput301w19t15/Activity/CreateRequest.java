@@ -101,10 +101,13 @@ public class CreateRequest extends AppCompatActivity {
             }
         }else{
             //check if already requested by user
-            String requestBookIDList = loggedInUser.getMyRequestedBooksID().toString();
+            String requestBookIDList = loggedInUser.getRequestedBooks().toString();
+            String watlistIDList = loggedInUser.getWatchlistBooks().toString();
             if (requestBookIDList.contains(bookID)) {
-                Toast.makeText(CreateRequest.this, "Already in Watch List", Toast.LENGTH_SHORT).show();
-            }else{
+                Toast.makeText(CreateRequest.this, "Already Requested", Toast.LENGTH_SHORT).show();
+            } else if (watlistIDList.contains(bookID)){
+                Toast.makeText(this, "Already in Watchlist", Toast.LENGTH_SHORT).show();
+            } else{
                 loggedInUser.addToMyRequestedBooksID(bookID);
                 Notification notif = new Notification("Requested", book.getBookID(), book.getTitle(), loggedInUser.getUserID(), loggedInUser.getEmail(),
                         book.getOwnerID(), book.getOwnerEmail(), book.getISBN(), book.getPhoto(), false);
