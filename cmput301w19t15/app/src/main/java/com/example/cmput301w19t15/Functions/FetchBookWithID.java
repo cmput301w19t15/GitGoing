@@ -24,7 +24,8 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
     private ImageView image;
 
     TextView authorText, titleText, isbnText, ownerEmailText,statusText;
-
+    String title, author, isbn, ownerEmail, status,photo,rating;
+    Long returnDate;
 
     public FetchBookWithID(ArrayList<Book> book, EditText title, EditText author, EditText isbn, ImageView image){
         this.books = book;
@@ -40,6 +41,17 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
         this.isbnText = isbn;
         this.ownerEmailText = owner;
         this.statusText = status;
+    }
+    public FetchBookWithID(ArrayList<Book>book, Long returnDate, String title, String author, String isbn, String owner, String status, String photo,String rating){
+        this.books = book;
+        this.title= title;
+        this.author = author;
+        this.isbn = isbn;
+        this.ownerEmail = owner;
+        this.status = status;
+        this.photo = photo;
+        this.returnDate =returnDate;
+        this.rating = rating;
     }
 
     @Override
@@ -67,6 +79,15 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
                                 isbnText.setText(book.getISBN());
                                 ownerEmailText.setText(book.getOwnerEmail());
                                 statusText.setText(book.getStatus());
+                            }
+                            if(title != null && author != null && isbn != null){
+                                title=book.getTitle();
+                                author=book.getAuthor();
+                                isbn=book.getISBN();
+                                ownerEmail=book.getOwnerEmail();
+                                status=book.getStatus();
+                                photo = book.getPhoto();
+                                returnDate = book.getDate();
                             }
 
                         } catch (Exception e){

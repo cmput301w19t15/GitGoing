@@ -34,6 +34,7 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
+import com.example.cmput301w19t15.Functions.FetchBookWithList;
 import com.example.cmput301w19t15.InProgress.BorrowerBookView;
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.Objects.BookAdapter;
@@ -53,6 +54,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
     private Button requested, accepted,borrowed, watchlist;
     private BookAdapter adapter, adapterAccepted,adapterBorrowed;
     private ArrayList<Book> currentBookList, listAccepted, listBorrowed;
+    private ArrayList<String> bookListID;
     private Book clickedBook;
     private RecyclerView mRecyclerView;
     private static User loggedInUser;
@@ -65,6 +67,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         currentBookList = new ArrayList<>();
+        bookListID = new ArrayList<>();
         //listAccepted = new ArrayList<>();
         //listBorrowed = new ArrayList<>();
 
@@ -88,10 +91,16 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
             @Override
             public void onClick(View v) {
                 currentBookList = loggedInUser.getMyRequestedBooks();
+                bookListID = loggedInUser.getMyRequestedBooksID();
                 adapter = new BookAdapter(RequestedBookList.this,currentBookList);
                 adapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(adapter);
                 adapter.setOnItemClickListener(RequestedBookList.this);
+                try {
+                    new FetchBookWithList(currentBookList,bookListID,adapter).execute();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
 

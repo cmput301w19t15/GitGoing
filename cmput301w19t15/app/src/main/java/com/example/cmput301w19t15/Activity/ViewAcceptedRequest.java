@@ -3,6 +3,7 @@ package com.example.cmput301w19t15.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -10,24 +11,30 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cmput301w19t15.Functions.FetchBookWithID;
 import com.example.cmput301w19t15.Functions.ScanBarcode;
 import com.example.cmput301w19t15.Objects.Notification;
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.R;
 import com.example.cmput301w19t15.Objects.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.Result;
+
+import java.util.ArrayList;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
     private Button exit, request, decline, scan, verify;
-    private Book newBook;
+    private ArrayList<Book> newBook;
     private User owner;
     User loggedInUser = MainActivity.getUser();
-    String ownerId, author, title, ownerEmail, isbn, status, bookId, correctScan;
+    String ownerId, author, title, ownerEmail, isbn, status, bookID, correctScan,image,rating;
+    Long returnDate;
     private ZXingScannerView scannerView;
     Integer SCAN_ISBN = 3;
     Notification notif;
@@ -40,7 +47,7 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
         /**
          * save the book values passed from the FindBooks classes when clicked on
          */
-        final Notification notif = (Notification) getIntent().getSerializableExtra("Notification");
+        notif = (Notification) getIntent().getSerializableExtra("Notification");
         TextView titleText = (TextView) findViewById(R.id.booktitle);
         titleText.setText(notif.getTitle());
         TextView isbnText = (TextView) findViewById(R.id.isbn);
@@ -49,8 +56,11 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
         ownerEmailText.setText(notif.getNotifyFromEmail());
         Log.d("hello", "youri bad");
         final TextView scanStatus = (TextView) findViewById(R.id.scan_status);
-        isbn =  notif.getISBN();
+
+
+
         correctScan = "false";
+
         if (correctScan.equals("false")){
             scanStatus.setText("Scan Incomplete");
         }
@@ -149,6 +159,7 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
                     //createReturnNotifications();
                     //addBookToBorrowedBooks();
                     //FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
+                    addBookToBorrowed();
                 } else{
                     Toast.makeText(getApplicationContext(), barcode, Toast.LENGTH_LONG).show();
                 }
@@ -162,11 +173,28 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
 
     public void addBookToBorrowed(){
 
+        //fetch book by id
+        new FetchBookWithID(newBook,returnDate,title,author,isbn,ownerEmail,status,image,rating).execute(bookID);
+        Book book = newBook.get(0);
+        //changebookstatus
+        Book bookNew = new Book(book.getTitle(), book.getAuthor(), book.getISBN(), book.getPhoto(), book.getOwnerEmail(),
+                book.getOwnerID(), book.getRating(), book.getRatingCount(), book.getRatingTotal());
+        bookNew.setBookID(bookID);
+        bookNew.setStatus("Borrowed");
+        //updatefirebase
+        DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(bookID);
+        newBook.setValue(bookNew).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+    });
+/*
         loggedInUser.addToMyRequestedBooksID(bookId);
         //Check over this
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users").child(ownerId).child("myBooks");
         FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID())
                 .child("myBorrowedBooks").setValue(bookId);
-
-    }
+*/
+        }
 }
