@@ -126,36 +126,153 @@ public class CreateRequest extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     try {
-                        ArrayList<Book> allBooks = new ArrayList<>();
+                        //ArrayList<Book> allBooks = new ArrayList<>();
                         for (DataSnapshot books : dataSnapshot.getChildren()) {
                             Book currBook = books.getValue(Book.class);
                             if (currBook.getBookID().equals(bookId)) {
+                                /**
+                                 * check status
+                                 */
                                 if (currBook.getStatus().equals("Accepted") || currBook.getStatus().equals("Borrowed")) {
                                     loggedInUser.addToWatchList(currBook);
+                                    Toast.makeText(CreateRequest.this, "Added to Watchlist", Toast.LENGTH_SHORT).show();
                                     finish();
                                 } else {
-                                    loggedInUser.addToMyRequestedBooks(currBook);
 
-                                    Notification notif = new Notification("Requested", bookId, title, loggedInUser.getUserID(), loggedInUser.getEmail(),
-                                            ownerId, ownerEmail, isbn, photo, false);
-                                    //pick notification table to save the notif
-                                    DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
-
-                                    //add notif to database
-                                    Log.d("HEY","WHY THO");
-                                    newNotif.setValue(notif).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    /**
+                                     *
+                                     * check if already requested by user
+                                     */
+                                    Toast.makeText(CreateRequest.this, "Trying", Toast.LENGTH_SHORT).show();
+                                    DatabaseReference bookReference = FirebaseDatabase.getInstance().getReference().child("users")
+                                            .child(loggedInUser.getUserID()).child("myRequestedBooks");
+                                    bookReference.addValueEventListener(new ValueEventListener() {
                                         @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(CreateRequest.this, "Successfully Added Notification", Toast.LENGTH_SHORT).show();
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            if (dataSnapshot.exists()) {
+                                                try {
+                                                    boolean exists = false;
+                                                    for (DataSnapshot reqBook : dataSnapshot.getChildren()) {
+                                                        Book requestedBook = reqBook.getValue(Book.class);
+                                                        if (requestedBook.getBookID().equals(bookId)) {
+                                                            exists = true;
+                                                        }
+                                                    }
+                                                    /**
+                                                     * add book if exists false
+                                                     */
+                                                    if (!exists) {
+                                                        DatabaseReference ownerReference = FirebaseDatabase.getInstance().getReference().child("users").child(ownerId).child("myBooks");
+                                                        ownerReference.addValueEventListener(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                if (dataSnapshot.exists()) {
+                                                                    try {
+                                                                        ArrayList<Book> allBooks = new ArrayList<>();
+                                                                        for (DataSnapshot books : dataSnapshot.getChildren()) {
+                                                                            Book currBook = books.getValue(Book.class);
+                                                                            if (currBook.getBookID().equals(bookId)) {
+                                                                                loggedInUser.addToMyRequestedBooks(currBook);
+
+                                                                                Notification notif = new Notification("Requested", bookId, title, loggedInUser.getUserID(), loggedInUser.getEmail(),
+                                                                                        ownerId, ownerEmail, isbn, photo, false);
+                                                                                //pick notification table to save the notif
+                                                                                DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
+
+                                                                                //add notif to database
+                                                                                Log.d("HEY", "WHY THO");
+                                                                                newNotif.setValue(notif).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                    @Override
+                                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                                        if (task.isSuccessful()) {
+                                                                                            Toast.makeText(CreateRequest.this, "Successfully Added Notification", Toast.LENGTH_SHORT).show();
+                                                                                        }
+                                                                                    }
+                                                                                });
+                                                                            }
+                                                                        }
+
+                                                                    } catch (Exception e) {
+                                                                        e.printStackTrace();
+                                                                    }
+                                                                }
+
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                            }
+                                                        });
+                                                    }
+                                                    else{
+                                                        Toast.makeText(CreateRequest.this, "Book Already Requested", Toast.LENGTH_SHORT).show();
+                                                    }
+
+                                                } catch (Exception e){
+                                                    e.printStackTrace();
+                                                }
                                             }
+                                            else {
+                                                Toast.makeText(CreateRequest.this, "Shold add new", Toast.LENGTH_SHORT).show();
+                                                DatabaseReference ownerReference = FirebaseDatabase.getInstance().getReference().child("users").child(ownerId).child("myBooks");
+                                                ownerReference.addValueEventListener(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        if (dataSnapshot.exists()) {
+                                                            try {
+                                                                ArrayList<Book> allBooks = new ArrayList<>();
+                                                                for (DataSnapshot books : dataSnapshot.getChildren()) {
+                                                                    Book currBook = books.getValue(Book.class);
+                                                                    if (currBook.getBookID().equals(bookId)) {
+                                                                        loggedInUser.addToMyRequestedBooks(currBook);
+
+                                                                        Notification notif = new Notification("Requested", bookId, title, loggedInUser.getUserID(), loggedInUser.getEmail(),
+                                                                                ownerId, ownerEmail, isbn, photo, false);
+                                                                        //pick notification table to save the notif
+                                                                        DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
+
+                                                                        //add notif to database
+                                                                        Log.d("HEY", "WHY THO");
+                                                                        newNotif.setValue(notif).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                            @Override
+                                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                                if (task.isSuccessful()) {
+                                                                                    Toast.makeText(CreateRequest.this, "Successfully Added Notification", Toast.LENGTH_SHORT).show();
+                                                                                }
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                }
+
+                                                            } catch (Exception e) {
+                                                                e.printStackTrace();
+                                                            }
+                                                        }
+
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                    }
+                                                });
+                                            }
+
                                         }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+
                                     });
                                 }
                             }
+
                         }
 
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
@@ -166,7 +283,9 @@ public class CreateRequest extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
         });
+
 
     }
 
