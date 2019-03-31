@@ -214,7 +214,7 @@ public class CreateRequest extends AppCompatActivity {
                                                 }
                                             }
                                             else {
-                                                Toast.makeText(CreateRequest.this, "Shold add new", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(CreateRequest.this, "Should add new", Toast.LENGTH_SHORT).show();
                                                 DatabaseReference ownerReference = FirebaseDatabase.getInstance().getReference().child("users").child(ownerId).child("myBooks");
                                                 ownerReference.addValueEventListener(new ValueEventListener() {
                                                     @Override
