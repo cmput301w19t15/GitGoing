@@ -108,6 +108,20 @@ public class CreateRequest extends AppCompatActivity {
                 loggedInUser.addToMyRequestedBooksID(bookID);
                 Notification notif = new Notification("Requested", book.getBookID(), book.getTitle(), loggedInUser.getUserID(), loggedInUser.getEmail(),
                         book.getOwnerID(), book.getOwnerEmail(), book.getISBN(), book.getPhoto(), false);
+
+                //update book status
+                Book bookNew = new Book(book.getTitle(), book.getAuthor(), book.getISBN(), book.getPhoto(), book.getOwnerEmail(),
+                        book.getOwnerID(), book.getRating(), book.getRatingCount(), book.getRatingTotal());
+                bookNew.setBookID(bookID);
+                bookNew.setStatus("Requested");
+                DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(bookID);
+                newBook.setValue(bookNew).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
+
                 //pick notification table to save the notif
                 DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
 
