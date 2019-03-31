@@ -108,7 +108,7 @@ public class RatingTest extends AppCompatActivity {
                 for (Book book : allBooks) {
                     if (temper.equals(book.getBookID())) {
                         newBook = new Book(book);
-                    }
+                    } //help
                 }
                 newBook.setRating(finalRating);
                 FirebaseDatabase.getInstance().getReference("books").child(temper).child("avgRating").setValue(finalRating);
