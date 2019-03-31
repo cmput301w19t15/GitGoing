@@ -101,7 +101,7 @@ public class CreateRequest extends AppCompatActivity {
             }
         }else{
             //check if already requested by user
-            String requestBookIDList = loggedInUser.getMyRequestedBooksID().toString();
+            String requestBookIDList = loggedInUser.getWatchlistBooks().toString();
             if (requestBookIDList.contains(bookID)) {
                 Toast.makeText(CreateRequest.this, "Already in Watch List", Toast.LENGTH_SHORT).show();
             }else{
