@@ -34,6 +34,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.cmput301w19t15.Functions.FetchBookWithList;
 import com.example.cmput301w19t15.Objects.Book;
@@ -104,8 +105,8 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
             public void onClick(View v) {
                 Log.d("testing", "boost size: " + mBookList.size());
                 filterText = filterView.getText().toString();
-                //loadBooks();
-                new FetchBookWithList(mBookList,mBookListID, mBookAdapter).execute("findBooks");
+                loadBooks();
+                //new FetchBookWithList(mBookList,mBookListID, mBookAdapter).execute("findBooks");
             }
         });
 
@@ -144,7 +145,7 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
         super.onRestart();
         updateBooks();
     }
-    //not used for now
+    //not used for now. NOPE it's actually runnig
     private void updateBooks(){
         try {
             if(mBookListID == null){
@@ -162,7 +163,8 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
                 mRecyclerView.setAdapter(mBookAdapter);
                 mBookAdapter.setOnItemClickListener(FindBooks.this);
             }
-            new FetchBookWithList(mBookList, mBookListID, mBookAdapter).execute("findBooks");
+            loadBooks();
+            //new FetchBookWithList(mBookList, mBookListID, mBookAdapter).execute("findBooks");
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -197,7 +199,7 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
     }
 
     /**
-     * Load my book from firebase.
+     * Load book from firebase.
      *
      * @param myCallback part of loadMyBookFromFireBase
      */
@@ -214,12 +216,13 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
                             if(books.child("date").getValue().equals(null) || books.child("date").getValue().equals("null")) {
                                 Log.d("testing", books.getKey());
                             } else {Book book = books.getValue(Book.class);
-                                allBooks.add(book);
+                                if (!book.getOwnerID().equals(loggedInUser.getUserID())) {
+                                    allBooks.add(book);
+                                }
                             }
                         }
                         // filter books
                         if (filterText != " ") {
-                            Log.d("debuging", filterText);
                             for (Book book : allBooks) {
                                 if(book.getTitle().toLowerCase().contains(filterText.toLowerCase())
                                 || book.getAuthor().toLowerCase().contains(filterText.toLowerCase())

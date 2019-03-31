@@ -16,10 +16,12 @@ package com.example.cmput301w19t15.Objects;
 //:)
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.cmput301w19t15.Activity.FindUsers;
 import com.example.cmput301w19t15.Activity.LoginActivity;
 import com.example.cmput301w19t15.Activity.Profile;
+import com.example.cmput301w19t15.Activity.RequestedBookList;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -309,13 +311,39 @@ public class User {
      * @return the array list
      */
     public ArrayList<Book> getMyRequestedBooks(){
-        ArrayList<Book> myFilteredBooks = new ArrayList<>();
+        /*ArrayList<Book> myFilteredBooks = new ArrayList<>();
         for (Book book : myRequestedBooks){
             if (book.getStatus().equals("Requested")) {
                 myFilteredBooks.add(book);
             }
         }
-        return myFilteredBooks;
+        return myFilteredBooks;*/
+        final ArrayList<Book> requestedBooks = new ArrayList<>();
+        DatabaseReference booksReference = FirebaseDatabase.getInstance().getReference().child("books");
+        booksReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<String> requestedID = getMyRequestedBooksID();
+                if (dataSnapshot.exists());
+                try {
+                    for (DataSnapshot books : dataSnapshot.getChildren()) {
+                        Book currentBook = books.getValue(Book.class);
+                        if (requestedID.contains(currentBook.getBookID())) {
+                            requestedBooks.add(currentBook);
+                            Log.e("TAG: ", currentBook.getTitle());
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return requestedBooks;
     }
 
     public ArrayList<Book> getWatchlistBooks() {
