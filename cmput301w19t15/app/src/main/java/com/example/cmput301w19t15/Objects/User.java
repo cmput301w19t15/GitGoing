@@ -616,7 +616,7 @@ public class User {
             @Override
             public void loadBookIDCallBack(ArrayList<String> value) {
                 switch(bookListType) {
-                    case "IDmyBooks": myBooksID = new ArrayList<>(value); break;
+                    case "myBooksID": myBooksID = new ArrayList<>(value); break;
                     case "myRequestedBooksID": myRequestedBooksID = new ArrayList<>(value); break;
                 }
 

@@ -23,11 +23,6 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
     private BookAdapter bookAdapter;
 
 
-    public FetchBookWithList(ArrayList<Book> bookList, ArrayList<String> idList){
-        this.bookList = bookList;
-        this.bookListID = idList;
-    }
-
     public FetchBookWithList(ArrayList<Book> bookList, ArrayList<String> idList, BookAdapter bookAdapter){
         this.bookList = bookList;
         this.bookListID = idList;
@@ -36,6 +31,7 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
 
     @Override
     protected ArrayList<Book> doInBackground(String... strings) {
+        bookList.clear();
         try{
             DatabaseReference bookReference = FirebaseDatabase.getInstance().getReference().child("books");
             bookReference.addValueEventListener(new ValueEventListener() {
