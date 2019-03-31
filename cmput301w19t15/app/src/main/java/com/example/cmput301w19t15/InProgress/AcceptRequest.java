@@ -216,8 +216,35 @@ public class AcceptRequest extends AppCompatActivity {
     /**
      * add owner's book to accepted requests for the borrower
      */
-    public void addBookToAccepted(){
-            DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID()).child("myBooks");
+    public void addBookToAccepted() {
+
+        DatabaseReference bookReference = FirebaseDatabase.getInstance().getReference().child("books");
+        bookReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    try {
+                        for (DataSnapshot books : dataSnapshot.getChildren()) {
+                            Book book = books.getValue(Book.class);
+                            if (book.getBookID().equals(bookId)) {
+                                book.setStatus("Accepted");
+                                book.setBorrowerID(borrowerID);
+                                FirebaseDatabase.getInstance().getReference().child("books").child(bookId).setValue(book);
+                            }
+                        }
+                    }  catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+            /*DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("books").child(loggedInUser.getUserID()).child("myBooks";
             userReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -237,10 +264,10 @@ public class AcceptRequest extends AppCompatActivity {
                                     User user = new User(borrowerEmail, borrowerID);
                                     user.addToMyRequestedBooks(book);
                                     /**
-                                     * update the original and owner's book to borrowed status
-                                     */
+                                     * update the original book to borrowed status
+
                                     FirebaseDatabase.getInstance().getReference().child("books").child(book.getBookID()).setValue(book);
-                                    FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID()).child("myBooks").child(book.getBookID()).setValue(book);
+                                    //FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID()).child("myBooks").child(book.getBookID()).setValue(book);
                                 }
                                 //allBooks.add(book);
                             }
@@ -256,6 +283,8 @@ public class AcceptRequest extends AppCompatActivity {
                 }
             });
         }
+        */
+    }
 
 }
 

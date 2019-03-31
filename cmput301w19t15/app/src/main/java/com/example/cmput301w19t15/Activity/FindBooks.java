@@ -227,7 +227,8 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
                                 if(book.getTitle().toLowerCase().contains(filterText.toLowerCase())
                                 || book.getAuthor().toLowerCase().contains(filterText.toLowerCase())
                                 || book.getOwnerEmail().toLowerCase().contains(filterText.toLowerCase())
-                                || book.getISBN().toLowerCase().contains(filterText.toLowerCase())) {
+                                || book.getISBN().toLowerCase().contains(filterText.toLowerCase())
+                                || book.getStatus().toLowerCase().contains(filterText.toLowerCase())) {
                                     filteredBooks.add(book);
                                 }
                             }
