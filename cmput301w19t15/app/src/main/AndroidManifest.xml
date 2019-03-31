@@ -72,8 +72,9 @@
         <activity android:name=".Activity.NotifyActivity" />
         <activity android:name=".InProgress.AcceptRequest" />
         <activity android:name=".Activity.ViewAcceptedRequest" />
-
         <activity android:name=".Activity.ViewAcceptedOwnerRequest"/>
+        <activity android:name=".Activity.ViewReturnRequestBorrower" />
+        <activity android:name=".Activity.ViewReturnRequestOwner"/>
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
