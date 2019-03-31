@@ -267,7 +267,8 @@ public class User {
     public void addToWatchList(Book book){
         try {
             watchlistBooks.add(book);
-            FirebaseDatabase.getInstance().getReference("users").child(userID).child("watchlist").child(book.getBookID()).setValue(watchlistBooks);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("watchlist").child(book.getBookID()).setValue(book);
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -615,7 +616,7 @@ public class User {
             @Override
             public void loadBookIDCallBack(ArrayList<String> value) {
                 switch(bookListType) {
-                    case "IDmyBooks": myBooksID = new ArrayList<>(value); break;
+                    case "myBooksID": myBooksID = new ArrayList<>(value); break;
                     case "myRequestedBooksID": myRequestedBooksID = new ArrayList<>(value); break;
                 }
 

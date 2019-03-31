@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.cmput301w19t15.Functions.ConvertPhoto;
+import com.example.cmput301w19t15.Functions.FetchBookWithID;
+import com.example.cmput301w19t15.Functions.FetchBookWithList;
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.R;
 import com.example.cmput301w19t15.Objects.User;
@@ -28,7 +30,7 @@ public class BookInfo extends AppCompatActivity {
      * @see MyBooks , FindBooks
      */
     User loggedInUser;
-    Book book;
+    ArrayList<Book> book = new ArrayList<>();
     String bookID;
     EditText titleEditText,authorEditText,ISBNEditText;
     ImageView image;
@@ -40,26 +42,20 @@ public class BookInfo extends AppCompatActivity {
 
         //Get book values from the MyBook class the user has clicked on the book
         bookID = (String) getIntent().getExtras().getString("BOOKID");
-        final int position = (int) getIntent().getExtras().getInt("POSITION");
-        book = loggedInUser.getMyBooks().get(position);
         //display book information as edit text
         titleEditText = findViewById(R.id.editMyBookTitle);
         authorEditText = findViewById(R.id.editMyBookAuthor);
         ISBNEditText = findViewById(R.id.editMyBookISBN);
-        //set the text as the values the book currently is set to
-        titleEditText.setText(book.getTitle());
-        authorEditText.setText(book.getAuthor());
-        ISBNEditText.setText(book.getISBN());
-        String imageString = book.getPhoto();
         image = findViewById(R.id.imageView);
-        image.setImageBitmap(ConvertPhoto.convert(imageString));
+
+        new FetchBookWithID(book,titleEditText,authorEditText,ISBNEditText,image).execute(bookID);
         ////need to get and set the current image - user will be able to update or delete the image
 
         Button updateBook = findViewById(R.id.updateBook);
         updateBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateBook(position);
+                updateBook();
             }
         });
 
@@ -86,7 +82,7 @@ public class BookInfo extends AppCompatActivity {
         deletePhoto.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                book.setPhoto("");
+                book.get(0).setPhoto("");
                 image.setImageResource(0);
             }
         });
@@ -96,24 +92,17 @@ public class BookInfo extends AppCompatActivity {
      * When the User clicks update book it will remove the book from the user and add
      * the new book then update firebase
      */
-    private void updateBook(Integer position){
+    private void updateBook(){
         String title = titleEditText.getText().toString();
         String author = authorEditText.getText().toString();
         String isbn = ISBNEditText.getText().toString();
-        loggedInUser.removeMyBooksID(book.getBookID());
-        loggedInUser.removeMyBooks(book);
-        book.setTitle(title);
-        book.setAuthor(author);
-        book.setISBN(isbn);
-        book.setBookID(book.getBookID());
+        loggedInUser.removeMyBooksID(bookID);
+        book.get(0).setTitle(title);
+        book.get(0).setAuthor(author);
+        book.get(0).setISBN(isbn);
 
-        loggedInUser.addToMyBooksID(book.getBookID());
-        loggedInUser.getMyBooks().set(position,book);
-        FirebaseDatabase.getInstance().getReference("books").child(book.getBookID()).setValue(book);// update books
-
-        //to be removed
-        loggedInUser.addToMyBooks(book);
-        FirebaseDatabase.getInstance().getReference("users").child(loggedInUser.getUserID()).child("myBooks").setValue(loggedInUser.getMyBooks());
+        loggedInUser.addToMyBooksID(bookID);
+        FirebaseDatabase.getInstance().getReference("books").child(bookID).setValue(book.get(0));// update books
 
         finish();
     }
@@ -122,9 +111,8 @@ public class BookInfo extends AppCompatActivity {
      * --need to remove book from other users that have requested the books
      */
     private void deleteBook(){
-        loggedInUser.removeMyBooks(book);
-        loggedInUser.removeMyBooksID(book.getBookID());
-        FirebaseDatabase.getInstance().getReference("books").child(book.getBookID()).removeValue();// delete book
+        loggedInUser.removeMyBooksID(bookID);
+        FirebaseDatabase.getInstance().getReference("books").child(bookID).removeValue();// delete book
 
         //outdated have to update
 
@@ -144,8 +132,8 @@ public class BookInfo extends AppCompatActivity {
                             ArrayList<Book> userRequestedList = new ArrayList<>();
                             for(DataSnapshot data: user.child("myRequestedBooks").getChildren()){
                                 Book singleBook = data.getValue(Book.class);
-                                if(!singleBook.getBookID().equalsIgnoreCase(book.getBookID())) {
-                                    userRequestedList.add(book);
+                                if(!singleBook.getBookID().equalsIgnoreCase(bookID)) {
+                                    userRequestedList.add(book.get(0));
                                 }
                             }
                             FirebaseDatabase.getInstance().getReference("users").child(user.getKey()).child("myRequestedBooks").setValue(userRequestedList);
@@ -154,7 +142,7 @@ public class BookInfo extends AppCompatActivity {
                             ArrayList<String> userRequestedListID = new ArrayList<>();
                             for(DataSnapshot data: user.child("myRequestedBooksID").getChildren()){
                                 String singleBookID = data.getValue(String.class);
-                                if(!singleBookID.equalsIgnoreCase(book.getBookID())) {
+                                if(!singleBookID.equalsIgnoreCase(bookID)) {
                                     userRequestedListID.add(singleBookID);
                                 }
                             }
