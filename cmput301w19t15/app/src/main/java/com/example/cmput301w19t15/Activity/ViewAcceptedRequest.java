@@ -96,11 +96,12 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
 
                                             }
                                         });
-                                        createReturnNotifications(notif);
+
 
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
+                                    createReturnNotifications(notif);
                                 }
                             }
 
