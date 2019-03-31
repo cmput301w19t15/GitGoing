@@ -118,8 +118,6 @@ public class CreateRequest extends AppCompatActivity {
      */
 
     private void addBookToRequest() {
-        owner = new User(ownerEmail, ownerId);
-
         DatabaseReference ownerReference = FirebaseDatabase.getInstance().getReference().child("users").child(ownerId).child("myBooks");
         ownerReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -268,6 +266,7 @@ public class CreateRequest extends AppCompatActivity {
 
                                     });
                                 }
+                                finish();
                             }
 
                         }
