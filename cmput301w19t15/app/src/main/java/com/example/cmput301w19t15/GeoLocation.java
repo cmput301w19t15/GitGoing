@@ -91,7 +91,7 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
                     Toast.makeText(GeoLocation.this, la + ' ' + lo, Toast.LENGTH_SHORT).show();
                     notif.setLatLng(resultLocation);
 
-                    DatabaseReference locationRef = FirebaseDatabase.getInstance().getReference().child("Notification").child(notif.getNotifID()).child("location").child(resultLocation.toString());
+                    FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID()).child("location").child(lo);
 
                 }
                 else{

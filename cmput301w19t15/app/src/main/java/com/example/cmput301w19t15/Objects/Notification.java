@@ -18,8 +18,10 @@ public class Notification implements Serializable {
     private String photo;
     private String notifID;
     private Boolean read;
+
     private Boolean OwnerScanned;
     private LatLng latLng;
+    private String ownerScanned;
 
     public Notification(String type, String bookID, String title, String notifyFromID, String notifyFromEmail,
                         String notifyToID, String notifyToEmail, String ISBN, String photo, Boolean read) {
@@ -124,9 +126,11 @@ public class Notification implements Serializable {
 
     public void setRead(Boolean read) {this.read = read; }
 
+//
     public void setLatLng (LatLng latLng){ this.latLng = latLng; }
 
     public LatLng getLatLng (){ return this.latLng; }
+
     public String getOwnerScanned() { return ownerScanned; }
 
     public void setOwnerScanned(String scanned) {this.ownerScanned = scanned; }
