@@ -87,11 +87,10 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                 User loggedInUser = MainActivity.getUser();
 
                 Book book = new Book(booktitleText, authorText, isbnText, bookPhoto, loggedInUser.getEmail(), loggedInUser.getUserID(), rating,0,0);
-                loggedInUser.addToMyBooks(book); //to be removed
                 loggedInUser.addToMyBooksID(book.getBookID());
 
-                Bundle result = new Bundle();
-                Intent returnIntent = new Intent(AddBookInfo.this, MyBooks.class);
+                //Bundle result = new Bundle();
+                //Intent returnIntent = new Intent(AddBookInfo.this, MyBooks.class);
 
                 //result.putSerializable("putresut", book);
 
@@ -107,8 +106,8 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                         }
                     }
                 });
-                returnIntent.putExtra("result", result);
-                setResult(1,returnIntent);
+                //returnIntent.putExtra("result", result);
+                //setResult(1,returnIntent);
                 finish();
             }
         });

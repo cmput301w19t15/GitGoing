@@ -8,7 +8,7 @@
     tools:context=".Activity.RatingTest">
 
     <RatingBar
-        android:id="@+id/stars2"
+        android:id="@+id/userRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -26,10 +26,10 @@
         android:layout_marginTop="8dp"
         android:text="Transaction Rating"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stars" />
+        app:layout_constraintTop_toBottomOf="@+id/bookRating" />
 
     <RatingBar
-        android:id="@+id/stars"
+        android:id="@+id/bookRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -75,5 +75,5 @@
         android:hint="Enter comment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stars2" />
+        app:layout_constraintTop_toBottomOf="@+id/userRating" />
 </android.support.constraint.ConstraintLayout>

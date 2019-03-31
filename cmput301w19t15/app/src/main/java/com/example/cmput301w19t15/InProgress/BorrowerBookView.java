@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * this is intended to list borrowers and display it
- * work in progress
+ * WORK IN PROGRESS
  */
 
 public class BorrowerBookView extends AppCompatActivity {

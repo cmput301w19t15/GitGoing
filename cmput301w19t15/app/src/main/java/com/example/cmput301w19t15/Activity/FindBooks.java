@@ -34,8 +34,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.cmput301w19t15.Functions.FetchBookWithList;
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.Objects.BookAdapter;
 import com.example.cmput301w19t15.R;
@@ -54,16 +55,13 @@ import java.util.ArrayList;
  */
 public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemClickListener{
     private FindBooks activity = this;
-    private EditText bookSearch, filter2Add;
-    private Button addFilter, searchBtn;
-    private ListView bookList;
     private static User loggedInUser;
-    private BookAdapter adapter;
-    private ArrayList<Book> listOfBooks;
+    private BookAdapter mBookAdapter;
+    private ArrayList<Book> mBookList;
+    private ArrayList<String> mBookListID;
     private RecyclerView mRecyclerView;
     private String filterText;
     private EditText filterView;
-
 
     /**
      * Calls when activity is first created
@@ -72,24 +70,43 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Set up the login form.
         setContentView(R.layout.activity_find_books);
 
         mRecyclerView = findViewById(R.id.recylcerView);
         //mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         filterView = findViewById(R.id.searchTextView);
         filterText = filterView.getText().toString();
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        listOfBooks = new ArrayList<>();
-        loadBooks();
+        loggedInUser = MainActivity.getUser();
+
+        try {
+            mBookListID = loggedInUser.getMyBooksID();
+            mBookList = new ArrayList<>();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        mBookAdapter = new BookAdapter(FindBooks.this, mBookList);
+        mRecyclerView.setAdapter(mBookAdapter);
+        mBookAdapter.setOnItemClickListener(FindBooks.this);
+
+        //list all books not owned
+        try {
+            new FetchBookWithList(mBookList, mBookListID, mBookAdapter).execute("findBooks");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         Button searchButton = findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("testing", "boost size: " + mBookList.size());
                 filterText = filterView.getText().toString();
                 loadBooks();
+                //new FetchBookWithList(mBookList,mBookListID, mBookAdapter).execute("findBooks");
             }
         });
 
@@ -118,7 +135,7 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
 */
 
 
-        //adapter = new ArrayAdapter<Book>(this, R.layout.list_item, listOfBooks);
+        //mBookAdapter = new ArrayAdapter<Book>(this, R.layout.list_item, mBookList);
 
 
     }
@@ -126,7 +143,31 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
     @Override
     protected void onRestart() {
         super.onRestart();
-        loadBooks();
+        updateBooks();
+    }
+    //not used for now. NOPE it's actually runnig
+    private void updateBooks(){
+        try {
+            if(mBookListID == null){
+                mBookListID = loggedInUser.getMyRequestedBooksID();
+            }else{
+                mBookListID.clear();
+            }
+            if(mBookList == null){
+                mBookList = new ArrayList<>();
+            }else{
+                mBookList.clear();
+            }
+            if(mBookAdapter == null) {
+                mBookAdapter = new BookAdapter(FindBooks.this, mBookList);
+                mRecyclerView.setAdapter(mBookAdapter);
+                mBookAdapter.setOnItemClickListener(FindBooks.this);
+            }
+            loadBooks();
+            //new FetchBookWithList(mBookList, mBookListID, mBookAdapter).execute("findBooks");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -136,11 +177,11 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
         loadMyBookFromFireBase(new loadBookCallBack() {
             @Override
             public void loadBookCallBack(ArrayList<Book> value) {
-                listOfBooks = (ArrayList<Book>) value.clone();
-                Log.d("testing","book size: "+listOfBooks.size());
-                adapter = new BookAdapter(FindBooks.this,listOfBooks);
-                mRecyclerView.setAdapter(adapter);
-                adapter.setOnItemClickListener(FindBooks.this);
+                mBookList = (ArrayList<Book>) value.clone();
+                Log.d("testing","book size: "+ mBookList.size());
+                mBookAdapter = new BookAdapter(FindBooks.this, mBookList);
+                mRecyclerView.setAdapter(mBookAdapter);
+                mBookAdapter.setOnItemClickListener(FindBooks.this);
             }
         });
     }
@@ -158,7 +199,7 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
     }
 
     /**
-     * Load my book from firebase.
+     * Load book from firebase.
      *
      * @param myCallback part of loadMyBookFromFireBase
      */
@@ -175,12 +216,13 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
                             if(books.child("date").getValue().equals(null) || books.child("date").getValue().equals("null")) {
                                 Log.d("testing", books.getKey());
                             } else {Book book = books.getValue(Book.class);
-                                allBooks.add(book);
+                                if (!book.getOwnerID().equals(loggedInUser.getUserID())) {
+                                    allBooks.add(book);
+                                }
                             }
                         }
                         // filter books
                         if (filterText != " ") {
-                            Log.d("debuging", filterText);
                             for (Book book : allBooks) {
                                 if(book.getTitle().toLowerCase().contains(filterText.toLowerCase())
                                 || book.getAuthor().toLowerCase().contains(filterText.toLowerCase())
@@ -211,18 +253,9 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
      */
     @Override
     public void onItemClick(int position) {
-        Book book = (Book) listOfBooks.get(position);
+        Book book = (Book) mBookList.get(position);
         Bundle bundle = new Bundle();
-        bundle.putString("TITLE",book.getTitle());
-        bundle.putString("AUTHOR",book.getAuthor());
-        bundle.putString("ISBN",book.getISBN());
-        bundle.putString("OWNEREMAIL",book.getOwnerEmail());
-        bundle.putString("OWNERID",book.getOwnerID());
-        bundle.putString("STATUS",book.getStatus());
         bundle.putString("BOOKID",book.getBookID());
-        bundle.putString("PHOTO", book.getPhoto());
-
-
         Intent intent = new Intent(FindBooks.this, CreateRequest.class);
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);

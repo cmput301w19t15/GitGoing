@@ -21,12 +21,7 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
     private ArrayList<Book> bookList;
     private ArrayList<String> bookListID;
     private BookAdapter bookAdapter;
-
-
-    public FetchBookWithList(ArrayList<Book> bookList, ArrayList<String> idList){
-        this.bookList = bookList;
-        this.bookListID = idList;
-    }
+    private String listType;
 
     public FetchBookWithList(ArrayList<Book> bookList, ArrayList<String> idList, BookAdapter bookAdapter){
         this.bookList = bookList;
@@ -36,6 +31,11 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
 
     @Override
     protected ArrayList<Book> doInBackground(String... strings) {
+        bookList.clear();
+        final String bookidlist = bookListID.toString();
+        if(strings.length > 0) {
+            listType = strings[0];  //
+        }
         try{
             DatabaseReference bookReference = FirebaseDatabase.getInstance().getReference().child("books");
             bookReference.addValueEventListener(new ValueEventListener() {
@@ -43,11 +43,15 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if(dataSnapshot.exists()) {
                         try {
+                            Log.d("tesint","child cound: "+dataSnapshot.getChildrenCount());
                             for (DataSnapshot books : dataSnapshot.getChildren()) {
                                 String bookid = books.child("bookID").getValue().toString();
-                                String bookidlist = bookListID.toString();
-
-                                if(bookidlist.contains(bookid)){
+                                if(listType != null){
+                                    if(!bookidlist.contains(bookid)){
+                                        Book book = books.getValue(Book.class);
+                                        bookList.add(book);
+                                    }
+                                }else if(bookidlist.contains(bookid)){
                                     Book book = books.getValue(Book.class);
                                     bookList.add(book);
                                 }
@@ -74,13 +78,5 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
     @Override
     protected void onPostExecute(ArrayList<Book> s){
         super.onPostExecute(s);
-        try {
-
-        } catch (Exception e){
-            // If onPostExecute does not receive a proper JSON string,
-            // update the UI to show failed results.
-            e.printStackTrace();
-        }
-
     }
 }

@@ -87,7 +87,7 @@
             android:textStyle="bold" />
 
         <RatingBar
-            android:id="@+id/stars"
+            android:id="@+id/bookRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewOwnerEmail"
