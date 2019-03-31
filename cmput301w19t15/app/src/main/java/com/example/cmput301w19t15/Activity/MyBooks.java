@@ -1,3 +1,4 @@
+
 /*
  * Class Name: MyBooks
  *
@@ -111,14 +112,12 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
     protected void onRestart() {
         super.onRestart();
         //gets books from user and loads them into screen
-        updateBooks();
-        mBookAdapter.notifyDataSetChanged();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        new FetchBookWithList(mBookList,mBookListID,mBookAdapter).execute();
     }
 
     /**
@@ -127,13 +126,30 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
     @Override
     protected void onStart() {
         super.onStart();
-        new FetchBookWithList(mBookList,mBookListID,mBookAdapter).execute();
+        loggedInUser = MainActivity.getUser();
+        try {
+            mBookListID = loggedInUser.getMyBooksID();
+            mBookList = new ArrayList<>();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        //Work in Progress
+        mBookAdapter = new BookAdapter(MyBooks.this,mBookList);
+        mRecyclerView.setAdapter(mBookAdapter);
+        mBookAdapter.setOnItemClickListener(MyBooks.this);
+
+        try {
+            new FetchBookWithList(mBookList,mBookListID,mBookAdapter).execute();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onBackPressed(){
         super.onBackPressed();
-        mBookAdapter.notifyDataSetChanged();
+
     }
 
     /**
