@@ -309,7 +309,13 @@ public class User {
      * @return the array list
      */
     public ArrayList<Book> getMyRequestedBooks(){
-        return myRequestedBooks;
+        ArrayList<Book> myFilteredBooks = new ArrayList<>();
+        for (Book book : myRequestedBooks){
+            if (book.getStatus().equals("Requested")) {
+                myFilteredBooks.add(book);
+            }
+        }
+        return myFilteredBooks;
     }
 
     public ArrayList<Book> getWatchlistBooks() {
