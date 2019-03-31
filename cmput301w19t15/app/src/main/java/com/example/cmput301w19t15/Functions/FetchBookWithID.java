@@ -3,10 +3,13 @@ package com.example.cmput301w19t15.Functions;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.cmput301w19t15.Objects.Book;
+import com.example.cmput301w19t15.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -20,12 +23,23 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
     private EditText titleEditText,authorEditText,ISBNEditText;
     private ImageView image;
 
+    TextView authorText, titleText, isbnText, ownerEmailText,statusText;
+
+
     public FetchBookWithID(ArrayList<Book> book, EditText title, EditText author, EditText isbn, ImageView image){
         this.books = book;
         this.titleEditText = title;
         this.authorEditText = author;
         this.ISBNEditText = isbn;
         this.image = image;
+    }
+    public FetchBookWithID(ArrayList<Book> book, TextView title, TextView author, TextView isbn, TextView owner, TextView status){
+        this.books = book;
+        this.titleText = title;
+        this.authorText = author;
+        this.isbnText = isbn;
+        this.ownerEmailText = owner;
+        this.statusText = status;
     }
 
     @Override
@@ -38,13 +52,22 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
                     if(dataSnapshot.exists()) {
                         try {
                             Book book = dataSnapshot.getValue(Book.class);
-                            books.add(book);
+                            books.add(0,book);
 
-                            titleEditText.setText(book.getTitle());
-                            authorEditText.setText(book.getAuthor());
-                            ISBNEditText.setText(book.getISBN());
-                            String imageString = book.getPhoto();
-                            image.setImageBitmap(ConvertPhoto.convert(imageString));
+                            if(titleEditText != null && authorEditText != null && isbnText != null) {
+                                titleEditText.setText(book.getTitle());
+                                authorEditText.setText(book.getAuthor());
+                                ISBNEditText.setText(book.getISBN());
+                                String imageString = book.getPhoto();
+                                image.setImageBitmap(ConvertPhoto.convert(imageString));
+                            }
+                            if(titleText != null && authorText != null && isbnText != null){
+                                titleText.setText(book.getTitle());
+                                authorText.setText(book.getAuthor());
+                                isbnText.setText(book.getISBN());
+                                ownerEmailText.setText(book.getOwnerEmail());
+                                statusText.setText(book.getStatus());
+                            }
 
                         } catch (Exception e){
                             e.printStackTrace();
