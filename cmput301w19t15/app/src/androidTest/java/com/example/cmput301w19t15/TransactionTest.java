@@ -12,6 +12,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.example.cmput301w19t15.Activity.MainActivity;
+
 import java.util.Random;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
@@ -21,9 +23,9 @@ import static junit.framework.TestCase.assertTrue;
  * test my book - not yet implemented
  */
 @RunWith(AndroidJUnit4.class)
-public class TransactionTest extends ActivityTestRule<LoginActivity> {
+public class TransactionTest extends ActivityTestRule<MainActivity> {
     public TransactionTest() {
-        super(LoginActivity.class);
+        super(MainActivity.class);
     }
 
     private Solo solo;

@@ -45,7 +45,7 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
         <RatingBar
-            android:id="@+id/stars"
+            android:id="@+id/bookRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textViewUserID"

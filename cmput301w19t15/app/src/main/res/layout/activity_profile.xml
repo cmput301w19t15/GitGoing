@@ -101,7 +101,7 @@
         app:layout_constraintTop_toBottomOf="@+id/newPassword" />
 
     <TextView
-        android:id="@+id/stars"
+        android:id="@+id/bookRating"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
