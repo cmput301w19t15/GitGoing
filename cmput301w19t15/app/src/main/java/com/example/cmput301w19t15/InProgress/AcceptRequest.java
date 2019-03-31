@@ -228,7 +228,7 @@ public class AcceptRequest extends AppCompatActivity {
                             Book book = books.getValue(Book.class);
                             if (book.getBookID().equals(bookId)) {
                                 book.setStatus("Accepted");
-                                book.setBorrowerID(borrowerID);
+                                book.setBorrowerID(notif3.getNotifyFromID());
                                 FirebaseDatabase.getInstance().getReference().child("books").child(bookId).setValue(book);
                             }
                         }
