@@ -128,8 +128,7 @@ public class AcceptRequest extends AppCompatActivity {
                         notif2 = new Notification("Accepted", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
 
                                 notif.getNotifyFromID(), notif.getNotifyFromEmail(), notif.getISBN(), notif.getPhoto(), false);
-                        ownerID = loggedInUser.getUserID();
-                        ownerEmail = loggedInUser.getEmail();
+
                         DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif2.getNotifID());
 
                         //add notif to database
