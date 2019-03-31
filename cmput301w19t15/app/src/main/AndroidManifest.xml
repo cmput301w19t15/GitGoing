@@ -25,7 +25,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="BookIT"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -51,7 +51,7 @@
             android:label="@string/title_activity_geo_location"></activity>
         <activity
             android:name=".Activity.LoginActivity"
-            android:label="GitGoing">
+            android:label="BookIT">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

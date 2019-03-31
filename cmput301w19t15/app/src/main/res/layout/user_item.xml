@@ -8,16 +8,18 @@
     app:cardCornerRadius="8dp">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="411dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/textViewUserName"
             android:layout_width="262dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="0dp"
             android:text="User Name Here"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textColor="#000000" />
@@ -28,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textViewUserName"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="19dp"
             android:text="User Email"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
@@ -42,5 +44,21 @@
             android:text="User ID #"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
+        <RatingBar
+            android:id="@+id/stars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textViewUserID"
+            android:layout_marginBottom="25dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:scaleX="0.3"
+            android:scaleY="0.3"
+            android:stepSize=".5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

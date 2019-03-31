@@ -131,23 +131,29 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
         // delete old notif and save with updated read value
 
 
-        if (notif.getType().equals("requested")) {
+        if (notif.getType().equals("Requested")) {
             Intent intent = new Intent(NotifyActivity.this, AcceptRequest.class);
             intent.putExtra("Notification", notif);
             intent.putExtra("NotifID", notifID);
             startActivityForResult(intent, 1);
         }
-        if (notif.getType().equals("accepted")) {
+        else if (notif.getType().equals("Accepted")) {
             Intent intent = new Intent(NotifyActivity.this, ViewAcceptedRequest.class);
             intent.putExtra("Notification", notif);
             intent.putExtra("NotifID", notifID);
             startActivityForResult(intent, 1);
         }
-        if (notif.getType().equals("acceptedOwner")) {
+        else if (notif.getType().equals("AcceptedOwner")) {
             Intent intent = new Intent(NotifyActivity.this, ViewAcceptedOwnerRequest.class);
             intent.putExtra("Notification", notif);
             intent.putExtra("NotifID", notifID);
             startActivityForResult(intent, 1);
         }
+        else if (notif.getType().equals("ReturnRequest")) {
+            Intent intent = new Intent(NotifyActivity.this, AcceptRequest.class);
+            intent.putExtra("Notification",notifID);
+            intent.putExtra("NotifID",notifID);
+            startActivityForResult(intent, 1);
+            }
     }
 }

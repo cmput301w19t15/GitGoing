@@ -35,7 +35,7 @@ public class Notification implements Serializable {
         if(this.notifID == null || this.notifID.isEmpty()){
             this.notifID = UUID.randomUUID().toString();}
         this.read = read;
-        this.OwnerScanned = Boolean.FALSE;
+        this.ownerScanned = "false";
     }
 
     public Notification() {}
@@ -127,5 +127,8 @@ public class Notification implements Serializable {
     public void setLatLng (LatLng latLng){ this.latLng = latLng; }
 
     public LatLng getLatLng (){ return this.latLng; }
+    public String getOwnerScanned() { return ownerScanned; }
+
+    public void setOwnerScanned(String scanned) {this.ownerScanned = scanned; }
 }
 

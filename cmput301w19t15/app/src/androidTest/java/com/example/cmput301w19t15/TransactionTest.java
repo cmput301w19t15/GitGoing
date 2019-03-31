@@ -16,7 +16,6 @@ import java.util.Random;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.*;
 
 /**
  * test my book - not yet implemented

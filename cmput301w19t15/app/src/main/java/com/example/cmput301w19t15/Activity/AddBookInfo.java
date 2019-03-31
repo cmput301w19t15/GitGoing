@@ -86,8 +86,8 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                 isbnText = isbn.getText().toString(); // look up better way
                 User loggedInUser = MainActivity.getUser();
 
-                Book book = new Book(booktitleText, authorText, isbnText, bookPhoto, loggedInUser.getEmail(), loggedInUser.getUserID(), rating);
-                loggedInUser.addToMyBooks(book);
+                Book book = new Book(booktitleText, authorText, isbnText, bookPhoto, loggedInUser.getEmail(), loggedInUser.getUserID(), rating,0,0);
+                loggedInUser.addToMyBooks(book); //to be removed
                 loggedInUser.addToMyBooksID(book.getBookID());
 
                 Bundle result = new Bundle();
@@ -155,7 +155,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                     startActivityForResult(intent, REQUEST_CAMERA);
                 }
 
-                 //if user chooses gallery, call mediaStorage and will return a uri object
+                //if user chooses gallery, call mediaStorage and will return a uri object
 
                 else if (items[which] == "Gallery"){
                     Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

@@ -88,8 +88,7 @@
         android:layout_width="140dp"
         android:layout_height="50dp"
         android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
-        android:layout_marginBottom="164dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/button1"
         android:text="Accept Request"
         android:textColor="#ffffff"
@@ -101,28 +100,11 @@
         android:layout_width="140dp"
         android:layout_height="50dp"
         android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginBottom="164dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/button1"
         android:text="DECLINE REQUEST"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/cancel"
-        android:layout_width="107dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="176dp"
-        android:layout_marginLeft="176dp"
-        android:layout_marginEnd="176dp"
-        android:layout_marginRight="176dp"
-        android:layout_marginBottom="28dp"
-        android:text="EXIT"
-        android:background="@drawable/button1"
-        android:textColor="#ffffff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
