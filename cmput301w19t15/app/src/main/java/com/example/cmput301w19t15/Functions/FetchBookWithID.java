@@ -53,15 +53,16 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
                         try {
                             Book book = dataSnapshot.getValue(Book.class);
                             books.add(0,book);
-
-                            if(titleEditText != null && authorEditText != null && isbnText != null) {
+                            if(titleEditText != null && authorEditText != null && ISBNEditText != null) {
                                 titleEditText.setText(book.getTitle());
                                 authorEditText.setText(book.getAuthor());
                                 ISBNEditText.setText(book.getISBN());
                                 String imageString = book.getPhoto();
                                 image.setImageBitmap(ConvertPhoto.convert(imageString));
                             }
+
                             if(titleText != null && authorText != null && isbnText != null){
+                                Log.d("testing",book.toString());
                                 titleText.setText(book.getTitle());
                                 authorText.setText(book.getAuthor());
                                 isbnText.setText(book.getISBN());
@@ -70,6 +71,7 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
                             }
 
                         } catch (Exception e){
+                            Log.d("testing",e.toString());
                             e.printStackTrace();
                         }
                     }
