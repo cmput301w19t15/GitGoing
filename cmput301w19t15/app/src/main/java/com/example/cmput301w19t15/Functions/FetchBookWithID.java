@@ -19,13 +19,16 @@ import java.util.ArrayList;
 
 /**
  * Allows the retrieval of a book using the book's ID
+ * this activity is intended to get the book object from firebase
+ * and update the the listview or edittext when called with the
+ * email isbn, owner email and etc..
+ * 
  */
 public class FetchBookWithID extends AsyncTask<String, Void, String> {
 
     private ArrayList<Book> books;
     private EditText titleEditText,authorEditText,ISBNEditText;
     private ImageView image;
-
     /**
      * The Author text.
      */
@@ -68,6 +71,9 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
      * The Return date.
      */
     Long returnDate;
+    TextView authorText, titleText, isbnText, ownerEmailText,statusText;
+    private String title, author, isbn, ownerEmail, status,photo,rating;
+    private Long returnDate;
 
     /**
      * Gets the book title, id, author, and ISBN

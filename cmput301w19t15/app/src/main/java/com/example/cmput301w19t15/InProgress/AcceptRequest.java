@@ -27,6 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 
 /**
  * The class that allows a book to be requested
+ * this activity is intended to get the for the owner to accept the book
+ * requested by another user
  */
 public class AcceptRequest extends AppCompatActivity {
 
@@ -72,16 +74,16 @@ public class AcceptRequest extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_accept_request);
 
-            /**
-             * save the book values passed from the FindBooks classes when clicked on
-             */
+
+            // save the book values passed from the FindBooks classes when clicked on
+
             final Notification notif = (Notification) getIntent().getSerializableExtra("Notification");
             notifID = (String) getIntent().getSerializableExtra("NotifID");
             notif.setNotifID(notifID);
 
-            /**
-             * set the text field with the values that was passed over
-             */
+
+            //set the text field with the values that was passed over
+
 
             TextView titleText = (TextView) findViewById(R.id.booktitle);
             titleText.setText(notif.getTitle());
@@ -95,9 +97,8 @@ public class AcceptRequest extends AppCompatActivity {
 
             request = (Button) findViewById(R.id.accept_button);
 
-            /**
-             * owner accepts the request
-             */
+
+            // owner accepts the request
             request.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

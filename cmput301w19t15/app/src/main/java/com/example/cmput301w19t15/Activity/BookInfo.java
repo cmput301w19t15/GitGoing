@@ -32,13 +32,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static com.example.cmput301w19t15.Functions.ConvertPhoto.convert;
+
 /**
  *User is able to edit or delete the book they have selected
- * @param saveInstanceState
+ *
  * @see MyBooks , FindBooks
  */
 public class BookInfo extends AppCompatActivity {
     //on create happens when book in list of my books is clicked
+
     private boolean notComplete = false;
     User loggedInUser;
     ArrayList<Book> book = new ArrayList<>();
@@ -104,7 +106,7 @@ public class BookInfo extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 book.get(0).setPhoto("");
-                //image.setImageResource(0);
+                image.setImageResource(0);
             }
         });
     }
@@ -135,8 +137,6 @@ public class BookInfo extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference("books").child(bookID).removeValue();// delete book
         finish();
     }
-
-
 
     private void selectPhoto() {
         final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
@@ -189,7 +189,7 @@ public class BookInfo extends AppCompatActivity {
                 Bundle bundle = data.getExtras();
                 final Bitmap bitmap = (Bitmap) bundle.get("data");
                 this.bookPhoto = convert(bitmap);
-                //image.setImageBitmap(bitmap);
+                image.setImageBitmap(bitmap);
             }
 
             /*
@@ -200,7 +200,7 @@ public class BookInfo extends AppCompatActivity {
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
                     this.bookPhoto = convert(bitmap);
-                    //image.setImageBitmap(bitmap);
+                    image.setImageBitmap(bitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

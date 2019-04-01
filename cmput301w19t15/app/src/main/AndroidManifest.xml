@@ -62,9 +62,7 @@
         <activity android:name=".Activity.BookInfo" />
         <activity android:name=".Activity.AddBookInfo" />
         <activity android:name=".Activity.Profile" />
-        <activity android:name=".InProgress.AcceptPage" />
         <activity android:name=".InProgress.BorrowerBookView" />
-        <activity android:name=".InProgress.DetailedBookInfo" />
         <activity android:name=".Activity.FindBooks" />
         <activity android:name=".Activity.FindUsers" />
         <activity android:name=".Activity.RequestedBookList" />

@@ -19,6 +19,9 @@ import java.util.Objects;
 
 /**
  * Gets the list that contains books
+ * this activity is intended to get the all the books from a given
+ * arraylist of book id and load books into recyclerview from the calling classes
+ *
  */
 // @reuse: https://github.com/google-developer-training/android-fundamentals/tree/master/WhoWroteIt
 public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> {

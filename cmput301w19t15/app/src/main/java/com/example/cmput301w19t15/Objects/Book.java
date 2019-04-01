@@ -4,7 +4,6 @@ package com.example.cmput301w19t15.Objects;
 import com.example.cmput301w19t15.Activity.AddBookInfo;
 import com.example.cmput301w19t15.Activity.BookInfo;
 import com.example.cmput301w19t15.InProgress.BorrowerBookView;
-import com.example.cmput301w19t15.InProgress.DetailedBookInfo;
 import com.example.cmput301w19t15.Activity.FindBooks;
 import com.example.cmput301w19t15.Activity.MyBooks;
 import com.example.cmput301w19t15.InProgress.Request;
@@ -20,7 +19,6 @@ import java.util.UUID;
  * @see BookAdapter
  * @see BookInfo
  * @see BorrowerBookView
- * @see DetailedBookInfo
  * @see FindBooks
  * @see MyBooks
  * @see Request

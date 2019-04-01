@@ -88,9 +88,12 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                 User loggedInUser = MainActivity.getUser();
                 notComplete = false;
 
-
                 if (booktitleText.isEmpty()) {
                     booktitle.setError("Title Required");
+                    notComplete = true;
+                }
+                if (authorText.isEmpty()) {
+                    booktitle.setError("Author Required");
                     notComplete = true;
                 }
                 if (isbnText.isEmpty()) {
@@ -102,16 +105,10 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                 if (!notComplete) {
                     Book book = new Book(booktitleText, authorText, isbnText, bookPhoto, loggedInUser.getEmail(), loggedInUser.getUserID(), rating, 0, 0);
                     loggedInUser.addToMyBooksID(book.getBookID());
-
-                    //Bundle result = new Bundle();
-                    //Intent returnIntent = new Intent(AddBookInfo.this, MyBooks.class);
-
-                    //result.putSerializable("putresut", book);
-
-                    //pick book table to save the book
+                    //get the book from the database
                     DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(book.getBookID());
 
-                    //add the book in the database
+                    //replace the book with the updated book in the database
                     newBook.setValue(book).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -120,8 +117,6 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                             }
                         }
                     });
-                    //returnIntent.putExtra("result", result);
-                    //setResult(1,returnIntent);
                     finish();
                 }
             }
@@ -188,7 +183,9 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
 
     /**
      * @reuse https://github.com/dm77/barcodescanner
+     * @param view
      * this methods initialize scanner
+     *
      */
     public void scan(View view){
         //https://github.com/ravi8x/Barcode-Reader

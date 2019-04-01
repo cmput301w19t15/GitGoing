@@ -100,6 +100,8 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
     private static final int DEFAULT_ZOOM = 20;
     private LatLng latLng;
 
+    private String bookID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,7 +148,6 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
                 double lo = Double.valueOf(mlongitude);
                 latLng = new LatLng(la,lo);
 
-
             }
 
             @Override
@@ -182,6 +183,7 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (correctScan.equals("true")) {
                     scanStatus.setText("Scan Complete");
                     Log.d("hello", "0");
@@ -230,6 +232,20 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
+                    DatabaseReference notifRef = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getBookID());
+                    notifRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            bookID = (String) dataSnapshot.getValue();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                    
 
                 }
                 else{
