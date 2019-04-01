@@ -94,5 +94,17 @@ public class BorrowerBookView extends AppCompatActivity {
                 });
             }
         });
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //need to view location from where you picked up the book
+                //step one: start geolocation activity
+                //Intent intent = new Intent(BorrowerBookView.this, GeoLocation.class);
+                //add in location as extra intent or something
+                //idk where or how we are getting location from notifications and such
+
+
+            }
+        });
     }
 }
