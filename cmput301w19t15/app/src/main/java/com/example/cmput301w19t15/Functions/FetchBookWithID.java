@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 /**
+ * Allows the retrieval of a book using the book's ID
  * this activity is intended to get the book object from firebase
  * and update the the listview or edittext when called with the
  * email isbn, owner email and etc..
@@ -28,11 +29,60 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
     private ArrayList<Book> books;
     private EditText titleEditText,authorEditText,ISBNEditText;
     private ImageView image;
-
+    /**
+     * The Author text.
+     */
+    TextView authorText, /**
+     * The Title text.
+     */
+    titleText, /**
+     * The Isbn text.
+     */
+    isbnText, /**
+     * The Owner email text.
+     */
+    ownerEmailText, /**
+     * The Status text.
+     */
+    statusText;
+    /**
+     * The Title.
+     */
+    String title, /**
+     * The Author.
+     */
+    author, /**
+     * The Isbn.
+     */
+    isbn, /**
+     * The Owner email.
+     */
+    ownerEmail, /**
+     * The Status.
+     */
+    status, /**
+     * The Photo.
+     */
+    photo, /**
+     * The Rating.
+     */
+    rating;
+    /**
+     * The Return date.
+     */
+    Long returnDate;
     TextView authorText, titleText, isbnText, ownerEmailText,statusText;
     private String title, author, isbn, ownerEmail, status,photo,rating;
     private Long returnDate;
 
+    /**
+     * Gets the book title, id, author, and ISBN
+     *
+     * @param book   the book
+     * @param title  the title
+     * @param author the author
+     * @param isbn   the isbn
+     */
     public FetchBookWithID(ArrayList<Book> book, EditText title, EditText author, EditText isbn){
         this.books = book;
         this.titleEditText = title;
@@ -40,6 +90,17 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
         this.ISBNEditText = isbn;
         //this.image = image;
     }
+
+    /**
+     * Gets the status as well as the above
+     *
+     * @param book   the book
+     * @param title  the title
+     * @param author the author
+     * @param isbn   the isbn
+     * @param owner  the owner
+     * @param status the status
+     */
     public FetchBookWithID(ArrayList<Book> book, TextView title, TextView author, TextView isbn, TextView owner, TextView status){
         this.books = book;
         this.titleText = title;
@@ -48,6 +109,20 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
         this.ownerEmailText = owner;
         this.statusText = status;
     }
+
+    /**
+     * Gets the photo and rating as well as the above
+     *
+     * @param book       the book
+     * @param returnDate the return date
+     * @param title      the title
+     * @param author     the author
+     * @param isbn       the isbn
+     * @param owner      the owner
+     * @param status     the status
+     * @param photo      the photo
+     * @param rating     the rating
+     */
     public FetchBookWithID(ArrayList<Book> book, Long returnDate, String title, String author, String isbn, String owner, String status, String photo,String rating){
         this.books = book;
         this.title= title;

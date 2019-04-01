@@ -33,7 +33,6 @@ import java.util.ArrayList;
 
 import static com.example.cmput301w19t15.Functions.ConvertPhoto.convert;
 
-
 /**
  *User is able to edit or delete the book they have selected
  *

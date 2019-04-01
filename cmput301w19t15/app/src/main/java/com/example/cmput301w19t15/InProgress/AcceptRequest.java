@@ -24,7 +24,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
 /**
+ * The class that allows a book to be requested
  * this activity is intended to get the for the owner to accept the book
  * requested by another user
  */
@@ -35,8 +37,38 @@ public class AcceptRequest extends AppCompatActivity {
         private User owner;
         private String notifID;
         private Notification notif2, notif3;
-        User loggedInUser = MainActivity.getUser();
-        String ownerID, borrowerID, author, title, borrowerEmail, isbn, status, bookId, ownerEmail;
+    /**
+     * The Logged in user.
+     */
+    User loggedInUser = MainActivity.getUser();
+    /**
+     * The Owner id.
+     */
+    String ownerID, /**
+     * The Borrower id.
+     */
+    borrowerID, /**
+     * The Author.
+     */
+    author, /**
+     * The Title.
+     */
+    title, /**
+     * The Borrower email.
+     */
+    borrowerEmail, /**
+     * The Isbn.
+     */
+    isbn, /**
+     * The Status.
+     */
+    status, /**
+     * The Book id.
+     */
+    bookId, /**
+     * The Owner email.
+     */
+    ownerEmail;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);

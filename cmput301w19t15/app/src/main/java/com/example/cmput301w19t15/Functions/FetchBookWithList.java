@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
+ * Gets the list that contains books
  * this activity is intended to get the all the books from a given
  * arraylist of book id and load books into recyclerview from the calling classes
  *
@@ -32,6 +33,13 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
     private String filter;
     private User loggedInUser = MainActivity.getUser();
 
+    /**
+     * Instantiates a new Fetch book with list.
+     *
+     * @param bookList    the book list
+     * @param idList      the id list
+     * @param bookAdapter the book adapter
+     */
     public FetchBookWithList(ArrayList<Book> bookList, ArrayList<String> idList, BookAdapter bookAdapter){
         this.bookList = bookList;
         this.bookListID = idList;

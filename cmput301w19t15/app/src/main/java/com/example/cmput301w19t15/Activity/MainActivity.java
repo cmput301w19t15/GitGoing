@@ -15,7 +15,6 @@
 package com.example.cmput301w19t15.Activity;
 //:)
 
-
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -40,12 +39,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+
 /**
  * Represents the primary activity after login
  * @author Thomas, Eisha, Breanne, Anjesh
  * @version 1.0
  * @since 1.0
  */
+
 
 public class MainActivity extends AppCompatActivity implements NotifAdapter.OnItemClickListener {
     private FirebaseAuth auth;

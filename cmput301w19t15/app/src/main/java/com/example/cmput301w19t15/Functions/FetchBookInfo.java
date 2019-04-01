@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 /**
  * this activity is intended to get the book information with
  * isbn from the book and replace the text in the text box
@@ -26,6 +27,13 @@ public class FetchBookInfo extends AsyncTask<String,Void,String> {
     private static final String base_url = "https://www.googleapis.com/books/v1/volumes?";
     private static final String query = "q=isbn:";
 
+    /**
+     * Gets book title and author
+     *
+     * @param authorInput the author input
+     * @param titleInput  the title input
+     * @param isbnInput   the isbn input
+     */
     public FetchBookInfo(EditText authorInput, EditText titleInput, EditText isbnInput){
         this.mAuthorInput = authorInput;
         this.mTitleInput = titleInput;
