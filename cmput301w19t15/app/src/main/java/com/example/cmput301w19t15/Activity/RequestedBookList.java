@@ -60,7 +60,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
     ArrayList<String> requestedIDList;
     private Book clickedBook;
     private RecyclerView mRecyclerView;
-    private User loggedInUser;
+    private User loggedInUser = MainActivity.getUser();;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,6 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         mRecyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(RequestedBookList.this);
 
-        loggedInUser = MainActivity.getUser();
         requestedIDList = loggedInUser.getMyRequestedBooksID();
         new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("Requested");
 
@@ -108,16 +107,12 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
             }
         });
 
-        watchlist.setEnabled(false);
-        watchlist.getBackground().setAlpha(128);
         watchlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentBookList = loggedInUser.getWatchlistBooks();
-                adapter = new BookAdapter(RequestedBookList.this,currentBookList);
-                adapter.notifyDataSetChanged();
-                mRecyclerView.setAdapter(adapter);
-                adapter.setOnItemClickListener(RequestedBookList.this);
+                currentBookList.clear();
+                requestedIDList = loggedInUser.getMyWatchListBooksID();
+                new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("WatchList");
 
             }
         });

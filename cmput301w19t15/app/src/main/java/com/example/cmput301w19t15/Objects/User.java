@@ -61,6 +61,7 @@ public class User {
     //
     private ArrayList<String> myBooksID = new ArrayList<>();
     private ArrayList<String> myRequestedBooksID = new ArrayList<>();
+    private ArrayList<String> myWatchListBooksID = new ArrayList<>();
     private String bookListType = "myBooks";
 
     /**
@@ -288,6 +289,28 @@ public class User {
             e.printStackTrace();
         }
     }
+
+
+    public void addToMyWatchListBooksID(String bookID){
+        try {
+            myWatchListBooksID.add(bookID);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myWatchListBooksID").setValue(myWatchListBooksID);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void removeMyWatchListBooksID(String bookID){
+        try {
+            myWatchListBooksID.remove(bookID);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myWatchListBooksID").setValue(myWatchListBooksID);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public ArrayList<String> getMyWatchListBooksID(){
+        return myWatchListBooksID;
+    }
+
     /**
      * Remove my requested books.
      *
@@ -681,6 +704,7 @@ public class User {
                 switch(bookListType) {
                     case "myBooksID": myBooksID = new ArrayList<>(value); break;
                     case "myRequestedBooksID": myRequestedBooksID = new ArrayList<>(value); break;
+                    case "myWatchListBooksID": myWatchListBooksID = new ArrayList<>(value); break;
                 }
 
             }
