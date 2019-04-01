@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 /**
  * this is intended to list borrowers and display it
- * WORK IN PROGRESS
+ *
  */
 
 public class BorrowerBookView extends AppCompatActivity {
