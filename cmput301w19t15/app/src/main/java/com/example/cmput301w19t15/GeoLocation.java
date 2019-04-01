@@ -321,5 +321,11 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
     }
 
 
+    @Override
+    public void onBackPressed(){
+        
+    }
+
+
 }
 

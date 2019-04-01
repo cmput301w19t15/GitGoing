@@ -21,8 +21,11 @@ public class Notification implements Serializable {
 
     private Boolean OwnerScanned;
     private LatLng latLng;
+    private String latitude;
+    private String longitude;
 
     private String ownerScanned;
+
     
 
     public Notification(String type, String bookID, String title, String notifyFromID, String notifyFromEmail,
@@ -137,5 +140,20 @@ public class Notification implements Serializable {
 
     public void setOwnerScanned(String scanned) {this.ownerScanned = scanned; }
 
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
 }
 
