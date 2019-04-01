@@ -82,8 +82,9 @@ public class Profile extends AppCompatActivity {
         inputName.setText(user.getName());
         inputEmail.setText(user.getEmail());
         inputPhoneNumber.setText(user.getPhone());
+
         try {
-            rating.setRating(user.getRating().intValue());
+            rating.setRating(user.getRating());
         }
         catch (Exception e){
             Log.d("testing","no user rating set");
