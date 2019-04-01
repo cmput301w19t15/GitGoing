@@ -137,6 +137,5 @@ public class Notification implements Serializable {
 
     public void setOwnerScanned(String scanned) {this.ownerScanned = scanned; }
 
-
 }
 

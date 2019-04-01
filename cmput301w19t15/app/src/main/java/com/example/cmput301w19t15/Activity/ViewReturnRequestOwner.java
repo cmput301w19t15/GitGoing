@@ -4,6 +4,7 @@ package com.example.cmput301w19t15.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,8 +17,13 @@ import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.Objects.Notification;
 import com.example.cmput301w19t15.Objects.User;
 import com.example.cmput301w19t15.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -36,7 +42,7 @@ public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingSc
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_accepted_request);
+        setContentView(R.layout.activity_view_accepted_owner_request);
 
         /**
          * save the book values passed from the FindBooks classes when clicked on
@@ -51,6 +57,7 @@ public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingSc
         Log.d("hello", "youri bad");
         final TextView scanStatus = (TextView) findViewById(R.id.scan_status);
         isbn =  notif.getISBN();
+        bookId = notif.getBookID();
         correctScan = "false";
         if (correctScan.equals("false")){
             scanStatus.setText("Scan Incomplete");
@@ -69,6 +76,41 @@ public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingSc
                 if (correctScan.equals("true")) {
                     scanStatus.setText("Scan Complete");
                     loggedInUser.addToMyBorrowedBooks(notif.getBookID());
+                    try {
+                        FirebaseDatabase.getInstance().getReference().child("books").child(bookId).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    try {
+                                        Book book = dataSnapshot.getValue(Book.class);
+                                        Book bookNew = new Book(book.getTitle(), book.getAuthor(), book.getISBN(), book.getPhoto(), book.getOwnerEmail(),
+                                                book.getOwnerID(), book.getRating(), book.getRatingCount(), book.getRatingTotal());
+                                        bookNew.setBookID(bookId);
+                                        bookNew.setStatus("Available");
+                                        DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(bookId);
+                                        newBook.setValue(bookNew).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Log.w("testing", "Error: ", databaseError.toException());
+                            }
+                        });
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Isbn scan not complete",Toast.LENGTH_LONG).show();
@@ -157,10 +199,6 @@ public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingSc
         }
 
     }
-    public void createReturnNotifications() {
-        //To do, will be very similar to ViewAccepted both
-    }
-
     public void addBookToBorrowed(){
 
         loggedInUser.addToMyRequestedBooksID(bookId);

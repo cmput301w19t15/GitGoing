@@ -57,6 +57,7 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
     private ZXingScannerView scannerView;
     Integer SCAN_ISBN = 3;
     Notification notif;
+    Book bookNew;
     TextView authorText,statusText;
 
     private MapView mapView;
@@ -79,6 +80,9 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
         TextView ownerEmailText = (TextView) findViewById(R.id.owner);
 
         isbn = notif.getISBN();
+
+        bookID =notif.getBookID();
+
 
 
        //initialize map
@@ -149,23 +153,17 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
                                 if (dataSnapshot.exists()) {
                                     try {
                                         Book book = dataSnapshot.getValue(Book.class);
-                                        Book bookNew = new Book(book.getTitle(), book.getAuthor(), book.getISBN(), book.getPhoto(), book.getOwnerEmail(),
+                                        bookNew = new Book(book.getTitle(), book.getAuthor(), book.getISBN(), book.getPhoto(), book.getOwnerEmail(),
                                                 book.getOwnerID(), book.getRating(), book.getRatingCount(), book.getRatingTotal());
                                         bookNew.setBookID(bookID);
                                         bookNew.setStatus("Borrowed");
-                                        DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(bookID);
-                                        newBook.setValue(bookNew).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
 
-                                            }
-                                        });
 
 
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
-                                    createReturnNotifications(notif);
+                                    //createReturnNotifications(notif);
                                 }
                             }
 
@@ -178,6 +176,13 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(bookID);
+                    newBook.setValue(bookNew).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Isbn scan not complete",Toast.LENGTH_LONG).show();
@@ -259,7 +264,7 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
                     //createReturnNotifications();
                     //addBookToBorrowedBooks();
                     //FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
-                    addBookToBorrowed();
+                    //addBookToBorrowed();
                 } else{
                     Toast.makeText(getApplicationContext(), barcode, Toast.LENGTH_LONG).show();
                 }

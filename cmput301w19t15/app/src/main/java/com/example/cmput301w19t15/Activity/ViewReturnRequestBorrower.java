@@ -40,7 +40,7 @@ public class ViewReturnRequestBorrower extends AppCompatActivity implements ZXin
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_accepted_owner_request);
+        setContentView(R.layout.activity_view_accepted_request);
 
         /**
          * save the book values passed from the FindBooks classes when clicked on
