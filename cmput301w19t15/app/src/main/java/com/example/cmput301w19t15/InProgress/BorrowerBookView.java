@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 /**
  * this is intended to list borrowers and display it
- * WORK IN PROGRESS
+ *
  */
 
 public class BorrowerBookView extends AppCompatActivity {
@@ -62,6 +62,7 @@ public class BorrowerBookView extends AppCompatActivity {
 
         /**
          * hide return button unless book is borrowed
+         * hide location button unless book is either accepted or borrowed
          */
         returnBook = (Button) findViewById(R.id.return_book);
         if(status.equals("borrowed")){
@@ -70,6 +71,9 @@ public class BorrowerBookView extends AppCompatActivity {
         else{
             returnBook.setVisibility(View.INVISIBLE);
         }
+
+        location.setVisibility(View.INVISIBLE);
+
         //display due date?
 
         //when borrowed, maybe on scan from notification, and book to borrowed and set due date?

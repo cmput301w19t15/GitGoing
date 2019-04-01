@@ -52,6 +52,8 @@ public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingSc
     private static final int DEFAULT_ZOOM = 20;
     private LatLng latLng;
 
+    private String bookID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +137,20 @@ public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingSc
                         }
 
                     });
+
+                    DatabaseReference notifRef = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getBookID());
+                    notifRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            bookID = (String) dataSnapshot.getValue();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            
+                        }
+                    });
+                    FirebaseDatabase.getInstance().getReference().child("books").child(bookID).child("status").setValue("Available");
 
                 }
                 else{

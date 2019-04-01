@@ -14,14 +14,7 @@
 
 package com.example.cmput301w19t15.Activity;
 //:)
-/**
- * Adapter for book class
- * @author Thomas, Josh
- * @version 1.0
- * @see BookAdapter
- * @see User
- * @since 1.0
- */
+
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -51,6 +44,9 @@ import com.google.firebase.database.ValueEventListener;
 
 /**
  * The type Requested book list.
+ * An UI that displays all types of books based on their status
+ * @see FetchBookWithList
+ * @see BorrowerBookView
  */
 public class RequestedBookList extends AppCompatActivity implements BookAdapter.OnItemClickListener{
     private RequestedBookList activity = this;
@@ -133,6 +129,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         bundle.putString("STATUS",clickedBook.getStatus());
         bundle.putString("BOOKID",clickedBook.getBookID());
         Intent intent = new Intent(RequestedBookList.this, BorrowerBookView.class);
+
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         startActivity(intent);

@@ -33,13 +33,15 @@ import java.util.ArrayList;
 
 import static com.example.cmput301w19t15.Functions.ConvertPhoto.convert;
 
+
+/**
+ *User is able to edit or delete the book they have selected
+ *
+ * @see MyBooks , FindBooks
+ */
 public class BookInfo extends AppCompatActivity {
     //on create happens when book in list of my books is clicked
-    /**
-     *User is able to edit or delete the book they have selected
-     * @param saveInstanceState
-     * @see MyBooks , FindBooks
-     */
+
     private boolean notComplete = false;
     User loggedInUser;
     ArrayList<Book> book = new ArrayList<>();

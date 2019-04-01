@@ -43,6 +43,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
 
+
+/**
+ * this activity creates a google map object,
+ * allow user to navigate through the map
+ * and choose a specific location to meet each other
+ */
 public class GeoLocation extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
     private static final int LOCATION_REQUEST_CODE = 1;
@@ -163,8 +169,9 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
+     * This will first check user permission
+     * if permission is granted. it will add location UI to the app
+     * Then get the current device location and move camera
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
@@ -180,11 +187,11 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
 
     }
 
-
+    /**
+     * this method is to ask user for location permission
+     */
     public void userPermission() {
-        /**
-         * ask user for location permission
-         */
+
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -196,12 +203,12 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
         }
     }
 
-
+    /**
+     * if permission is acquired, it will get user's current location and
+     * move camera
+     */
     private void getDeviceLocation() {
-        /**
-         * if permission is acquired, it will get user's current location and
-         * move camera
-         */
+
         try {
             if (userPermission) {
                 Task locationResult = fusedLocationProviderClient.getLastLocation();
@@ -233,15 +240,15 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
     }
 
 
-
+    /**
+     * this class is to handle the permission request
+     * if permission is acquired, it will also display user's current location
+     * if not, then display an error message
+     * this method will always update the current UI no matter what
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        /**
-         * this class is to handle the permission request
-         * if permission is acquired, it will also display user's current location
-         * if not, then display an error message
-         * this method will always update the current UI no matter what
-         */
+
         userPermission = false;
         switch (requestCode) {
             case LOCATION_REQUEST_CODE:
@@ -259,13 +266,13 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
     }
 
 
-
+    /**
+     * this method update map UI
+     * if permission is acquired,
+     * this will add 'find current locatrion button' into UI
+     */
     private void updateUI(){
-        /**
-         * this method update map UI
-         * if permission is acquired,
-         * this will add 'find current locatrion button' into UI
-         */
+
         if (mMap == null) {
             return;
         }
@@ -287,8 +294,9 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
     }
 
 
-    // source: https://androidclarified.com/display-current-location-google-map-fusedlocationproviderclient/
+
     /**
+     * @resue: https://androidclarified.com/display-current-location-google-map-fusedlocationproviderclient/
      * display location with latitude and longitude
      */
     private void displayLocation(){
@@ -321,9 +329,13 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
     }
 
 
+    /**
+     * override to disable back button
+     * force user to choose a location
+     */
     @Override
     public void onBackPressed(){
-        
+
     }
 
 
