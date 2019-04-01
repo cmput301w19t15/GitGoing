@@ -57,14 +57,15 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
         TextView ownerEmailText = (TextView) findViewById(R.id.owner);
 
 
+        /**
         mapView =  (MapView) findViewById(R.id.mapView);
         DatabaseReference laRef = FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).child("latitude");
         laRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d("MapTest","We've been here");
-                double la = (double) dataSnapshot.getValue();
-                Log.d("MapTest",Double.toString(la));
+                //double la = (double) dataSnapshot.getValue();
+                //Log.d("MapTest",Double.toString(la));
             }
 
             @Override
@@ -72,7 +73,7 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
                 Log.w("TAG", "loadPost:onCancelled", databaseError.toException());
             }
         });
-
+        */
 
         ownerEmailText.setText(notif.getNotifyFromEmail());
 

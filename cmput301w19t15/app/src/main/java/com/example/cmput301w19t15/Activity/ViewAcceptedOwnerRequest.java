@@ -69,24 +69,32 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
             scanStatus.setText("Scan Incomplete");
         }
 
-
+        /**
         //retrieve data from firebase
         mapView =  (MapView) findViewById(R.id.mapView);
         DatabaseReference laRef = FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID());
         laRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d("MapTest","We've been here");
-                Log.d("MapTest",dataSnapshot.getValue().toString());
+                try {
+                    //Notification notif = dataSnapshot.getValue(Notification.class);
+                    //double la = notif.getLatitude();
+                    //double lo = notif.getLongitude();
+                    //Log.d("MapTest",Double.toString(la));
+                    //Log.d("MapTest",Double.toString(lo));
 
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.w("TAG", "loadPost:onCancelled", databaseError.toException());
             }
         });
-
+        */
 
         exit = (Button) findViewById(R.id.cancel);
         exit.setOnClickListener(new View.OnClickListener() {

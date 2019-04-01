@@ -91,35 +91,19 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
                     String la = Double.toString(resultLocation.latitude);
                     String lo = Double.toString(resultLocation.longitude);
                     Toast.makeText(GeoLocation.this, la + ' ' + lo, Toast.LENGTH_SHORT).show();
-                    acceptedNotif.setLatLng(resultLocation);
-                    acceptedOwnerNotif.setLatLng(resultLocation);
+                    acceptedNotif.setLatitude(resultLocation.latitude);
+                    acceptedNotif.setLongitude(resultLocation.longitude);
+                    acceptedOwnerNotif.setLatitude(resultLocation.latitude);
+                    acceptedOwnerNotif.setLongitude(resultLocation.longitude);
 
 
-                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedNotif.getNotifID()).child("latitude").setValue(la);
-                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedNotif.getNotifID()).child("longitude").setValue(lo);
+                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedNotif.getNotifID()).child("latitude").setValue(resultLocation.latitude);
+                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedNotif.getNotifID()).child("longitude").setValue(resultLocation.longitude);
 
 
-                    DatabaseReference notifRef = FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedOwnerNotif.getNotifID());
-                    //FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedOwnerNotif.getNotifID()).child("latitude").setValue(la);
-                    //FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedOwnerNotif.getNotifID()).child("longitude").setValue(lo);
-
-                    notifRef.child("latitude").setValue(la).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Log.d("MapTest","Successfully Added Notification 1");
-                        }
-                    });
-
-
-
-                    notifRef.child("longitude").setValue(lo).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
-                                Log.d("MapTest","Successfully Added Notification 2");
-                            }
-                        }
-                    });
+                    //DatabaseReference notifRef = FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedOwnerNotif.getNotifID());
+                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedOwnerNotif.getNotifID()).child("latitude").setValue(resultLocation.latitude);
+                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedOwnerNotif.getNotifID()).child("longitude").setValue(resultLocation.longitude);
 
 
                     finish();
