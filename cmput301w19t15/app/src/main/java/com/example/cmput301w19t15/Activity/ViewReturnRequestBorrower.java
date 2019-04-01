@@ -85,7 +85,6 @@ public class ViewReturnRequestBorrower extends AppCompatActivity implements ZXin
             public void onClick(View v) {
                 if (correctScan.equals("true")) {
                     scanStatus.setText("Scan Complete");
-                    Log.d("hello", "thomas bad");
                     try {
                         FirebaseDatabase.getInstance().getReference().child("notifications").addValueEventListener(new ValueEventListener() {
                             @Override
@@ -101,7 +100,6 @@ public class ViewReturnRequestBorrower extends AppCompatActivity implements ZXin
                                                 requesterNotification.setOwnerScanned("True");
                                                 oldrequesterID= notif.getNotifID();
                                                 FirebaseDatabase.getInstance().getReference("notifications").child(requesterNotification.getNotifID()).setValue(requesterNotification);
-                                                Log.d("hello", "thomas bad");
                                                 FirebaseDatabase.getInstance().getReference("notifications").child(oldrequesterID).removeValue();
                                                 break;
                                             }
@@ -155,81 +153,9 @@ public class ViewReturnRequestBorrower extends AppCompatActivity implements ZXin
                 if (barcode.equals(isbn)) {
                     Toast.makeText(getApplicationContext(),"Isbn scan matched",Toast.LENGTH_LONG).show();
                     this.correctScan = "true";
-                    /*
-                    try {
-                        FirebaseDatabase.getInstance().getReference().child("notifications").addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    try {
-                                        for (DataSnapshot notifs : dataSnapshot.getChildren()) {
-                                            Log.d("hello", this.notif.getNotifyFromID());
-                                            if (notifs.child("notifyFromID").getValue().equals(this.notif.getNotifyToID()) &&
-                                                    notifs.child("notifyToID").getValue().equals(this.notif.getNotifyFromID()) &&
-                                                    notifs.child("isbn").getValue().equals(this.notif.getISBN())) {
-                                                Notification requesterNotification = notifs.getValue(Notification.class);
-                                                requesterNotification.setOwnerScanned("True");
-                                                FirebaseDatabase.getInstance().getReference("notifications").child(requesterNotification.getNotifID()).setValue(requesterNotification);
-                                                Log.d("hello", "thomas bad");
-                                                FirebaseDatabase.getInstance().getReference("notifications").child(this.notif.getNotifID()).removeValue();
-                                                break;
-                                            }
-                                        }
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                Log.w("testing", "Error: ", databaseError.toException());
-                            }
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    //changeStatusForRequester();
-*/
                 }
             }
         }
     }
-/*
-    public void changeStatusForRequester(Notification notif) {
-
-        try {
-            FirebaseDatabase.getInstance().getReference().child("notifications").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        try {
-                            for (DataSnapshot notifs : dataSnapshot.getChildren()) {
-                                Log.d("hello", notif.getNotifyFromID());
-                                if (notifs.child("notifyFromID").getValue().equals(notif.getNotifyToID()) &&
-                                        notifs.child("notifyToID").getValue().equals(notif.getNotifyFromID()) &&
-                                        notifs.child("isbn").getValue().equals(notif.getISBN())) {
-                                    Notification requesterNotification = notifs.getValue(Notification.class);
-                                    requesterNotification.setOwnerScanned("True");
-                                    FirebaseDatabase.getInstance().getReference("notifications").child(requesterNotification.getNotifID()).setValue(requesterNotification);
-                                    Log.d("hello", "thomas bad");
-                                    break;
-                                }
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.w("testing", "Error: ", databaseError.toException());
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-*/
 }

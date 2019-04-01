@@ -78,7 +78,6 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
             @Override
             public void onClick(View v) {
                 scan(v);
-                Toast.makeText(getApplicationContext(),"Isbn scan matched",Toast.LENGTH_LONG).show();
                 Log.d("hello", correctScan);
             }
 
