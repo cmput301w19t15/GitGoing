@@ -14,6 +14,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Allows getting book information from database
+ */
 // @reuse: https://github.com/google-developer-training/android-fundamentals/tree/master/WhoWroteIt
 public class FetchBookInfo extends AsyncTask<String,Void,String> {
 
@@ -23,6 +26,13 @@ public class FetchBookInfo extends AsyncTask<String,Void,String> {
     private static final String base_url = "https://www.googleapis.com/books/v1/volumes?";
     private static final String query = "q=isbn:";
 
+    /**
+     * Gets book title and author
+     *
+     * @param authorInput the author input
+     * @param titleInput  the title input
+     * @param isbnInput   the isbn input
+     */
     public FetchBookInfo(EditText authorInput, EditText titleInput, EditText isbnInput){
         this.mAuthorInput = authorInput;
         this.mTitleInput = titleInput;

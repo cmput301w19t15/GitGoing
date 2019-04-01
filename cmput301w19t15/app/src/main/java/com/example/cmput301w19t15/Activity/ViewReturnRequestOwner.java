@@ -36,6 +36,10 @@ import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
+/**
+ * Prepares information to scan for owner return
+ */
+
 public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingScannerView.ResultHandler, OnMapReadyCallback {
 
     private Button exit, request, decline, scan, verify;

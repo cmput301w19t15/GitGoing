@@ -22,7 +22,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * Creates notifications and allows interactions with notifications
+ * @see Notification
+ */
 public class NotifyActivity extends AppCompatActivity implements NotifAdapter.OnItemClickListener {
+
     private NotifAdapter adapter;
     private ArrayList<Notification> listOfNotif;
     private RecyclerView mRecyclerView;
@@ -46,6 +51,9 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
         Log.d("TAG", "wutttt");
     }
 
+    /**
+     * Load notif from firebase
+     */
     public void loadNotif() {
         loadNotifFromFirebBase(new loadNotifCallBack() {
             @Override
@@ -58,10 +66,23 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
         });
     }
 
+    /**
+     * The interface Load notif call back.
+     */
     public interface loadNotifCallBack {
+        /**
+         * Load notif call back.
+         *
+         * @param value the value
+         */
         void loadNotifCallBack(ArrayList<Notification> value);
     }
 
+    /**
+     * Joins user with their notifications and allows interactions with notifications
+     *
+     * @param myCallback the my callback
+     */
     public void loadNotifFromFirebBase(final loadNotifCallBack myCallback) {
         DatabaseReference notifReference = FirebaseDatabase.getInstance().getReference().child("notifications");
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

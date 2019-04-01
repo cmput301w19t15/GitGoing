@@ -22,6 +22,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * Creates and calculates rating for user and books
+ * @version 1.0
+ */
 public class RatingTest extends AppCompatActivity {
     EditText userComment;
     private static User loggedInUser;
@@ -69,6 +73,9 @@ public class RatingTest extends AppCompatActivity {
         });
     }
 
+    /**
+     * loads database from firebase to get/set rating
+     */
     public void getMainRating() {
         listOfRatings = new ArrayList<>();
         loadMyRatingFromFireBase(new loadBookCallBack() {
@@ -78,10 +85,20 @@ public class RatingTest extends AppCompatActivity {
             }
         });
     }
+
     public interface loadBookCallBack {
+        /**
+         * Load book call back.
+         *
+         * @param value the value
+         */
         void loadBookCallBack(ArrayList<Book> value);
     }
 
+    /**
+     * Loads data from firebase then calculates the average rating for book and user
+     *
+     */
     public void loadMyRatingFromFireBase(final loadBookCallBack myCallback){
         final DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("books");
         userReference.addValueEventListener(new ValueEventListener() {

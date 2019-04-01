@@ -17,6 +17,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Gets the list that contains books
+ */
 // @reuse: https://github.com/google-developer-training/android-fundamentals/tree/master/WhoWroteIt
 public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> {
 
@@ -27,6 +30,13 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
     private String filter;
     private User loggedInUser = MainActivity.getUser();
 
+    /**
+     * Instantiates a new Fetch book with list.
+     *
+     * @param bookList    the book list
+     * @param idList      the id list
+     * @param bookAdapter the book adapter
+     */
     public FetchBookWithList(ArrayList<Book> bookList, ArrayList<String> idList, BookAdapter bookAdapter){
         this.bookList = bookList;
         this.bookListID = idList;

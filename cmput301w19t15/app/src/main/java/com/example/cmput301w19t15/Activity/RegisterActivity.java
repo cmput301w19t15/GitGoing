@@ -48,6 +48,8 @@ import com.google.firebase.database.ValueEventListener;
  * @see User
  * @since 1.0
  */
+
+
 public class RegisterActivity extends AppCompatActivity {
     private EditText inputEmail, inputPassword, inputName, inputPhoneNumber,currentFocus;
 

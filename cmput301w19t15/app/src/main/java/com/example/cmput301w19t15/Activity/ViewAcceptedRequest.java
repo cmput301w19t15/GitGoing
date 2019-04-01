@@ -45,6 +45,10 @@ import java.util.ArrayList;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
+/**
+ * Allows borrower to scan to receive book for first time
+ */
+
 public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScannerView.ResultHandler, OnMapReadyCallback {
 
     private Button exit, request, decline, scan, verify;

@@ -34,17 +34,57 @@ import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
+
+/**
+ * The type View return request owner.
+ */
 public class ViewReturnRequestBorrower extends AppCompatActivity implements ZXingScannerView.ResultHandler, OnMapReadyCallback {
 
     private Button exit, scan, verify;
     private Book newBook;
     private User owner;
+    /**
+     * The Logged in user.
+     */
     User loggedInUser = MainActivity.getUser();
-    String ownerID, author, title, ownerEmail, isbn, status, bookId;
+    /**
+     * The Owner id.
+     */
+    String ownerID, /**
+     * The Author.
+     */
+    author, /**
+     * The Title.
+     */
+    title, /**
+     * The Owner email.
+     */
+    ownerEmail, /**
+     * The Isbn.
+     */
+    isbn, /**
+     * The Status.
+     */
+    status, /**
+     * The Book id.
+     */
+    bookId;
     private String correctScan, oldrequesterID;
+    /**
+     * The Scan isbn.
+     */
     Integer SCAN_ISBN = 3;
     private ZXingScannerView scannerView;
-    Notification notif, notif2, requesterNotification;
+    /**
+     * The Notif.
+     */
+    Notification notif, /**
+     * The Notif 2.
+     */
+    notif2, /**
+     * The Requester notification.
+     */
+    requesterNotification;
 
     private MapView mapView;
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
@@ -189,8 +229,10 @@ public class ViewReturnRequestBorrower extends AppCompatActivity implements ZXin
 }
 
     /**
-     * @reuse https://github.com/dm77/barcodescanner
-     * this methods initialize scanner
+     * Scan.
+     *
+     * @param view the view
+     * @reuse https ://github.com/dm77/barcodescanner this methods initialize scanner
      */
     public void scan(View view){
         //https://github.com/ravi8x/Barcode-Reader
