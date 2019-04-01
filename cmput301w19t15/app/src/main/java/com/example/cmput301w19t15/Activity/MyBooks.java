@@ -19,15 +19,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
 
-import com.example.cmput301w19t15.Functions.FetchBookWithID;
 import com.example.cmput301w19t15.Functions.FetchBookWithList;
 import com.example.cmput301w19t15.InProgress.Exchange;
-import com.example.cmput301w19t15.InProgress.AcceptPage;
 import com.example.cmput301w19t15.InProgress.Location;
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.Objects.BookAdapter;
@@ -45,7 +42,6 @@ import java.util.ArrayList;
  * @see Book
  * @see BookAdapter
  * @see BookInfo
- * @see AcceptPage
  * @see Exchange
  * @see Location
  * @since 1.0

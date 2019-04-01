@@ -24,7 +24,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
+/**
+ * this activity is intended to get the for the owner to accept the book
+ * requested by another user
+ */
 public class AcceptRequest extends AppCompatActivity {
 
         private Button exit,request,decline;
