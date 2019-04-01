@@ -9,8 +9,8 @@
 
     <Button
         android:id="@+id/watchlist"
-        android:layout_width="88dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="64dp"
         android:background="@drawable/button1"
@@ -22,8 +22,8 @@
 
     <Button
         android:id="@+id/borrowed"
-        android:layout_width="88dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="64dp"
         android:background="@drawable/button1"
@@ -35,8 +35,8 @@
 
     <Button
         android:id="@+id/accepted"
-        android:layout_width="88dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/button1"
@@ -48,8 +48,8 @@
 
     <Button
         android:id="@+id/requested"
-        android:layout_width="88dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/button1"
