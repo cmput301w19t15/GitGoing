@@ -12,7 +12,7 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.example.cmput301w19t15.Activity;
-//:)
+//
 
 
 import android.os.Bundle;
@@ -119,20 +119,15 @@ public class FindUsers extends AppCompatActivity implements UserAdapter.OnItemCl
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
                     try {
-                        Log.e("TAG", "Test0");
                         ArrayList<User> allUsers = new ArrayList<>();
                         ArrayList<User> filteredUsers = new ArrayList<>();
                         for (DataSnapshot users : dataSnapshot.getChildren()) {
-                            Log.e("TAG", "Test1");
                             //final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            Log.e("TAG", "Test3");
                             if (users != null) {
-                                    Log.e("TAG", "Test2");
                                     try {
                                         String userID = users.child("name").getValue().toString();
                                         String emailID = users.child("email").getValue().toString();
                                         User currentUser = new User(emailID, userID);
-                                        Log.e("TAG", "Made it here");
                                         //ArrayList<String> userInformation = new ArrayList<>();
                                         //userInformation.add(dataSnapshot.child("name").getValue().toString());
                                         //userInformation.add(dataSnapshot.child("email").getValue().toString());

@@ -13,7 +13,7 @@
  */
 
 package com.example.cmput301w19t15.Activity;
-//:)
+//
 /**
  * Represents a database search for the books
  * @author Thomas, Anjesh, Eisha, Breanne, Yourui, Josh
