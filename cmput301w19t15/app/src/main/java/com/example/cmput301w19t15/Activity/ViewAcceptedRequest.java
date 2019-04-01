@@ -147,15 +147,16 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
                     Log.d("MapTest",bookID);
                     scanStatus.setText("Scan Complete");
                     Log.d("hello", "0");
-                    //loggedInUser.addToMyBorrowedBooks(bookID);
+                    String status = "Borrowed";
                     DatabaseReference bookRef = FirebaseDatabase.getInstance().getReference().child("books").child(bookID);
-                    bookRef.child("status").setValue("Borrowed").addOnSuccessListener(new OnSuccessListener<Void>() {
+                    bookRef.child("status").setValue(status).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Log.d("MapTest","Successfully Added Notification 1");
                         }
 
                     });
+
 
                     createReturnNotifications();
                 }
