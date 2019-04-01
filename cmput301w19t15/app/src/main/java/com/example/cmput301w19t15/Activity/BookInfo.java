@@ -105,7 +105,7 @@ public class BookInfo extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 book.get(0).setPhoto("");
-                //image.setImageResource(0);
+                image.setImageResource(0);
             }
         });
     }
@@ -136,8 +136,6 @@ public class BookInfo extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference("books").child(bookID).removeValue();// delete book
         finish();
     }
-
-
 
     private void selectPhoto() {
         final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
@@ -190,7 +188,7 @@ public class BookInfo extends AppCompatActivity {
                 Bundle bundle = data.getExtras();
                 final Bitmap bitmap = (Bitmap) bundle.get("data");
                 this.bookPhoto = convert(bitmap);
-                //image.setImageBitmap(bitmap);
+                image.setImageBitmap(bitmap);
             }
 
             /*
@@ -201,7 +199,7 @@ public class BookInfo extends AppCompatActivity {
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
                     this.bookPhoto = convert(bitmap);
-                    //image.setImageBitmap(bitmap);
+                    image.setImageBitmap(bitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
