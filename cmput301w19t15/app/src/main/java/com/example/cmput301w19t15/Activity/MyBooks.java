@@ -158,13 +158,9 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
      */
     @Override
     public void onItemClick(int position) {
-        //Work in Progress
         clickedBook = (Book) mBookList.get(position);
         Intent intent = new Intent(MyBooks.this, BookInfo.class);
         intent.putExtra("BOOKID",clickedBook.getBookID());
-        intent.putExtra("POSITION",position);
-        //setResult(RESULT_OK, intent);
-        //startActivityForResult(intent,1);
         startActivity(intent);
     }
 

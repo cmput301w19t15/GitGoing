@@ -14,6 +14,7 @@
 
 package com.example.cmput301w19t15.Objects;
 //:)
+import android.app.admin.DeviceAdminInfo;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
@@ -22,12 +23,14 @@ import com.example.cmput301w19t15.Activity.FindUsers;
 import com.example.cmput301w19t15.Activity.LoginActivity;
 import com.example.cmput301w19t15.Activity.Profile;
 import com.example.cmput301w19t15.Activity.RequestedBookList;
+import com.google.android.gms.common.data.DataBufferSafeParcelable;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.spec.ECField;
 import java.util.ArrayList;
 
 /**
@@ -242,6 +245,7 @@ public class User {
     public ArrayList<String> getMyBooksID(){
         return myBooksID;
     }
+    //public  ArrayList<String> getMyRequestedBooksAcceptedID() {return my; }
 
     /**
      * Add to my requested books (books I have requested from others - with status).
@@ -388,6 +392,31 @@ public class User {
      * @return the array list
      */
     public ArrayList<Book> getRequestedBooks(){
+        try {
+            DatabaseReference bookReference = FirebaseDatabase.getInstance().getReference().child(this.getUserID()).child("myRequestedBooksID");
+            bookReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        try {
+                            for (DataSnapshot booksID: dataSnapshot.getChildren()) {
+                                String bookID =  booksID.toString();
+                                Log.e("BOOK: ", bookID);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return requestedBooks;
     }
 

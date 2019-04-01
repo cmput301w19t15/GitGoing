@@ -17,8 +17,10 @@ import com.example.cmput301w19t15.Objects.Notification;
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.R;
 import com.example.cmput301w19t15.Objects.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.model.LatLng;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +44,9 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
     Notification notif;
     TextView authorText,statusText;
 
+    private MapView mapView;
+    private LatLng latLng;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +61,27 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
         TextView isbnText = (TextView) findViewById(R.id.isbn);
         isbnText.setText(notif.getISBN());
         TextView ownerEmailText = (TextView) findViewById(R.id.owner);
+
+        mapView =  (MapView) findViewById(R.id.mapView);
+        DatabaseReference laRef = FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).child("latitude");
+        laRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                double la = (double) dataSnapshot.getValue();
+                Toast.makeText(ViewAcceptedRequest.this, Double.toString(la) ,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
         ownerEmailText.setText(notif.getNotifyFromEmail());
+
+
+
         Log.d("hello", "youri bad");
         final TextView scanStatus = (TextView) findViewById(R.id.scan_status);
         isbn =  notif.getISBN();

@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
     //private ProgressBar progressBar;
-    private Button logOut, myBooks, myBorrows, myRequests, findUser, findBook, temp, myMap;
+    private Button logOut, myBooks, myBorrows, myRequests, findUser, findBook, temp;
     private ImageButton myProfile, notifyButton;
 
     private static User loggedInUser;
@@ -153,14 +153,6 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
             }
         });
 
-        myMap = findViewById(R.id.my_map);
-        myMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, GeoLocation.class);
-                startActivity(intent);
-            }
-        });
     }
 
     protected void onStart(){

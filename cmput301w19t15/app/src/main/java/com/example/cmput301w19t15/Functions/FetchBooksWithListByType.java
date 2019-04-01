@@ -1,5 +1,6 @@
 package com.example.cmput301w19t15.Functions;
 
+
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -15,15 +16,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
-// @reuse: https://github.com/google-developer-training/android-fundamentals/tree/master/WhoWroteIt
-public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> {
+public class FetchBooksWithListByType extends AsyncTask<String, Void, ArrayList<Book>> {
 
     private ArrayList<Book> bookList;
     private ArrayList<String> bookListID;
     private BookAdapter bookAdapter;
     private String listType;
 
-    public FetchBookWithList(ArrayList<Book> bookList, ArrayList<String> idList, BookAdapter bookAdapter){
+    public FetchBooksWithListByType(ArrayList<Book> bookList, ArrayList<String> idList, BookAdapter bookAdapter){
         this.bookList = bookList;
         this.bookListID = idList;
         this.bookAdapter = bookAdapter;
@@ -43,17 +43,14 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if(dataSnapshot.exists()) {
                         try {
+                            Log.d("tesint","child cound: "+dataSnapshot.getChildrenCount());
                             for (DataSnapshot books : dataSnapshot.getChildren()) {
                                 String bookid = books.child("bookID").getValue().toString();
                                 if(listType != null){
-                                    Book book = books.getValue(Book.class);
-                                    if(listType.equalsIgnoreCase("findBooks") && !bookidlist.contains(bookid)){
+                                    if(!bookidlist.contains(bookid)){
+                                        Book book = books.getValue(Book.class);
                                         bookList.add(book);
-                                    }else if(listType.equalsIgnoreCase("Requested") && !bookidlist.contains(bookid)){
-                                        bookList.add(book);
-                                    }else if(bookidlist.contains(bookid) && book.getStatus().equalsIgnoreCase(listType)){
-                                        bookList.add(book);
-
+                                    }
                                 }else if(bookidlist.contains(bookid)){
                                     Book book = books.getValue(Book.class);
                                     bookList.add(book);
@@ -82,4 +79,5 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
     protected void onPostExecute(ArrayList<Book> s){
         super.onPostExecute(s);
     }
+
 }

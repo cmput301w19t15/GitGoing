@@ -116,6 +116,11 @@ public class Book {
         Accepted,
         Borrowed
     }
+
+    @Override
+    public String toString(){
+        return this.title + ", " + this.author + ", " + this.ownerEmail + ", " + this.BookID;
+    }
     public void setTitle(String title) {
         this.title = title;
     }
