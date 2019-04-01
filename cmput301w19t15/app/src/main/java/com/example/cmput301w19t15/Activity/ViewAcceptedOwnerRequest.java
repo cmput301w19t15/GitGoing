@@ -192,6 +192,7 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
                     DatabaseReference notifRef = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getBookID());
                     notifRef.addValueEventListener(new ValueEventListener() {
                         @Override
