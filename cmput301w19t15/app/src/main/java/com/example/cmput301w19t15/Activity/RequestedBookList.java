@@ -71,6 +71,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         currentBookList = new ArrayList<>();
+        loggedInUser = MainActivity.getUser();
         //listAccepted = new ArrayList<>();
         //listBorrowed = new ArrayList<>();
 
@@ -95,8 +96,13 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         requested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                currentBookList = new ArrayList<>();
+                ArrayList<String> requestedIDList = loggedInUser.getMyRequestedBooksID();
+                new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("Requested");
+                mRecyclerView.setAdapter(adapter);
+                adapter.setOnItemClickListener(RequestedBookList.this);
 
-                getRequestedBooks("Requested");
+                //getRequestedBooks("Requested");
 
 
                 /*loggedInUser = MainActivity.getUser();
