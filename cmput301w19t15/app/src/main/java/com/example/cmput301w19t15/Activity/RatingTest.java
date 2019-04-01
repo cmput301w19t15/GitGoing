@@ -1,5 +1,6 @@
 package com.example.cmput301w19t15.Activity;
 
+import android.media.Rating;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,12 +29,23 @@ public class RatingTest extends AppCompatActivity {
     private String temper = "a9a09b87-f99f-4a31-acca-09cac956e7dd";
     private ArrayList<Book> listOfRatings;
     private Book newBook;
+    ////////ADDED IN////////
+    private User rateUser;
+    private Book rateBook;
+    private RatingBar userRating;
+    private RatingBar bookRating;
+    private Rating userFinal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating_test);
+        //get user that is not logged in from  notif or whatever
+        //get book that was returned from notif
+        //rate user
+        //userFinal.setRating((rateUser.getRating() + userRating.getRating())/userRating.getStepSize());
+        //same for book
+
         //bookID = (String) getIntent().getExtras().getString("BOOKID");
         loggedInUser = MainActivity.getUser();
 
