@@ -13,7 +13,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
+/**
+ * this activity is intended to get the book information with
+ * isbn from the book and replace the text in the text box
+ */
 // @reuse: https://github.com/google-developer-training/android-fundamentals/tree/master/WhoWroteIt
 public class FetchBookInfo extends AsyncTask<String,Void,String> {
 

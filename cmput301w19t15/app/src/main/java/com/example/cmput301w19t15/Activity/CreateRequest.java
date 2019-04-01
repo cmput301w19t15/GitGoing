@@ -48,12 +48,12 @@ public class CreateRequest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_request);
 
-        /**
+        /*
          * save the book values passed from the FindBooks classes when clicked on
          */
         Bundle bundle = getIntent().getExtras();
         bookID = (String) bundle.get("BOOKID");
-        /**
+        /*
          * set the text field with the values that was passed over
          */
         TextView titleText = (TextView) findViewById(R.id.booktitle);

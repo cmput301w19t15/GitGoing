@@ -17,6 +17,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * this activity is intended to get the book object from firebase
+ * and update the the listview or edittext when called with the
+ * email isbn, owner email and etc..
+ * 
+ */
 public class FetchBookWithID extends AsyncTask<String, Void, String> {
 
     private ArrayList<Book> books;
@@ -24,8 +30,8 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
     private ImageView image;
 
     TextView authorText, titleText, isbnText, ownerEmailText,statusText;
-    String title, author, isbn, ownerEmail, status,photo,rating;
-    Long returnDate;
+    private String title, author, isbn, ownerEmail, status,photo,rating;
+    private Long returnDate;
 
     public FetchBookWithID(ArrayList<Book> book, EditText title, EditText author, EditText isbn){
         this.books = book;
