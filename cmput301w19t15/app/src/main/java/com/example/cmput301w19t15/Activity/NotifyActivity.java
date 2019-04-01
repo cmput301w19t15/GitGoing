@@ -114,8 +114,6 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
         Boolean read = notif.getRead();
         String title = notif.getTitle();
         String type = notif.getType();
-        double latitude = notif.getLatitude();
-        double longitude = notif.getLongitude();
 
 
         if (read == false) {
