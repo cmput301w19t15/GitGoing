@@ -27,12 +27,12 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
     String title, author, isbn, ownerEmail, status,photo,rating;
     Long returnDate;
 
-    public FetchBookWithID(ArrayList<Book> book, EditText title, EditText author, EditText isbn, ImageView image){
+    public FetchBookWithID(ArrayList<Book> book, EditText title, EditText author, EditText isbn){
         this.books = book;
         this.titleEditText = title;
         this.authorEditText = author;
         this.ISBNEditText = isbn;
-        this.image = image;
+        //this.image = image;
     }
     public FetchBookWithID(ArrayList<Book> book, TextView title, TextView author, TextView isbn, TextView owner, TextView status){
         this.books = book;
@@ -42,7 +42,7 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
         this.ownerEmailText = owner;
         this.statusText = status;
     }
-    public FetchBookWithID(ArrayList<Book>book, Long returnDate, String title, String author, String isbn, String owner, String status, String photo,String rating){
+    public FetchBookWithID(ArrayList<Book> book, Long returnDate, String title, String author, String isbn, String owner, String status, String photo,String rating){
         this.books = book;
         this.title= title;
         this.author = author;
@@ -67,20 +67,20 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
                             books.add(0,book);
 
                             if(titleEditText != null && authorEditText != null && isbnText != null) {
-                                titleEditText.setText(book.getTitle());
+                                titleEditText.setText("world");
                                 authorEditText.setText(book.getAuthor());
                                 ISBNEditText.setText(book.getISBN());
                                 String imageString = book.getPhoto();
                                 image.setImageBitmap(ConvertPhoto.convert(imageString));
                             }
-                            if(titleText != null && authorText != null && isbnText != null){
+                            else if(titleText != null && authorText != null && isbnText != null){
                                 titleText.setText(book.getTitle());
                                 authorText.setText(book.getAuthor());
                                 isbnText.setText(book.getISBN());
                                 ownerEmailText.setText(book.getOwnerEmail());
                                 statusText.setText(book.getStatus());
                             }
-                            if(title != null && author != null && isbn != null){
+                            else if(title != null && author != null && isbn != null){
                                 title=book.getTitle();
                                 author=book.getAuthor();
                                 isbn=book.getISBN();

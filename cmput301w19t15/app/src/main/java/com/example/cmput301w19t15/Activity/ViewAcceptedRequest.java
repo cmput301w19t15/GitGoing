@@ -58,7 +58,6 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
         final TextView scanStatus = (TextView) findViewById(R.id.scan_status);
 
 
-
         correctScan = "false";
 
         if (correctScan.equals("false")){
@@ -177,7 +176,7 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
         new FetchBookWithID(newBook,returnDate,title,author,isbn,ownerEmail,status,image,rating).execute(bookID);
         Book book = newBook.get(0);
         //changebookstatus
-        Book bookNew = new Book(book.getTitle(), book.getAuthor(), book.getISBN(), book.getPhoto(), book.getOwnerEmail(),
+        Book bookNew = new Book(notif.getTitle(), book.getAuthor(), book.getISBN(), book.getPhoto(), book.getOwnerEmail(),
                 book.getOwnerID(), book.getRating(), book.getRatingCount(), book.getRatingTotal());
         bookNew.setBookID(bookID);
         bookNew.setStatus("Borrowed");

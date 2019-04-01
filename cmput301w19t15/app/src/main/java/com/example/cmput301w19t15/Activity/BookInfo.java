@@ -33,7 +33,7 @@ public class BookInfo extends AppCompatActivity {
     ArrayList<Book> book = new ArrayList<>();
     String bookID;
     EditText titleEditText,authorEditText,ISBNEditText;
-    ImageView image;
+    //ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,14 +43,14 @@ public class BookInfo extends AppCompatActivity {
         //Get book values from the MyBook class the user has clicked on the book
         bookID = (String) getIntent().getExtras().getString("BOOKID");
         //display book information as edit text
-        titleEditText = findViewById(R.id.editMyBookTitle);
-        authorEditText = findViewById(R.id.editMyBookAuthor);
-        ISBNEditText = findViewById(R.id.editMyBookISBN);
-        image = findViewById(R.id.imageView);
+        EditText titleEditText = findViewById(R.id.editMyBookTitle);
+        EditText authorEditText = findViewById(R.id.editMyBookAuthor);
+        EditText ISBNEditText = findViewById(R.id.editMyBookISBN);
+        //image = findViewById(R.id.imageView);
 
-        new FetchBookWithID(book,titleEditText,authorEditText,ISBNEditText,image).execute(bookID);
+        new FetchBookWithID(book,titleEditText,authorEditText,ISBNEditText).execute(bookID);
         ////need to get and set the current image - user will be able to update or delete the image
-
+        //titleEditText.setText("hello");
         Button updateBook = findViewById(R.id.updateBook);
         updateBook.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +83,7 @@ public class BookInfo extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 book.get(0).setPhoto("");
-                image.setImageResource(0);
+                //image.setImageResource(0);
             }
         });
     }
