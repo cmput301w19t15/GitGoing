@@ -82,13 +82,12 @@ public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingSc
         }
 
 
-
         //retrieve data from firebase
         final DatabaseReference laRef = FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID());
         laRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d("MapTest","We've been here");
+                //Log.d("MapTest","We've been here");
                 String mlatitude = (String) dataSnapshot.child("latitude").getValue();
                 String mlongitude = (String) dataSnapshot.child("longitude").getValue();
                 double la = Double.valueOf(mlatitude);
