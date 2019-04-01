@@ -93,7 +93,6 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         requested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 currentBookList.clear();
                 new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("Requested");
 
