@@ -29,6 +29,7 @@ public class BookInfo extends AppCompatActivity {
      * @param saveInstanceState
      * @see MyBooks , FindBooks
      */
+    private boolean notComplete = false;
     User loggedInUser;
     ArrayList<Book> book = new ArrayList<>();
     String bookID;
@@ -96,6 +97,8 @@ public class BookInfo extends AppCompatActivity {
         String title = titleEditText.getText().toString();
         String author = authorEditText.getText().toString();
         String isbn = ISBNEditText.getText().toString();
+
+
         book.get(0).setTitle(title);
         book.get(0).setAuthor(author);
         book.get(0).setISBN(isbn);
