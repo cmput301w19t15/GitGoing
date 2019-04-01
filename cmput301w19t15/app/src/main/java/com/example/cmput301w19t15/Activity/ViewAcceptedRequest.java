@@ -158,6 +158,8 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
                     });
 
                     createReturnNotifications();
+                    addBookToBorrowed();
+
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Isbn scan not complete",Toast.LENGTH_LONG).show();
@@ -311,23 +313,7 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
     }
 
     public void addBookToBorrowed(){
-
-        //fetch book by id
-        new FetchBookWithID(newBook,returnDate,title,author,isbn,ownerEmail,status,image,rating).execute(bookID);
-        Book book = newBook.get(0);
-        //changebookstatus
-        Book bookNew = new Book(notif.getTitle(), book.getAuthor(), book.getISBN(), book.getPhoto(), book.getOwnerEmail(),
-                book.getOwnerID(), book.getRating(), book.getRatingCount(), book.getRatingTotal());
-        bookNew.setBookID(bookID);
-        bookNew.setStatus("Borrowed");
-        //updatefirebase
-        DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(bookID);
-        newBook.setValue(bookNew).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-
-            }
-    });
+        FirebaseDatabase.getInstance().getReference().child("books").child(bookID).child("status").setValue("Borrowed");
 /*
         loggedInUser.addToMyRequestedBooksID(bookId);
 

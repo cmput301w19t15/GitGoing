@@ -227,6 +227,9 @@ public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingSc
 
         loggedInUser.addToMyRequestedBooksID(bookId);
         //Check over this
+
+
+
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users").child(ownerId).child("myBooks");
         FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID())
                 .child("myBorrowedBooks").setValue(bookId);
