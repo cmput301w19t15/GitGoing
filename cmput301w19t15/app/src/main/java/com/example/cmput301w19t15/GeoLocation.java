@@ -1,6 +1,7 @@
 package com.example.cmput301w19t15;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.webkit.GeolocationPermissions;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 import android.location.Location;
 
 
+import com.example.cmput301w19t15.Activity.ViewAcceptedRequest;
+import com.example.cmput301w19t15.Objects.Notification;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
@@ -33,6 +37,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
 
@@ -43,6 +49,7 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
 
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
     private FloatingActionButton selectLocation;
 
@@ -55,12 +62,16 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
     private boolean userPermission;
     private Location currentLocation;
 
+
+
     private LatLng resultLocation;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Notification acceptedNotif = (Notification) getIntent().getSerializableExtra("Accepted");
+        final Notification acceptedOwnerNotif = (Notification) getIntent().getSerializableExtra("AcceptedOwner");
 
         //instantiate all services required to detect device and geolocation
         //fusedlocation is the sercive that gets user's location
@@ -72,7 +83,6 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
         setContentView(R.layout.activity_geo_location);
         selectLocation = findViewById(R.id.selectLocation);
 
-
         selectLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,13 +90,24 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
                     String la = Double.toString(resultLocation.latitude);
                     String lo = Double.toString(resultLocation.longitude);
                     Toast.makeText(GeoLocation.this, la + ' ' + lo, Toast.LENGTH_SHORT).show();
+                    acceptedNotif.setLatLng(resultLocation);
+                    acceptedOwnerNotif.setLatLng(resultLocation);
+
+                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedNotif.getNotifID()).child("latitude").setValue(la);
+                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedNotif.getNotifID()).child("longitude").setValue(lo);
+
+                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedOwnerNotif.getNotifID()).child("latitude").setValue(la);
+                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedOwnerNotif.getNotifID()).child("longitude").setValue(lo);
+
+                    finish();
                 }
                 else{
                     Toast.makeText(GeoLocation.this, "no marker decected",Toast.LENGTH_LONG).show();
+
+
                 }
             }
         });
-
 
 
         geoDataClient = Places.getGeoDataClient(this,null);
@@ -97,13 +118,14 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
-
         if (savedInstanceState != null) {
             currentLocation = savedInstanceState.getParcelable(KEY_LOCATION);
             cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
+
         mapFragment.getMapAsync(this);
-        
+
+
     }
 
     @Override
@@ -133,21 +155,23 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
         getDeviceLocation();
         mMap.setOnMapClickListener(this);
 
-
     }
+
 
     public void userPermission() {
         /**
          * ask user for location permission
          */
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(this, new String[]{
-                    android.Manifest.permission.ACCESS_FINE_LOCATION
-            }, LOCATION_REQUEST_CODE);
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            userPermission = true;
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
-
 
 
     private void getDeviceLocation() {
@@ -272,5 +296,7 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
         resultLocation = latLng;
 
     }
+
+
 }
 
