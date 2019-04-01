@@ -131,6 +131,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         bundle.putString("STATUS",clickedBook.getStatus());
         bundle.putString("BOOKID",clickedBook.getBookID());
         Intent intent = new Intent(RequestedBookList.this, BorrowerBookView.class);
+
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         startActivity(intent);
