@@ -86,7 +86,7 @@ public class ViewReturnRequestBorrower extends AppCompatActivity implements ZXin
         laRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d("MapTest","We've been here");
+                //Log.d("MapTest","We've been here");
                 String mlatitude = (String) dataSnapshot.child("latitude").getValue();
                 String mlongitude = (String) dataSnapshot.child("longitude").getValue();
                 double la = Double.valueOf(mlatitude);
