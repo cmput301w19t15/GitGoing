@@ -76,7 +76,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         //listAccepted = new ArrayList<>();
         //listBorrowed = new ArrayList<>();
 
-        //loggedInUser = MainActivity.getUser();
+        loggedInUser = MainActivity.getUser();
         //currentBookList = loggedInUser.getRequestedBooks();
         //listAccepted = loggedInUser.getMyRequestedBooksAccepted();
         //listBorrowed = loggedInUser.getBorrowedBooks();
@@ -98,7 +98,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
             @Override
             public void onClick(View v) {
 
-                getRequestedBooks("Requested");
+                //getRequestedBooks("Requested");
 
 
                 /*loggedInUser = MainActivity.getUser();
@@ -138,7 +138,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
             @Override
             public void onClick(View v) {
 
-                getRequestedBooks("Accepted");
+               // getRequestedBooks("Accepted");
 
 
 
@@ -155,7 +155,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
             @Override
             public void onClick(View v) {
 
-                getRequestedBooks("Borrowed");
+               // getRequestedBooks("Borrowed");
 
 
                 /*currentBookList = loggedInUser.getBorrowedBooks();
@@ -237,6 +237,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         });
 
     }
+
     public void getRequestedBooks (final String status) {
         returnList.clear();
 
@@ -269,12 +270,14 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
                                                 /**
                                                  * find right book by ID and status
                                                  */
+
                                                 if (book.getBookID().equals(bookID) && book.getStatus().equals(status)) {
                                                     if (!returnList.contains(book)) {
                                                         returnList.add(book);
                                                         Log.e("ADDED", "TITLE: "+  book.getTitle());
                                                     }
                                                 }
+
                                             }
                                         } catch (Exception e) {
                                             e.printStackTrace();
