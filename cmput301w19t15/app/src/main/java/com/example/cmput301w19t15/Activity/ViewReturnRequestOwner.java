@@ -1,6 +1,7 @@
 package com.example.cmput301w19t15.Activity;
 //:)
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,12 @@ import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.Objects.Notification;
 import com.example.cmput301w19t15.Objects.User;
 import com.example.cmput301w19t15.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +35,7 @@ import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingScannerView.ResultHandler{
+public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingScannerView.ResultHandler, OnMapReadyCallback {
 
     private Button exit, request, decline, scan, verify;
     private Book newBook;
@@ -38,6 +45,11 @@ public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingSc
     private ZXingScannerView scannerView;
     Integer SCAN_ISBN = 3;
     Notification notif;
+
+    private MapView mapView;
+    private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
+    private static final int DEFAULT_ZOOM = 20;
+    private LatLng latLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +74,42 @@ public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingSc
         if (correctScan.equals("false")){
             scanStatus.setText("Scan Incomplete");
         }
+        //initialize map
+        Bundle mapViewBundle = null;
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
+        }
+
+
+
+        //retrieve data from firebase
+        final DatabaseReference laRef = FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID());
+        laRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d("MapTest","We've been here");
+                String mlatitude = (String) dataSnapshot.child("latitude").getValue();
+                String mlongitude = (String) dataSnapshot.child("longitude").getValue();
+                double la = Double.valueOf(mlatitude);
+                double lo = Double.valueOf(mlongitude);
+                latLng = new LatLng(la,lo);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("TAG", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
+
+        mapView = (MapView) findViewById(R.id.mapView);
+        mapView.onCreate(mapViewBundle);
+
+        mapView.getMapAsync(this);
+
+
+
         exit = (Button) findViewById(R.id.cancel);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,4 +256,69 @@ public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingSc
                 .child("myBorrowedBooks").setValue(bookId);
 
     }
+
+    // override all methods for mapView
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Bundle mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY);
+        if (mapViewBundle == null) {
+            mapViewBundle = new Bundle();
+            outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle);
+        }
+
+        mapView.onSaveInstanceState(mapViewBundle);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @SuppressLint("MissingPermission")
+    @Override
+    public void onMapReady(GoogleMap map) {
+        map.setMyLocationEnabled(true);
+        map.getUiSettings().setMyLocationButtonEnabled(true);
+        map.getUiSettings().setMapToolbarEnabled(true);
+        map.getUiSettings().setZoomControlsEnabled(true);
+        map.addMarker(new MarkerOptions().position(latLng));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                latLng, DEFAULT_ZOOM));
+
+    }
+
+    @Override
+    protected void onPause() {
+        mapView.onPause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mapView.onDestroy();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+
 }
