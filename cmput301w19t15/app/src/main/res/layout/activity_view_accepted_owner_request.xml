@@ -31,15 +31,15 @@
 
     <TextView
         android:id="@+id/scan_status"
-        android:layout_width="0dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="28dp"
         app:layout_constraintBottom_toTopOf="@+id/cancel"
-        app:layout_constraintEnd_toStartOf="@+id/verify"
-        app:layout_constraintHorizontal_bias="0.606"
-        app:layout_constraintStart_toEndOf="@+id/scan" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.58"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/isbnNumber"
@@ -106,18 +106,21 @@
         android:layout_width="107dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="96dp"
         android:background="@drawable/button1"
         android:text="SCAN"
         android:textColor="#ffffff"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/scan_status"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/verify"
         android:layout_width="107dp"
         android:layout_height="50dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="96dp"
         android:background="@drawable/button1"
@@ -125,7 +128,8 @@
         android:textColor="#ffffff"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/scan_status" />
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
