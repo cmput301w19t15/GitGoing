@@ -62,8 +62,11 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.NotifViewHol
         else if (currentNotif.getType().equals("AcceptedOwner")) {
             notifType = "You have accepted this request";
         }
-        else if(currentNotif.getType().equals("ReturnRequest")){
-            notifType = "Borrower would like to return book";
+        else if(currentNotif.getType().equals("ReturnOwner")){
+            notifType = "Lending complete, view return details";
+        }
+        else if(currentNotif.getType().equals("ReturnBorrower")){
+            notifType = "Borrowing complete, view return details";
         }
         String title = currentNotif.getTitle();
         String notifyFromEmail = currentNotif.getNotifyFromEmail();

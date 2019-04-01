@@ -24,6 +24,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 
@@ -53,6 +54,7 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
     private User owner;
     User loggedInUser = MainActivity.getUser();
     String ownerId, author, title, ownerEmail, isbn, status, bookID, correctScan,image,rating;
+    String mlatitude, mlongitude;
     Long returnDate;
     private ZXingScannerView scannerView;
     Integer SCAN_ISBN = 3;
@@ -78,9 +80,7 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
         TextView isbnText = (TextView) findViewById(R.id.isbn);
         isbnText.setText(notif.getISBN());
         TextView ownerEmailText = (TextView) findViewById(R.id.owner);
-
         isbn = notif.getISBN();
-
         bookID =notif.getBookID();
 
 
@@ -98,8 +98,8 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d("MapTest","We've been here");
-                String mlatitude = (String) dataSnapshot.child("latitude").getValue();
-                String mlongitude = (String) dataSnapshot.child("longitude").getValue();
+                mlatitude = (String) dataSnapshot.child("latitude").getValue();
+                mlongitude = (String) dataSnapshot.child("longitude").getValue();
                 double la = Double.valueOf(mlatitude);
                 double lo = Double.valueOf(mlongitude);
                 latLng = new LatLng(la,lo);
@@ -145,45 +145,20 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
             @Override
             public void onClick(View v) {
                 if (correctScan.equals("true")) {
+                    Log.d("MapTest",bookID);
                     scanStatus.setText("Scan Complete");
-                    loggedInUser.addToMyBorrowedBooks(bookID);
-                    try {
-                        FirebaseDatabase.getInstance().getReference().child("books").child(bookID).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    try {
-                                        Book book = dataSnapshot.getValue(Book.class);
-                                        bookNew = new Book(book.getTitle(), book.getAuthor(), book.getISBN(), book.getPhoto(), book.getOwnerEmail(),
-                                                book.getOwnerID(), book.getRating(), book.getRatingCount(), book.getRatingTotal());
-                                        bookNew.setBookID(bookID);
-                                        bookNew.setStatus("Borrowed");
-
-
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                    //createReturnNotifications(notif);
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                Log.w("testing", "Error: ", databaseError.toException());
-                            }
-                        });
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(bookID);
-                    newBook.setValue(bookNew).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    Log.d("hello", "0");
+                    //loggedInUser.addToMyBorrowedBooks(bookID);
+                    DatabaseReference bookRef = FirebaseDatabase.getInstance().getReference().child("books").child(bookID);
+                    bookRef.child("status").setValue("Borrowed").addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-
+                        public void onSuccess(Void aVoid) {
+                            Log.d("MapTest","Successfully Added Notification 1");
                         }
+
                     });
+
+                    createReturnNotifications();
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Isbn scan not complete",Toast.LENGTH_LONG).show();
@@ -273,8 +248,8 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
         }
 
     }
-    public void createReturnNotifications(Notification notif) {
-        Notification notif2 = new Notification("ReturnBorrower", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
+    public void createReturnNotifications() {
+        Notification notif2 = new Notification("ReturnOwner", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
 
                 notif.getNotifyFromID(), notif.getNotifyFromEmail(), notif.getISBN(), notif.getPhoto(), false);
 
@@ -290,8 +265,23 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
                 }
             }
         });
+        newNotif.child("latitude").setValue(mlatitude).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("MapTest","Successfully Added Notification 1");
+            }
+        });
 
-        Notification notif3 = new Notification("ReturnOwner", notif.getBookID(), notif.getTitle(), notif.getNotifyFromID(), notif.getNotifyFromEmail(),
+        newNotif.child("longitude").setValue(mlongitude).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Log.d("MapTest","Successfully Added Notification 2");
+                }
+            }
+        });
+
+        Notification notif3 = new Notification("ReturnBorrower", notif.getBookID(), notif.getTitle(), notif.getNotifyFromID(), notif.getNotifyFromEmail(),
                 notif.getNotifyToID(), notif.getNotifyToEmail(), notif.getISBN(), notif.getPhoto(), false);
         DatabaseReference newNotif2 = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif3.getNotifID());
 
@@ -301,6 +291,21 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(ViewAcceptedRequest.this, "Successfully Added Notification ", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        newNotif2.child("latitude").setValue(mlatitude).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("MapTest","Successfully Added Notification 1");
+            }
+        });
+
+        newNotif2.child("longitude").setValue(mlongitude).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Log.d("MapTest","Successfully Added Notification 2");
                 }
             }
         });

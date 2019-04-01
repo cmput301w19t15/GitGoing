@@ -55,7 +55,7 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
     private MyBooks activity = this;
     private static User loggedInUser;
     private BookAdapter mBookAdapter;
-    private ArrayList<Book> mBookList;
+    private ArrayList<Book> mBookList = new ArrayList<>();;
     private ArrayList<String> mBookListID;
     private RecyclerView mRecyclerView;
     private static final int NEW_BOOK = 1;
@@ -78,8 +78,8 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         //gets books from user and loads them into screen
         loggedInUser = MainActivity.getUser();
 
-        mBookListID = loggedInUser.getMyBooksID();
-        mBookList = new ArrayList<>();
+        mBookListID = new ArrayList<>(loggedInUser.getMyBooksID());
+
         //Work in Progress
         mBookAdapter = new BookAdapter(MyBooks.this,mBookList);
         mRecyclerView.setAdapter(mBookAdapter);
@@ -124,12 +124,6 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         }
     }
 
-    @Override
-    public void onBackPressed(){
-        super.onBackPressed();
-
-    }
-
     /**
      * Open a open a book that is clicked on that will be editable
      * @param position - index of clicked book
@@ -139,7 +133,6 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         clickedBook = (Book) mBookList.get(position);
         Intent intent = new Intent(MyBooks.this, BookInfo.class);
         intent.putExtra("BOOKID",clickedBook.getBookID());
-
         startActivity(intent);
     }
 

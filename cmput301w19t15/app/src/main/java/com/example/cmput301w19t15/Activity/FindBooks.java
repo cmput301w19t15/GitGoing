@@ -13,7 +13,7 @@
  */
 
 package com.example.cmput301w19t15.Activity;
-//:)
+//
 /**
  * Represents a database search for the books
  * @author Thomas, Anjesh, Eisha, Breanne, Yourui, Josh
@@ -99,45 +99,17 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
             e.printStackTrace();
         }
 
-
         Button searchButton = findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("testing", "boost size: " + mBookList.size());
                 filterText = filterView.getText().toString();
-                loadBooks();
+                new FetchBookWithList(mBookList,mBookListID, mBookAdapter).execute("filter", filterText);
+                //loadBooks();
                 //new FetchBookWithList(mBookList,mBookListID, mBookAdapter).execute("findBooks");
             }
         });
-
-
-/*
-        bookList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Book book = (Book) bookList.getItemAtPosition(i);
-                String ownerEmail = book.getOwnerEmail();
-                User borrower = MainActivity.getUser();
-                //Request request = new Request(owner, borrower, book);
-                borrower.addToMyRequestedBooks(book);
-                //owner.addToRequestedBooks(book);
-
-
-            }
-        });
-
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-
-        });
-*/
-
-
-        //mBookAdapter = new ArrayAdapter<Book>(this, R.layout.list_item, mBookList);
-
 
     }
 
@@ -146,14 +118,11 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
         super.onStart();
         //updateBooks();
     }
-    //not used for now. NOPE it's actually runnig
+    //not used for now. NOPE it's actually running
     private void updateBooks(){
         try {
-            if(mBookListID == null){
-                mBookListID = loggedInUser.getMyRequestedBooksID();
-            }else{
-                mBookListID.clear();
-            }
+            mBookListID.clear();
+            mBookListID = loggedInUser.getMyRequestedBooksID();
             if(mBookList == null){
                 mBookList = new ArrayList<>();
             }else{
@@ -164,89 +133,10 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
                 mRecyclerView.setAdapter(mBookAdapter);
                 mBookAdapter.setOnItemClickListener(FindBooks.this);
             }
-            loadBooks();
-            //new FetchBookWithList(mBookList, mBookListID, mBookAdapter).execute("findBooks");
+            new FetchBookWithList(mBookList, mBookListID, mBookAdapter).execute("findBooks");
         }catch(Exception e){
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Load books into recyclerview
-     */
-    public void loadBooks(){
-        loadMyBookFromFireBase(new loadBookCallBack() {
-            @Override
-            public void loadBookCallBack(ArrayList<Book> value) {
-                mBookList = (ArrayList<Book>) value.clone();
-                Log.d("testing","book size: "+ mBookList.size());
-                mBookAdapter = new BookAdapter(FindBooks.this, mBookList);
-                mRecyclerView.setAdapter(mBookAdapter);
-                mBookAdapter.setOnItemClickListener(FindBooks.this);
-            }
-        });
-    }
-
-    /**
-     * The interface Load book callback.
-     */
-    public interface loadBookCallBack {
-        /**
-         * Load book call back.
-         *
-         * @param value the value
-         */
-        void loadBookCallBack(ArrayList<Book> value);
-    }
-
-    /**
-     * Load book from firebase.
-     *
-     * @param myCallback part of loadMyBookFromFireBase
-     */
-    public void loadMyBookFromFireBase(final loadBookCallBack myCallback){
-        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("books");
-        userReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    try {
-                        ArrayList<Book> allBooks = new ArrayList<>();
-                        ArrayList<Book> filteredBooks = new ArrayList<>();
-                        for (DataSnapshot books : dataSnapshot.getChildren()) {
-                            if(books.child("date").getValue().equals(null) || books.child("date").getValue().equals("null")) {
-                                Log.d("testing", books.getKey());
-                            } else {Book book = books.getValue(Book.class);
-                                if (!book.getOwnerID().equals(loggedInUser.getUserID())) {
-                                    allBooks.add(book);
-                                }
-                            }
-                        }
-                        // filter books
-                        if (filterText != " ") {
-                            for (Book book : allBooks) {
-                                if(book.getTitle().toLowerCase().contains(filterText.toLowerCase())
-                                || book.getAuthor().toLowerCase().contains(filterText.toLowerCase())
-                                || book.getOwnerEmail().toLowerCase().contains(filterText.toLowerCase())
-                                || book.getISBN().toLowerCase().contains(filterText.toLowerCase())
-                                || book.getStatus().toLowerCase().contains(filterText.toLowerCase())) {
-                                    filteredBooks.add(book);
-                                }
-                            }
-                        } else {
-                            filteredBooks = allBooks;
-                        }
-                        myCallback.loadBookCallBack(filteredBooks);
-                    } catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w("testing","Error: ", databaseError.toException());
-            }
-        });
     }
 
     /**

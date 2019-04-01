@@ -59,15 +59,18 @@ public class RatingTest extends AppCompatActivity {
 
     public void getMainRating() {
         listOfRatings = new ArrayList<>();
-        loadMyRatingFromFireBase(new FindBooks.loadBookCallBack() {
+        loadMyRatingFromFireBase(new loadBookCallBack() {
             @Override
             public void loadBookCallBack(ArrayList<Book> value) {
                 listOfRatings = (ArrayList<Book>) value.clone();
             }
         });
     }
+    public interface loadBookCallBack {
+        void loadBookCallBack(ArrayList<Book> value);
+    }
 
-    public void loadMyRatingFromFireBase(final FindBooks.loadBookCallBack myCallback){
+    public void loadMyRatingFromFireBase(final loadBookCallBack myCallback){
         final DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("books");
         userReference.addValueEventListener(new ValueEventListener() {
             @Override

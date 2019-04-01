@@ -54,6 +54,7 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
     private String isbnText;
     private String bookPhoto;
     private String rating;
+    private boolean notComplete = false;
 
     private ZXingScannerView scannerView;
     Integer SELECT_FILE = 0, REQUEST_CAMERA = 1, SCAN_ISBN = 3;
@@ -85,30 +86,44 @@ public class AddBookInfo extends AppCompatActivity implements ZXingScannerView.R
                 authorText = author.getText().toString();
                 isbnText = isbn.getText().toString(); // look up better way
                 User loggedInUser = MainActivity.getUser();
+                notComplete = false;
 
-                Book book = new Book(booktitleText, authorText, isbnText, bookPhoto, loggedInUser.getEmail(), loggedInUser.getUserID(), rating,0,0);
-                loggedInUser.addToMyBooksID(book.getBookID());
 
-                //Bundle result = new Bundle();
-                //Intent returnIntent = new Intent(AddBookInfo.this, MyBooks.class);
+                if (booktitleText.isEmpty()) {
+                    booktitle.setError("Title Required");
+                    notComplete = true;
+                }
+                if (isbnText.isEmpty()) {
+                    isbn.setError("ISBN Required");
+                    notComplete = true;
+                }
 
-                //result.putSerializable("putresut", book);
 
-                //pick book table to save the book
-                DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(book.getBookID());
+                if (!notComplete) {
+                    Book book = new Book(booktitleText, authorText, isbnText, bookPhoto, loggedInUser.getEmail(), loggedInUser.getUserID(), rating, 0, 0);
+                    loggedInUser.addToMyBooksID(book.getBookID());
 
-                //add the book in the database
-                newBook.setValue(book).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(AddBookInfo.this, "Successfully Added Book", Toast.LENGTH_SHORT).show();
+                    //Bundle result = new Bundle();
+                    //Intent returnIntent = new Intent(AddBookInfo.this, MyBooks.class);
+
+                    //result.putSerializable("putresut", book);
+
+                    //pick book table to save the book
+                    DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(book.getBookID());
+
+                    //add the book in the database
+                    newBook.setValue(book).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(AddBookInfo.this, "Successfully Added Book", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
-                //returnIntent.putExtra("result", result);
-                //setResult(1,returnIntent);
-                finish();
+                    });
+                    //returnIntent.putExtra("result", result);
+                    //setResult(1,returnIntent);
+                    finish();
+                }
             }
         });
 
