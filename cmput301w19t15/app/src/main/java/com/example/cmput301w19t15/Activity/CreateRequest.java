@@ -69,7 +69,6 @@ public class CreateRequest extends AppCompatActivity {
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //checkIfExists();
                 addBookToRequest();
                 finish();
             }
