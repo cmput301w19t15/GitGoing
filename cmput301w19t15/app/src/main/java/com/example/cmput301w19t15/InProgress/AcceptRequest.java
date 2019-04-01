@@ -119,10 +119,13 @@ public class AcceptRequest extends AppCompatActivity {
                                 }
                             }
                         });
+
                         FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
                         Intent intent = new Intent(AcceptRequest.this, GeoLocation.class);
-                        intent.putExtra("Notification",notif);
+                        intent.putExtra("Accepted",notif2);
+                        intent.putExtra("AcceptedOwner",notif3);
                         startActivity(intent);
+
                         finish();
                         //Intent intent = new Intent(AcceptRequest.this, NotifyActivity.class);
                         //startActivity(intent);

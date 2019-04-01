@@ -70,7 +70,8 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Notification notif = (Notification) getIntent().getSerializableExtra("Notification");
+        final Notification acceptedNotif = (Notification) getIntent().getSerializableExtra("Accepted");
+        final Notification acceptedOwnerNotif = (Notification) getIntent().getSerializableExtra("AcceptedOwner");
 
         //instantiate all services required to detect device and geolocation
         //fusedlocation is the sercive that gets user's location
@@ -89,10 +90,16 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
                     String la = Double.toString(resultLocation.latitude);
                     String lo = Double.toString(resultLocation.longitude);
                     Toast.makeText(GeoLocation.this, la + ' ' + lo, Toast.LENGTH_SHORT).show();
-                    notif.setLatLng(resultLocation);
+                    acceptedNotif.setLatLng(resultLocation);
+                    acceptedOwnerNotif.setLatLng(resultLocation);
 
-                    FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID()).child("location").child(lo);
+                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedNotif.getNotifID()).child("latitude").setValue(la);
+                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedNotif.getNotifID()).child("longitude").setValue(lo);
 
+                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedOwnerNotif.getNotifID()).child("latitude").setValue(la);
+                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedOwnerNotif.getNotifID()).child("longitude").setValue(lo);
+
+                    finish();
                 }
                 else{
                     Toast.makeText(GeoLocation.this, "no marker decected",Toast.LENGTH_LONG).show();
