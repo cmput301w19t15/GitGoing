@@ -81,8 +81,10 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         adapter.setOnItemClickListener(RequestedBookList.this);
 
         requestedIDList = loggedInUser.getMyRequestedBooksID();
-        new FetchBookWithList(currentBookList, requestedIDList, adapter).execute("Requested");
-
+        if(loadBooksOnce) {
+            new FetchBookWithList(currentBookList, requestedIDList, adapter).execute("Requested");
+            loadBooksOnce = false;
+        }
         requested = (Button) findViewById(R.id.requested);
         accepted = (Button) findViewById(R.id.accepted);
         borrowed = (Button) findViewById(R.id.borrowed);

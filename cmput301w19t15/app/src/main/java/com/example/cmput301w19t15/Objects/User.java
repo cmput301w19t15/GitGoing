@@ -355,12 +355,47 @@ public class User {
         loadMyBookIDFromFireBase(new loadBookIDCallBack() {
             @Override
             public void loadBookIDCallBack(ArrayList<String> value) {
-                switch(bookListType) {
-                    case "myBooksID": myBooksID = new ArrayList<>(value); break;
-                    case "myRequestedBooksID": myRequestedBooksID = new ArrayList<>(value); break;
-                    case "myWatchListBooksID": myWatchListBooksID = new ArrayList<>(value); break;
+                switch (bookListType) {
+                    case "myBooksID":
+                        myBooksID = new ArrayList<>(value);
+                        break;
+                    case "myRequestedBooksID":
+                        myRequestedBooksID = new ArrayList<>(value);
+                        break;
+                    case "myWatchListBooksID":
+                        myWatchListBooksID = new ArrayList<>(value);
+                        break;
                 }
+                if (bookListType.equalsIgnoreCase("myWatchListBooksID")) {
+                    DatabaseReference bookReference = FirebaseDatabase.getInstance().getReference().child("books");
+                    bookReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                try {
+                                    for (String singleBook : getMyRequestedBooksID()) {
+                                        if (!dataSnapshot.child(singleBook).exists()) {
+                                            removeMyRequestedBooksID(singleBook);
+                                        }
+                                    }
+                                    for (String singleBook : getMyWatchListBooksID()) {
+                                        if (!dataSnapshot.child(singleBook).exists()) {
+                                            removeMyWatchListBooksID(singleBook);
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.w("testing", "Error: ", databaseError.toException());
+                        }
+                    });
+
+                }
             }
         });
     }
