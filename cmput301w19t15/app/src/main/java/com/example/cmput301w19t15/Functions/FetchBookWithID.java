@@ -62,7 +62,6 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
                             }
 
                             if(titleText != null && authorText != null && isbnText != null){
-                                Log.d("testing",book.toString());
                                 titleText.setText(book.getTitle());
                                 authorText.setText(book.getAuthor());
                                 isbnText.setText(book.getISBN());
