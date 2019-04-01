@@ -99,6 +99,7 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
             e.printStackTrace();
         }
 
+
         Button searchButton = findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,9 +142,9 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
-        updateBooks();
+    protected void onStart() {
+        super.onStart();
+        //updateBooks();
     }
     //not used for now. NOPE it's actually runnig
     private void updateBooks(){

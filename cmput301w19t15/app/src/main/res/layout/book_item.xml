@@ -29,9 +29,11 @@
 
         <TextView
             android:id="@+id/textViewBookTitle"
-            android:layout_width="262dp"
+            android:layout_width="228dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_marginLeft="5dp"
+            android:layout_marginEnd="0dp"
             android:layout_toRightOf="@id/imageView"
             android:text="Book Title Here"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -39,43 +41,49 @@
 
         <TextView
             android:id="@+id/textViewAuthor"
-            android:layout_width="262dp"
+            android:layout_width="228dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/textViewBookTitle"
+            android:layout_alignParentEnd="true"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="0dp"
             android:layout_toRightOf="@id/imageView"
             android:text="Author Name"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
         <TextView
             android:id="@+id/textViewISBN"
-            android:layout_width="262dp"
+            android:layout_width="228dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewAuthor"
+            android:layout_alignParentEnd="true"
             android:layout_marginLeft="6dp"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="0dp"
             android:layout_toRightOf="@id/imageView"
             android:text="ISBN #"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
         <TextView
             android:id="@+id/textViewOwnerEmail"
-            android:layout_width="262dp"
+            android:layout_width="228dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewISBN"
+            android:layout_alignParentEnd="true"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="0dp"
             android:layout_toRightOf="@id/imageView"
             android:text="Owner Email"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
         <TextView
             android:id="@+id/textViewStatus"
-            android:layout_width="262dp"
+            android:layout_width="149dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewOwnerEmail"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="36dp"
             android:layout_marginTop="22dp"
             android:layout_toRightOf="@id/imageView"
             android:background="@color/colorPrimary"
@@ -92,8 +100,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewOwnerEmail"
             android:layout_alignEnd="@+id/textViewStatus"
-            android:layout_marginTop="-16dp"
-            android:layout_marginEnd="80dp"
+            android:layout_marginTop="-17dp"
+            android:layout_marginEnd="63dp"
             android:layout_marginRight="8dp"
             android:clickable="false"
             android:focusable="false"
