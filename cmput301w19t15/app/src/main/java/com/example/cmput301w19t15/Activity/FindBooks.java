@@ -215,12 +215,10 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
                         ArrayList<Book> allBooks = new ArrayList<>();
                         ArrayList<Book> filteredBooks = new ArrayList<>();
                         for (DataSnapshot books : dataSnapshot.getChildren()) {
-                            if(books.child("date").getValue().equals(null) || books.child("date").getValue().equals("null")) {
-                                Log.d("testing", books.getKey());
-                            } else {Book book = books.getValue(Book.class);
-                                if (!book.getOwnerID().equals(loggedInUser.getUserID())) {
+                            Book book = books.getValue(Book.class);
+                                if (book.getOwnerID() != null && !book.getOwnerID().equals(loggedInUser.getUserID())) {
                                     allBooks.add(book);
-                                }
+
                             }
                         }
                         // filter books
@@ -233,11 +231,12 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
                                 || book.getOwnerEmail().toLowerCase().contains(filterText.toLowerCase())
                                 || book.getISBN().toLowerCase().contains(filterText.toLowerCase())
                                 || book.getStatus().toLowerCase().contains(filterText.toLowerCase())) {
-                                    Log.d("hey","Test2");
+                                    Log.e("hey","Test2");
                                     filteredBooks.add(book);
                                 }
                             }
                         } else {
+                            Log.e("TAG", "NOPE " + filterText);
                             filteredBooks = allBooks;
                         }
                         myCallback.loadBookCallBack(filteredBooks);

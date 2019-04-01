@@ -119,18 +119,27 @@ public class FindUsers extends AppCompatActivity implements UserAdapter.OnItemCl
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
                     try {
+                        Log.e("TAG", "Test0");
                         ArrayList<User> allUsers = new ArrayList<>();
                         ArrayList<User> filteredUsers = new ArrayList<>();
                         for (DataSnapshot users : dataSnapshot.getChildren()) {
-                                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                if (user != null) {
-                                    String userID = users.child("name").getValue().toString();
-                                    String emailID = users.child("email").getValue().toString();
-                                    User currentUser = new User(emailID, userID);
-                                    //ArrayList<String> userInformation = new ArrayList<>();
-                                    //userInformation.add(dataSnapshot.child("name").getValue().toString());
-                                    //userInformation.add(dataSnapshot.child("email").getValue().toString());
-                                    allUsers.add(currentUser);
+                            Log.e("TAG", "Test1");
+                            //final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            Log.e("TAG", "Test3");
+                            if (users != null) {
+                                    Log.e("TAG", "Test2");
+                                    try {
+                                        String userID = users.child("name").getValue().toString();
+                                        String emailID = users.child("email").getValue().toString();
+                                        User currentUser = new User(emailID, userID);
+                                        Log.e("TAG", "Made it here");
+                                        //ArrayList<String> userInformation = new ArrayList<>();
+                                        //userInformation.add(dataSnapshot.child("name").getValue().toString());
+                                        //userInformation.add(dataSnapshot.child("email").getValue().toString());
+                                        allUsers.add(currentUser);
+                                    } catch (Exception e ){
+                                        e.printStackTrace();
+                                    }
                             }
                         }
                         // filter users
