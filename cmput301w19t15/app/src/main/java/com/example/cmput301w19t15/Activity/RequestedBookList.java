@@ -120,7 +120,6 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
                     requestedIDList.add(onebook);
                 }
                 new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("WatchList");
-
             }
         });
     }
