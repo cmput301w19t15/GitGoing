@@ -116,14 +116,14 @@
 
     <TextView
         android:id="@+id/scan_status"
-        android:layout_width="0dp"
+        android:layout_width="128dp"
         android:layout_height="50dp"
-        android:layout_marginStart="232dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="248dp"
+        android:layout_marginTop="174dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView" />
+        app:layout_constraintTop_toBottomOf="@+id/owner" />
 
 
     <Button
@@ -142,14 +142,25 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.gms.maps.MapView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mapView"
         android:layout_width="239dp"
-        android:layout_height="59dp"
+        android:layout_height="252dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="172dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/owner" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/mapView"
+        app:layout_constraintTop_toTopOf="@+id/mapView"
+        app:srcCompat="@drawable/ic_full_screen_black_24dp" />
 
 </android.support.constraint.ConstraintLayout>

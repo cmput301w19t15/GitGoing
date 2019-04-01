@@ -38,6 +38,7 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
         loadNotif();
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -113,6 +114,7 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
         Boolean read = notif.getRead();
         String title = notif.getTitle();
         String type = notif.getType();
+
 
         if (read == false) {
             read = true;
