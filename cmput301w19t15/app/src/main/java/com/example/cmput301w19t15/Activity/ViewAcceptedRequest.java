@@ -71,6 +71,7 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
         TextView isbnText = (TextView) findViewById(R.id.isbn);
         isbnText.setText(notif.getISBN());
         TextView ownerEmailText = (TextView) findViewById(R.id.owner);
+        isbn = notif.getISBN();
 /*
         mapView =  (MapView) findViewById(R.id.mapView);
         DatabaseReference laRef = FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).child("latitude");
