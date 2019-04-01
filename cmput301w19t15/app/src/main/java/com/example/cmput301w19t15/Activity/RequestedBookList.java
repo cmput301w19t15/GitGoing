@@ -103,7 +103,6 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         accepted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 currentBookList.clear();
                 new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("Accepted");
 
@@ -113,7 +112,6 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         borrowed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 currentBookList.clear();
                 new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("Borrowed");
 
@@ -124,11 +122,8 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
             @Override
             public void onClick(View v) {
                 currentBookList.clear();
-                for(String onebook: loggedInUser.getMyWatchListBooksID()){
-                    requestedIDList.add(onebook);
-                }
-                new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("WatchList");
 
+                new FetchBookWithList(currentBookList,loggedInUser.getMyWatchListBooksID(),adapter).execute("WatchList");
             }
         });
 

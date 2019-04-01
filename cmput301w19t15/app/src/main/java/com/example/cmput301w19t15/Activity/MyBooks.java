@@ -60,7 +60,7 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
     private RecyclerView mRecyclerView;
     private static final int NEW_BOOK = 1;
     private Book clickedBook;
-
+    private boolean loadBooksOnce = true;
 
     /**
      * Called when activity is first created
@@ -89,12 +89,10 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         mRecyclerView.setAdapter(mBookAdapter);
         mBookAdapter.setOnItemClickListener(MyBooks.this);
 
-        try {
+        if(loadBooksOnce){
             new FetchBookWithList(mBookList,mBookListID,mBookAdapter).execute();
-        }catch (Exception e){
-            e.printStackTrace();
+            loadBooksOnce = false;
         }
-
 
         //adds new book by starting add book info class
         Button addBook = (Button) findViewById(R.id.add_book);
@@ -107,19 +105,6 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         });
 
     }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        //gets books from user and loads them into screen
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     /**
      * called everytime the activity is started
      */
