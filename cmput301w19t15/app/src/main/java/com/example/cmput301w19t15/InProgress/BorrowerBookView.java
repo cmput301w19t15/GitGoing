@@ -49,6 +49,8 @@ public class BorrowerBookView extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         status = (String) bundle.get("STATUS");
         bookID = (String) bundle.get("BOOKID");
+        location = (Button) findViewById(R.id.location);
+
 
         TextView titleText = (TextView) findViewById(R.id.booktitle_view);
         TextView authorText = (TextView) findViewById(R.id.bookauthor_view);
