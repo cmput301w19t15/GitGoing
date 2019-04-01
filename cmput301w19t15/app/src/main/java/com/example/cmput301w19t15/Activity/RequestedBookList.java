@@ -36,6 +36,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import com.example.cmput301w19t15.Functions.FetchBookWithID;
 import com.example.cmput301w19t15.Functions.FetchBookWithList;
 import com.example.cmput301w19t15.InProgress.BorrowerBookView;
 import com.example.cmput301w19t15.InProgress.Request;
@@ -123,6 +124,8 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
             }
         });
 
+        checkWatchList();
+
     }
     @Override
     public void onItemClick(int position) {
@@ -134,5 +137,49 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         startActivity(intent);
+    }
+
+    public void checkWatchList() {
+        /**
+         * go through watchlist books
+         */
+        DatabaseReference bookIDREference = FirebaseDatabase.getInstance().getReference().child("users")
+                .child(loggedInUser.getUserID()).child("watchlist");
+        bookIDREference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    try {
+
+                        for (DataSnapshot ID : dataSnapshot.getChildren()) {
+                            Book watchBook = ID.getValue(Book.class);
+                            String titleEditText, authorEditText, ISBNEditText, bookID;
+                            /**
+                             * get book from books and check status
+                             */
+                            /*ArrayList<Book> bookList = new ArrayList<>();
+                            bookList.add(ID);
+                            titleEditText = watchBook.getTitle();
+                            authorEditText = watchBook.getAuthor();
+                            ISBNEditText = watchBook.getISBN();
+                            bookID = watchBook.getBookID();
+                            new FetchBookWithID(bookList,titleEditText,authorEditText,ISBNEditText).execute(bookID);*/
+                            String watchBookID = watchBook.getBookID();
+                            String bookStatus = FirebaseDatabase.getInstance().getReference().child("books")
+                                    .child(watchBookID).child("status").toString();
+                            Log.e("TAG", "bookStatus: " + bookStatus);
+
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
