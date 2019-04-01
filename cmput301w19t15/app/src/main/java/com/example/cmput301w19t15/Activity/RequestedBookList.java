@@ -60,6 +60,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
     private RecyclerView mRecyclerView;
     private static User loggedInUser;
     private ArrayList<String> currentBookListID;
+    ArrayList<String> requestedIDList;
     ArrayList<Book> returnList = new ArrayList<>();
 
 
@@ -70,104 +71,43 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         mRecyclerView = findViewById(R.id.recylcerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         currentBookList = new ArrayList<>();
+        adapter = new BookAdapter(RequestedBookList.this,currentBookList);
+        mRecyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(RequestedBookList.this);
+
         loggedInUser = MainActivity.getUser();
-        //listAccepted = new ArrayList<>();
-        //listBorrowed = new ArrayList<>();
-
-        //loggedInUser = MainActivity.getUser();
-        //currentBookList = loggedInUser.getRequestedBooks();
-        //listAccepted = loggedInUser.getMyRequestedBooksAccepted();
-        //listBorrowed = loggedInUser.getBorrowedBooks();
-        //adapter = new BookAdapter(RequestedBookList.this,currentBookList);
-        //adapterAccepted = new BookAdapter(RequestedBookList.this, listAccepted);
-        //adapterBorrowed = new BookAdapter(RequestedBookList.this, listBorrowed);
-       // mRecyclerView.setAdapter(adapter);
-        //adapter.setOnItemClickListener(RequestedBookList.this);
-        getRequestedBooks("Requested");
-
-
+        requestedIDList = loggedInUser.getMyRequestedBooksID();
+        new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("Requested");
 
         requested = (Button) findViewById(R.id.requested);
         accepted = (Button) findViewById(R.id.accepted);
         borrowed = (Button) findViewById(R.id.borrowed);
         watchlist = (Button) findViewById(R.id.watchlist);
 
+
         requested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentBookList = new ArrayList<>();
-                ArrayList<String> requestedIDList = loggedInUser.getMyRequestedBooksID();
+                currentBookList.clear();
                 new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("Requested");
-                mRecyclerView.setAdapter(adapter);
-                adapter.setOnItemClickListener(RequestedBookList.this);
-
-                //getRequestedBooks("Requested");
-
-
-                /*loggedInUser = MainActivity.getUser();
-                try {
-                    currentBookListID = loggedInUser.getMyRequestedBooksID();
-                    currentBookList = new ArrayList<>();
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-
-                adapter = new BookAdapter(RequestedBookList.this,currentBookList);
-                mRecyclerView.setAdapter(adapter);
-                adapter.setOnItemClickListener(RequestedBookList.this);
-
-                try {
-                    new FetchBookWithList(currentBookList,currentBookListID,adapter).execute();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-
-
-                /*currentBookList = loggedInUser.getRequestedBooks();
-                for (Book book : currentBookList){
-                    Toast.makeText(activity, "book: " + book.getTitle(), Toast.LENGTH_SHORT).show();
-                }
-                adapter = new BookAdapter(RequestedBookList.this,currentBookList);
-                adapter.notifyDataSetChanged();
-                mRecyclerView.setAdapter(adapter);
-                adapter.setOnItemClickListener(RequestedBookList.this); */
             }
         });
-
 
         accepted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                getRequestedBooks("Accepted");
-
-
-
-
-                /* currentBookList = loggedInUser.getMyRequestedBooksAccepted();
-                adapter = new BookAdapter(RequestedBookList.this,currentBookList);
-                adapter.notifyDataSetChanged();;
-                mRecyclerView.setAdapter(adapter);
-                adapter.setOnItemClickListener(RequestedBookList.this); */
+                currentBookList.clear();
+                new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("Accepted");
             }
         });
 
         borrowed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                getRequestedBooks("Borrowed");
-
-
-                /*currentBookList = loggedInUser.getBorrowedBooks();
-                adapter = new BookAdapter(RequestedBookList.this,currentBookList);
-                adapter.notifyDataSetChanged();
-                mRecyclerView.setAdapter(adapter);
-                adapter.setOnItemClickListener(RequestedBookList.this);
-                */
-
+                currentBookList.clear();
+                new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("Borrowed");
             }
         });
 
