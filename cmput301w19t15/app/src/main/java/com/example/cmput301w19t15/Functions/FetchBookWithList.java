@@ -68,7 +68,9 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
                                                     || book.getStatus().toLowerCase().contains(filter.toLowerCase())) {
                                                 bookList.add(book);
                                             }
-                                        } else if ((listType.equalsIgnoreCase("WatchList") || listType.equalsIgnoreCase("Requested")) && bookidlist.contains(bookid)) {
+                                        } else if(listType.equalsIgnoreCase("Requested") && book.getStatus().equalsIgnoreCase(listType) && bookidlist.contains(bookid)){
+                                            bookList.add(book);
+                                        } else if (listType.equalsIgnoreCase("WatchList") && bookidlist.contains(bookid)) {
                                             bookList.add(book);
                                         } else if ((listType.equalsIgnoreCase("Accepted") || listType.equalsIgnoreCase("Borrowed")) && book.getStatus().equalsIgnoreCase(listType) && bookidlist.contains(bookid) && book.getBorrowerID().equalsIgnoreCase(loggedInUser.getUserID())) {
                                             bookList.add(book);
