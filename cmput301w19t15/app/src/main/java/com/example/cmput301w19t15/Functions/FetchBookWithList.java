@@ -44,7 +44,6 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
                     if(dataSnapshot.exists()) {
                         try {
                             for (DataSnapshot books : dataSnapshot.getChildren()) {
-                                Log.d("testing","books " + books.toString());
                                 String bookid = books.child("bookID").getValue().toString();
                                 if(listType != null){
                                     Book book = books.getValue(Book.class);
