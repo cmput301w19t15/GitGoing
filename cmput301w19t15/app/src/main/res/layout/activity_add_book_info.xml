@@ -10,7 +10,7 @@
     <EditText
         android:id="@+id/booktitle"
         android:layout_width="0dp"
-        android:layout_height="53dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="60dp"
@@ -23,7 +23,7 @@
     <EditText
         android:id="@+id/bookAuthor"
         android:layout_width="0dp"
-        android:layout_height="53dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="60dp"
@@ -36,7 +36,7 @@
     <EditText
         android:id="@+id/isbn"
         android:layout_width="0dp"
-        android:layout_height="53dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="60dp"
@@ -48,16 +48,19 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="142dp"
-        android:layout_height="132dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:padding="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/addPhoto"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/isbn" />
 
@@ -66,57 +69,55 @@
         android:layout_width="170dp"
         android:layout_height="53dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/button1"
         android:text="Upload Photo"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintBottom_toTopOf="@+id/scanInfo"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/deletePhoto"
         android:layout_width="170dp"
         android:layout_height="53dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/button1"
         android:text="Delete Photo"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintBottom_toTopOf="@+id/scanInfo"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/scanInfo"
         android:layout_width="170dp"
         android:layout_height="53dp"
         android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/button1"
         android:text="@string/scan"
         android:textColor="#ffffff"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/addBook"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deletePhoto" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/addBook"
         android:layout_width="170dp"
         android:layout_height="53dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="60dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/button1"
         android:text="@string/addBook"
         android:textColor="#ffffff"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scanInfo" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
