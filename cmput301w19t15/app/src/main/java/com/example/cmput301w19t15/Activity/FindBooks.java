@@ -105,8 +105,8 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
             public void onClick(View v) {
                 Log.d("testing", "boost size: " + mBookList.size());
                 filterText = filterView.getText().toString();
-
-                loadBooks();
+                new FetchBookWithList(mBookList,mBookListID, mBookAdapter).execute("filter", filterText);
+                //loadBooks();
                 //new FetchBookWithList(mBookList,mBookListID, mBookAdapter).execute("findBooks");
             }
         });
@@ -164,7 +164,7 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
                 mRecyclerView.setAdapter(mBookAdapter);
                 mBookAdapter.setOnItemClickListener(FindBooks.this);
             }
-            loadBooks();
+            //loadBooks();
             //new FetchBookWithList(mBookList, mBookListID, mBookAdapter).execute("findBooks");
         }catch(Exception e){
             e.printStackTrace();
