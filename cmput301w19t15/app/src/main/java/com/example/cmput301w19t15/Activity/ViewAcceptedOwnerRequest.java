@@ -205,7 +205,7 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
 
                         }
                     });
-                    FirebaseDatabase.getInstance().getReference().child("books").child(bookID).child("status").setValue("Borrowed");
+                    
 
                 }
                 else{
