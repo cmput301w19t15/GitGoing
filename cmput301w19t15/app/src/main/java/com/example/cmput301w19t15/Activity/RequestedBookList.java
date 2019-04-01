@@ -23,6 +23,7 @@ package com.example.cmput301w19t15.Activity;
  * @since 1.0
  */
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -54,15 +55,12 @@ import com.google.firebase.database.ValueEventListener;
 public class RequestedBookList extends AppCompatActivity implements BookAdapter.OnItemClickListener{
     private RequestedBookList activity = this;
     private Button requested, accepted,borrowed, watchlist;
-    private BookAdapter adapter, adapterAccepted,adapterBorrowed;
-    private ArrayList<Book> currentBookList, listAccepted, listBorrowed;
+    private BookAdapter adapter;
+    private ArrayList<Book> currentBookList;
+    ArrayList<String> requestedIDList;
     private Book clickedBook;
     private RecyclerView mRecyclerView;
-    private static User loggedInUser;
-    private ArrayList<String> currentBookListID;
-    ArrayList<String> requestedIDList;
-    ArrayList<Book> returnList = new ArrayList<>();
-
+    private User loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +83,6 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         accepted = (Button) findViewById(R.id.accepted);
         borrowed = (Button) findViewById(R.id.borrowed);
         watchlist = (Button) findViewById(R.id.watchlist);
-
 
         requested.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +108,8 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
             }
         });
 
+        watchlist.setEnabled(false);
+        watchlist.getBackground().setAlpha(128);
         watchlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
