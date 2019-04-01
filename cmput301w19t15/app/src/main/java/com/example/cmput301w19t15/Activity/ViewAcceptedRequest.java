@@ -112,6 +112,7 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
                 Log.w("TAG", "loadPost:onCancelled", databaseError.toException());
             }
         });
+        */
 
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(mapViewBundle);

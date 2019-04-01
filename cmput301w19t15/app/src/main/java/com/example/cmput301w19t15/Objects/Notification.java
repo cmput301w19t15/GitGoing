@@ -23,7 +23,26 @@ public class Notification implements Serializable {
     private LatLng latLng;
 
     private String ownerScanned;
-    
+
+
+    public Notification(String type, String bookID, String title, String notifyFromID, String notifyFromEmail,
+                        String notifyToID, String notifyToEmail, String ISBN, String photo, Boolean read, double latitude, double longitude) {
+        this.type = type;
+        this.bookID = bookID;
+        this.title = title;
+        this.notifyFromID = notifyFromID;
+        this.notifyFromEmail = notifyFromEmail;
+        this.notifyToID = notifyToID;
+        this.notifyToEmail = notifyToEmail;
+        this.ISBN = ISBN;
+        this.photo = photo;
+        if(this.notifID == null || this.notifID.isEmpty()){
+            this.notifID = UUID.randomUUID().toString();}
+        this.read = read;
+        this.ownerScanned = "false";
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
 
     public Notification(String type, String bookID, String title, String notifyFromID, String notifyFromEmail,
                         String notifyToID, String notifyToEmail, String ISBN, String photo, Boolean read) {
@@ -129,9 +148,9 @@ public class Notification implements Serializable {
     public void setRead(Boolean read) {this.read = read; }
 
 //
-    public void setLatLng (LatLng latLng){ this.latLng = latLng; }
+    //public void setLatLng (LatLng latLng){ this.latLng = latLng; }
 
-    public LatLng getLatLng (){ return this.latLng; }
+    //public LatLng getLatLng (){ return this.latLng; }
 
     public String getOwnerScanned() { return ownerScanned; }
 

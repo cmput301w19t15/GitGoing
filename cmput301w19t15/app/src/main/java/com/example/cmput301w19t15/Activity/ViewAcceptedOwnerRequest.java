@@ -107,12 +107,12 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
 
 
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.w("TAG", "loadPost:onCancelled", databaseError.toException());
             }
         });
+        */
 
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(mapViewBundle);
