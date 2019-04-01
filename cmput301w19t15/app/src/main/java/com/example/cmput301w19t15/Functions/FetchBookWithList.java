@@ -70,7 +70,7 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
                                             }
                                         } else if ((listType.equalsIgnoreCase("WatchList") || listType.equalsIgnoreCase("Requested")) && bookidlist.contains(bookid)) {
                                             bookList.add(book);
-                                        } else if ((listType.equalsIgnoreCase("Accepted") || listType.equalsIgnoreCase("Borrowed")) && bookidlist.contains(bookid) && book.getBorrowerID().equalsIgnoreCase(loggedInUser.getUserID())) {
+                                        } else if ((listType.equalsIgnoreCase("Accepted") || listType.equalsIgnoreCase("Borrowed")) && book.getStatus().equalsIgnoreCase(listType) && bookidlist.contains(bookid) && book.getBorrowerID().equalsIgnoreCase(loggedInUser.getUserID())) {
                                             bookList.add(book);
                                         }
 
