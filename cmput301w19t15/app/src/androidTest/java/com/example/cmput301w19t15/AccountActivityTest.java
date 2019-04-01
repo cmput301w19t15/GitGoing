@@ -190,7 +190,7 @@ public class AccountActivityTest extends ActivityTestRule<MainActivity> {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         CheckAccount(email);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        ChangePassword(email);
+        //ChangePassword(email);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         AddBook();
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);

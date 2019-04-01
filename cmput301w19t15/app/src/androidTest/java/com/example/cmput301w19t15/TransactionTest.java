@@ -137,6 +137,12 @@ public class TransactionTest extends ActivityTestRule<MainActivity> {
         assertTrue(solo.waitForText("Notifications", 1, 2000));
         solo.goBack();
     }
+    public void ViewBook1() {
+        solo.clickOnView(solo.getCurrentActivity().findViewById(
+                R.id.my_books));
+        assertTrue(solo.waitForText("Requested", 1, 2000));
+        solo.goBack();
+    }
     public void AcceptTheRequest(){
         solo.clickOnView(solo.getCurrentActivity().findViewById(
                 R.id.notify));
@@ -145,8 +151,27 @@ public class TransactionTest extends ActivityTestRule<MainActivity> {
         assertTrue(solo.waitForText("test book", 1, 2000));
         solo.clickOnView(solo.getCurrentActivity().findViewById(
                 R.id.accept_button));
+        assertTrue(solo.waitForActivity(GeoLocation.class));
+        solo.clickOnScreen(222,222);
+        solo.clickOnView(solo.getCurrentActivity().findViewById(R.id.selectLocation));
         assertTrue(solo.waitForText("Notifications", 1, 2000));
         solo.goBack();
+    }
+    public void ViewBook2() {
+        solo.clickOnView(solo.getCurrentActivity().findViewById(
+                R.id.my_books));
+        assertTrue(solo.waitForText("Accepted", 1, 2000));
+        solo.goBack();
+    }
+    public void VerifyRequest2(String Owner) {
+        solo.clickOnView(solo.getCurrentActivity().findViewById(R.id.my_requests));
+        assertTrue(solo.waitForText("Accepted", 1, 2000));
+        solo.clickOnView(solo.getCurrentActivity().findViewById(
+                R.id.accepted));
+        assertTrue(solo.waitForText(Owner, 1, 2000));
+        solo.goBack();
+        assertTrue(solo.waitForText("Find Books", 1, 2000));
+
     }
     @Test
     public void TestTransaction() {
@@ -163,9 +188,17 @@ public class TransactionTest extends ActivityTestRule<MainActivity> {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         Login(emailOwner);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        ViewBook1();
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         ViewRequest(emailRequester);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         AcceptTheRequest();
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        ViewBook2();
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        Login(emailRequester);
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        VerifyRequest2(emailOwner);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }
 }
