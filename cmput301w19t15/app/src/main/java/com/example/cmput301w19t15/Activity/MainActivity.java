@@ -245,6 +245,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
             loggedInUser.loadBooks("borrowedBooks");
             loggedInUser.loadBooksID("myBooksID");
             loggedInUser.loadBooksID("myRequestedBooksID");
+            loggedInUser.loadBooksID("myWatchListBooksID");
         }
     }
 
