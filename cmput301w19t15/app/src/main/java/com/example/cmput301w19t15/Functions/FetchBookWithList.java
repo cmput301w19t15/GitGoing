@@ -55,6 +55,7 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
                                     }else if((listType.equalsIgnoreCase("WatchList"))&& bookidlist.contains(bookid)) {
                                         bookList.add(book);
                                         //listType.equalsIgnoreCase("Requested") ||
+                                        //
                                     }
                                     else if(listType.equalsIgnoreCase("Accepted") && bookidlist.contains(bookid) && book.getBorrowerID().equalsIgnoreCase(loggedInUser.getUserID())){
                                         bookList.add(book);
