@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
     //private ProgressBar progressBar;
-    private Button logOut, myBooks, myBorrows, myRequests, findUser, findBook, temp;
+    private Button logOut, myBooks, myRequests, findUser, findBook, temp;
     private ImageButton myProfile, notifyButton;
 
     private static User loggedInUser;
@@ -239,10 +239,10 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
             String emailID = user.getEmail();
             loggedInUser = new User(emailID,userID);
             loggedInUser.loadUserInformation();
-            loggedInUser.loadBooks("myBooks");
-            loggedInUser.loadBooks("myRequestedBooks");
-            loggedInUser.loadBooks("requestedBooks");
-            loggedInUser.loadBooks("borrowedBooks");
+            //loggedInUser.loadBooks("myBooks");
+            //loggedInUser.loadBooks("myRequestedBooks");
+            //loggedInUser.loadBooks("requestedBooks");
+            //loggedInUser.loadBooks("borrowedBooks");
             loggedInUser.loadBooksID("myBooksID");
             loggedInUser.loadBooksID("myRequestedBooksID");
             loggedInUser.loadBooksID("myWatchListBooksID");
