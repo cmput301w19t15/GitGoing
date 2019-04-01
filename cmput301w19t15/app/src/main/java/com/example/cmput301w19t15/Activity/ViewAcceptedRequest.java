@@ -56,18 +56,20 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
         isbnText.setText(notif.getISBN());
         TextView ownerEmailText = (TextView) findViewById(R.id.owner);
 
+
         mapView =  (MapView) findViewById(R.id.mapView);
         DatabaseReference laRef = FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).child("latitude");
         laRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d("MapTest","We've been here");
                 double la = (double) dataSnapshot.getValue();
-                Toast.makeText(ViewAcceptedRequest.this, Double.toString(la) ,Toast.LENGTH_SHORT).show();
+                Log.d("MapTest",Double.toString(la));
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.w("TAG", "loadPost:onCancelled", databaseError.toException());
             }
         });
 

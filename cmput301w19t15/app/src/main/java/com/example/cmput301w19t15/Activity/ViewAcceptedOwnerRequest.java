@@ -18,11 +18,14 @@ import com.example.cmput301w19t15.Objects.Notification;
 import com.example.cmput301w19t15.Objects.User;
 import com.example.cmput301w19t15.R;
 
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
@@ -40,6 +43,9 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
     Integer SCAN_ISBN = 3;
     private ZXingScannerView scannerView;
     Notification notif, notif2, requesterNotification;
+
+    private MapView mapView;
+    private LatLng latLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +69,23 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
             scanStatus.setText("Scan Incomplete");
         }
 
+
+        //retrieve data from firebase
+        mapView =  (MapView) findViewById(R.id.mapView);
+        DatabaseReference laRef = FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID());
+        laRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d("MapTest","We've been here");
+                Log.d("MapTest",dataSnapshot.getValue().toString());
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("TAG", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
 
 
         exit = (Button) findViewById(R.id.cancel);
