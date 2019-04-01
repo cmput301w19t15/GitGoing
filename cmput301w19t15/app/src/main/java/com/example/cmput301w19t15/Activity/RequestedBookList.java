@@ -55,6 +55,7 @@ import com.google.firebase.database.ValueEventListener;
 public class RequestedBookList extends AppCompatActivity implements BookAdapter.OnItemClickListener{
     private RequestedBookList activity = this;
     private Button requested, accepted,borrowed, watchlist;
+
     private BookAdapter adapter;
     private ArrayList<Book> currentBookList;
     ArrayList<String> requestedIDList;
@@ -71,6 +72,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         mRecyclerView = findViewById(R.id.recylcerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         currentBookList = new ArrayList<>();
         adapter = new BookAdapter(RequestedBookList.this,currentBookList);
@@ -91,24 +93,30 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
         requested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 currentBookList.clear();
                 new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("Requested");
+
             }
         });
 
         accepted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 currentBookList.clear();
                 new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("Accepted");
+
             }
         });
 
         borrowed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 currentBookList.clear();
                 new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("Borrowed");
+
             }
         });
 
@@ -122,6 +130,7 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
                 new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("WatchList");
             }
         });
+
     }
     @Override
     public void onItemClick(int position) {

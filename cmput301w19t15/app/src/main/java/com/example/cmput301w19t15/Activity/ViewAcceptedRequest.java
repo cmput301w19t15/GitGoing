@@ -18,6 +18,10 @@ import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.R;
 import com.example.cmput301w19t15.Objects.User;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -25,6 +29,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -37,10 +42,13 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
     private Button exit, request, decline, scan, verify;
+
     private ArrayList<Book> newBook = new ArrayList<>();
+
     private User owner;
     User loggedInUser = MainActivity.getUser();
-    String ownerId, author, title, ownerEmail, isbn, status, bookId, correctScan;
+    String ownerId, author, title, ownerEmail, isbn, status, bookID, correctScan,image,rating;
+    Long returnDate;
     private ZXingScannerView scannerView;
     Integer SCAN_ISBN = 3;
     Notification notif;
@@ -57,13 +65,13 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
         /**
          * save the book values passed from the FindBooks classes when clicked on
          */
-        final Notification notif = (Notification) getIntent().getSerializableExtra("Notification");
+        notif = (Notification) getIntent().getSerializableExtra("Notification");
         TextView titleText = (TextView) findViewById(R.id.booktitle);
         titleText.setText(notif.getTitle());
         TextView isbnText = (TextView) findViewById(R.id.isbn);
         isbnText.setText(notif.getISBN());
         TextView ownerEmailText = (TextView) findViewById(R.id.owner);
-
+/*
         mapView =  (MapView) findViewById(R.id.mapView);
         DatabaseReference laRef = FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).child("latitude");
         laRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -78,7 +86,7 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
 
             }
         });
-
+*/
 
         ownerEmailText.setText(notif.getNotifyFromEmail());
 
@@ -86,8 +94,10 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
 
         Log.d("hello", "youri bad");
         final TextView scanStatus = (TextView) findViewById(R.id.scan_status);
-        isbn =  notif.getISBN();
+
+
         correctScan = "false";
+
         if (correctScan.equals("false")){
             scanStatus.setText("Scan Incomplete");
         }
@@ -104,9 +114,9 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
             public void onClick(View v) {
                 if (correctScan.equals("true")) {
                     scanStatus.setText("Scan Complete");
-                    loggedInUser.addToMyBorrowedBooks(bookId);
+                    loggedInUser.addToMyBorrowedBooks(bookID);
                     try {
-                        FirebaseDatabase.getInstance().getReference().child("books").child(bookId).addValueEventListener(new ValueEventListener() {
+                        FirebaseDatabase.getInstance().getReference().child("books").child(bookID).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
@@ -114,9 +124,9 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
                                         Book book = dataSnapshot.getValue(Book.class);
                                         Book bookNew = new Book(book.getTitle(), book.getAuthor(), book.getISBN(), book.getPhoto(), book.getOwnerEmail(),
                                                 book.getOwnerID(), book.getRating(), book.getRatingCount(), book.getRatingTotal());
-                                        bookNew.setBookID(bookId);
+                                        bookNew.setBookID(bookID);
                                         bookNew.setStatus("Borrowed");
-                                        DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(bookId);
+                                        DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(bookID);
                                         newBook.setValue(bookNew).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
@@ -222,6 +232,7 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
                     //createReturnNotifications();
                     //addBookToBorrowedBooks();
                     //FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
+                    addBookToBorrowed();
                 } else{
                     Toast.makeText(getApplicationContext(), barcode, Toast.LENGTH_LONG).show();
                 }
@@ -264,11 +275,29 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
 
     public void addBookToBorrowed(){
 
-        loggedInUser.addToMyBorrowedBooks(bookId);
+        //fetch book by id
+        new FetchBookWithID(newBook,returnDate,title,author,isbn,ownerEmail,status,image,rating).execute(bookID);
+        Book book = newBook.get(0);
+        //changebookstatus
+        Book bookNew = new Book(notif.getTitle(), book.getAuthor(), book.getISBN(), book.getPhoto(), book.getOwnerEmail(),
+                book.getOwnerID(), book.getRating(), book.getRatingCount(), book.getRatingTotal());
+        bookNew.setBookID(bookID);
+        bookNew.setStatus("Borrowed");
+        //updatefirebase
+        DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(bookID);
+        newBook.setValue(bookNew).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+    });
+/*
+        loggedInUser.addToMyRequestedBooksID(bookId);
+
         //Check over this
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users").child(ownerId).child("myBooks");
         FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID())
                 .child("myBorrowedBooks").setValue(bookId);
-
-    }
+*/
+        }
 }
