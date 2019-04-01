@@ -110,7 +110,6 @@ public class AccountActivityTest extends ActivityTestRule<MainActivity> {
         solo.clickOnView( solo.getCurrentActivity().findViewById(
                 R.id.save));
         assertTrue(solo.waitForText("Find Books", 1, 2000));
-        EditText name = (EditText) solo.getView(R.id.name);
         solo.clickOnView( solo.getCurrentActivity().findViewById(
                 R.id.logout_button));
         assertTrue(solo.waitForText("Forgot Password", 1, 2000));

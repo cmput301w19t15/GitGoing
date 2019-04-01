@@ -11,13 +11,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cmput301w19t15.Functions.FetchBookWithID;
 import com.example.cmput301w19t15.Functions.ScanBarcode;
 import com.example.cmput301w19t15.Objects.Notification;
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.R;
 import com.example.cmput301w19t15.Objects.User;
+
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,18 +28,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
 
+import java.util.ArrayList;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
     private Button exit, request, decline, scan, verify;
-    private Book newBook;
+    private ArrayList<Book> newBook = new ArrayList<>();
     private User owner;
     User loggedInUser = MainActivity.getUser();
     String ownerId, author, title, ownerEmail, isbn, status, bookId, correctScan;
     private ZXingScannerView scannerView;
     Integer SCAN_ISBN = 3;
     Notification notif;
+    TextView authorText,statusText;
 
     private MapView mapView;
     private LatLng latLng;
@@ -96,7 +102,43 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
             public void onClick(View v) {
                 if (correctScan.equals("true")) {
                     scanStatus.setText("Scan Complete");
-                    loggedInUser.addToMyBorrowedBooks(notif.getBookID());
+                    loggedInUser.addToMyBorrowedBooks(bookId);
+                    try {
+                        FirebaseDatabase.getInstance().getReference().child("books").child(bookId).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    try {
+                                        Book book = dataSnapshot.getValue(Book.class);
+                                        Book bookNew = new Book(book.getTitle(), book.getAuthor(), book.getISBN(), book.getPhoto(), book.getOwnerEmail(),
+                                                book.getOwnerID(), book.getRating(), book.getRatingCount(), book.getRatingTotal());
+                                        bookNew.setBookID(bookId);
+                                        bookNew.setStatus("Borrowed");
+                                        DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(bookId);
+                                        newBook.setValue(bookNew).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                    createReturnNotifications(notif);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Log.w("testing", "Error: ", databaseError.toException());
+                            }
+                        });
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Isbn scan not complete",Toast.LENGTH_LONG).show();
@@ -185,13 +227,42 @@ public class ViewAcceptedRequest extends AppCompatActivity implements ZXingScann
         }
 
     }
-    public void createReturnNotifications() {
-        //To do, will be very similar to ViewAccepted both
+    public void createReturnNotifications(Notification notif) {
+        Notification notif2 = new Notification("ReturnBorrower", notif.getBookID(), notif.getTitle(), notif.getNotifyToID(), notif.getNotifyToEmail(),
+
+                notif.getNotifyFromID(), notif.getNotifyFromEmail(), notif.getISBN(), notif.getPhoto(), false);
+
+        DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif2.getNotifID());
+
+        //add notif to database
+        //newNotif.setValue(notif2);
+        newNotif.setValue(notif2).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(ViewAcceptedRequest.this, "Successfully Added Notification ", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        Notification notif3 = new Notification("ReturnOwner", notif.getBookID(), notif.getTitle(), notif.getNotifyFromID(), notif.getNotifyFromEmail(),
+                notif.getNotifyToID(), notif.getNotifyToEmail(), notif.getISBN(), notif.getPhoto(), false);
+        DatabaseReference newNotif2 = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif3.getNotifID());
+
+        //add notif to database
+        newNotif2.setValue(notif3).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(ViewAcceptedRequest.this, "Successfully Added Notification ", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public void addBookToBorrowed(){
 
-        loggedInUser.addToMyRequestedBooksID(bookId);
+        loggedInUser.addToMyBorrowedBooks(bookId);
         //Check over this
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users").child(ownerId).child("myBooks");
         FirebaseDatabase.getInstance().getReference().child("users").child(loggedInUser.getUserID())
