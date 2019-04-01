@@ -124,7 +124,9 @@ public class RequestedBookList extends AppCompatActivity implements BookAdapter.
             @Override
             public void onClick(View v) {
                 currentBookList.clear();
-                requestedIDList = loggedInUser.getMyWatchListBooksID();
+                for(String onebook: loggedInUser.getMyWatchListBooksID()){
+                    requestedIDList.add(onebook);
+                }
                 new FetchBookWithList(currentBookList,requestedIDList,adapter).execute("WatchList");
 
             }
