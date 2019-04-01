@@ -4,8 +4,10 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.cmput301w19t15.Activity.MainActivity;
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.Objects.BookAdapter;
+import com.example.cmput301w19t15.Objects.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +24,7 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
     private ArrayList<String> bookListID;
     private BookAdapter bookAdapter;
     private String listType;
+    private User loggedInUser = MainActivity.getUser();
 
     public FetchBookWithList(ArrayList<Book> bookList, ArrayList<String> idList, BookAdapter bookAdapter){
         this.bookList = bookList;
@@ -43,14 +46,20 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if(dataSnapshot.exists()) {
                         try {
-                            Log.d("tesint","child cound: "+dataSnapshot.getChildrenCount());
                             for (DataSnapshot books : dataSnapshot.getChildren()) {
                                 String bookid = books.child("bookID").getValue().toString();
                                 if(listType != null){
-                                    if(!bookidlist.contains(bookid)){
-                                        Book book = books.getValue(Book.class);
+                                    Book book = books.getValue(Book.class);
+                                    if(listType.equalsIgnoreCase("findBooks")){
+                                        bookList.add(book);
+                                    }else if((listType.equalsIgnoreCase("Requested") || listType.equalsIgnoreCase("WatchList"))&& bookidlist.contains(bookid)) {
+                                        bookList.add(book);
+                                    }else if(listType.equalsIgnoreCase("Accepted") && bookidlist.contains(bookid) && book.getBorrowerID().equalsIgnoreCase(loggedInUser.getUserID())){
+                                        bookList.add(book);
+                                    }else if(bookidlist.contains(bookid) && book.getStatus().equalsIgnoreCase(listType)) {
                                         bookList.add(book);
                                     }
+
                                 }else if(bookidlist.contains(bookid)){
                                     Book book = books.getValue(Book.class);
                                     bookList.add(book);

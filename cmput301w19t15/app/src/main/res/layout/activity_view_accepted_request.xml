@@ -11,32 +11,29 @@
         android:id="@+id/verify"
         android:layout_width="107dp"
         android:layout_height="50dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginStart="288dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="76dp"
         android:background="@drawable/button1"
         android:text="VERIFY"
         android:textColor="#ffffff"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/cancel" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/scan"
         android:layout_width="107dp"
         android:layout_height="50dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="304dp"
+        android:layout_marginBottom="72dp"
         android:background="@drawable/button1"
         android:text="SCAN"
         android:textColor="#ffffff"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cancel" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/bookTitle"
@@ -118,38 +115,40 @@
         android:id="@+id/scan_status"
         android:layout_width="128dp"
         android:layout_height="50dp"
-        android:layout_marginStart="248dp"
-        android:layout_marginTop="174dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/owner" />
 
 
     <Button
         android:id="@+id/cancel"
-        android:layout_width="107dp"
+        android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="64dp"
         android:layout_marginEnd="64dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/button1"
         android:text="EXIT"
         android:textColor="#ffffff"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/scan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.gms.maps.MapView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.google.android.gms.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mapView"
-        android:layout_width="239dp"
+        android:layout_width="368dp"
         android:layout_height="252dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="172dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/owner" />
 

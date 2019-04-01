@@ -61,6 +61,7 @@ public class User {
     //
     private ArrayList<String> myBooksID = new ArrayList<>();
     private ArrayList<String> myRequestedBooksID = new ArrayList<>();
+    private ArrayList<String> myWatchListBooksID = new ArrayList<>();
     private String bookListType = "myBooks";
 
     /**
@@ -288,6 +289,28 @@ public class User {
             e.printStackTrace();
         }
     }
+
+
+    public void addToMyWatchListBooksID(String bookID){
+        try {
+            myWatchListBooksID.add(bookID);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myWatchListBooksID").setValue(myWatchListBooksID);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void removeMyWatchListBooksID(String bookID){
+        try {
+            myWatchListBooksID.remove(bookID);
+            FirebaseDatabase.getInstance().getReference("users").child(userID).child("myWatchListBooksID").setValue(myWatchListBooksID);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public ArrayList<String> getMyWatchListBooksID(){
+        return myWatchListBooksID;
+    }
+
     /**
      * Remove my requested books.
      *
@@ -477,7 +500,7 @@ public class User {
      * Load books.
      * @reuse https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      * @param bookListType the book list type
-     */
+     *
     public void loadBooks(final String bookListType){
         this.bookListType = bookListType;
         loadMyBookFromFireBase(new loadBookCallBack() {
@@ -492,7 +515,7 @@ public class User {
             }
         });
     }
-
+*/
     /**
      * The interface Load user call back.
      *
@@ -552,7 +575,7 @@ public class User {
      * Load my book from fire base.
      * @reuse https://stackoverflow.com/questions/47847694/how-to-return-datasnapshot-value-as-a-result-of-a-method
      * @param myCallback the my callback
-     */
+     *
     public void loadMyBookFromFireBase(final loadBookCallBack myCallback){
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("users").child(this.userID).child(bookListType);
         userReference.addValueEventListener(new ValueEventListener() {
@@ -577,7 +600,7 @@ public class User {
             }
         });
     }
-
+*/
 
     /** requested books that are avaliable - with status */
 
@@ -681,6 +704,7 @@ public class User {
                 switch(bookListType) {
                     case "myBooksID": myBooksID = new ArrayList<>(value); break;
                     case "myRequestedBooksID": myRequestedBooksID = new ArrayList<>(value); break;
+                    case "myWatchListBooksID": myWatchListBooksID = new ArrayList<>(value); break;
                 }
 
             }

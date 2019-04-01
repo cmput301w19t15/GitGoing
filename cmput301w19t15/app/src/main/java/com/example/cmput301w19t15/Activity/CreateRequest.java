@@ -40,7 +40,6 @@ public class CreateRequest extends AppCompatActivity {
 
     private Button request,cancel;
     private ArrayList<Book> newBook = new ArrayList<>();
-    private User owner;
     User loggedInUser = MainActivity.getUser();
     String bookID;
 
@@ -70,7 +69,6 @@ public class CreateRequest extends AppCompatActivity {
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //checkIfExists();
                 addBookToRequest();
                 finish();
             }
@@ -96,16 +94,17 @@ public class CreateRequest extends AppCompatActivity {
             if(book.getBorrowerID().equalsIgnoreCase(loggedInUser.getUserID())) {
                 Toast.makeText(CreateRequest.this, "You are currently borrowing this book", Toast.LENGTH_SHORT).show();
             }else{
-                loggedInUser.addToWatchList(book);
+                loggedInUser.addToMyWatchListBooksID(book.getBookID());
                 Toast.makeText(CreateRequest.this, "Added to Watch List", Toast.LENGTH_SHORT).show();
             }
         }else{
             //check if already requested by user
-            String requestBookIDList = loggedInUser.getRequestedBooks().toString();
-            String watlistIDList = loggedInUser.getWatchlistBooks().toString();
+            String requestBookIDList = loggedInUser.getMyRequestedBooksID().toString();
+            String watchListBookIDList = loggedInUser.getMyWatchListBooksID().toString();
+
             if (requestBookIDList.contains(bookID)) {
                 Toast.makeText(CreateRequest.this, "Already Requested", Toast.LENGTH_SHORT).show();
-            } else if (watlistIDList.contains(bookID)){
+            } else if (watchListBookIDList.contains(bookID)){
                 Toast.makeText(this, "Already in Watchlist", Toast.LENGTH_SHORT).show();
             } else{
                 loggedInUser.addToMyRequestedBooksID(bookID);
@@ -113,15 +112,12 @@ public class CreateRequest extends AppCompatActivity {
                         book.getOwnerID(), book.getOwnerEmail(), book.getISBN(), book.getPhoto(), false);
 
                 //update book status
-                Book bookNew = new Book(book.getTitle(), book.getAuthor(), book.getISBN(), book.getPhoto(), book.getOwnerEmail(),
-                        book.getOwnerID(), book.getRating(), book.getRatingCount(), book.getRatingTotal());
-                bookNew.setBookID(bookID);
-                bookNew.setStatus("Requested");
+                book.setStatus("Requested");
                 DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(bookID);
-                newBook.setValue(bookNew).addOnCompleteListener(new OnCompleteListener<Void>() {
+                newBook.setValue(book).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-
+                        Log.d("tesing", "set status to requested");
                     }
                 });
 

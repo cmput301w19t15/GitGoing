@@ -22,14 +22,17 @@ package com.example.cmput301w19t15.Activity;
  * @since 1.0
  */
 
+import android.media.Rating;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.EditText;
 
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 
 
 import com.example.cmput301w19t15.Activity.MainActivity;
@@ -51,6 +54,7 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class Profile extends AppCompatActivity {
     private EditText inputEmail, inputPassword, inputNewPassword, inputName, inputPhoneNumber, currentFocus;
+    private RatingBar rating;
 
     Button saveButton, cancelButton;
     //private ProgressBar progressBar;
@@ -73,10 +77,17 @@ public class Profile extends AppCompatActivity {
         inputNewPassword = findViewById(R.id.newPassword);
         inputName = findViewById(R.id.name);
         inputPhoneNumber = findViewById(R.id.phone);
+        rating = findViewById(R.id.userRatingBar);
 
         inputName.setText(user.getName());
         inputEmail.setText(user.getEmail());
         inputPhoneNumber.setText(user.getPhone());
+        try {
+            rating.setRating(user.getRating().intValue());
+        }
+        catch (Exception e){
+            Log.d("testing","no user rating set");
+        }
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -60,7 +60,7 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
     private RecyclerView mRecyclerView;
     private static final int NEW_BOOK = 1;
     private Book clickedBook;
-
+    private boolean loadBooksOnce = true;
 
     /**
      * Called when activity is first created
@@ -77,24 +77,15 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
 
         //gets books from user and loads them into screen
         loggedInUser = MainActivity.getUser();
-        try {
-            mBookListID = loggedInUser.getMyBooksID();
-            mBookList = new ArrayList<>();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
 
+        mBookListID = loggedInUser.getMyBooksID();
+        mBookList = new ArrayList<>();
         //Work in Progress
         mBookAdapter = new BookAdapter(MyBooks.this,mBookList);
         mRecyclerView.setAdapter(mBookAdapter);
         mBookAdapter.setOnItemClickListener(MyBooks.this);
 
-        try {
-            new FetchBookWithList(mBookList,mBookListID,mBookAdapter).execute();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
+        new FetchBookWithList(mBookList,mBookListID,mBookAdapter).execute();
 
         //adds new book by starting add book info class
         Button addBook = (Button) findViewById(R.id.add_book);
@@ -107,19 +98,6 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         });
 
     }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        //gets books from user and loads them into screen
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     /**
      * called everytime the activity is started
      */
@@ -161,30 +139,8 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         clickedBook = (Book) mBookList.get(position);
         Intent intent = new Intent(MyBooks.this, BookInfo.class);
         intent.putExtra("BOOKID",clickedBook.getBookID());
+
         startActivity(intent);
     }
 
-    //not used for now
-    private void updateBooks(){
-        try {
-            if(mBookListID == null){
-                mBookListID = loggedInUser.getMyBooksID();
-            }else{
-                mBookListID.clear();
-            }
-            if(mBookList == null){
-                mBookList = new ArrayList<>();
-            }else{
-                mBookList.clear();
-            }
-            if(mBookAdapter == null) {
-                mBookAdapter = new BookAdapter(MyBooks.this, mBookList);
-                mRecyclerView.setAdapter(mBookAdapter);
-                mBookAdapter.setOnItemClickListener(MyBooks.this);
-            }
-            new FetchBookWithList(mBookList,mBookListID,mBookAdapter).execute();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
 }

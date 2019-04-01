@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.cmput301w19t15.Activity.CreateRequest;
 import com.example.cmput301w19t15.Activity.MainActivity;
+import com.example.cmput301w19t15.Functions.FetchBookWithID;
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.Objects.Notification;
 import com.example.cmput301w19t15.Objects.User;
@@ -20,6 +21,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 /**
  * this is intended to list borrowers and display it
  * WORK IN PROGRESS
@@ -28,7 +31,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class BorrowerBookView extends AppCompatActivity {
     private Button returnBook,location,scanBook;
     private Book book;
-    private String bookID, author,title,ownerID,ISBN,status,ownerEmail,image;
+    private String bookID,status;
+    private ArrayList<Book> newBook = new ArrayList<>();
     private Integer postion;
     private User owner;
     User loggedInUser = MainActivity.getUser();
@@ -43,29 +47,23 @@ public class BorrowerBookView extends AppCompatActivity {
          * get book information and display it
          */
         Bundle bundle = getIntent().getExtras();
-        ownerID = (String) bundle.get("OWNERID");
-        author = (String) bundle.get("AUTHOR");
-        ownerEmail = (String) bundle.get("OWNEREMAIL");
-        ISBN = (String) bundle.get("ISBN");
-        title = (String) bundle.get("TITLE");
         status = (String) bundle.get("STATUS");
         bookID = (String) bundle.get("BOOKID");
-        returnBook = (Button) findViewById(R.id.return_book);
+        location = (Button) findViewById(R.id.location);
 
-        TextView authorText = (TextView) findViewById(R.id.bookauthor_view);
-        authorText.setText(author);
+
         TextView titleText = (TextView) findViewById(R.id.booktitle_view);
-        titleText.setText(title);
+        TextView authorText = (TextView) findViewById(R.id.bookauthor_view);
         TextView isbnText = (TextView) findViewById(R.id.isbn_view);
-        isbnText.setText(ISBN);
         TextView ownerEmailText = (TextView) findViewById(R.id.owner_view);
-        ownerEmailText.setText(ownerEmail);
         TextView statusText = (TextView) findViewById(R.id.status_view);
-        statusText.setText(status);
+
+        new FetchBookWithID(newBook,titleText,authorText,isbnText,ownerEmailText,statusText).execute(bookID);
 
         /**
          * hide return button unless book is borrowed
          */
+        returnBook = (Button) findViewById(R.id.return_book);
         if(status.equals("borrowed")){
             returnBook.setVisibility(View.VISIBLE);
         }
@@ -80,7 +78,8 @@ public class BorrowerBookView extends AppCompatActivity {
         returnBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Notification notif = new Notification("ReturnRequest", bookID, title, loggedInUser.getUserID(), loggedInUser.getEmail(), ownerID, ownerEmail, ISBN, image,false);
+                Book book = newBook.get(0);
+                Notification notif = new Notification("ReturnRequest", bookID, book.getTitle(), loggedInUser.getUserID(), loggedInUser.getEmail(), book.getOwnerID(), book.getOwnerEmail(), book.getISBN(), book.getPhoto(),false);
                 //pick notification table to save the notif
                 DatabaseReference newNotif = FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID());
 
@@ -95,6 +94,17 @@ public class BorrowerBookView extends AppCompatActivity {
                 });
             }
         });
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //need to view location from where you picked up the book
+                //step one: start geolocation activity
+                //Intent intent = new Intent(BorrowerBookView.this, GeoLocation.class);
+                //add in location as extra intent or something
+                //idk where or how we are getting location from notifications and such
 
+
+            }
+        });
     }
 }
