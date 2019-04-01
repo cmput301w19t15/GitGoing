@@ -40,7 +40,7 @@ public class RatingTest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating_test);
-        //get user that is not logged in from  notif
+        //get user that is not logged in from  notif or whatever
         //get book that was returned from notif
         //rate user
         //userFinal.setRating((rateUser.getRating() + userRating.getRating())/userRating.getStepSize());
