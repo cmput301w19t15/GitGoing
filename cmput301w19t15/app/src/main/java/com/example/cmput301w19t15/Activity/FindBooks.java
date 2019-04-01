@@ -99,13 +99,13 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
             e.printStackTrace();
         }
 
-
         Button searchButton = findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("testing", "boost size: " + mBookList.size());
                 filterText = filterView.getText().toString();
+
                 loadBooks();
                 //new FetchBookWithList(mBookList,mBookListID, mBookAdapter).execute("findBooks");
             }
@@ -146,7 +146,7 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
         super.onStart();
         //updateBooks();
     }
-    //not used for now. NOPE it's actually runnig
+    //not used for now. NOPE it's actually running
     private void updateBooks(){
         try {
             if(mBookListID == null){
@@ -205,6 +205,7 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
      * @param myCallback part of loadMyBookFromFireBase
      */
     public void loadMyBookFromFireBase(final loadBookCallBack myCallback){
+
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("books");
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -223,13 +224,16 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
                             }
                         }
                         // filter books
+                        Log.d("hey","Test0");
                         if (filterText != " ") {
+                            Log.d("hey","Test1");
                             for (Book book : allBooks) {
                                 if(book.getTitle().toLowerCase().contains(filterText.toLowerCase())
                                 || book.getAuthor().toLowerCase().contains(filterText.toLowerCase())
                                 || book.getOwnerEmail().toLowerCase().contains(filterText.toLowerCase())
                                 || book.getISBN().toLowerCase().contains(filterText.toLowerCase())
                                 || book.getStatus().toLowerCase().contains(filterText.toLowerCase())) {
+                                    Log.d("hey","Test2");
                                     filteredBooks.add(book);
                                 }
                             }
