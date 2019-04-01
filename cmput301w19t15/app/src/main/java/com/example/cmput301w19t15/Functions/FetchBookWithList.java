@@ -24,6 +24,7 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
     private ArrayList<String> bookListID;
     private BookAdapter bookAdapter;
     private String listType;
+    private String filter;
     private User loggedInUser = MainActivity.getUser();
 
     public FetchBookWithList(ArrayList<Book> bookList, ArrayList<String> idList, BookAdapter bookAdapter){
@@ -36,8 +37,12 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
     protected ArrayList<Book> doInBackground(String... strings) {
         bookList.clear();
         final String bookidlist = bookListID.toString();
-        if(strings.length > 0) {
-            listType = strings[0];  //
+        if(strings.length == 1) {
+            listType = strings[0];
+        }
+        if(strings.length == 2){
+            listType = strings[0];
+            filter = strings[1];
         }
         try{
             DatabaseReference bookReference = FirebaseDatabase.getInstance().getReference().child("books");
@@ -47,25 +52,36 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
                     if(dataSnapshot.exists()) {
                         try {
                             for (DataSnapshot books : dataSnapshot.getChildren()) {
-                                String bookid = books.child("bookID").getValue().toString();
-                                if(listType != null){
-                                    Book book = books.getValue(Book.class);
-                                    if(listType.equalsIgnoreCase("findBooks")){
-                                        bookList.add(book);
-                                    }else if((listType.equalsIgnoreCase("WatchList"))&& bookidlist.contains(bookid)) {
-                                        bookList.add(book);
-                                        //listType.equalsIgnoreCase("Requested") ||
-                                        //
-                                    }
-                                    else if(listType.equalsIgnoreCase("Accepted") && bookidlist.contains(bookid) && book.getBorrowerID().equalsIgnoreCase(loggedInUser.getUserID())){
-                                        bookList.add(book);
-                                    }else if(bookidlist.contains(bookid) && book.getStatus().equalsIgnoreCase(listType)) {
-                                        bookList.add(book);
-                                    }
+                                try {
+                                    String bookid = books.child("bookID").getValue().toString();
+                                    if (listType != null) {
+                                        Book book = books.getValue(Book.class);
+                                        if (listType.equalsIgnoreCase("findBooks") && !bookidlist.contains(bookid)) {
+                                            bookList.add(book);
+                                        } else if(listType.equalsIgnoreCase("filter")){
+                                            if(filter.isEmpty() || filter.equalsIgnoreCase(" "))
+                                                bookList.add(book);
+                                            else if(book.getTitle().toLowerCase().contains(filter.toLowerCase())
+                                                    || book.getAuthor().toLowerCase().contains(filter.toLowerCase())
+                                                    || book.getOwnerEmail().toLowerCase().contains(filter.toLowerCase())
+                                                    || book.getISBN().toLowerCase().contains(filter.toLowerCase())
+                                                    || book.getStatus().toLowerCase().contains(filter.toLowerCase())) {
+                                                bookList.add(book);
+                                            }
+                                        } else if ((listType.equalsIgnoreCase("WatchList") || listType.equalsIgnoreCase("Requested")) && bookidlist.contains(bookid)) {
+                                            bookList.add(book);
+                                        } else if ((listType.equalsIgnoreCase("Accepted") || listType.equalsIgnoreCase("Borrowed")) && bookidlist.contains(bookid) && book.getBorrowerID().equalsIgnoreCase(loggedInUser.getUserID())) {
+                                            bookList.add(book);
+                                        }
 
-                                }else if(bookidlist.contains(bookid)){
-                                    Book book = books.getValue(Book.class);
-                                    bookList.add(book);
+
+                                    } else if (bookidlist.contains(bookid)) {
+                                        Book book = books.getValue(Book.class);
+                                        bookList.add(book);
+                                    }
+                                }catch(Exception e){
+                                    Log.d("tesseting",e.toString());
+                                    e.printStackTrace();
                                 }
                             }
                         } catch (Exception e){

@@ -25,6 +25,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -122,43 +123,20 @@ public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingSc
             @Override
             public void onClick(View v) {
                 if (correctScan.equals("true")) {
+                    Log.d("MapTest", bookId);
                     scanStatus.setText("Scan Complete");
-                    loggedInUser.addToMyBorrowedBooks(notif.getBookID());
-                    try {
-                        FirebaseDatabase.getInstance().getReference().child("books").child(bookId).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    try {
-                                        Book book = dataSnapshot.getValue(Book.class);
-                                        Book bookNew = new Book(book.getTitle(), book.getAuthor(), book.getISBN(), book.getPhoto(), book.getOwnerEmail(),
-                                                book.getOwnerID(), book.getRating(), book.getRatingCount(), book.getRatingTotal());
-                                        bookNew.setBookID(bookId);
-                                        bookNew.setStatus("Available");
-                                        DatabaseReference newBook = FirebaseDatabase.getInstance().getReference().child("books").child(bookId);
-                                        newBook.setValue(bookNew).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
+                    Log.d("hello", "0");
+                    //loggedInUser.addToMyBorrowedBooks(bookID);
+                    DatabaseReference bookRef = FirebaseDatabase.getInstance().getReference().child("books").child(bookId);
+                    bookRef.child("status").setValue("Available").addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("MapTest", "Successfully Added Notification 1");
+                            //startRating();
+                        }
 
-                                            }
-                                        });
+                    });
 
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                Log.w("testing", "Error: ", databaseError.toException());
-                            }
-                        });
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Isbn scan not complete",Toast.LENGTH_LONG).show();
@@ -168,7 +146,6 @@ public class ViewReturnRequestOwner extends AppCompatActivity implements ZXingSc
         Log.d("hello", notif.getOwnerScanned());
         if (notif.getOwnerScanned().equals("True")){
             Toast.makeText(getApplicationContext(),"Isbn scan matched",Toast.LENGTH_LONG).show();
-            Log.d("hello", "youris bad");
             scan = (Button) findViewById(R.id.scan);
             scan.setOnClickListener(new View.OnClickListener() {
                 @Override

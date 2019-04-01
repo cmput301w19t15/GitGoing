@@ -12,7 +12,7 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.example.cmput301w19t15.Activity;
-//:)
+//
 
 
 import android.os.Bundle;
@@ -122,15 +122,19 @@ public class FindUsers extends AppCompatActivity implements UserAdapter.OnItemCl
                         ArrayList<User> allUsers = new ArrayList<>();
                         ArrayList<User> filteredUsers = new ArrayList<>();
                         for (DataSnapshot users : dataSnapshot.getChildren()) {
-                                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                if (user != null) {
-                                    String userID = users.child("name").getValue().toString();
-                                    String emailID = users.child("email").getValue().toString();
-                                    User currentUser = new User(emailID, userID);
-                                    //ArrayList<String> userInformation = new ArrayList<>();
-                                    //userInformation.add(dataSnapshot.child("name").getValue().toString());
-                                    //userInformation.add(dataSnapshot.child("email").getValue().toString());
-                                    allUsers.add(currentUser);
+                            //final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            if (users != null) {
+                                    try {
+                                        String userID = users.child("name").getValue().toString();
+                                        String emailID = users.child("email").getValue().toString();
+                                        User currentUser = new User(emailID, userID);
+                                        //ArrayList<String> userInformation = new ArrayList<>();
+                                        //userInformation.add(dataSnapshot.child("name").getValue().toString());
+                                        //userInformation.add(dataSnapshot.child("email").getValue().toString());
+                                        allUsers.add(currentUser);
+                                    } catch (Exception e ){
+                                        e.printStackTrace();
+                                    }
                             }
                         }
                         // filter users

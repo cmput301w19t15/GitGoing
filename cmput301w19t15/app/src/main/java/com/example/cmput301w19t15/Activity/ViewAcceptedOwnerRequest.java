@@ -29,6 +29,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import com.google.firebase.database.DataSnapshot;
@@ -159,11 +160,18 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
                                                     notifs.child("isbn").getValue().equals(notif.getISBN())) {
                                                 requesterNotification = notifs.getValue(Notification.class);
                                                 Log.d("hello", "3");
-                                                requesterNotification.setOwnerScanned("True");
+                                                //requesterNotification.setOwnerScanned("True");
                                                 oldrequesterID= notif.getNotifID();
-                                                FirebaseDatabase.getInstance().getReference("notifications").child(requesterNotification.getNotifID()).setValue(requesterNotification);
+                                                //FirebaseDatabase.getInstance().getReference("notifications").child(requesterNotification.getNotifID()).setValue(requesterNotification);
                                                 Log.d("hello", "thomas bad");
                                                 FirebaseDatabase.getInstance().getReference("notifications").child(oldrequesterID).removeValue();
+                                                DatabaseReference notifRef = FirebaseDatabase.getInstance().getReference().child("notifications").child(requesterNotification.getNotifID());
+                                                notifRef.child("ownerScanned").setValue("True").addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d("MapTest","Successfully Added Notification 1");
+                                                    }
+                                                });
 
                                                 break;
                                             }
@@ -186,13 +194,7 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Isbn scan not complete",Toast.LENGTH_LONG).show();
-            }
-            if (correctScan =="true") {
-                FirebaseDatabase.getInstance().getReference("notifications").child(requesterNotification.getNotifID()).setValue(requesterNotification);
-                Log.d("hello", "thomas bad");
-                FirebaseDatabase.getInstance().getReference("notifications").child(oldrequesterID).removeValue();
-            }
-
+                }
             }
         });
 }

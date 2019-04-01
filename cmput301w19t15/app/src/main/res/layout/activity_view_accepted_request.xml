@@ -12,7 +12,7 @@
         android:layout_width="107dp"
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="84dp"
+        android:layout_marginBottom="96dp"
         android:background="@drawable/button1"
         android:text="VERIFY"
         android:textColor="#ffffff"
@@ -25,7 +25,7 @@
         android:layout_width="107dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="84dp"
+        android:layout_marginBottom="96dp"
         android:background="@drawable/button1"
         android:text="SCAN"
         android:textColor="#ffffff"
@@ -113,13 +113,13 @@
         android:id="@+id/scan_status"
         android:layout_width="128dp"
         android:layout_height="50dp"
-        android:layout_marginStart="248dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/cancel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.703"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/owner" />
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <Button
@@ -140,13 +140,15 @@
 
     <com.google.android.gms.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mapView"
-        android:layout_width="205dp"
-        android:layout_height="166dp"
+        android:layout_width="288dp"
+        android:layout_height="238dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="172dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/scan_status"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.424"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/owner" />
 

@@ -24,6 +24,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -131,10 +132,13 @@ public class ViewReturnRequestBorrower extends AppCompatActivity implements ZXin
             public void onClick(View v) {
                 if (correctScan.equals("true")) {
                     scanStatus.setText("Scan Complete");
+                    Log.d("hello", "0");
                     try {
+                        Log.d("hello", "1");
                         FirebaseDatabase.getInstance().getReference().child("notifications").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Log.d("hello", "2");
                                 if (dataSnapshot.exists()) {
                                     try {
                                         for (DataSnapshot notifs : dataSnapshot.getChildren()) {
@@ -143,10 +147,21 @@ public class ViewReturnRequestBorrower extends AppCompatActivity implements ZXin
                                                     notifs.child("notifyToID").getValue().equals(notif.getNotifyFromID()) &&
                                                     notifs.child("isbn").getValue().equals(notif.getISBN())) {
                                                 requesterNotification = notifs.getValue(Notification.class);
-                                                requesterNotification.setOwnerScanned("True");
+                                                Log.d("hello", "3");
+                                                //requesterNotification.setOwnerScanned("True");
                                                 oldrequesterID= notif.getNotifID();
-                                                FirebaseDatabase.getInstance().getReference("notifications").child(requesterNotification.getNotifID()).setValue(requesterNotification);
+                                                //FirebaseDatabase.getInstance().getReference("notifications").child(requesterNotification.getNotifID()).setValue(requesterNotification);
+                                                Log.d("hello", "thomas bad");
                                                 FirebaseDatabase.getInstance().getReference("notifications").child(oldrequesterID).removeValue();
+                                                DatabaseReference notifRef = FirebaseDatabase.getInstance().getReference().child("notifications").child(requesterNotification.getNotifID());
+                                                notifRef.child("ownerScanned").setValue("True").addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d("MapTest","Successfully Added Notification 1");
+                                                        //startRating();
+                                                    }
+                                                });
+
                                                 break;
                                             }
                                         }
@@ -168,8 +183,7 @@ public class ViewReturnRequestBorrower extends AppCompatActivity implements ZXin
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Isbn scan not complete",Toast.LENGTH_LONG).show();
-            }
-
+                }
             }
         });
 }

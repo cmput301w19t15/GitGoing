@@ -29,6 +29,7 @@ public class BookInfo extends AppCompatActivity {
      * @param saveInstanceState
      * @see MyBooks , FindBooks
      */
+    private boolean notComplete = false;
     User loggedInUser;
     ArrayList<Book> book = new ArrayList<>();
     String bookID;
@@ -43,9 +44,9 @@ public class BookInfo extends AppCompatActivity {
         //Get book values from the MyBook class the user has clicked on the book
         bookID = (String) getIntent().getExtras().getString("BOOKID");
         //display book information as edit text
-        EditText titleEditText = findViewById(R.id.editMyBookTitle);
-        EditText authorEditText = findViewById(R.id.editMyBookAuthor);
-        EditText ISBNEditText = findViewById(R.id.editMyBookISBN);
+        titleEditText = findViewById(R.id.editMyBookTitle);
+        authorEditText = findViewById(R.id.editMyBookAuthor);
+        ISBNEditText = findViewById(R.id.editMyBookISBN);
         //image = findViewById(R.id.imageView);
 
         new FetchBookWithID(book,titleEditText,authorEditText,ISBNEditText).execute(bookID);
@@ -96,11 +97,12 @@ public class BookInfo extends AppCompatActivity {
         String title = titleEditText.getText().toString();
         String author = authorEditText.getText().toString();
         String isbn = ISBNEditText.getText().toString();
+
+
         book.get(0).setTitle(title);
         book.get(0).setAuthor(author);
         book.get(0).setISBN(isbn);
         FirebaseDatabase.getInstance().getReference("books").child(bookID).setValue(book.get(0));// update books
-
         finish();
     }
     /**
