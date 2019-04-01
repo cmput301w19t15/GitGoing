@@ -18,6 +18,7 @@ import android.location.Location;
 
 
 import com.example.cmput301w19t15.Activity.ViewAcceptedRequest;
+import com.example.cmput301w19t15.InProgress.AcceptRequest;
 import com.example.cmput301w19t15.Objects.Notification;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -93,11 +94,33 @@ public class GeoLocation extends FragmentActivity implements OnMapReadyCallback,
                     acceptedNotif.setLatLng(resultLocation);
                     acceptedOwnerNotif.setLatLng(resultLocation);
 
+
                     FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedNotif.getNotifID()).child("latitude").setValue(la);
                     FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedNotif.getNotifID()).child("longitude").setValue(lo);
 
-                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedOwnerNotif.getNotifID()).child("latitude").setValue(la);
-                    FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedOwnerNotif.getNotifID()).child("longitude").setValue(lo);
+
+                    DatabaseReference notifRef = FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedOwnerNotif.getNotifID());
+                    //FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedOwnerNotif.getNotifID()).child("latitude").setValue(la);
+                    //FirebaseDatabase.getInstance().getReference().child("notifications").child(acceptedOwnerNotif.getNotifID()).child("longitude").setValue(lo);
+
+                    notifRef.child("latitude").setValue(la).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("MapTest","Successfully Added Notification 1");
+                        }
+                    });
+
+
+
+                    notifRef.child("longitude").setValue(lo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                Log.d("MapTest","Successfully Added Notification 2");
+                            }
+                        }
+                    });
+
 
                     finish();
                 }

@@ -114,14 +114,18 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
         Boolean read = notif.getRead();
         String title = notif.getTitle();
         String type = notif.getType();
+        double latitude = notif.getLatitude();
+        double longitude = notif.getLongitude();
 
 
         if (read == false) {
             read = true;
-            FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("notifications").child(notifID);
+            ref.child("read").setValue(read);
+            //FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).removeValue();
             notif.setRead(read);
-            notif.setNotifID(notifID);
-            FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).setValue(notif);
+            //notif.setNotifID(notifID);
+            //FirebaseDatabase.getInstance().getReference("notifications").child(notif.getNotifID()).setValue(notif);
 
         }
         //else {
