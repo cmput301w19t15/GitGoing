@@ -111,34 +111,6 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
             }
         });
 
-
-/*
-        bookList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Book book = (Book) bookList.getItemAtPosition(i);
-                String ownerEmail = book.getOwnerEmail();
-                User borrower = MainActivity.getUser();
-                //Request request = new Request(owner, borrower, book);
-                borrower.addToMyRequestedBooks(book);
-                //owner.addToRequestedBooks(book);
-
-
-            }
-        });
-
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-
-        });
-*/
-
-
-        //mBookAdapter = new ArrayAdapter<Book>(this, R.layout.list_item, mBookList);
-
-
     }
 
     @Override
@@ -149,11 +121,8 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
     //not used for now. NOPE it's actually running
     private void updateBooks(){
         try {
-            if(mBookListID == null){
-                mBookListID = loggedInUser.getMyRequestedBooksID();
-            }else{
-                mBookListID.clear();
-            }
+            mBookListID.clear();
+            mBookListID = loggedInUser.getMyRequestedBooksID();
             if(mBookList == null){
                 mBookList = new ArrayList<>();
             }else{
@@ -164,92 +133,10 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
                 mRecyclerView.setAdapter(mBookAdapter);
                 mBookAdapter.setOnItemClickListener(FindBooks.this);
             }
-            //loadBooks();
-            //new FetchBookWithList(mBookList, mBookListID, mBookAdapter).execute("findBooks");
+            new FetchBookWithList(mBookList, mBookListID, mBookAdapter).execute("findBooks");
         }catch(Exception e){
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Load books into recyclerview
-     */
-    public void loadBooks(){
-        loadMyBookFromFireBase(new loadBookCallBack() {
-            @Override
-            public void loadBookCallBack(ArrayList<Book> value) {
-                mBookList = (ArrayList<Book>) value.clone();
-                Log.d("testing","book size: "+ mBookList.size());
-                mBookAdapter = new BookAdapter(FindBooks.this, mBookList);
-                mRecyclerView.setAdapter(mBookAdapter);
-                mBookAdapter.setOnItemClickListener(FindBooks.this);
-            }
-        });
-    }
-
-    /**
-     * The interface Load book callback.
-     */
-    public interface loadBookCallBack {
-        /**
-         * Load book call back.
-         *
-         * @param value the value
-         */
-        void loadBookCallBack(ArrayList<Book> value);
-    }
-
-    /**
-     * Load book from firebase.
-     *
-     * @param myCallback part of loadMyBookFromFireBase
-     */
-    public void loadMyBookFromFireBase(final loadBookCallBack myCallback){
-
-        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("books");
-        userReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    try {
-                        ArrayList<Book> allBooks = new ArrayList<>();
-                        ArrayList<Book> filteredBooks = new ArrayList<>();
-                        for (DataSnapshot books : dataSnapshot.getChildren()) {
-                            Book book = books.getValue(Book.class);
-                                if (book.getOwnerID() != null && !book.getOwnerID().equals(loggedInUser.getUserID())) {
-                                    allBooks.add(book);
-
-                            }
-                        }
-                        // filter books
-                        Log.d("hey","Test0");
-                        if (filterText != " ") {
-                            Log.d("hey","Test1");
-                            for (Book book : allBooks) {
-                                if(book.getTitle().toLowerCase().contains(filterText.toLowerCase())
-                                || book.getAuthor().toLowerCase().contains(filterText.toLowerCase())
-                                || book.getOwnerEmail().toLowerCase().contains(filterText.toLowerCase())
-                                || book.getISBN().toLowerCase().contains(filterText.toLowerCase())
-                                || book.getStatus().toLowerCase().contains(filterText.toLowerCase())) {
-                                    Log.e("hey","Test2");
-                                    filteredBooks.add(book);
-                                }
-                            }
-                        } else {
-                            Log.e("TAG", "NOPE " + filterText);
-                            filteredBooks = allBooks;
-                        }
-                        myCallback.loadBookCallBack(filteredBooks);
-                    } catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w("testing","Error: ", databaseError.toException());
-            }
-        });
     }
 
     /**

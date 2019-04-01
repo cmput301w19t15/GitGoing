@@ -38,9 +38,10 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
         bookList.clear();
         final String bookidlist = bookListID.toString();
         if(strings.length == 1) {
-            listType = strings[0];  //
+            listType = strings[0];
         }
         if(strings.length == 2){
+            listType = strings[0];
             filter = strings[1];
         }
         try{
@@ -58,9 +59,7 @@ public class FetchBookWithList extends AsyncTask<String, Void, ArrayList<Book>> 
                                         if (listType.equalsIgnoreCase("findBooks") && !bookidlist.contains(bookid)) {
                                             bookList.add(book);
                                         } else if(listType.equalsIgnoreCase("filter")){
-                                            Log.d("testing", "in here");
-                                            Log.d("testing","filter lenght: " + filter.length());
-                                            if(filter.isEmpty())
+                                            if(filter.isEmpty() || filter.equalsIgnoreCase(" "))
                                                 bookList.add(book);
                                             else if(book.getTitle().toLowerCase().contains(filter.toLowerCase())
                                                     || book.getAuthor().toLowerCase().contains(filter.toLowerCase())
