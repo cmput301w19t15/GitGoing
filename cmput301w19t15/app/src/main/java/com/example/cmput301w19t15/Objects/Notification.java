@@ -21,8 +21,7 @@ public class Notification implements Serializable {
 
     private Boolean OwnerScanned;
     private LatLng latLng;
-    private double latitude;
-    private double longitude;
+
     private String ownerScanned;
     
 
@@ -138,12 +137,5 @@ public class Notification implements Serializable {
 
     public void setOwnerScanned(String scanned) {this.ownerScanned = scanned; }
 
-    public void setLatitude(double latitude) { this.latitude = latitude; }
-
-    public double getLatitude() { return latitude; }
-
-    public double getLongitude() { return longitude; }
-
-    public void setLongitude(double longitude) { this.longitude = longitude; }
 }
 

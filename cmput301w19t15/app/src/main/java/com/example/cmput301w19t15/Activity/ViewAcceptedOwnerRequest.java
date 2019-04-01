@@ -68,7 +68,8 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
         if (correctScan.equals("false")){
             scanStatus.setText("Scan Incomplete");
         }
-
+        requesterNotification = notif;
+        oldrequesterID = "null";
 
         //retrieve data from firebase
         mapView =  (MapView) findViewById(R.id.mapView);
@@ -111,11 +112,13 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
             public void onClick(View v) {
                 if (correctScan.equals("true")) {
                     scanStatus.setText("Scan Complete");
-                    Log.d("hello", "thomas bad");
+                    Log.d("hello", "0");
                     try {
+                        Log.d("hello", "1");
                         FirebaseDatabase.getInstance().getReference().child("notifications").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Log.d("hello", "2");
                                 if (dataSnapshot.exists()) {
                                     try {
                                         for (DataSnapshot notifs : dataSnapshot.getChildren()) {
@@ -124,6 +127,7 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
                                                     notifs.child("notifyToID").getValue().equals(notif.getNotifyFromID()) &&
                                                     notifs.child("isbn").getValue().equals(notif.getISBN())) {
                                                 requesterNotification = notifs.getValue(Notification.class);
+                                                Log.d("hello", "3");
                                                 requesterNotification.setOwnerScanned("True");
                                                 oldrequesterID= notif.getNotifID();
                                                 FirebaseDatabase.getInstance().getReference("notifications").child(requesterNotification.getNotifID()).setValue(requesterNotification);
@@ -151,6 +155,11 @@ public class ViewAcceptedOwnerRequest extends AppCompatActivity implements ZXing
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Isbn scan not complete",Toast.LENGTH_LONG).show();
+            }
+            if (correctScan =="true") {
+                FirebaseDatabase.getInstance().getReference("notifications").child(requesterNotification.getNotifID()).setValue(requesterNotification);
+                Log.d("hello", "thomas bad");
+                FirebaseDatabase.getInstance().getReference("notifications").child(oldrequesterID).removeValue();
             }
 
             }
