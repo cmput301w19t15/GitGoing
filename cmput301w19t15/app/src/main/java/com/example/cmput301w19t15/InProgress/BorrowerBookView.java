@@ -92,6 +92,5 @@ public class BorrowerBookView extends AppCompatActivity {
                 });
             }
         });
-
     }
 }
