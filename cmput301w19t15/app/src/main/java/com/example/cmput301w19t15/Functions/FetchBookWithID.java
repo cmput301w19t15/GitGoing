@@ -66,21 +66,24 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
                             Book book = dataSnapshot.getValue(Book.class);
                             books.add(0,book);
 
-                            if(titleEditText != null && authorEditText != null && isbnText != null) {
-                                titleEditText.setText("world");
+                            if(titleEditText != null && authorEditText != null && ISBNEditText != null) {
+                                titleEditText.setText(book.getTitle());
+
                                 authorEditText.setText(book.getAuthor());
                                 ISBNEditText.setText(book.getISBN());
                                 String imageString = book.getPhoto();
                                 image.setImageBitmap(ConvertPhoto.convert(imageString));
                             }
-                            else if(titleText != null && authorText != null && isbnText != null){
+
+                            if(titleText != null && authorText != null && isbnText != null){
+
                                 titleText.setText(book.getTitle());
                                 authorText.setText(book.getAuthor());
                                 isbnText.setText(book.getISBN());
                                 ownerEmailText.setText(book.getOwnerEmail());
                                 statusText.setText(book.getStatus());
                             }
-                            else if(title != null && author != null && isbn != null){
+                            if(title != null && author != null && isbn != null){
                                 title=book.getTitle();
                                 author=book.getAuthor();
                                 isbn=book.getISBN();
@@ -91,6 +94,7 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
                             }
 
                         } catch (Exception e){
+                            Log.d("testing",e.toString());
                             e.printStackTrace();
                         }
                     }
