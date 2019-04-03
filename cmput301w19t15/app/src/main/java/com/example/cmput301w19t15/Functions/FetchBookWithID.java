@@ -71,9 +71,6 @@ public class FetchBookWithID extends AsyncTask<String, Void, String> {
      * The Return date.
      */
     Long returnDate;
-    TextView authorText, titleText, isbnText, ownerEmailText,statusText;
-    private String title, author, isbn, ownerEmail, status,photo,rating;
-    private Long returnDate;
 
     /**
      * Gets the book title, id, author, and ISBN

@@ -8,12 +8,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.cmput301w19t15.Functions.ConvertPhoto;
 import com.example.cmput301w19t15.Functions.FetchBookInfo;
@@ -22,6 +25,8 @@ import com.example.cmput301w19t15.Functions.FetchBookWithList;
 import com.example.cmput301w19t15.Objects.Book;
 import com.example.cmput301w19t15.R;
 import com.example.cmput301w19t15.Objects.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -134,6 +139,29 @@ public class BookInfo extends AppCompatActivity {
      */
     private void deleteBook(){
         loggedInUser.removeMyBooksID(bookID);
+
+        FirebaseDatabase.getInstance().getReference("books").child(bookID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                FirebaseDatabase.getInstance().getReference("deletedBooks").child(dataSnapshot.getKey()).setValue(dataSnapshot.getValue(), new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if(databaseError == null){
+                            Log.i("TAG", "onComplete(: success)");
+                            FirebaseDatabase.getInstance().getReference("books").child(bookID).removeValue();
+                        }else{
+                            Log.e("TAG","onComplete: failure: " + databaseError.getMessage() +" : " +databaseError.getDetails());
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("TAG","onCancelled: failure: " + databaseError.getMessage() +" : " +databaseError.getDetails());
+            }
+        });
+
         FirebaseDatabase.getInstance().getReference("books").child(bookID).removeValue();// delete book
         finish();
     }

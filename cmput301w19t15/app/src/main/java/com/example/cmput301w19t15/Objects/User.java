@@ -19,11 +19,15 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.cmput301w19t15.Activity.CreateRequest;
 import com.example.cmput301w19t15.Activity.FindUsers;
 import com.example.cmput301w19t15.Activity.LoginActivity;
+import com.example.cmput301w19t15.Activity.MainActivity;
 import com.example.cmput301w19t15.Activity.Profile;
 import com.example.cmput301w19t15.Activity.RequestedBookList;
 import com.google.android.gms.common.data.DataBufferSafeParcelable;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -366,6 +370,7 @@ public class User {
                         myWatchListBooksID = new ArrayList<>(value);
                         break;
                 }
+                final User loggedinUser = MainActivity.getUser();
                 if (bookListType.equalsIgnoreCase("myWatchListBooksID")) {
                     DatabaseReference bookReference = FirebaseDatabase.getInstance().getReference().child("books");
                     bookReference.addValueEventListener(new ValueEventListener() {
@@ -376,13 +381,68 @@ public class User {
                                     for (String singleBook : getMyRequestedBooksID()) {
                                         if (!dataSnapshot.child(singleBook).exists()) {
                                             removeMyRequestedBooksID(singleBook);
+                                            FirebaseDatabase.getInstance().getReference().child("deletedBooks").child(singleBook).addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                    if(dataSnapshot.exists()) {
+                                                        Book book = dataSnapshot.getValue(Book.class);
+                                                        Notification notif = new Notification("requestedDeleted", book.getBookID(), book.getTitle(), book.getOwnerID(), book.getOwnerEmail(), loggedinUser.getUserID(), loggedinUser.getEmail(),
+                                                                book.getISBN(), book.getPhoto(), false);
+                                                        //pick notification table to save the notif, add notif to database
+                                                        FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID()).setValue(notif);
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                }
+                                            });
                                         }
                                     }
                                     for (String singleBook : getMyWatchListBooksID()) {
                                         if (!dataSnapshot.child(singleBook).exists()) {
                                             removeMyWatchListBooksID(singleBook);
+                                            Log.d("TAG","Books Have been deleted" + singleBook);
+                                            //notify book has been deleted
+                                            FirebaseDatabase.getInstance().getReference().child("deletedBooks").child(singleBook).addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                    if(dataSnapshot.exists()) {
+                                                        Book book = dataSnapshot.getValue(Book.class);
+                                                        Notification notif = new Notification("watchListDeleted", book.getBookID(), book.getTitle(), book.getOwnerID(), book.getOwnerEmail(), loggedinUser.getUserID(), loggedinUser.getEmail(),
+                                                                book.getISBN(), book.getPhoto(), false);
+                                                        //pick notification table to save the notif, add notif to database
+                                                        FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID()).setValue(notif);
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                }
+                                            });
+                                        }else{
+                                            //check if book is avalible
+                                            FirebaseDatabase.getInstance().getReference().child("books").child(singleBook).addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                    if(dataSnapshot.exists()) {
+                                                        Book book = dataSnapshot.getValue(Book.class);
+                                                        Notification notif = new Notification("WatchList Available", book.getBookID(), book.getTitle(), book.getOwnerID(), book.getOwnerEmail(), loggedinUser.getUserID(), loggedinUser.getEmail(),
+                                                                book.getISBN(), book.getPhoto(), false);
+                                                        //pick notification table to save the notif, add notif to database
+                                                        FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID()).setValue(notif);
+                                                    }
+                                                }
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                }
+                                            });
                                         }
                                     }
+
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }

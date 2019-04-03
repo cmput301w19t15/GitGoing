@@ -91,16 +91,6 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
             }
         });
 
-        temp = findViewById(R.id.button2);
-        temp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,RatingTest.class);
-                startActivity(intent);
-            }
-        });
-
-
         findUser = findViewById(R.id.find_user);
         findUser.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
