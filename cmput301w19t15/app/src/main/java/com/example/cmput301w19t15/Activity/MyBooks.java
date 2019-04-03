@@ -102,7 +102,10 @@ public class MyBooks extends AppCompatActivity implements BookAdapter.OnItemClic
         super.onStart();
         loggedInUser = MainActivity.getUser();
         try {
+            mBookList.clear();
+            mBookAdapter.notifyDataSetChanged();
             mBookListID = loggedInUser.getMyBooksID();
+            mRecyclerView.removeAllViews();
             mBookList = new ArrayList<>();
         }catch(Exception e){
             e.printStackTrace();
