@@ -184,15 +184,8 @@ public class NotifyActivity extends AppCompatActivity implements NotifAdapter.On
             intent.putExtra("NotifID",notifID);
             startActivityForResult(intent, 1);
         }else if(notif.getType().equalsIgnoreCase("requestedDeleted")){
-            Intent intent = new Intent(NotifyActivity.this, ViewReturnRequestBorrower.class);
-            intent.putExtra("Notification",notif);
-            intent.putExtra("NotifID",notifID);
-            startActivityForResult(intent, 1);
         }else if(notif.getType().equalsIgnoreCase("watchListDeleted")){
-            Intent intent = new Intent(NotifyActivity.this, ViewReturnRequestBorrower.class);
-            intent.putExtra("Notification",notif);
-            intent.putExtra("NotifID",notifID);
-            startActivityForResult(intent, 1);
+
         }
     }
 }

@@ -362,16 +362,13 @@ public class User {
                 switch (bookListType) {
                     case "myBooksID":
                         myBooksID = new ArrayList<>(value);
-                        break;
                     case "myRequestedBooksID":
-                        myRequestedBooksID = new ArrayList<>(value);
-                        break;
+                        myRequestedBooksID = new ArrayList<>(value); break;
                     case "myWatchListBooksID":
-                        myWatchListBooksID = new ArrayList<>(value);
-                        break;
+                        myWatchListBooksID = new ArrayList<>(value); break;
                 }
-                final User loggedinUser = MainActivity.getUser();
-                if (bookListType.equalsIgnoreCase("myWatchListBooksID")) {
+
+                if (bookListType.equalsIgnoreCase("myRequestedBooksID")) {
                     DatabaseReference bookReference = FirebaseDatabase.getInstance().getReference().child("books");
                     bookReference.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -384,26 +381,45 @@ public class User {
                                             FirebaseDatabase.getInstance().getReference().child("deletedBooks").child(singleBook).addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                    if(dataSnapshot.exists()) {
+                                                    if (dataSnapshot.exists()) {
                                                         Book book = dataSnapshot.getValue(Book.class);
-                                                        Notification notif = new Notification("requestedDeleted", book.getBookID(), book.getTitle(), book.getOwnerID(), book.getOwnerEmail(), loggedinUser.getUserID(), loggedinUser.getEmail(),
+                                                        Notification notif = new Notification("requestedDeleted", book.getBookID(), book.getTitle(), book.getOwnerID(), book.getOwnerEmail(), getUserID(), getEmail(),
                                                                 book.getISBN(), book.getPhoto(), false);
                                                         //pick notification table to save the notif, add notif to database
                                                         FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID()).setValue(notif);
                                                     }
                                                 }
-
                                                 @Override
                                                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
                                                 }
                                             });
                                         }
                                     }
+                                } catch (Exception e) {
+                                    Log.d("testing", e.toString());
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.w("testing", "Error: ", databaseError.toException());
+                        }
+                    });
+                }
+
+                if (bookListType.equalsIgnoreCase("myWatchListBooksID")) {
+                    Log.d("testing"," in here 0000");
+                    DatabaseReference bookReference = FirebaseDatabase.getInstance().getReference().child("books");
+                    bookReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                try {
                                     for (String singleBook : getMyWatchListBooksID()) {
                                         if (!dataSnapshot.child(singleBook).exists()) {
                                             removeMyWatchListBooksID(singleBook);
-                                            Log.d("TAG","Books Have been deleted" + singleBook);
                                             //notify book has been deleted
                                             FirebaseDatabase.getInstance().getReference().child("deletedBooks").child(singleBook).addValueEventListener(new ValueEventListener() {
                                                 @Override
@@ -411,7 +427,7 @@ public class User {
                                                     if(dataSnapshot.exists()) {
                                                         Book book = dataSnapshot.getValue(Book.class);
                                                         if (book.getStatus().equalsIgnoreCase("Available")) {
-                                                            Notification notif = new Notification("watchListDeleted", book.getBookID(), book.getTitle(), book.getOwnerID(), book.getOwnerEmail(), loggedinUser.getUserID(), loggedinUser.getEmail(),
+                                                            Notification notif = new Notification("watchListDeleted", book.getBookID(), book.getTitle(), book.getOwnerID(), book.getOwnerEmail(), getUserID(), getEmail(),
                                                                     book.getISBN(), book.getPhoto(), false);
                                                             //pick notification table to save the notif, add notif to database
                                                             FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID()).setValue(notif);
@@ -431,7 +447,7 @@ public class User {
                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                     if(dataSnapshot.exists()) {
                                                         Book book = dataSnapshot.getValue(Book.class);
-                                                        Notification notif = new Notification("WatchList Available", book.getBookID(), book.getTitle(), book.getOwnerID(), book.getOwnerEmail(), loggedinUser.getUserID(), loggedinUser.getEmail(),
+                                                        Notification notif = new Notification("WatchList Available", book.getBookID(), book.getTitle(), book.getOwnerID(), book.getOwnerEmail(), getUserID(), getEmail(),
                                                                 book.getISBN(), book.getPhoto(), false);
                                                         //pick notification table to save the notif, add notif to database
                                                         FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID()).setValue(notif);

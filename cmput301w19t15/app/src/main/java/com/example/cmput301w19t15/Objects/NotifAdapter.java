@@ -68,6 +68,12 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.NotifViewHol
         else if(currentNotif.getType().equals("ReturnBorrower")){
             notifType = "Borrowing complete, view return details";
         }
+        else if(currentNotif.getType().equals("requestedDeleted")){
+            notifType = "Requested Book has been deleted";
+        }
+        else if(currentNotif.getType().equals("watchListDeleted")){
+            notifType = "Watch Listed Book has been deleted";
+        }
         String title = currentNotif.getTitle();
         String notifyFromEmail = currentNotif.getNotifyFromEmail();
         String ISBN = currentNotif.getISBN();
