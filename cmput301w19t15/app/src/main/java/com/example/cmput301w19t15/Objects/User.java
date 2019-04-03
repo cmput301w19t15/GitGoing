@@ -410,10 +410,12 @@ public class User {
                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                     if(dataSnapshot.exists()) {
                                                         Book book = dataSnapshot.getValue(Book.class);
-                                                        Notification notif = new Notification("watchListDeleted", book.getBookID(), book.getTitle(), book.getOwnerID(), book.getOwnerEmail(), loggedinUser.getUserID(), loggedinUser.getEmail(),
-                                                                book.getISBN(), book.getPhoto(), false);
-                                                        //pick notification table to save the notif, add notif to database
-                                                        FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID()).setValue(notif);
+                                                        if (book.getStatus().equalsIgnoreCase("Available")) {
+                                                            Notification notif = new Notification("watchListDeleted", book.getBookID(), book.getTitle(), book.getOwnerID(), book.getOwnerEmail(), loggedinUser.getUserID(), loggedinUser.getEmail(),
+                                                                    book.getISBN(), book.getPhoto(), false);
+                                                            //pick notification table to save the notif, add notif to database
+                                                            FirebaseDatabase.getInstance().getReference().child("notifications").child(notif.getNotifID()).setValue(notif);
+                                                        }
                                                     }
                                                 }
 
