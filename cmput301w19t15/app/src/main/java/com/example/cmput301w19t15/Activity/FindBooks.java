@@ -121,20 +121,21 @@ public class FindBooks extends AppCompatActivity implements BookAdapter.OnItemCl
     //not used for now. NOPE it's actually running
     private void updateBooks(){
         try {
-            mBookListID.clear();
+            mBookList.clear();
             mBookListID = loggedInUser.getMyRequestedBooksID();
-            if(mBookList == null){
-                mBookList = new ArrayList<>();
-            }else{
-                mBookList.clear();
-            }
-            if(mBookAdapter == null) {
-                mBookAdapter = new BookAdapter(FindBooks.this, mBookList);
-                mRecyclerView.setAdapter(mBookAdapter);
-                mBookAdapter.setOnItemClickListener(FindBooks.this);
-            }
-            new FetchBookWithList(mBookList, mBookListID, mBookAdapter).execute("findBooks");
+            mBookAdapter.notifyDataSetChanged();
+            mRecyclerView.removeAllViews();
+            mBookList = new ArrayList<>();
         }catch(Exception e){
+            e.printStackTrace();
+        }
+        mBookAdapter = new BookAdapter(FindBooks.this, mBookList);
+        mRecyclerView.setAdapter(mBookAdapter);
+        mBookAdapter.setOnItemClickListener(FindBooks.this);
+
+        try{
+            new FetchBookWithList(mBookList, mBookListID, mBookAdapter).execute("findBooks");
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
