@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_updated);
 
-        checkLogIn();
-        getLoggedinUser();
+        //checkLogIn();
+        //getLoggedinUser();
         //numNotif = 0;
         //loadNotifMain();
 
@@ -153,23 +153,10 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
         unreadAmt = 0;
         listOfNotif = new ArrayList<>();
         notifyButton.setImageResource(R.drawable.read);
+        checkLogIn();
         loadNotifMain();
         getLoggedinUser();
     }
-    /**
-     * Caleed when activity restarted
-     */
-    protected void onRestart() {
-        super.onRestart();
-        numNotif = 0;
-        unreadAmt = 0;
-        listOfNotif = new ArrayList<>();
-        notifyButton.setImageResource(R.drawable.read);
-        loadNotifMain();
-        getLoggedinUser();
-    }
-
-
     /**
      * Called when activity is resumed
      */
@@ -179,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements NotifAdapter.OnIt
         unreadAmt = 0;
         listOfNotif = new ArrayList<>();
         notifyButton.setImageResource(R.drawable.read);
+        checkLogIn();
         loadNotifMain();
         getLoggedinUser();
         //progressBar.setVisibility(View.GONE);

@@ -368,7 +368,7 @@ public class User {
                         myWatchListBooksID = new ArrayList<>(value); break;
                 }
 
-                if (bookListType.equalsIgnoreCase("myRequestedBooksID")) {
+                if (bookListType.equalsIgnoreCase("myRequestedBooksID") && !myRequestedBooksID.isEmpty()) {
                     DatabaseReference bookReference = FirebaseDatabase.getInstance().getReference().child("books");
                     bookReference.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -409,7 +409,7 @@ public class User {
                     });
                 }
 
-                if (bookListType.equalsIgnoreCase("myWatchListBooksID")) {
+                if (bookListType.equalsIgnoreCase("myWatchListBooksID") && !!myWatchListBooksID.isEmpty()) {
                     Log.d("testing"," in here 0000");
                     DatabaseReference bookReference = FirebaseDatabase.getInstance().getReference().child("books");
                     bookReference.addValueEventListener(new ValueEventListener() {
